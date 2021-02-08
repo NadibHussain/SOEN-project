@@ -22,22 +22,22 @@ public class Continent {
     /**
      * Control Value of continent
      */
-    private int CONTROLVALUE;
+    private int ControlValue;
     /**
      * Arraylist containing a record of owners
      */
     private ArrayList<Player> d_currentOwners;
 
     /**
-     * Constructor for object Continent
+     * Constructor for Continent
      * @param NAME name
      * @param ID unique ID
-     * @param CONTROLVALUE control value
+     * @param ControlValue control value
      */
-    public Continent(String NAME, int ID, int CONTROLVALUE){
+    public Continent(String NAME, int ID, int ControlValue){
         this.NAME = NAME;
         this.ID = ID;
-        this.CONTROLVALUE = CONTROLVALUE;
+        this.ControlValue = ControlValue;
     }
 
     /**
@@ -50,10 +50,10 @@ public class Continent {
 
     /**
      * Sets the name
-     * @param p_name string with name
+     * @param ContinentName string with name
      */
-    public void setName(String p_name) {
-        this.NAME = p_name;
+    public void setName(String ContinentName) {
+        this.NAME = ContinentName;
     }
 
     /**
@@ -66,10 +66,10 @@ public class Continent {
 
     /**
      * Sets the ID
-     * @param p_ID int with ID
+     * @param ContinentID int with ID
      */
-    public void setID(int p_ID) {
-        this.ID = p_ID;
+    public void setID(int ContinentID) {
+        this.ID = ContinentID;
     }
 
     /**
@@ -77,22 +77,22 @@ public class Continent {
      * @return An int with control value
      */
     public int getControlValue() {
-        return CONTROLVALUE;
+        return ControlValue;
     }
 
     /**
      * Sets the control value
-     * @return An int with control value
+     * @param p_ControlValue int with control value
      */
-    public void setControlValue(int p_controlValue) {
-        this.CONTROLVALUE = p_controlValue;
+    public void setControlValue(int p_ControlValue) {
+        this.ControlValue = p_ControlValue;
     }
 
     /**
      * Print continent
      */
     public String printContinent() {
-        return String.format("%s %d %d", this.NAME, this.ID, this.CONTROLVALUE);
+        return String.format("%s %d %d", this.NAME, this.ID, this.ControlValue);
     }
 
 }
