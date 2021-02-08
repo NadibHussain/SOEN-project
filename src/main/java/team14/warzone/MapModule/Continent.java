@@ -14,7 +14,7 @@ public class Continent {
     /**
      * The name of the continent
      */
-    private String  NAME;
+    private String NAME;
     /**
      * The unique ID of continent
      */
@@ -22,7 +22,7 @@ public class Continent {
     /**
      * Control Value of continent
      */
-    private int ControlValue;
+    private int CONTROLVALUE;
     /**
      * Arraylist containing a record of owners
      */
@@ -32,12 +32,12 @@ public class Continent {
      * Constructor for Continent
      * @param NAME name
      * @param ID unique ID
-     * @param ControlValue control value
+     * @param CONTROLVALUE control value
      */
-    public Continent(String NAME, int ID, int ControlValue){
+    public Continent(String NAME, int ID, int CONTROLVALUE){
         this.NAME = NAME;
         this.ID = ID;
-        this.ControlValue = ControlValue;
+        this.CONTROLVALUE = CONTROLVALUE;
     }
 
     /**
@@ -50,10 +50,10 @@ public class Continent {
 
     /**
      * Sets the name
-     * @param ContinentName string with name
+     * @param p_ContinentName string with name
      */
-    public void setName(String ContinentName) {
-        this.NAME = ContinentName;
+    public void setName(String p_ContinentName) {
+        this.NAME = p_ContinentName;
     }
 
     /**
@@ -66,10 +66,10 @@ public class Continent {
 
     /**
      * Sets the ID
-     * @param ContinentID int with ID
+     * @param p_ContinentID int with ID
      */
-    public void setID(int ContinentID) {
-        this.ID = ContinentID;
+    public void setID(int p_ContinentID) {
+        this.ID = p_ContinentID;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Continent {
      * @return An int with control value
      */
     public int getControlValue() {
-        return ControlValue;
+        return CONTROLVALUE;
     }
 
     /**
@@ -85,14 +85,14 @@ public class Continent {
      * @param p_ControlValue int with control value
      */
     public void setControlValue(int p_ControlValue) {
-        this.ControlValue = p_ControlValue;
+        this.CONTROLVALUE = p_ControlValue;
     }
 
     /**
      * Print continent
      */
     public String printContinent() {
-        return String.format("%s %d %d", this.NAME, this.ID, this.ControlValue);
+        return String.format("%s %d %d", this.NAME, this.ID, this.CONTROLVALUE);
     }
 
 }

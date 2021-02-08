@@ -18,7 +18,7 @@ public class Country {
     /**
      * Continent containing the country
      */
-    private String ContinentName;
+    private String l_ContinentName;
     /**
      * Name of current owner
      */
@@ -26,22 +26,22 @@ public class Country {
     /**
      * Number of armies on the country
      */
-    private int NumberOfArmies;
+    private int NUMOFARMIES;
 
     /**
      * Constructor for Country
      * @param NAME name
      * @param ID unique ID
-     * @param ContinentName Continent Name
+     * @param l_ContinentName Continent Name
      * @param d_CurrentOwner Current Owner
-     * @param NumberOfArmies Number of Armies
+     * @param NUMOFARMIES Number of Armies
      */
-    public Country(String NAME, int ID, String ContinentName, String d_CurrentOwner, int NumberOfArmies){
+    public Country(String NAME, int ID, String l_ContinentName, String d_CurrentOwner, int NUMOFARMIES){
         this.NAME = NAME;
         this.ID = ID;
-        this.ContinentName = ContinentName;
+        this.l_ContinentName = l_ContinentName;
         this.d_CurrentOwner = d_CurrentOwner;
-        this.NumberOfArmies = NumberOfArmies;
+        this.NUMOFARMIES = NUMOFARMIES;
     }
 
     /**
@@ -54,10 +54,10 @@ public class Country {
 
     /**
      * Sets the name
-     * @param CountryName string with name
+     * @param p_CountryName string with name
      */
-    public void setName(String CountryName) {
-        this.NAME = CountryName;
+    public void setName(String p_CountryName) {
+        this.NAME = p_CountryName;
     }
 
     /**
@@ -70,10 +70,10 @@ public class Country {
 
     /**
      * Sets the ID
-     * @param CountryID int with ID
+     * @param p_CountryID int with ID
      */
-    public void setID(int CountryID) {
-        this.ID = CountryID;
+    public void setID(int p_CountryID) {
+        this.ID = p_CountryID;
     }
 
     /**
@@ -81,15 +81,15 @@ public class Country {
      * @return A string with continent name
      */
     public String getContinentName() {
-        return ContinentName;
+        return l_ContinentName;
     }
 
     /**
      * Sets the control value
-     * @param ContinentName with control value
+     * @param p_ContinentName with control value
      */
-    public void setControlValue(String ContinentName) {
-        this.ContinentName = ContinentName;
+    public void setControlValue(String p_ContinentName) {
+        this.l_ContinentName = p_ContinentName;
     }
 
     /**
@@ -102,10 +102,10 @@ public class Country {
 
     /**
      * Sets the current owner name
-     * @param d_CurrentOwner with current player who owns the country
+     * @param p_CurrentOwner with current player who owns the country
      */
-    public void setD_CurrentOwner(String d_CurrentOwner) {
-        this.d_CurrentOwner = d_CurrentOwner;
+    public void setD_CurrentOwner(String p_CurrentOwner) {
+        this.d_CurrentOwner = p_CurrentOwner;
     }
 
     /**
@@ -113,22 +113,22 @@ public class Country {
      * @return An int with number of armies
      */
     public int getNumberOfArmies() {
-        return NumberOfArmies;
+        return NUMOFARMIES;
     }
 
     /**
      * Sets the number of armies on the country
-     * @param NumberOfArmies with current player who owns the country
+     * @param p_NumberOfArmies with current player who owns the country
      */
-    public void setNumberOfArmies(int NumberOfArmies) {
-        this.NumberOfArmies = NumberOfArmies;
+    public void setNumberOfArmies(int p_NumberOfArmies) {
+        this.NUMOFARMIES = p_NumberOfArmies;
     }
 
     /**
      * Print Country
      */
     public String printCountry () {
-        return String.format("%s %d %s %s %d", NAME, ID, ContinentName, d_CurrentOwner, NumberOfArmies);
+        return String.format("%s %d %s %s %d", NAME, ID, l_ContinentName, d_CurrentOwner, NUMOFARMIES);
     }
 }
 
