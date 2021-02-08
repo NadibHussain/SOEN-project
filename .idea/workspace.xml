@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97769eb6-6242-4ee1-857f-53eaaab4779f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/GameEngine/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/MapEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,10 +49,23 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,7 +78,7 @@
       <workItem from="1612732842867" duration="20000" />
       <workItem from="1612732907214" duration="754000" />
       <workItem from="1612783958496" duration="1137000" />
-      <workItem from="1612785118550" duration="2211000" />
+      <workItem from="1612785118550" duration="2726000" />
     </task>
     <servers />
   </component>
