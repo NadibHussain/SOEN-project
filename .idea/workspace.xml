@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="97769eb6-6242-4ee1-857f-53eaaab4779f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestContinent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestContinent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCountry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestCountry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMapEditor.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1oAcRuAw46kyRrMNIxzaoltJdGw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="team14.warzone" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="97769eb6-6242-4ee1-857f-53eaaab4779f" name="Default Changelist" comment="" />
+      <created>1612732837578</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1612732837578</updated>
+      <workItem from="1612732842867" duration="20000" />
+      <workItem from="1612732907214" duration="754000" />
+      <workItem from="1612783958496" duration="1137000" />
+      <workItem from="1612785118550" duration="3808000" />
+      <workItem from="1612862509622" duration="951000" />
+      <workItem from="1612785118550" duration="2726000" />
+      <workItem from="1612794712245" duration="5403000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
