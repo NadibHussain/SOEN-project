@@ -95,7 +95,7 @@ public class MapEditor {
      * Validates the map object
      * @param p_map
      */
-    public boolean validateMap(ArrayList<Country> p_map){
+    public boolean validateMap(ArrayList<Object> p_map){
 
         /**
          * checking if the map is connected
