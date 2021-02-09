@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="97769eb6-6242-4ee1-857f-53eaaab4779f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Continent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestContinent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestContinent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestCountry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestCountry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMapEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/MapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/team14/warzone/MapModule/MapEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

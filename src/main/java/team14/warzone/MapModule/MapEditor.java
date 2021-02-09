@@ -16,8 +16,21 @@ public class MapEditor {
     public void saveMap(String p_fileName){
 
     }
-    public void validateMap(ArrayList<Object> p_map){
 
+    /**
+     * Validates the map object
+     * @param p_map
+     */
+    public boolean validateMap(ArrayList<Country> p_map){
+
+        /**
+         * checking if the map is connected
+         */
+        for (int count = 0; count<p_map.size() ; count++ ){
+//            if( )
+
+        }
+        return false;
     }
     public void addCountry(String p_name){
 
