@@ -7,14 +7,11 @@ package team14.warzone.MapModule;
  */
 
 public class Country {
-    /**
-     * The name of country
-     */
-    private String NAME;
+
     /**
      * Unique ID of country
      */
-    private int ID;
+    private String ID;
     /**
      * Continent containing the country
      */
@@ -30,14 +27,12 @@ public class Country {
 
     /**
      * Constructor for Country
-     * @param NAME name
      * @param ID unique ID
      * @param l_ContinentName Continent Name
      * @param d_CurrentOwner Current Owner
      * @param NUMOFARMIES Number of Armies
      */
-    public Country(String NAME, int ID, String l_ContinentName, String d_CurrentOwner, int NUMOFARMIES){
-        this.NAME = NAME;
+    public Country(String ID, String l_ContinentName, String d_CurrentOwner, int NUMOFARMIES){
         this.ID = ID;
         this.l_ContinentName = l_ContinentName;
         this.d_CurrentOwner = d_CurrentOwner;
@@ -45,34 +40,18 @@ public class Country {
     }
 
     /**
-     * Returns the name
-     * @return A string with name
-     */
-    public String getName() {
-        return NAME;
-    }
-
-    /**
-     * Sets the name
-     * @param p_CountryName string with name
-     */
-    public void setName(String p_CountryName) {
-        this.NAME = p_CountryName;
-    }
-
-    /**
      * Returns the ID
-     * @return An int with ID
+     * @return A string with ID
      */
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
     /**
      * Sets the ID
-     * @param p_CountryID int with ID
+     * @param p_CountryID String with ID
      */
-    public void setID(int p_CountryID) {
+    public void setID(String p_CountryID) {
         this.ID = p_CountryID;
     }
 
@@ -128,7 +107,7 @@ public class Country {
      * Print Country
      */
     public String printCountry () {
-        return String.format("%s %d %s %s %d", NAME, ID, l_ContinentName, d_CurrentOwner, NUMOFARMIES);
+        return String.format("%s %s %s %d", ID, l_ContinentName, d_CurrentOwner, NUMOFARMIES);
     }
 }
 
