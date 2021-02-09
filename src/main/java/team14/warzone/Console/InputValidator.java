@@ -27,11 +27,61 @@ public class InputValidator {
             )
     );
 
-    public boolean validateInput() throws Exception {
-        // check if p_InputMsg[0] exists in VALID_ORDER_LIST, if not throw exception
+    public boolean validateInput(Command p_Command) throws Exception {
+        // switch to call method for each command
+        switch (p_Command.getCommandType()) {
+            case "editcontinent":
+                // method to validate editcontinent
+                return validateEditContinent(p_Command);
 
-        // switch to call method for each order
+            case "editcountry":
+                // method
+                break;
 
+            case "editneighbor":
+                // method
+                break;
+
+            case "savemap":
+                // method
+                break;
+
+            case "editmap":
+                // method
+                break;
+
+            case "validatemap":
+                //method
+                break;
+
+            case "loadmap":
+                // method
+                break;
+
+            case "showmap":
+                // method
+                break;
+
+            case "gameplayer":
+                // method
+                break;
+
+            case "assigncountries":
+                // method
+                break;
+
+            case "deploy":
+                // method
+                break;
+
+            default:
+                throw new Exception("Invalid command: " + p_Command.getCommandType());
+        }
+
+        return true;
+    }
+
+    private boolean validateEditContinent(Command p_Command) {
         return true;
     }
 }
