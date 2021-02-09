@@ -1,5 +1,7 @@
 package team14.warzone.MapModule;
 
+import java.util.ArrayList;
+
 /**
  * This class consists the information about the country
  * @author razashaik
@@ -27,6 +29,13 @@ public class Country {
      * Number of armies on the country
      */
     private int NUMOFARMIES;
+
+
+
+    /**
+     * list of the id of neighbours
+     */
+    private ArrayList<String> d_neighbours = new ArrayList<String>();
 
     /**
      * Constructor for Country
@@ -129,6 +138,21 @@ public class Country {
      */
     public String printCountry () {
         return String.format("%s %d %s %s %d", NAME, ID, l_ContinentName, d_CurrentOwner, NUMOFARMIES);
+    }
+
+    /**
+     * set neighbour list
+     * @param d_neighbours array list of the id of the neighbour
+     */
+    public void setD_neighbours(ArrayList<String> d_neighbours) {
+        this.d_neighbours = d_neighbours;
+    }
+
+    /**
+     * get neighbour list
+     */
+    public ArrayList<String> getD_neighbours() {
+        return d_neighbours;
     }
 }
 
