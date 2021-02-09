@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="97769eb6-6242-4ee1-857f-53eaaab4779f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestContinent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestContinent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCountry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestCountry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestMapEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MapModule/TestMapEditor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,14 +58,21 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="team14.warzone" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -78,7 +89,8 @@
       <workItem from="1612732842867" duration="20000" />
       <workItem from="1612732907214" duration="754000" />
       <workItem from="1612783958496" duration="1137000" />
-      <workItem from="1612785118550" duration="2726000" />
+      <workItem from="1612785118550" duration="3808000" />
+      <workItem from="1612862509622" duration="951000" />
     </task>
     <servers />
   </component>
