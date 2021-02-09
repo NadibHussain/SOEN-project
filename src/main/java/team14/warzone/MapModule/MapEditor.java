@@ -1,6 +1,9 @@
 package team14.warzone.MapModule;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MapEditor {
 
@@ -10,7 +13,19 @@ public class MapEditor {
 
     }
 
-    public void loadMap(){
+    public void loadMap(String p_fileName){
+        try {
+            File myObj = new File(p_fileName);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
     }
     public void saveMap(String p_fileName){
