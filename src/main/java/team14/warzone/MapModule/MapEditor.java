@@ -92,10 +92,15 @@ public class MapEditor {
     }
 
     /**
+     * 
+ * This class consists the information about the map
+ * @author NadibHussain
+ * @version 1.0
+ *
      * Validates the map object
      * @param p_map
      */
-    public boolean validateMap(ArrayList<Object> p_map){
+    public boolean validateMap(Map p_map){
 
         /**
          * checking if the map is connected
