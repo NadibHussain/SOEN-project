@@ -33,9 +33,9 @@ public class Country {
 
 
     /**
-     * list of the id of neighbours
+     * list of the country object of neighbours
      */
-    private ArrayList<String> d_neighbours = new ArrayList<String>();
+    private ArrayList<Country> d_neighbours = new ArrayList<Country>();
 
     /**
      * Constructor for Country
@@ -142,16 +142,16 @@ public class Country {
 
     /**
      * set neighbour list
-     * @param d_neighbours array list of the id of the neighbour
+     * @param d_neighbours array list of the country object of the neighbour
      */
-    public void setD_neighbours(ArrayList<String> d_neighbours) {
+    public void setD_neighbours(ArrayList<Country> d_neighbours) {
         this.d_neighbours = d_neighbours;
     }
 
     /**
      * get neighbour list
      */
-    public ArrayList<String> getD_neighbours() {
+    public ArrayList<Country> getD_neighbours() {
         return d_neighbours;
     }
 }

@@ -7,14 +7,14 @@ import java.util.Scanner;
 
 public class MapEditor {
 
-    public ArrayList<Object> d_loadedMap;
+    public Map d_loadedMap;
 
     public MapEditor(){
 
     }
 
-    public Map loadMap(String p_fileName){
-        Map map =  new Map();
+    public void loadMap(String p_fileName){
+        Map l_map =  new Map();
         try {
             File myObj = new File(p_fileName);
             Scanner myReader = new Scanner(myObj);
@@ -23,7 +23,7 @@ public class MapEditor {
                 if (data.equals("[countries]")){
                     while (true){
                         String l_line = myReader.nextLine();
-                        ArrayList<Continent> l_continentList = map.getD_continents();
+                        ArrayList<Continent> l_continentList = l_map.getD_continents();
                         if(l_line.equals(""))
                         {
                             break;
@@ -36,7 +36,7 @@ public class MapEditor {
                                     continentName = l_conrinent.getName();
                                 }
                             }
-                            map.addCountry(l_country_array[1],Integer.parseInt(l_country_array[0]),continentName);
+                            l_map.addCountry(l_country_array[1],Integer.parseInt(l_country_array[0]),continentName);
                         }
                     }
                 }
@@ -51,14 +51,14 @@ public class MapEditor {
                         }
                         else {
                             String[] l_continent_array = l_line.split(" ");
-                            map.addContinent(l_continent_array[0],id,Integer.parseInt(l_continent_array[1]));
+                            l_map.addContinent(l_continent_array[0],id,Integer.parseInt(l_continent_array[1]));
                             id++;
                         }
                     }
                 }
                 else if (data.equals("[borders]"))
                 {
-                    ArrayList<Country> l_countires = map.getD_countries();
+                    ArrayList<Country> l_countires = l_map.getD_countries();
                     int l_index = 0;
                     while (myReader.hasNextLine()){
                         String l_line = myReader.nextLine();
@@ -68,9 +68,15 @@ public class MapEditor {
                         }
                         else {
                             String[] l_neighbour_array = l_line.split(" ");
-                            ArrayList<String> l_neighbourID_array = new ArrayList<String>();
+                            ArrayList<Country> l_neighbourID_array = new ArrayList<Country>();
                             for (int x=1;x<l_neighbour_array.length;x++){
-                                l_neighbourID_array.add(l_neighbour_array[x]);
+                                for(int j = 0;j<l_countires.size();j++)
+                                {
+                                    if (l_countires.get(j).getID() == Integer.parseInt(l_neighbour_array[x]))
+                                    {
+                                        l_neighbourID_array.add(l_countires.get(j));
+                                    }
+                                }
                             }
                             l_countires.get(l_index).setD_neighbours(l_neighbourID_array);
                             l_index++;
@@ -84,7 +90,7 @@ public class MapEditor {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return map;
+        this.d_loadedMap = l_map;
 
     }
     public void saveMap(String p_fileName){
@@ -93,22 +99,9 @@ public class MapEditor {
     public void validateMap(ArrayList<Object> p_map){
 
     }
-    public void addCountry(String p_name){
 
+    public Map getD_loadedMap() {
+        return d_loadedMap;
     }
-    public void removeCountry(String p_name){
 
-    }
-    public void addContinent(String p_name){
-
-    }
-    public void removeContinent(String p_name){
-
-    }
-    public void addNeighbour(String p_name){
-
-    }
-    public void removeNeighbour(String p_name){
-
-    }
 }
