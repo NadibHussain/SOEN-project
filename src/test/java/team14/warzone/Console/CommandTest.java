@@ -13,11 +13,6 @@ class CommandTest {
     List<Option> options = new ArrayList<>();
     Command command = new Command("editContenent", options);
 
-    @BeforeEach
-    public void before() {
-
-    }
-
     @Test
     void getD_Keyword() {
         assertEquals("editContenent", command.getD_Keyword());

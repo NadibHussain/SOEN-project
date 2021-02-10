@@ -11,7 +11,13 @@ public class Command {
     private List<Option> d_Options = new ArrayList<Option>();
 
     /**
-     * Class constructor
+     * Class default constructor
+     */
+    public Command() {
+    }
+
+    /**
+     * Class constructor, specifying keyword and options
      *
      * @param p_Keyword : keyword of the command
      * @param p_Options : options of the command, if any
@@ -55,5 +61,26 @@ public class Command {
      */
     public void setD_Options(List<Option> p_Options) {
         this.d_Options = p_Options;
+    }
+
+    /**
+     * A method to add an option to the command
+     *
+     * @param opt : the option to be added
+     */
+    public void addOption(Option opt) {
+        this.d_Options.add(opt);
+    }
+
+    @Override
+    public String toString() {
+        String allOptions = "";
+        for (Option opt : d_Options) {
+            allOptions += opt.getD_Name() + ", args: " + opt.getD_Arguments() + ". ";
+        }
+        return "Command{" +
+                "d_Keyword='" + d_Keyword + '\'' +
+                ", d_Options=" + allOptions +
+                '}';
     }
 }

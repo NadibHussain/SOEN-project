@@ -11,7 +11,13 @@ public class Option {
     private List<String> d_Arguments = new ArrayList<String>();
 
     /**
-     * Class constructor
+     * Default class constructor
+     */
+    public Option() {
+    }
+
+    /**
+     * Class constructor, specifying name and arguments
      *
      * @param p_Name      : Name of the option
      * @param p_Arguments : arguments of the option
@@ -56,4 +62,14 @@ public class Option {
     public void setD_Arguments(List<String> p_Arguments) {
         this.d_Arguments = p_Arguments;
     }
+
+    /**
+     * A method to add argument to the option
+     *
+     * @param arg : argument to be added
+     */
+    public void addArgument(String arg) {
+        this.d_Arguments.add(arg);
+    }
+
 }
