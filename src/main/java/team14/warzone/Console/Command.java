@@ -7,14 +7,14 @@ import java.util.ArrayList;
  */
 public class Command {
     private String d_Keyword;
-    private ArrayList<Options> d_Options = new ArrayList<Options>();
+    private ArrayList<Option> d_Options = new ArrayList<Option>();
 
     /**
      * Class constructor
      * @param p_Keyword : keyword of the command
      * @param p_Options : options of the command, if any
      */
-    public Command(String p_Keyword, ArrayList<Options> p_Options) {
+    public Command(String p_Keyword, ArrayList<Option> p_Options) {
         this.d_Keyword = p_Keyword;
         this.d_Options = p_Options;
     }
@@ -39,7 +39,7 @@ public class Command {
      * A method to get a list of options related to the current command, if any
      * @return d_Options : options list of the command
      */
-    public ArrayList<Options> getD_Options() {
+    public ArrayList<Option> getD_Options() {
         return d_Options;
     }
 
@@ -47,7 +47,7 @@ public class Command {
      * A method to set the options related to the current command
      * @param p_Options : options list of the command
      */
-    public void setD_Options(ArrayList<Options> p_Options) {
+    public void setD_Options(ArrayList<Option> p_Options) {
         this.d_Options = p_Options;
     }
 }
