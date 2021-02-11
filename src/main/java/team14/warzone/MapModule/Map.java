@@ -69,11 +69,18 @@ public class Map {
      */
     public void removeContinent(String p_name){
         Iterator itr = d_continents.iterator();
+        Iterator itr1 = d_countries.iterator();
         while (itr.hasNext())
         {
             Continent l_continent = (Continent) itr.next();
             if (l_continent.getName().equals(p_name))
                 itr.remove();
+        }
+        while (itr1.hasNext())
+        {
+            Country l_country = (Country) itr1.next();
+            if (l_country.getContinentName().equals(p_name))
+                itr1.remove();
         }
     }
 
