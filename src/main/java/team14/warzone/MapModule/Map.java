@@ -6,13 +6,19 @@ import java.util.Iterator;
 /**
  * This class consists the information about the map
  * @author NadibHussain
+ * @author razashaik
  * @version 1.0
  */
 
 public class Map {
 
-
+    /**
+     *  Array List of Continents defined in our map
+     */
     public ArrayList<Continent> d_continents = new ArrayList<Continent>();
+    /**
+     *  Array List of Countries defined in our map
+     */
     public ArrayList<Country> d_countries = new ArrayList<Country>();
 
     public Map(){
@@ -24,9 +30,9 @@ public class Map {
     }
     
     /** 
-     * @param p_name
-     * @param p_ID
-     * @param p_continentName
+     * @param p_name Name of country to be added
+     * @param p_ID ID of country to be added
+     * @param p_continentName Continent to which the country belongs to
      */
     public void addCountry(String p_name, int p_ID, String p_continentName){
         Country l_country = new Country(p_name,p_ID,p_continentName,"",0);
@@ -34,7 +40,7 @@ public class Map {
     }
     
     /** 
-     * @param p_name
+     * @param p_name Name of the country to be removed
      */
     public void removeCountry(String p_name){
         Iterator itr = d_countries.iterator();
@@ -48,9 +54,9 @@ public class Map {
 
     
     /** 
-     * @param p_name
-     * @param p_ID
-     * @param p_controllValue
+     * @param p_name Name of the continent to be added
+     * @param p_ID ID of the continent to be added
+     * @param p_controllValue Control Value of the continent
      */
     public void addContinent(String p_name, int p_ID, int p_controllValue){
         Continent l_continent = new Continent(p_name,p_ID,p_controllValue);
@@ -59,7 +65,7 @@ public class Map {
     }
     
     /** 
-     * @param p_name
+     * @param p_name Name of the continent to be removed
      */
     public void removeContinent(String p_name){
         Iterator itr = d_continents.iterator();
@@ -70,9 +76,11 @@ public class Map {
                 itr.remove();
         }
     }
-    
-    /** 
-     * @param p_name
+
+    /**
+     *
+     * @param p_CountryID Country to which the neighbour is to be added
+     * @param p_neighbourID Name of the neighbour country to be added
      */
     public void addNeighbour(Country p_CountryID, Country p_neighbourID) {
         for (int i = 0; i < d_countries.size(); i++ ) {
@@ -84,9 +92,11 @@ public class Map {
             }
         }
     }
-    
-    /** 
-     * @param p_name
+
+    /**
+     *
+     * @param p_CountryID Country from which the neighbour is to be removed
+     * @param p_neighbourID Name of the neighbour to be removed
      */
     public void removeNeighbour(Country p_CountryID, Country p_neighbourID) {
         for (int i = 0; i < d_countries.size(); i++ ) {
