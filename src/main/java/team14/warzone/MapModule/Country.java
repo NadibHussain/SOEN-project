@@ -53,6 +53,10 @@ public class Country {
         this.NUMOFARMIES = NUMOFARMIES;
     }
 
+    public Country(Country country) {
+        this(country.getName(), country.getID(), country.getContinentName(), country.getD_CurrentOwner(), country.getNumberOfArmies());
+    }
+
     /**
      * Returns the name
      * @return A string with name
@@ -154,5 +158,36 @@ public class Country {
     public ArrayList<Country> getD_neighbours() {
         return d_neighbours;
     }
-}
 
+    public boolean addNeighbour(Country country) {
+
+        for (var i = 0; i < d_neighbours.size(); i++ ) {
+            if (d_neighbours.get(i).getID() == country.getID()) {
+                return false;
+            }
+        };
+        d_neighbours.add(new Country(country));
+        return true;
+    }
+
+    public boolean removeNeighbour(Country country) {
+
+        for (var i = 0; i < d_neighbours.size(); i++) {
+            if (d_neighbours.get(i).getID() == country.getID()) {
+                d_neighbours.removeIf(c -> c.getID() == country.getID());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "NAME='" + NAME + '\'' +
+                ", ID=" + ID +
+                ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
+                ", d_neighbours=" + d_neighbours +
+                '}';
+    }
+}

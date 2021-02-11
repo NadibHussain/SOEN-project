@@ -26,6 +26,9 @@ public class Map {
         Country l_country = new Country(p_name,p_ID,p_continentName,"",0);
         d_countries.add(l_country);
     }
+    public void addCountry(Country country) {
+        d_countries.add(country);
+    }
     public void removeCountry(String p_name){
         Iterator itr = d_countries.iterator();
         while (itr.hasNext())
@@ -42,13 +45,35 @@ public class Map {
 
     }
     public void removeContinent(String p_name){
-
+        Iterator itr = d_continents.iterator();
+        while (itr.hasNext())
+        {
+            Continent l_continent = (Continent) itr.next();
+            if (l_continent.getName().equals(p_name))
+                itr.remove();
+        }
     }
-    public void addNeighbour(String p_name){
 
+    public void addNeighbour(Country p_CountryID, Country p_neighbourID) {
+        for (int i = 0; i < d_countries.size(); i++ ) {
+            if (d_countries.get(i).getID() == p_CountryID.getID()) {
+                d_countries.get(i).addNeighbour(p_neighbourID);
+            }
+            if (d_countries.get(i).getID() == p_neighbourID.getID()) {
+                d_countries.get(i).addNeighbour(p_CountryID);
+            }
+        }
     }
-    public void removeNeighbour(String p_name){
-
+    
+    public void removeNeighbour(Country p_CountryID, Country p_neighbourID) {
+        for (int i = 0; i < d_countries.size(); i++ ) {
+            if (d_countries.get(i).getID() == p_CountryID.getID()) {
+                d_countries.get(i).removeNeighbour(p_neighbourID);
+            }
+            if (d_countries.get(i).getID() == p_neighbourID.getID()) {
+                d_countries.get(i).removeNeighbour(p_CountryID);
+            }
+        }
     }
     public ArrayList<Continent> getD_continents() {
         return d_continents;
