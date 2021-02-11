@@ -22,13 +22,20 @@ public class Map {
     public void showMap() {
 
     }
+    
+    /** 
+     * @param p_name
+     * @param p_ID
+     * @param p_continentName
+     */
     public void addCountry(String p_name, int p_ID, String p_continentName){
         Country l_country = new Country(p_name,p_ID,p_continentName,"",0);
         d_countries.add(l_country);
     }
-    public void addCountry(Country country) {
-        d_countries.add(country);
-    }
+    
+    /** 
+     * @param p_name
+     */
     public void removeCountry(String p_name){
         Iterator itr = d_countries.iterator();
         while (itr.hasNext())
@@ -39,11 +46,21 @@ public class Map {
         }
     }
 
+    
+    /** 
+     * @param p_name
+     * @param p_ID
+     * @param p_controllValue
+     */
     public void addContinent(String p_name, int p_ID, int p_controllValue){
         Continent l_continent = new Continent(p_name,p_ID,p_controllValue);
         d_continents.add(l_continent);
 
     }
+    
+    /** 
+     * @param p_name
+     */
     public void removeContinent(String p_name){
         Iterator itr = d_continents.iterator();
         while (itr.hasNext())
@@ -53,7 +70,10 @@ public class Map {
                 itr.remove();
         }
     }
-
+    
+    /** 
+     * @param p_name
+     */
     public void addNeighbour(Country p_CountryID, Country p_neighbourID) {
         for (int i = 0; i < d_countries.size(); i++ ) {
             if (d_countries.get(i).getID() == p_CountryID.getID()) {
@@ -65,6 +85,9 @@ public class Map {
         }
     }
     
+    /** 
+     * @param p_name
+     */
     public void removeNeighbour(Country p_CountryID, Country p_neighbourID) {
         for (int i = 0; i < d_countries.size(); i++ ) {
             if (d_countries.get(i).getID() == p_CountryID.getID()) {
@@ -75,16 +98,18 @@ public class Map {
             }
         }
     }
+    /** 
+     * @return ArrayList<Continent>
+     */
     public ArrayList<Continent> getD_continents() {
         return d_continents;
     }
 
+    
+    /** 
+     * @return ArrayList<Country>
+     */
     public ArrayList<Country> getD_countries() {
         return d_countries;
     }
-
-
-
-
-
 }

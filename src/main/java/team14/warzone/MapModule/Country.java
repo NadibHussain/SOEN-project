@@ -21,7 +21,7 @@ public class Country {
      * Continent containing the country
      */
     private String l_ContinentName;
-    /**
+    /** 
      * Name of current owner
      */
     private String d_CurrentOwner;
