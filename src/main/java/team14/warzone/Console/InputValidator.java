@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class InputValidator {
-    public static enum Phase {
+    public enum Phase {
         MAPEDITOR,
         STARTUP,
         GAMEPLAY
     }
 
-    public static Phase d_CurrentPhase;
+    public static Phase CURRENT_PHASE;
     private static ArrayList<String> VALID_ORDER_LIST = new ArrayList<>(
             Arrays.asList(
                     "editcontinent",
@@ -26,10 +26,16 @@ public class InputValidator {
                     "deploy"
             )
     );
+    public static ArrayList<String> VALID_MAPEDITOR_OPTIONS = new ArrayList<>(
+            Arrays.asList(
+                    "-add",
+                    "-remove"
+            )
+    );
 
     public boolean validateInput(Command p_Command) throws Exception {
         // switch to call method for each command
-        switch (p_Command.getCommandType()) {
+        switch (p_Command.getD_Keyword()) {
             case "editcontinent":
                 // method to validate editcontinent
                 return validateEditContinent(p_Command);
@@ -75,13 +81,21 @@ public class InputValidator {
                 break;
 
             default:
-                throw new Exception("Invalid command: " + p_Command.getCommandType());
+                throw new Exception("Invalid command: " + p_Command.getD_Keyword());
         }
 
         return true;
     }
 
     private boolean validateEditContinent(Command p_Command) {
+        // editcontinent -add continentID continentvalie -remove continentID
+        // check CURRENT_PHASE
+
+        // validate list of options
+            // p_Command.d_Options.forEach
+                // validate option.d_Name exists in VALID_MAPEDITOR_OPTIONS
+                // ADD: validate 2 arguments and value not null
+                // REMOVE: validate 1 arg and continent exists
         return true;
     }
 }
