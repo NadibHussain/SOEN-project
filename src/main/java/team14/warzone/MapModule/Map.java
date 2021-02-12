@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * This class consists the information about the map
+ * This class consists the information and functionality of the map
  * @author NadibHussain
  * @author razashaik
  * @version 1.0
@@ -34,11 +34,16 @@ public class Map {
      * @param p_ID ID of country to be added
      * @param p_continentName Continent to which the country belongs to
      */
-    public void addCountry(String p_name, int p_ID, String p_continentName){
+    public void addCountry(String p_name, int p_ID, String p_continentName) {
         Country l_country = new Country(p_name,p_ID,p_continentName,"",0);
-        d_countries.add(l_country);
+        for (int i = 0; i < d_continents.size(); i++) {
+            if (d_continents.get(i).getName().equals(p_continentName)) {
+                d_countries.add(l_country);
+            } else System.out.println("Continent does not exist");
+        }
     }
-    
+
+
     /** 
      * @param p_name Name of the country to be removed
      */
