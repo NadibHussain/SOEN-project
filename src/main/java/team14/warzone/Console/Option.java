@@ -19,6 +19,15 @@ public class Option {
     /**
      * Class constructor, specifying name and arguments
      *
+     * @param p_Arguments : arguments of the option
+     */
+    public Option(List<String> p_Arguments) {
+        this("default", p_Arguments);
+    }
+
+    /**
+     * Class constructor, specifying name and arguments
+     *
      * @param p_Name      : Name of the option
      * @param p_Arguments : arguments of the option
      */
