@@ -90,7 +90,8 @@ public class InputValidator {
                 break;
 
             default:
-                throw new Exception("Invalid command: " + p_CommandName);
+                System.out.println("Invalid command: " + p_CommandName);
+                return false;
         }
 
         return true;
