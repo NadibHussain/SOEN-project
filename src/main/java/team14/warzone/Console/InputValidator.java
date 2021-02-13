@@ -11,8 +11,8 @@ public class InputValidator {
         GAMEPLAY
     }
 
-    public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
-    private static ArrayList<String> VALID_ORDER_LIST = new ArrayList<>(
+    public static Phase CURRENT_PHASE = Phase.STARTUP;
+    public static final ArrayList<String> VALID_ORDER_LIST = new ArrayList<>(
             Arrays.asList(
                     "editcontinent",
                     "editcountry",
@@ -34,7 +34,7 @@ public class InputValidator {
             )
     );
 
-    public boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) throws Exception {
+    public boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
         // switch to call method for each command
         switch (p_CommandName) {
             case "editcontinent":
@@ -54,47 +54,81 @@ public class InputValidator {
                 }
 
             case "editneighbor":
-                // method
-                break;
+                try {
+                    return validateEditNeighbor(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "savemap":
-                // method
-                break;
+                try {
+                    return validateSaveMap(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "editmap":
-                // method
-                break;
+                try {
+                    return validateEditMap(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "validatemap":
-                //method
-                break;
+                try {
+                    return validateMap(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "loadmap":
-                // method
-                break;
+                try {
+                    return loadMap(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "showmap":
-                // method
-                break;
+                try {
+                    return showMap(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "gameplayer":
-                // method
-                break;
+                try {
+                    return validateGamePlayer(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "assigncountries":
-                // method
-                break;
+                try {
+                    return validateAssignCountries(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "deploy":
-                // method
-                break;
+                try {
+                    return validateDeploy(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             default:
                 System.out.println("Invalid command: " + p_CommandName);
                 return false;
         }
-
-        return true;
     }
 
     private boolean validateEditContinent(String p_OptionName, List<String> p_Arguments) throws Exception {
@@ -106,10 +140,10 @@ public class InputValidator {
 
         // Validate -add arguments and -remove arguments
         if (p_OptionName.equals("-add")) {
-            if (p_Arguments.size() != 2)
+            if (p_Arguments.size() != 2 || !isNumeric(p_Arguments.get(0)))
                 throw new Exception("Invalid arguments");
         } else if (p_OptionName.equals("-remove")) {
-            if (p_Arguments.size() != 1)
+            if (p_Arguments.size() != 1 || !isNumeric(p_Arguments.get(0)))
                 throw new Exception("Invalid arguments");
         }
         return true;
@@ -124,12 +158,139 @@ public class InputValidator {
 
         // Validate -add arguments and -remove arguments
         if (p_OptionName.equals("-add")) {
-            if (p_Arguments.size() != 2)
+            if (p_Arguments.size() != 2 || !isNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
                 throw new Exception("Invalid arguments");
+
         } else if (p_OptionName.equals("-remove")) {
-            if (p_Arguments.size() != 1)
+            if (p_Arguments.size() != 1 || !isNumeric(p_Arguments.get(0)))
                 throw new Exception("Invalid arguments");
         }
+        return true;
+    }
+
+    private boolean validateEditNeighbor(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.MAPEDITOR);
+
+        // Validate option name
+        optionNameCheck(p_OptionName);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 2 || !isNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean validateSaveMap(List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.MAPEDITOR);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1)
+            throw new Exception("Invalid arguments");
+
+        // Validate if filename is alphanumeric
+        if (!isAlphaNumeric(p_Arguments.get(0)))
+            throw new Exception("Invalid filename: should be alphanumberic");
+
+        return true;
+    }
+
+    private boolean validateEditMap(List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.MAPEDITOR);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1)
+            throw new Exception("Invalid arguments");
+
+        // Validate if filename is alphanumeric
+        if (!isAlphaNumeric(p_Arguments.get(0)))
+            throw new Exception("Invalid filename: should be alphanumberic");
+
+        return true;
+    }
+
+    private boolean validateMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.MAPEDITOR);
+
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate no arguments were passed
+        if (!p_Arguments.isEmpty())
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean loadMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.MAPEDITOR);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1)
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean showMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate no arguments were passed
+        if (!p_Arguments.isEmpty())
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean validateGamePlayer(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.STARTUP);
+
+        // Validate option name
+        optionNameCheck(p_OptionName);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1 || !isAlphaNumeric(p_Arguments.get(0)))
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean validateAssignCountries(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.STARTUP);
+
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate no arguments were passed
+        if (!p_Arguments.isEmpty())
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private boolean validateDeploy(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.GAMEPLAY);
+
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate arguments
+        if (p_Arguments.size() != 2 || !isNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
+            throw new Exception("Invalid arguments");
+
         return true;
     }
 
@@ -143,5 +304,21 @@ public class InputValidator {
         if (!VALID_MAPEDITOR_OPTIONS.contains(p_OptionName)) {
             throw new Exception("Invalid option: " + p_OptionName);
         }
+    }
+
+    private boolean isNumeric(String p_StrNum) {
+        if (p_StrNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(p_StrNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isAlphaNumeric(String p_Str) {
+        return p_Str != null && p_Str.matches("^[a-zA-Z0-9]*$");
     }
 }
