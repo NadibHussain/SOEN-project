@@ -12,21 +12,6 @@ public class InputValidator {
     }
 
     public static Phase CURRENT_PHASE = Phase.STARTUP;
-    public static final ArrayList<String> VALID_ORDER_LIST = new ArrayList<>(
-            Arrays.asList(
-                    "editcontinent",
-                    "editcountry",
-                    "editneighbor",
-                    "savemap",
-                    "editmap",
-                    "validatemap",
-                    "loadmap",
-                    "showmap",
-                    "gameplayer",
-                    "assigncountries",
-                    "deploy"
-            )
-    );
     public static ArrayList<String> VALID_MAPEDITOR_OPTIONS = new ArrayList<>(
             Arrays.asList(
                     "-add",
