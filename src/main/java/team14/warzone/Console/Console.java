@@ -66,11 +66,6 @@ public class Console {
     }
 
     public static void filterCommand(Command p_UserCommand) {
-//        if(l_InputValidator.d_CurrentPhase.equals("MAPEDITOR")){
-//            //call MapEditor methods
-//        }
-//        else if(l_InputValidator.d_CurrentPhase.equals("STARTUP") || l_InputValidator.d_CurrentPhase.equals("GAMEPLAY")){
-//            //call gameEngine methods
-//        }
+
     }
 }

@@ -28,6 +28,13 @@ public class Command {
     }
 
     /**
+     * Method to execute the command object
+     */
+    public void execute() {
+        // execute the command
+    }
+
+    /**
      * A method to get the keyword related to the current command
      *
      * @return String : the keyword of the command
