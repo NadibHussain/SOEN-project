@@ -13,12 +13,13 @@ import java.util.ArrayList;
 public class Continent {
     /**
      * The name of the continent
-     */
+
     private String NAME;
-    /**
-     * The unique ID of continent
      */
-    private int ID;
+     /**
+     * The unique ID of continent (in our case - name)
+     */
+    private String ID;
     /**
      * Control Value of continent
      */
@@ -30,12 +31,10 @@ public class Continent {
 
     /**
      * Constructor for Continent
-     * @param NAME name
      * @param ID unique ID
      * @param CONTROLVALUE control value
      */
-    public Continent(String NAME, int ID, int CONTROLVALUE){
-        this.NAME = NAME;
+    public Continent(String ID, int CONTROLVALUE){
         this.ID = ID;
         this.CONTROLVALUE = CONTROLVALUE;
     }
@@ -43,32 +42,32 @@ public class Continent {
     /**
      * Returns the name
      * @return A string with name
-     */
+
     public String getName() {
         return NAME;
     }
-
+    */
     /**
      * Sets the name
      * @param p_ContinentName string with name
-     */
+
     public void setName(String p_ContinentName) {
         this.NAME = p_ContinentName;
     }
-
+    */
     /**
      * Returns the ID
-     * @return An int with ID
+     * @return A String with ID
      */
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
     /**
      * Sets the ID
-     * @param p_ContinentID int with ID
+     * @param p_ContinentID String with ID
      */
-    public void setID(int p_ContinentID) {
+    public void setID(String p_ContinentID) {
         this.ID = p_ContinentID;
     }
 
@@ -92,7 +91,7 @@ public class Continent {
      * Print continent
      */
     public String printContinent() {
-        return String.format("%s %d %d", this.NAME, this.ID, this.CONTROLVALUE);
+        return String.format("%s %d", this.ID, this.CONTROLVALUE);
     }
 
 }
