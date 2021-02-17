@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class contains static methods that is used to check validity of user input
+ *
+ * @author Anagh Mehran
+ * @version 1.0
+ */
 public class InputValidator {
     public enum Phase {
         MAPEDITOR,
@@ -11,7 +17,7 @@ public class InputValidator {
         GAMEPLAY
     }
 
-    public static Phase CURRENT_PHASE = Phase.STARTUP;
+    public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
     public static ArrayList<String> VALID_MAPEDITOR_OPTIONS = new ArrayList<>(
             Arrays.asList(
                     "-add",
@@ -19,6 +25,15 @@ public class InputValidator {
             )
     );
 
+    /**
+     * Validates whether the user input is valid.
+     * If the command is not valid it will print a error message to console.
+     *
+     * @param p_CommandName Name of the command entered
+     * @param p_OptionName  Name of the option ("-add" or "-remove")
+     * @param p_Arguments   List of arguments
+     * @return true if the command is valid; otherwise return false
+     */
     public static boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
         // switch to call method for each command
         switch (p_CommandName) {
@@ -116,6 +131,14 @@ public class InputValidator {
         }
     }
 
+    /**
+     * This method checks the validity of "editcontinent" command.
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  List of arguments passed
+     * @return true if all checks are passed
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateEditContinent(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -134,6 +157,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the validity of "editcountry" command.
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  List of arguments passed
+     * @return true if all checks are passed
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateEditCountry(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -305,5 +336,9 @@ public class InputValidator {
 
     private static boolean isAlphaNumeric(String p_Str) {
         return p_Str != null && p_Str.matches("^[a-zA-Z0-9]*$");
+    }
+
+    public static void setCurrentPhase(Phase p_CurrentPhase) {
+        CURRENT_PHASE = p_CurrentPhase;
     }
 }
