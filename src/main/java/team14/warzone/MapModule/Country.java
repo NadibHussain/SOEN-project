@@ -9,18 +9,15 @@ import java.util.ArrayList;
  */
 
 public class Country {
-    /**
-     * The name of country
+
+     /**
+     * Unique ID of country (in our case - name)
      */
-    private String NAME;
-    /**
-     * Unique ID of country
-     */
-    private int ID;
+    private String ID;
     /**
      * Continent containing the country
      */
-    private String l_ContinentName;
+    private String l_ContinentID;
     /** 
      * Name of current owner
      */
@@ -35,74 +32,58 @@ public class Country {
     /**
      * list of the country object of neighbours
      */
-    private ArrayList<Country> d_neighbours = new ArrayList<Country>();
+    private ArrayList<Country> d_neighbours = new ArrayList<>();
 
     /**
      * Constructor for Country
-     * @param NAME name
-     * @param ID unique ID
-     * @param l_ContinentName Continent Name
+     * @param ID unique ID (name)
+     * @param l_ContinentID Continent ID
      * @param d_CurrentOwner Current Owner
      * @param NUMOFARMIES Number of Armies
      */
-    public Country(String NAME, int ID, String l_ContinentName, String d_CurrentOwner, int NUMOFARMIES){
-        this.NAME = NAME;
+    public Country(String ID, String l_ContinentID, String d_CurrentOwner, int NUMOFARMIES){
+        /*this.NAME = NAME;
+        */
         this.ID = ID;
-        this.l_ContinentName = l_ContinentName;
+        this.l_ContinentID = l_ContinentID;
         this.d_CurrentOwner = d_CurrentOwner;
         this.NUMOFARMIES = NUMOFARMIES;
     }
 
     public Country(Country country) {
-        this(country.getName(), country.getID(), country.getContinentName(), country.getD_CurrentOwner(), country.getNumberOfArmies());
-    }
-
-    /**
-     * Returns the name
-     * @return A string with name
-     */
-    public String getName() {
-        return NAME;
-    }
-
-    /**
-     * Sets the name
-     * @param p_CountryName string with name
-     */
-    public void setName(String p_CountryName) {
-        this.NAME = p_CountryName;
+        this(country.getID(), country.getContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
     }
 
     /**
      * Returns the ID
-     * @return An int with ID
+     * @return A String with ID
      */
-    public int getID() {
+    public String getID() {
         return ID;
     }
 
     /**
      * Sets the ID
-     * @param p_CountryID int with ID
+     * @param p_CountryID String with ID
      */
-    public void setID(int p_CountryID) {
+    public void setID(String p_CountryID) {
         this.ID = p_CountryID;
     }
 
     /**
-     * Returns the continent name which contains the country
-     * @return A string with continent name
+     * Returns the continent ID which contains the country
+     * @return A string with continent ID
      */
-    public String getContinentName() {
-        return l_ContinentName;
+    public String getContinentID() {
+        return l_ContinentID;
     }
 
     /**
      * Sets the control value
-     * @param p_ContinentName with control value
+     * @param p_ContinentID with control value
      */
-    public void setControlValue(String p_ContinentName) {
-        this.l_ContinentName = p_ContinentName;
+    public void setControlValue(String p_ContinentID) {
+        this.l_ContinentID = p_ContinentID;
     }
 
     /**
@@ -141,7 +122,7 @@ public class Country {
      * Print Country
      */
     public String printCountry () {
-        return String.format("%s %d %s %s %d", NAME, ID, l_ContinentName, d_CurrentOwner, NUMOFARMIES);
+        return String.format("%s %s %s %d", ID, l_ContinentID, d_CurrentOwner, NUMOFARMIES);
     }
 
     /**
@@ -170,11 +151,11 @@ public class Country {
         return true;
     }
 
-    public boolean removeNeighbour(Country country) {
+    public boolean removeNeighbour(String  p_ID) {
 
         for (var i = 0; i < d_neighbours.size(); i++) {
-            if (d_neighbours.get(i).getID() == country.getID()) {
-                d_neighbours.removeIf(c -> c.getID() == country.getID());
+            if (d_neighbours.get(i).getID() == p_ID) {
+                d_neighbours.removeIf(c -> c.getID() == p_ID);
                 return true;
             }
         }
@@ -184,8 +165,7 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "NAME='" + NAME + '\'' +
-                ", ID=" + ID +
+                "ID=" + ID +
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
                 ", d_neighbours=" + d_neighbours +
                 '}';
