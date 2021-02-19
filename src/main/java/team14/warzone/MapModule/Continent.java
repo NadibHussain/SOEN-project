@@ -12,7 +12,11 @@ import java.util.ArrayList;
 
 public class Continent {
 
-     /**
+    /**
+     * Unique integer ID of continent
+     */
+    private int l_ID;
+    /**
      * The unique ID of continent (in our case - name)
      */
     private String ID;
@@ -26,16 +30,34 @@ public class Continent {
     private ArrayList<Player> d_currentOwners;
     /**
      * Constructor for Continent
-     * @param ID unique ID
+     * @param l_ID unique integer ID
+     * @param ID unique ID (name)
      * @param CONTROLVALUE control value
      */
-    public Continent(String ID, int CONTROLVALUE){
+    public Continent(int l_ID, String ID, int CONTROLVALUE){
+        this.l_ID = l_ID;
         this.ID = ID;
         this.CONTROLVALUE = CONTROLVALUE;
     }
 
     /**
-     * Returns the ID
+     * Returns the integer ID
+     * @return An int with ID
+     */
+    public int getl_ID() {
+        return l_ID;
+    }
+
+    /**
+     * Sets the integer ID
+     * @param p_Continentl_ID String with ID
+     */
+    public void setL_ID(int p_Continentl_ID) {
+        this.l_ID = p_Continentl_ID;
+    }
+
+    /**
+     * Returns the ID name
      * @return A String with ID
      */
     public String getID() {
@@ -43,7 +65,7 @@ public class Continent {
     }
 
     /**
-     * Sets the ID
+     * Sets the ID name
      * @param p_ContinentID String with ID
      */
     public void setID(String p_ContinentID) {
@@ -70,7 +92,17 @@ public class Continent {
      * Print continent
      */
     public String printContinent() {
-        return String.format("%s %d", this.ID, this.CONTROLVALUE);
+        return String.format("%d %s %d",this.l_ID,  this.ID, this.CONTROLVALUE);
     }
 
+
+    @Override
+    public String toString() {
+        return "Continent{" +
+                "l_ID=" + l_ID +
+                "," + "ID=" + ID +
+                "," + "Control Value=" + CONTROLVALUE +
+                ", d_CurrentOwner='" + d_currentOwners + '\'' +
+                '}';
+    }
 }

@@ -23,21 +23,25 @@ public class Map {
      */
 
     public ArrayList<Country> d_countries = new ArrayList<Country>();
+    /**
+     * Auto increment counters for generating integer ID for countries and continents
+     */
+    private static int d_IdTracker = 0;
+    private static int d_IdTracker1 = 0;
 
-    public Map() {
-
-    }
 
     public void showMap() {
 
     }
 
     /**
+     * @param l_ID          integer ID of country
      * @param p_ID          ID of country to be added
      * @param p_continentID Continent to which the country belongs to
      */
-    public void addCountry(String p_ID, String p_continentID) {
-        Country l_country = new Country(p_ID, p_continentID, "", 0);
+    public void addCountry(int l_ID, String p_ID, String p_continentID) {
+        l_ID = ++d_IdTracker1;
+        Country l_country = new Country(l_ID, p_ID, p_continentID, "", 0);
 
         for (int j = 0; j < d_countries.size(); j++) {
             if (d_countries.get(j).getID() == p_ID) {
@@ -82,14 +86,15 @@ public class Map {
 
 
     /**
+     * @param l_ID            integer ID of country
      * @param p_ID            ID of the continent to be added
      * @param p_controllValue Control Value of the continent
      */
-    public void addContinent(String p_ID, int p_controllValue) {
+    public void addContinent(int l_ID, String p_ID, int p_controllValue) {
         Iterator<Continent> itr = d_continents.iterator();
-
+        l_ID = ++d_IdTracker;
         boolean found = false;
-        Continent l_continent = new Continent(p_ID, p_controllValue);
+        Continent l_continent = new Continent(l_ID, p_ID, p_controllValue);
         while (itr.hasNext()) {
             Continent cur = (Continent) itr.next();
             if (cur.getID() == p_ID) {

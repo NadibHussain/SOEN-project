@@ -9,7 +9,10 @@ import java.util.ArrayList;
  */
 
 public class Country {
-
+    /**
+     * Unique integer ID of country
+     */
+    private int l_ID;
      /**
      * Unique ID of country (in our case - name)
      */
@@ -36,14 +39,14 @@ public class Country {
 
     /**
      * Constructor for Country
+     * @param l_ID unique integer ID
      * @param ID unique ID (name)
      * @param l_ContinentID Continent ID
      * @param d_CurrentOwner Current Owner
      * @param NUMOFARMIES Number of Armies
      */
-    public Country(String ID, String l_ContinentID, String d_CurrentOwner, int NUMOFARMIES){
-        /*this.NAME = NAME;
-        */
+    public Country(int l_ID, String ID, String l_ContinentID, String d_CurrentOwner, int NUMOFARMIES){
+        this.l_ID = l_ID;
         this.ID = ID;
         this.l_ContinentID = l_ContinentID;
         this.d_CurrentOwner = d_CurrentOwner;
@@ -51,7 +54,23 @@ public class Country {
     }
 
     public Country(Country country) {
-        this(country.getID(), country.getContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
+        this(country.getl_ID(), country.getID(), country.getContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
+    }
+
+    /**
+     * Returns the integer ID
+     * @return An int with ID
+     */
+    public int getl_ID() {
+        return l_ID;
+    }
+
+    /**
+     * Sets the integer ID
+     * @param p_Countryl_ID int with ID
+     */
+    public void setID(int p_Countryl_ID) {
+        this.l_ID = p_Countryl_ID;
     }
 
     /**
@@ -165,7 +184,8 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "ID=" + ID +
+                "l_ID=" + l_ID +
+                "," + "ID=" + ID +
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
                 ", d_neighbours=" + d_neighbours +
                 '}';
