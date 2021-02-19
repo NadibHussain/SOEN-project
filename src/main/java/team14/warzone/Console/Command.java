@@ -1,10 +1,15 @@
 package team14.warzone.Console;
 
-import java.util.ArrayList;
+import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.MapModule.Map;
+import team14.warzone.MapModule.MapEditor;
+
 import java.util.List;
 
 /**
  * This class is used to create objects representing the commands entered by user in the command line
+ * @author zeina
+ * @version 1.0
  */
 public class Command {
     private String d_Keyword;
@@ -28,10 +33,48 @@ public class Command {
     }
 
     /**
-     * Method to execute the command object
+     * Method to execute the command object by calling the corresponding methods from
+     * Map, MapEditor or the GameEngine classes
      */
     public void execute() {
-        // execute the command
+        List<String> l_CommandArgs = this.getD_Options().getD_Arguments();
+        String l_optionName = this.getD_Options().getD_Name();
+        switch (this.getD_Keyword()) {
+            case "editcontinent":
+                if (l_optionName.equals("-add"))
+                    MapEditor.d_loadedMap.addContinent(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                else //-remove option
+                    MapEditor.d_loadedMap.removeContinent(l_CommandArgs.get(0));
+            case "editcountry":
+                if (l_optionName.equals("-add"))
+                    MapEditor.d_loadedMap.addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                else //-remove option
+                    MapEditor.d_loadedMap.removeCountry(l_CommandArgs.get(0));
+            case "editneighbor":
+                if (l_optionName.equals("-add"))
+                    MapEditor.d_loadedMap.addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                else //-remove option
+                    MapEditor.d_loadedMap.removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+            case "savemap":
+                MapEditor.saveMap(l_CommandArgs.get(0));
+            case "editmap":
+                MapEditor.loadMap(l_CommandArgs.get(0));
+            case "validatemap":
+                MapEditor.validateMap(MapEditor.d_loadedMap);
+            case "loadmap":
+                MapEditor.loadMap(l_CommandArgs.get(0));
+            case "showmap":
+                Map.showMap();
+            case "gameplayer":
+                if (l_optionName.equals("-add"))
+                    GameEngine.addPlayer(l_CommandArgs.get(0));
+                else //-remove option
+                    GameEngine.removePlayer(l_CommandArgs.get(0));
+            case "assigncountries":
+                GameEngine.assignCountries();
+            case "deploy":
+                GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+        }
     }
 
     /**
@@ -64,7 +107,7 @@ public class Command {
     /**
      * A method to set the options related to the current command
      *
-     * @param p_Options : options list of the command
+     * @param p_Option : options list of the command
      */
     public void setD_Options(Option p_Option) {
         this.d_Option = p_Option;
