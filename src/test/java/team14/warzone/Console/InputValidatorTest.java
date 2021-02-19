@@ -1,5 +1,7 @@
 package team14.warzone.Console;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -29,6 +31,11 @@ public class InputValidatorTest {
                 {"showmap", "noOption", Arrays.asList(new String[]{})},
                 {"editcountry", "-add", Arrays.asList(new String[]{"1", "1"})}
         });
+    }
+
+    @BeforeClass
+    public void setUp() {
+
     }
 
     @Test
