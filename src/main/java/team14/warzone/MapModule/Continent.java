@@ -11,11 +11,7 @@ import java.util.ArrayList;
 */
 
 public class Continent {
-    /**
-     * The name of the continent
 
-    private String NAME;
-     */
      /**
      * The unique ID of continent (in our case - name)
      */
@@ -28,7 +24,6 @@ public class Continent {
      * Arraylist containing a record of owners
      */
     private ArrayList<Player> d_currentOwners;
-
     /**
      * Constructor for Continent
      * @param ID unique ID
@@ -39,22 +34,6 @@ public class Continent {
         this.CONTROLVALUE = CONTROLVALUE;
     }
 
-    /**
-     * Returns the name
-     * @return A string with name
-
-    public String getName() {
-        return NAME;
-    }
-    */
-    /**
-     * Sets the name
-     * @param p_ContinentName string with name
-
-    public void setName(String p_ContinentName) {
-        this.NAME = p_ContinentName;
-    }
-    */
     /**
      * Returns the ID
      * @return A String with ID

@@ -16,10 +16,12 @@ public class Map {
     /**
      * Array List of Continents defined in our map
      */
+
     public ArrayList<Continent> d_continents = new ArrayList<Continent>();
     /**
      * Array List of Countries defined in our map
      */
+
     public ArrayList<Country> d_countries = new ArrayList<Country>();
 
     public Map() {

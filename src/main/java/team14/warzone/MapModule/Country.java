@@ -9,11 +9,7 @@ import java.util.ArrayList;
  */
 
 public class Country {
-    /**
-     * The name of country
 
-    private String NAME;
-     */
      /**
      * Unique ID of country (in our case - name)
      */
@@ -36,7 +32,7 @@ public class Country {
     /**
      * list of the country object of neighbours
      */
-    private ArrayList<Country> d_neighbours = new ArrayList<Country>();
+    private ArrayList<Country> d_neighbours = new ArrayList<>();
 
     /**
      * Constructor for Country
@@ -57,23 +53,6 @@ public class Country {
     public Country(Country country) {
         this(country.getID(), country.getContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
     }
-
-    /**
-     * Returns the name
-     * @return A string with name
-
-    public String getName() {
-        return NAME;
-    }
-
-
-     * Sets the name
-     * @param p_CountryName string with name
-
-    public void setName(String p_CountryName) {
-        this.NAME = p_CountryName;
-    }
-    */
 
     /**
      * Returns the ID
