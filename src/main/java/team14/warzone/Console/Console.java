@@ -19,12 +19,12 @@ public class Console {
     public void readInput() {
         while (true) {
             String[] l_UserInput = d_Scanner.nextLine().split(" ");
-            Command l_UserCommand = new Command();
             //if user wants to exit the game
             if (l_UserInput[0].equals("exit"))
                 break;
             //define keywords and argument for the command
             String l_Keyword = l_UserInput[0];
+            String l_OptName = ""; //to store command option
             List<String> l_Arguments = new ArrayList<>();
             boolean l_ValidCommand = true;// to store the command validity
             //check one word command : a keyword only, no options or arguments
@@ -39,10 +39,9 @@ public class Console {
                     System.out.println("valid command");
             } else { //check three words or more command
                 for (int i = 1; i < l_UserInput.length; i++) {
-                    String l_Opt = ""; //to store command options
                     if (l_UserInput[i].charAt(0) == '-') { //check if a word is an option
                         l_Arguments.clear();//reset arguments list
-                        l_Opt = l_UserInput[i];
+                        l_OptName = l_UserInput[i];
                         //store all arguments for that option
                         while ((i + 1) < l_UserInput.length && l_UserInput[i + 1].charAt(0) != '-') {
                             l_Arguments.add(l_UserInput[i + 1]);
@@ -56,16 +55,19 @@ public class Console {
                         }
                     }
                     //check command validity
-                    System.out.println("keyword : " + l_Keyword + ", options: " + l_Opt + ", arguments : " + l_Arguments);
-                    l_ValidCommand = l_ValidCommand && InputValidator.validateInput(l_Keyword, l_Opt, l_Arguments);
+                    System.out.println("keyword : " + l_Keyword + ", options: " + l_OptName + ", arguments : " + l_Arguments);
+                    l_ValidCommand = l_ValidCommand && InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
+                    if (l_ValidCommand) {
+                        System.out.println("valid command");
+                        //Set options for the user command
+                        Option l_opt = new Option(l_OptName, l_Arguments);
+                        //Create Command object, passing keyword and option
+                        Command l_UserCommand = new Command(l_Keyword, l_opt);
+                        setD_CommandBuffer(l_UserCommand);
+
+                    } else
+                        System.out.println("invalid command");
                 }
-                if (l_ValidCommand) {
-                    System.out.println("valid command");
-                    setD_CommandBuffer(l_UserCommand);
-                    // Since filter is static, we need to pass the gameengine object to store command in
-//                    filterCommand(l_UserCommand);
-                } else
-                    System.out.println("invalid command");
             }
         }
     }

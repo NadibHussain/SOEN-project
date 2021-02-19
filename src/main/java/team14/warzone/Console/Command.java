@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Command {
     private String d_Keyword;
-    private List<Option> d_Options = new ArrayList<Option>();
+    private Option d_Option = new Option();
 
     /**
      * Class default constructor
@@ -22,9 +22,9 @@ public class Command {
      * @param p_Keyword : keyword of the command
      * @param p_Options : options of the command, if any
      */
-    public Command(String p_Keyword, List<Option> p_Options) {
+    public Command(String p_Keyword, Option p_Options) {
         this.d_Keyword = p_Keyword;
-        this.d_Options = p_Options;
+        this.d_Option = p_Options;
     }
 
     /**
@@ -57,8 +57,8 @@ public class Command {
      *
      * @return d_Options : options list of the command
      */
-    public List<Option> getD_Options() {
-        return d_Options;
+    public Option getD_Options() {
+        return d_Option;
     }
 
     /**
@@ -66,28 +66,15 @@ public class Command {
      *
      * @param p_Options : options list of the command
      */
-    public void setD_Options(List<Option> p_Options) {
-        this.d_Options = p_Options;
-    }
-
-    /**
-     * A method to add an option to the command
-     *
-     * @param opt : the option to be added
-     */
-    public void addOption(Option opt) {
-        this.d_Options.add(opt);
+    public void setD_Options(Option p_Option) {
+        this.d_Option = p_Option;
     }
 
     @Override
     public String toString() {
-        String allOptions = "";
-        for (Option opt : d_Options) {
-            allOptions += opt.getD_Name() + ", args: " + opt.getD_Arguments() + ". ";
-        }
         return "Command{" +
-                "d_Keyword='" + d_Keyword + '\'' +
-                ", d_Options=" + allOptions +
+                "d_Keyword='" + d_Keyword + '\'' + d_Option.getD_Name() +
+                ", d_Options=" + d_Option.getD_Arguments() +
                 '}';
     }
 }
