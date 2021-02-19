@@ -6,18 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class is used to read commands from user console, validate it then send the commands to the appropriate classes
+ */
 public class Console {
-    static Scanner l_Scanner = new Scanner(System.in);
-    private Command d_CommandBuffer;
+    static Scanner d_Scanner = new Scanner(System.in); // A scanner to read user input
+    private Command d_CommandBuffer;// store user command
 
-//    public static void main(String[] p_Args) {
-//        System.out.println("Welcome to warzone game, please enter your command : ");
-//        readInput();
-//    }
-
+    /**
+     * A method to read input from user console
+     */
     public void readInput() {
         while (true) {
-            String[] l_UserInput = l_Scanner.nextLine().split(" ");
+            String[] l_UserInput = d_Scanner.nextLine().split(" ");
             Command l_UserCommand = new Command();
             //if user wants to exit the game
             if (l_UserInput[0].equals("exit"))
@@ -69,6 +70,10 @@ public class Console {
         }
     }
 
+    /**
+     * A method to filter user commands depending on the current game phase
+     * @param p_GameEngine the game engine used to apply user game play commands
+     */
     public void filterCommand(GameEngine p_GameEngine) {
         if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
             d_CommandBuffer.execute();
@@ -86,6 +91,10 @@ public class Console {
         }
     }
 
+    /**
+     * A method to store user Command object
+     * @param d_CommandBuffer user Command object
+     */
     public void setD_CommandBuffer(Command d_CommandBuffer) {
         this.d_CommandBuffer = d_CommandBuffer;
     }
