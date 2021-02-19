@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class contains static methods that is used to check validity of user input
+ *
+ * @author Anagh Mehran
+ * @version 1.0
+ */
 public class InputValidator {
     public enum Phase {
         MAPEDITOR,
@@ -11,22 +17,7 @@ public class InputValidator {
         GAMEPLAY
     }
 
-    public static Phase CURRENT_PHASE = Phase.STARTUP;
-    public static final ArrayList<String> VALID_ORDER_LIST = new ArrayList<>(
-            Arrays.asList(
-                    "editcontinent",
-                    "editcountry",
-                    "editneighbor",
-                    "savemap",
-                    "editmap",
-                    "validatemap",
-                    "loadmap",
-                    "showmap",
-                    "gameplayer",
-                    "assigncountries",
-                    "deploy"
-            )
-    );
+    public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
     public static ArrayList<String> VALID_MAPEDITOR_OPTIONS = new ArrayList<>(
             Arrays.asList(
                     "-add",
@@ -34,7 +25,16 @@ public class InputValidator {
             )
     );
 
-    public boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
+    /**
+     * Validates whether the user input is valid.
+     * If the command is not valid it will print a error message to console.
+     *
+     * @param p_CommandName Name of the command entered
+     * @param p_OptionName  Name of the option ("-add" or "-remove")
+     * @param p_Arguments   List of arguments
+     * @return true if the command is valid; otherwise return false
+     */
+    public static boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
         // switch to call method for each command
         switch (p_CommandName) {
             case "editcontinent":
@@ -131,7 +131,15 @@ public class InputValidator {
         }
     }
 
-    private boolean validateEditContinent(String p_OptionName, List<String> p_Arguments) throws Exception {
+    /**
+     * This method checks the validity of "editcontinent" command.
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  List of arguments passed
+     * @return true if all checks are passed
+     * @throws Exception throws exception with error message
+     */
+    private static boolean validateEditContinent(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -149,7 +157,15 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateEditCountry(String p_OptionName, List<String> p_Arguments) throws Exception {
+    /**
+     * This method checks the validity of "editcountry" command.
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  List of arguments passed
+     * @return true if all checks are passed
+     * @throws Exception throws exception with error message
+     */
+    private static boolean validateEditCountry(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -168,7 +184,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateEditNeighbor(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean validateEditNeighbor(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -182,7 +198,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateSaveMap(List<String> p_Arguments) throws Exception {
+    private static boolean validateSaveMap(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -197,7 +213,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateEditMap(List<String> p_Arguments) throws Exception {
+    private static boolean validateEditMap(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -212,7 +228,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean validateMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -227,7 +243,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean loadMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean loadMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
 
@@ -238,7 +254,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean showMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean showMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate no option was passed
         if (!p_OptionName.equals("noOption"))
             throw new Exception("Invalid option");
@@ -250,7 +266,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateGamePlayer(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean validateGamePlayer(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.STARTUP);
 
@@ -264,7 +280,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateAssignCountries(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean validateAssignCountries(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.STARTUP);
 
@@ -279,7 +295,7 @@ public class InputValidator {
         return true;
     }
 
-    private boolean validateDeploy(String p_OptionName, List<String> p_Arguments) throws Exception {
+    private static boolean validateDeploy(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);
 
@@ -294,19 +310,19 @@ public class InputValidator {
         return true;
     }
 
-    private void gamePhaseCheck(Phase p_ExpectedPhase) throws Exception {
+    private static void gamePhaseCheck(Phase p_ExpectedPhase) throws Exception {
         if (CURRENT_PHASE != p_ExpectedPhase) {
             throw new Exception("Command not valid in current phase");
         }
     }
 
-    private void optionNameCheck(String p_OptionName) throws Exception {
+    private static void optionNameCheck(String p_OptionName) throws Exception {
         if (!VALID_MAPEDITOR_OPTIONS.contains(p_OptionName)) {
             throw new Exception("Invalid option: " + p_OptionName);
         }
     }
 
-    private boolean isNumeric(String p_StrNum) {
+    private static boolean isNumeric(String p_StrNum) {
         if (p_StrNum == null) {
             return false;
         }
@@ -318,7 +334,11 @@ public class InputValidator {
         return true;
     }
 
-    private boolean isAlphaNumeric(String p_Str) {
+    private static boolean isAlphaNumeric(String p_Str) {
         return p_Str != null && p_Str.matches("^[a-zA-Z0-9]*$");
+    }
+
+    public static void setCurrentPhase(Phase p_CurrentPhase) {
+        CURRENT_PHASE = p_CurrentPhase;
     }
 }
