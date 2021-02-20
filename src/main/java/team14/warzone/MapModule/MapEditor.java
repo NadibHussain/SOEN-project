@@ -36,11 +36,12 @@ public class MapEditor {
                             String[] l_country_array = l_line.split(" ");
                             String continentName = "";
                             for (Continent l_conrinent : l_continentList) {
-                                if (l_conrinent.getID() == Integer.parseInt(l_country_array[2])) {
-                                    continentName = l_conrinent.getName();
+                                if (l_conrinent.getD_ContinentIntID() == Integer.parseInt(l_country_array[2])) {
+                                    continentName = l_conrinent.getD_ContinentID();
+                                    break;
                                 }
                             }
-                            l_map.addCountry(l_country_array[1], Integer.parseInt(l_country_array[0]), continentName);
+                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[1],continentName);
                         }
                     }
                 } else if (data.equals("[continents]")) {
@@ -51,7 +52,7 @@ public class MapEditor {
                             break;
                         } else {
                             String[] l_continent_array = l_line.split(" ");
-                            l_map.addContinent(l_continent_array[0], id, Integer.parseInt(l_continent_array[1]));
+                            l_map.addContinent(id,l_continent_array[0], Integer.parseInt(l_continent_array[1]));
                             id++;
                         }
                     }
@@ -67,7 +68,7 @@ public class MapEditor {
                             ArrayList<Country> l_neighbourID_array = new ArrayList<Country>();
                             for (int x = 1; x < l_neighbour_array.length; x++) {
                                 for (int j = 0; j < l_countires.size(); j++) {
-                                    if (l_countires.get(j).getID() == Integer.parseInt(l_neighbour_array[x])) {
+                                    if (l_countires.get(j).getD_CountryIntID() == Integer.parseInt(l_neighbour_array[x])) {
                                         l_neighbourID_array.add(l_countires.get(j));
                                     }
                                 }

@@ -86,8 +86,8 @@ public class Map {
 
 
     /**
-     * @param p_ContinentIntID            integer ID of country
-     * @param p_ContinentID            ID of the continent to be added
+     * @param p_ContinentIntID integer ID of country
+     * @param p_ContinentID ID of the continent to be added in our case the name
      * @param p_ControlValue Control Value of the continent
      */
     public void addContinent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue) {
