@@ -97,12 +97,13 @@ public class Country {
         return d_CountryContinentID;
     }
 
+
     /**
-     * Sets the control value
-     * @param p_ContinentID with control value
+     * Sets the country continent ID which contains the country
+     * @param p_CountryContinentID String with Continent ID which contains the country
      */
-    public void setControlValue(String p_ContinentID) {
-        this.d_CountryContinentID = p_ContinentID;
+    public void setD_CountryContinentID(String p_CountryContinentID) {
+        this.d_CountryContinentID = p_CountryContinentID;
     }
 
     /**
@@ -145,18 +146,18 @@ public class Country {
     }
 
     /**
+     * get neighbour list
+     */
+    public ArrayList<Country> getD_neighbours() {
+        return d_neighbours;
+    }
+
+    /**
      * set neighbour list
      * @param d_neighbours array list of the country object of the neighbour
      */
     public void setD_neighbours(ArrayList<Country> d_neighbours) {
         this.d_neighbours = d_neighbours;
-    }
-
-    /**
-     * get neighbour list
-     */
-    public ArrayList<Country> getD_neighbours() {
-        return d_neighbours;
     }
 
     public boolean addNeighbour(Country country) {
