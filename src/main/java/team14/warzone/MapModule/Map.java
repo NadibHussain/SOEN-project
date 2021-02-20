@@ -3,6 +3,9 @@ package team14.warzone.MapModule;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JFrame;
+import javax.swing.JTable;
+
 /**
  * This class consists the information and functionality of the map
  *
@@ -31,6 +34,25 @@ public class Map {
 
 
     public void showMap() {
+        String[] l_columnNames = {"Country", "Continent", "Current Owner", "No. of Armies"};
+        Object[][] l_data = new Object [4][this.d_countries.size()];
+
+        for (int l_index = 0; l_index<this.d_countries.size();l_index++){
+
+
+        }
+        JTable table = new JTable(l_data, l_columnNames);
+
+        //Create and set up the window.
+        JFrame frame = new JFrame("Map");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        frame.setContentPane(table);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
 
     }
 
