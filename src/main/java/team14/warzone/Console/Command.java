@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * This class is used to create objects representing the commands entered by user in the command line
+ *
  * @author zeina
  * @version 1.0
  */
@@ -39,41 +40,45 @@ public class Command {
     public void execute() {
         List<String> l_CommandArgs = this.getD_Options().getD_Arguments();
         String l_optionName = this.getD_Options().getD_Name();
+        MapEditor l_MapEditor = new MapEditor();
+        Map l_Map = new Map();
+        GameEngine l_gameEng = new GameEngine();
+
         switch (this.getD_Keyword()) {
             case "editcontinent":
                 if (l_optionName.equals("-add"))
-                    MapEditor.d_loadedMap.addContinent(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                    l_MapEditor.getD_loadedMap().addContinent(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
-                    MapEditor.d_loadedMap.removeContinent(l_CommandArgs.get(0));
+                    l_MapEditor.getD_loadedMap().removeContinent(l_CommandArgs.get(0));
             case "editcountry":
                 if (l_optionName.equals("-add"))
-                    MapEditor.d_loadedMap.addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    l_MapEditor.getD_loadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    MapEditor.d_loadedMap.removeCountry(l_CommandArgs.get(0));
+                    l_MapEditor.getD_loadedMap().removeCountry(l_CommandArgs.get(0));
             case "editneighbor":
                 if (l_optionName.equals("-add"))
-                    MapEditor.d_loadedMap.addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    l_MapEditor.getD_loadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    MapEditor.d_loadedMap.removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    l_MapEditor.getD_loadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
             case "savemap":
-                MapEditor.saveMap(l_CommandArgs.get(0));
+                l_MapEditor.saveMap(l_CommandArgs.get(0));
             case "editmap":
-                MapEditor.loadMap(l_CommandArgs.get(0));
+                l_MapEditor.loadMap(l_CommandArgs.get(0));
             case "validatemap":
-                MapEditor.validateMap(MapEditor.d_loadedMap);
+                l_MapEditor.validateMap(MapEditor.d_loadedMap);
             case "loadmap":
-                MapEditor.loadMap(l_CommandArgs.get(0));
+                l_MapEditor.loadMap(l_CommandArgs.get(0));
             case "showmap":
-                Map.showMap();
+                l_Map.showMap();
             case "gameplayer":
                 if (l_optionName.equals("-add"))
-                    GameEngine.addPlayer(l_CommandArgs.get(0));
+                    l_gameEng.addPlayer(l_CommandArgs.get(0));
                 else //-remove option
-                    GameEngine.removePlayer(l_CommandArgs.get(0));
+                    l_gameEng.removePlayer(l_CommandArgs.get(0));
             case "assigncountries":
-                GameEngine.assignCountries();
+                l_gameEng.assignCountries();
             case "deploy":
-                GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                l_gameEng.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
         }
     }
 
