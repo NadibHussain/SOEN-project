@@ -37,7 +37,6 @@ public class Command {
      * Method to execute the command object by calling the corresponding methods from
      * Map, MapEditor or the GameEngine classes
      */
-    /*
     public void execute() {
         List<String> l_CommandArgs = this.getD_Options().getD_Arguments();
         String l_optionName = this.getD_Options().getD_Name();
@@ -82,7 +81,6 @@ public class Command {
                 l_gameEng.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
         }
     }
-    */
 
     /**
      * A method to get the keyword related to the current command
