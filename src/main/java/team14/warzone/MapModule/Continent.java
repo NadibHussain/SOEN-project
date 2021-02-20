@@ -15,94 +15,94 @@ public class Continent {
     /**
      * Unique integer ID of continent
      */
-    private int l_ID;
+    private int d_ContinentIntID;
     /**
      * The unique ID of continent (in our case - name)
      */
-    private String ID;
+    private String d_ContinentID;
     /**
      * Control Value of continent
      */
-    private int CONTROLVALUE;
+    private int d_ControlValue;
     /**
      * Arraylist containing a record of owners
      */
-    private ArrayList<Player> d_currentOwners;
+    private ArrayList<Player> d_CurrentOwners;
     /**
      * Constructor for Continent
-     * @param l_ID unique integer ID
-     * @param ID unique ID (name)
-     * @param CONTROLVALUE control value
+     * @param p_ContinentIntID unique integer ID
+     * @param p_ContinentID unique ID (name)
+     * @param p_ControlValue control value
      */
-    public Continent(int l_ID, String ID, int CONTROLVALUE){
-        this.l_ID = l_ID;
-        this.ID = ID;
-        this.CONTROLVALUE = CONTROLVALUE;
+    public Continent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue){
+        this.d_ContinentIntID = p_ContinentIntID;
+        this.d_ContinentID = p_ContinentID;
+        this.d_ControlValue = p_ControlValue;
     }
 
     /**
      * Returns the integer ID
      * @return An int with ID
      */
-    public int getl_ID() {
-        return l_ID;
+    public int getD_ContinentIntID() {
+        return d_ContinentIntID;
     }
 
     /**
      * Sets the integer ID
-     * @param p_Continentl_ID String with ID
+     * @param p_ContinentIntID String with ID
      */
-    public void setL_ID(int p_Continentl_ID) {
-        this.l_ID = p_Continentl_ID;
+    public void setD_ContinentIntID(int p_ContinentIntID) {
+        this.d_ContinentIntID = p_ContinentIntID;
     }
 
     /**
      * Returns the ID name
      * @return A String with ID
      */
-    public String getID() {
-        return ID;
+    public String getD_ContinentID() {
+        return d_ContinentID;
     }
 
     /**
      * Sets the ID name
      * @param p_ContinentID String with ID
      */
-    public void setID(String p_ContinentID) {
-        this.ID = p_ContinentID;
+    public void setD_ContinentID(String p_ContinentID) {
+        this.d_ContinentID = p_ContinentID;
     }
 
     /**
      * Returns the control value
      * @return An int with control value
      */
-    public int getControlValue() {
-        return CONTROLVALUE;
+    public int getD_ControlValue() {
+        return d_ControlValue;
     }
 
     /**
      * Sets the control value
      * @param p_ControlValue int with control value
      */
-    public void setControlValue(int p_ControlValue) {
-        this.CONTROLVALUE = p_ControlValue;
+    public void setD_ControlValue(int p_ControlValue) {
+        this.d_ControlValue = p_ControlValue;
     }
 
     /**
      * Print continent
      */
     public String printContinent() {
-        return String.format("%d %s %d",this.l_ID,  this.ID, this.CONTROLVALUE);
+        return String.format("%d %s %d",this.d_ContinentIntID,  this.d_ContinentID, this.d_ControlValue);
     }
 
 
     @Override
     public String toString() {
         return "Continent{" +
-                "l_ID=" + l_ID +
-                "," + "ID=" + ID +
-                "," + "Control Value=" + CONTROLVALUE +
-                ", d_CurrentOwner='" + d_currentOwners + '\'' +
+                "Int ID=" + d_ContinentIntID +
+                "," + "Name ID=" + d_ContinentID +
+                "," + "Control Value=" + d_ControlValue +
+                ", d_CurrentOwner='" + d_CurrentOwners + '\'' +
                 '}';
     }
 }

@@ -12,15 +12,15 @@ public class Country {
     /**
      * Unique integer ID of country
      */
-    private int l_ID;
+    private int d_CountryIntID;
      /**
      * Unique ID of country (in our case - name)
      */
-    private String ID;
+    private String d_CountryID;
     /**
      * Continent containing the country
      */
-    private String l_ContinentID;
+    private String d_CountryContinentID;
     /** 
      * Name of current owner
      */
@@ -28,7 +28,7 @@ public class Country {
     /**
      * Number of armies on the country
      */
-    private int NUMOFARMIES;
+    private int d_NumberOfArmies;
 
 
 
@@ -39,62 +39,62 @@ public class Country {
 
     /**
      * Constructor for Country
-     * @param l_ID unique integer ID
-     * @param ID unique ID (name)
-     * @param l_ContinentID Continent ID
-     * @param d_CurrentOwner Current Owner
-     * @param NUMOFARMIES Number of Armies
+     * @param p_CountryIntID unique integer ID
+     * @param p_CountryID unique ID (name)
+     * @param p_CountryContinentID Continent ID
+     * @param p_CurrentOwner Current Owner
+     * @param p_NumberOfArmies Number of Armies
      */
-    public Country(int l_ID, String ID, String l_ContinentID, String d_CurrentOwner, int NUMOFARMIES){
-        this.l_ID = l_ID;
-        this.ID = ID;
-        this.l_ContinentID = l_ContinentID;
-        this.d_CurrentOwner = d_CurrentOwner;
-        this.NUMOFARMIES = NUMOFARMIES;
+    public Country(int p_CountryIntID, String p_CountryID, String p_CountryContinentID, String p_CurrentOwner, int p_NumberOfArmies){
+        this.d_CountryIntID = p_CountryIntID;
+        this.d_CountryID = p_CountryID;
+        this.d_CountryContinentID = p_CountryContinentID;
+        this.d_CurrentOwner = p_CurrentOwner;
+        this.d_NumberOfArmies = p_NumberOfArmies;
     }
 
     public Country(Country country) {
-        this(country.getl_ID(), country.getID(), country.getContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
+        this(country.getD_CountryIntID(), country.getD_CountryID(),country.getD_CountryContinentID(), country.getD_CurrentOwner(), country.getNumberOfArmies());
     }
 
     /**
      * Returns the integer ID
      * @return An int with ID
      */
-    public int getl_ID() {
-        return l_ID;
+    public int getD_CountryIntID() {
+        return d_CountryIntID;
     }
 
     /**
      * Sets the integer ID
-     * @param p_Countryl_ID int with ID
+     * @param p_CountryIntID int with ID
      */
-    public void setID(int p_Countryl_ID) {
-        this.l_ID = p_Countryl_ID;
+    public void setD_CountryIntID(int p_CountryIntID) {
+        this.d_CountryIntID = p_CountryIntID;
     }
 
     /**
-     * Returns the ID
+     * Returns the CountryID
      * @return A String with ID
      */
-    public String getID() {
-        return ID;
+    public String getD_CountryID() {
+        return d_CountryID;
     }
 
     /**
-     * Sets the ID
+     * Sets the CountryID
      * @param p_CountryID String with ID
      */
-    public void setID(String p_CountryID) {
-        this.ID = p_CountryID;
+    public void setD_CountryID(String p_CountryID) {
+        this.d_CountryID = p_CountryID;
     }
 
     /**
      * Returns the continent ID which contains the country
      * @return A string with continent ID
      */
-    public String getContinentID() {
-        return l_ContinentID;
+    public String getD_CountryContinentID() {
+        return d_CountryContinentID;
     }
 
     /**
@@ -102,7 +102,7 @@ public class Country {
      * @param p_ContinentID with control value
      */
     public void setControlValue(String p_ContinentID) {
-        this.l_ContinentID = p_ContinentID;
+        this.d_CountryContinentID = p_ContinentID;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Country {
      * @return An int with number of armies
      */
     public int getNumberOfArmies() {
-        return NUMOFARMIES;
+        return d_NumberOfArmies;
     }
 
     /**
@@ -134,14 +134,14 @@ public class Country {
      * @param p_NumberOfArmies with current player who owns the country
      */
     public void setNumberOfArmies(int p_NumberOfArmies) {
-        this.NUMOFARMIES = p_NumberOfArmies;
+        this.d_NumberOfArmies = p_NumberOfArmies;
     }
 
     /**
      * Print Country
      */
     public String printCountry () {
-        return String.format("%s %s %s %d", ID, l_ContinentID, d_CurrentOwner, NUMOFARMIES);
+        return String.format("%d %s %s %s %d",d_CountryIntID,  d_CountryID, d_CountryContinentID, d_CurrentOwner, d_NumberOfArmies);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Country {
     public boolean addNeighbour(Country country) {
 
         for (var i = 0; i < d_neighbours.size(); i++ ) {
-            if (d_neighbours.get(i).getID() == country.getID()) {
+            if (d_neighbours.get(i).getD_CountryID() == country.getD_CountryID()) {
                 return false;
             }
         };
@@ -173,8 +173,8 @@ public class Country {
     public boolean removeNeighbour(String  p_ID) {
 
         for (var i = 0; i < d_neighbours.size(); i++) {
-            if (d_neighbours.get(i).getID() == p_ID) {
-                d_neighbours.removeIf(c -> c.getID() == p_ID);
+            if (d_neighbours.get(i).getD_CountryID() == p_ID) {
+                d_neighbours.removeIf(c -> c.getD_CountryID() == p_ID);
                 return true;
             }
         }
@@ -184,8 +184,8 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "l_ID=" + l_ID +
-                "," + "ID=" + ID +
+                "Int ID=" + d_CountryIntID +
+                "," + "Name ID=" + d_CountryID +
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
                 ", d_neighbours=" + d_neighbours +
                 '}';
