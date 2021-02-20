@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * This class is used to create objects representing the commands entered by user in the command line
+ *
  * @author zeina
  * @version 1.0
  */
@@ -36,6 +37,7 @@ public class Command {
      * Method to execute the command object by calling the corresponding methods from
      * Map, MapEditor or the GameEngine classes
      */
+    /*
     public void execute() {
         List<String> l_CommandArgs = this.getD_Options().getD_Arguments();
         String l_optionName = this.getD_Options().getD_Name();
@@ -76,6 +78,7 @@ public class Command {
                 GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
         }
     }
+    */
 
     /**
      * A method to get the keyword related to the current command
@@ -119,5 +122,9 @@ public class Command {
                 "d_Keyword='" + d_Keyword + '\'' + d_Option.getD_Name() +
                 ", d_Options=" + d_Option.getD_Arguments() +
                 '}';
+    }
+
+    public void execute() {
+
     }
 }

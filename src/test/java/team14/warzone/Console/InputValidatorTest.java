@@ -26,16 +26,17 @@ public class InputValidatorTest {
     }
 
     @Parameterized.Parameters
-    public static Collection<Object[]> testConditions() {
+    public static Collection<Object[]> testConditions_mapPhase() {
         return Arrays.asList(new Object[][]{
                 {"showmap", "noOption", Arrays.asList(new String[]{})},
-                {"editcountry", "-add", Arrays.asList(new String[]{"1", "1"})}
+                {"editcountry", "-add", Arrays.asList(new String[]{"1", "1"})},
+                {"editcontinent", "-add", Arrays.asList(new String[]{"1", "asia"})},
+                {"editneighbor", "-add", Arrays.asList(new String[]{"Bangladesh", "India"})},
+                {"showmap", "noOption", Arrays.asList(new String[]{})},
+                {"editmap", "noOption", Arrays.asList(new String[]{"mymap"})},
+                {"validatemap", "noOption", Arrays.asList(new String[]{})},
+                {"loadmap", "noOption", Arrays.asList(new String[]{"mymap"})},
         });
-    }
-
-    @BeforeClass
-    public void setUp() {
-
     }
 
     @Test
