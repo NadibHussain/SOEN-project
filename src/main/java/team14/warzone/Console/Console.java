@@ -10,8 +10,13 @@ import java.util.Scanner;
  * This class is used to read commands from user console, validate it then send the commands to the appropriate classes
  */
 public class Console {
-    static Scanner d_Scanner = new Scanner(System.in); // A scanner to read user input
-    private Command d_CommandBuffer;// store user command
+    static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
+    private Command d_CommandBuffer;                    // store user command
+    private GameEngine d_GameEngine;
+
+    public Console(GameEngine d_GameEngine) {
+        this.d_GameEngine = d_GameEngine;
+    }
 
     /**
      * A method to read input from user console
@@ -74,9 +79,8 @@ public class Console {
 
     /**
      * A method to filter user commands depending on the current game phase
-     * @param p_GameEngine the game engine used to apply user game play commands
      */
-    public void filterCommand(GameEngine p_GameEngine) {
+    public void filterCommand() {
         if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
             d_CommandBuffer.execute();
         } else {
@@ -87,7 +91,7 @@ public class Console {
                     break;
 
                 case GAMEPLAY:
-                    p_GameEngine.receiveCommand(d_CommandBuffer);
+                    d_GameEngine.receiveCommand(d_CommandBuffer);
                     break;
             }
         }
@@ -95,6 +99,7 @@ public class Console {
 
     /**
      * A method to store user Command object
+     *
      * @param d_CommandBuffer user Command object
      */
     public void setD_CommandBuffer(Command d_CommandBuffer) {
