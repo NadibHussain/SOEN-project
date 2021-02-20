@@ -125,8 +125,4 @@ public class Command {
                 ", d_Options=" + d_Option.getD_Arguments() +
                 '}';
     }
-
-    public void execute() {
-
-    }
 }
