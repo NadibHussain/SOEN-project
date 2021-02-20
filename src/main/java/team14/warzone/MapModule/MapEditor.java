@@ -117,17 +117,17 @@ public class MapEditor {
         for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
             for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
                     .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
-                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getID())))
-                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getID());
+                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
+                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
 
             }
-            if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getContinentName()))) {
-                l_stackContinents.push(l_countries.get(l_aCountryIndex).getContinentName());
+            if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getD_CountryContinentID()))) {
+                l_stackContinents.push(l_countries.get(l_aCountryIndex).getD_CountryContinentID());
             }
 
-            if (l_countries.get(l_aCountryIndex).getContinentName().isEmpty()) {
+            if (l_countries.get(l_aCountryIndex).getD_CountryContinentID().isEmpty()) {
                 System.out.println(
-                        l_countries.get(l_aCountryIndex).getName() + " country does not belong to any continent.");
+                        l_countries.get(l_aCountryIndex).getD_CountryID() + " country does not belong to any continent.");
                 return false;
             } else {
                 l_hasContinent = true;

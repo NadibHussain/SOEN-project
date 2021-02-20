@@ -13,7 +13,7 @@ public class TestMapEditor {
         Map m = me.getD_loadedMap();
         assert m.getD_continents().size() == 18;
         assert m.getD_countries().size() == 180;
-        assert m.getD_countries().get(1).getD_neighbours().get(2).getID() == 8;
+        assert m.getD_countries().get(1).getD_neighbours().get(2).getD_CountryIntID() == 8;
     }
 
     @Test
