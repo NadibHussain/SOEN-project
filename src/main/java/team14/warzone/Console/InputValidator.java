@@ -184,6 +184,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the validity of "editneighbor" command
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  List of arguments passed
+     * @return true if all checks passes
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateEditNeighbor(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -198,6 +206,13 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the validity of "savemap" command
+     *
+     * @param p_Arguments List of arguments passed
+     * @return true if all checks passes
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateSaveMap(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -213,6 +228,13 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the validity of "editmap" command
+     *
+     * @param p_Arguments Contains the filename of the map to be edited
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateEditMap(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -228,6 +250,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the validity of "validatemap" command
+     *
+     * @param p_OptionName Name of the option (Expect "noOption")
+     * @param p_Arguments  Contains list of arguments to be passed. In this case this should be an empty list.
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -243,6 +273,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks the validity of "loadMap" command
+     *
+     * @param p_OptionName Name of the option (Expect "noOption")
+     * @param p_Arguments  Contains list of arguments to be passed. In this case this should be an empty list.
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean loadMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.MAPEDITOR);
@@ -254,6 +292,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks the validity of "showmap" command
+     *
+     * @param p_OptionName Name of the option (Expect "noOption")
+     * @param p_Arguments  Contains list of arguments to be passed. In this case this should be an empty list.
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean showMap(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate no option was passed
         if (!p_OptionName.equals("noOption"))
@@ -266,6 +312,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks the validity of "gameplayer" command
+     *
+     * @param p_OptionName Name of the option ("-add" or "-remove")
+     * @param p_Arguments  Name of the player
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateGamePlayer(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.STARTUP);
@@ -280,6 +334,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks the validity of "assigncountries" command
+     *
+     * @param p_OptionName Name of the option (Expected "noOption")
+     * @param p_Arguments  Arguments passed (Should be empty list)
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateAssignCountries(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.STARTUP);
@@ -295,6 +357,14 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks the validity of "deploy" command
+     *
+     * @param p_OptionName Name of the option ("noOption")
+     * @param p_Arguments  number of armies to deploy
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
     private static boolean validateDeploy(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);
@@ -310,18 +380,37 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * This method checks the current gamephase with the expected phase
+     *
+     * @param p_ExpectedPhase Expected phase that should be compared with current phase
+     * @throws Exception throws exception with error message when the current gamephase does not match with expected
+     *                   phase
+     */
     private static void gamePhaseCheck(Phase p_ExpectedPhase) throws Exception {
         if (CURRENT_PHASE != p_ExpectedPhase) {
             throw new Exception("Command not valid in current phase");
         }
     }
 
+    /**
+     * This methods checks that the option name is valid. Finds the option name from the list of valid options
+     *
+     * @param p_OptionName name of the option
+     * @throws Exception throws exception with error message when option name is not valid
+     */
     private static void optionNameCheck(String p_OptionName) throws Exception {
         if (!VALID_MAPEDITOR_OPTIONS.contains(p_OptionName)) {
             throw new Exception("Invalid option: " + p_OptionName);
         }
     }
 
+    /**
+     * Method checks if the string passed contains only numeric characters
+     *
+     * @param p_StrNum string to be checked
+     * @return true if the string contains only numeric characters; else return false
+     */
     private static boolean isNumeric(String p_StrNum) {
         if (p_StrNum == null) {
             return false;
@@ -334,10 +423,21 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Method checks if the string passed contains only alphanumeric characters
+     *
+     * @param p_Str string to be checked
+     * @return true if the string contains only alphanumeric characters; else retur false
+     */
     private static boolean isAlphaNumeric(String p_Str) {
         return p_Str != null && p_Str.matches("^[a-zA-Z0-9]*$");
     }
 
+    /**
+     * Method sets the current phase
+     *
+     * @param p_CurrentPhase current phase to be set
+     */
     public static void setCurrentPhase(Phase p_CurrentPhase) {
         CURRENT_PHASE = p_CurrentPhase;
     }

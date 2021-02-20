@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommandTest {
     List<Option> options = new ArrayList<>();
-    Command command = new Command("editContenent", options);
+    Command command = new Command("editContenent", (Option) options);
 
     @Test
     void getD_Keyword() {
@@ -30,7 +30,7 @@ class CommandTest {
         Option option2 = new Option("-remove", Arrays.asList("Asia", "7"));
         options.add(option1);
         options.add(option2);
-        command.setD_Options(options);
+        command.setD_Options((Option) options);
         assertEquals(options, command.getD_Options());
     }
 
@@ -38,7 +38,7 @@ class CommandTest {
     void setD_Options() {
         List<Option> options = new ArrayList<>();
         options.add(new Option("-remove", Arrays.asList("Europe", "6")));
-        command.setD_Options(options);
+        command.setD_Options((Option) options);
         assertEquals(options, command.getD_Options());
     }
 }
