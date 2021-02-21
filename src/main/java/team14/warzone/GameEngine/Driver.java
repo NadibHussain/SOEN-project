@@ -8,6 +8,8 @@ public class Driver {
         Console console = new Console(ge);
 
         System.out.println("Welcome to warzone game, please enter your command : ");
-        console.readInput();
+        while (true) {
+            console.readInput();
+        }
     }
 }

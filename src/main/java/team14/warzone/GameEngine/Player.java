@@ -5,6 +5,12 @@ import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
 
+/**
+ * Class implements the player model
+ *
+ * @author Anagh
+ * @version 1.0
+ */
 public class Player {
     private String d_Name;
     private int d_TotalNumberOfArmies;
@@ -14,7 +20,8 @@ public class Player {
     public Player() {
     }
 
-    public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned, ArrayList<Command> d_OrderList) {
+    public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
+                  ArrayList<Command> d_OrderList) {
         this.d_Name = d_Name;
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
         this.d_CountriesOwned = d_CountriesOwned;
@@ -27,6 +34,7 @@ public class Player {
 
     public void nextOrder() {
         d_OrderList.get(d_OrderList.size() - 1).execute();
+        // remove the command after execution
     }
 
     public void setD_Name(String d_Name) {
