@@ -2,6 +2,8 @@ package team14.warzone.MapModule;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -41,7 +43,7 @@ public class MapEditor {
                                     break;
                                 }
                             }
-                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[1],continentName);
+                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[2],continentName);
                         }
                     }
                 } else if (data.equals("[continents]")) {
@@ -90,9 +92,45 @@ public class MapEditor {
     }
 
     /**
+     * This method is used to save a map in a text format
      * @param p_fileName
      */
     public void saveMap(String p_fileName) {
+        String l_content = "This map was created from a SOEN-6441 Project \n \n";
+        l_content+="[continents]\n";
+        for (Continent l_continent:d_loadedMap.getD_continents()) {
+            l_content += l_continent.getD_ContinentID()+" "+l_continent.getD_ControlValue()+"\n";
+        }
+        l_content+="\n[countries]\n";
+        for (Country l_country:d_loadedMap.getD_countries()) {
+            int l_continentIntId = -1;
+            for (Continent l_continent: d_loadedMap.getD_continents()) {
+                if (l_continent.getD_ContinentID().equals(l_country.getD_CountryContinentID()))
+                {
+                    l_continentIntId = l_continent.getD_ContinentIntID();
+                }
+            }
+            l_content += l_country.getD_CountryIntID()+" "+"-"+" "+l_continentIntId+"\n";
+        }
+
+        l_content+="\n[borders]\n";
+        for (Country l_country:d_loadedMap.getD_countries()) {
+            l_content += l_country.getD_CountryIntID()+" ";
+            for (Country l_neighbour:l_country.getD_neighbours()) {
+                l_content += l_neighbour.getD_CountryIntID()+ " ";
+            }
+            l_content += "\n";
+        }
+
+        try {
+            FileWriter myWriter = new FileWriter(p_fileName);
+            myWriter.write(l_content);
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
     }
 
