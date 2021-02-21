@@ -1,11 +1,13 @@
 package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Command;
+import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class GameEngine {
@@ -56,9 +58,32 @@ public class GameEngine {
         }
     }
 
+    /**
+     * A method to loop the players list in a RR fashion, to give their order
+     */
+    public void gameLoop(){
+        boolean[] pass = new boolean[d_PlayerList.size()];
+        while(Arrays.asList(pass).contains(false)){
+            for(int i = 0; i < d_PlayerList.size(); i++){
+                d_CurrentPlayer = d_PlayerList.get(i);
+                if(pass[i] == false)
+                    Console.displayMsg("Enter Command for player " + d_CurrentPlayer.getD_Name());
+            }
+        }
+        Arrays.fill(pass, false);
+    }
+
     public void receiveCommand(Command p_Command) {
         // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command);
+        d_CurrentPlayer.issueOrder(p_Command); //store order in current player orders list
+        switch (p_Command.getD_Keyword()){
+            case "deploy": //decrease number of armies for the current player
+                int l_ArmiesOwned = d_CurrentPlayer.getD_TotalNumberOfArmies();
+                int l_ArmiesToDeploy = Integer.parseInt(p_Command.getD_Options().getD_Arguments().get(1));
+                d_CurrentPlayer.setD_TotalNumberOfArmies(l_ArmiesOwned - l_ArmiesToDeploy);
+                break;
+            default:
+        }
     }
 
 }
