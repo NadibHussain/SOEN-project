@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 /**
@@ -34,21 +35,27 @@ public class Map {
 
 
     public void showMap() {
-        String[] l_columnNames = {"Country", "Continent", "Current Owner", "No. of Armies"};
-        Object[][] l_data = new Object [4][this.d_countries.size()];
+        String[] l_columnNames = {"SL.","Country", "Continent","Neighbours", "Current Owner", "No. of Armies"};
+        Object[][] l_data = new Object [this.d_countries.size()][6];
 
         for (int l_index = 0; l_index<this.d_countries.size();l_index++){
-
+            l_data[l_index][0] = l_index;
+            l_data[l_index][1] = this.d_countries.get(l_index).getD_CountryID();
+            l_data[l_index][2] = this.d_countries.get(l_index).getD_CountryContinentID();
+            // l_data[l_index][3] = this.d_countries.get(l_index).getD_neighbours();
+            l_data[l_index][4] = this.d_countries.get(l_index).getD_CurrentOwner();
+            l_data[l_index][5] = this.d_countries.get(l_index).getNumberOfArmies();
 
         }
-        JTable table = new JTable(l_data, l_columnNames);
+        JTable l_table = new JTable(l_data, l_columnNames);
 
         //Create and set up the window.
         JFrame frame = new JFrame("Map");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        frame.setContentPane(table);
+        frame.add(new JScrollPane(l_table));
+        
 
         //Display the window.
         frame.pack();
