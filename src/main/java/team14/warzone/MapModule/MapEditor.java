@@ -1,5 +1,7 @@
 package team14.warzone.MapModule;
 
+import team14.warzone.GameEngine.GameEngine;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,9 +11,14 @@ import java.util.Stack;
 public class MapEditor {
 
     public Map d_loadedMap;
+    private GameEngine d_GameEngine;
 
     public MapEditor() {
 
+    }
+
+    public MapEditor(GameEngine p_GameEngine) {
+        d_GameEngine = p_GameEngine;
     }
 
     /**
@@ -41,7 +48,7 @@ public class MapEditor {
                                     break;
                                 }
                             }
-                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[1],continentName);
+                            l_map.addCountry(Integer.parseInt(l_country_array[0]), l_country_array[1], continentName);
                         }
                     }
                 } else if (data.equals("[continents]")) {
@@ -52,7 +59,7 @@ public class MapEditor {
                             break;
                         } else {
                             String[] l_continent_array = l_line.split(" ");
-                            l_map.addContinent(id,l_continent_array[0], Integer.parseInt(l_continent_array[1]));
+                            l_map.addContinent(id, l_continent_array[0], Integer.parseInt(l_continent_array[1]));
                             id++;
                         }
                     }
@@ -86,7 +93,7 @@ public class MapEditor {
             e.printStackTrace();
         }
         this.d_loadedMap = l_map;
-
+        d_GameEngine.setD_LoadedMap(d_loadedMap);
     }
 
     /**
@@ -97,9 +104,9 @@ public class MapEditor {
     }
 
     /**
-     * @author tanzia-ahmed
      * @param p_map
      * @return boolean
+     * @author tanzia-ahmed
      */
     public boolean validateMap(Map p_map) {
         ArrayList<Country> l_countries = p_map.getD_countries();
@@ -117,8 +124,8 @@ public class MapEditor {
         for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
             for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
                     .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
-                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
-                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
+                if (!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
+                    l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
 
             }
             if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getD_CountryContinentID()))) {
@@ -127,7 +134,8 @@ public class MapEditor {
 
             if (l_countries.get(l_aCountryIndex).getD_CountryContinentID().isEmpty()) {
                 System.out.println(
-                        l_countries.get(l_aCountryIndex).getD_CountryID() + " country does not belong to any continent.");
+                        l_countries.get(l_aCountryIndex).getD_CountryID() + " country does not belong to any " +
+                                "continent.");
                 return false;
             } else {
                 l_hasContinent = true;
@@ -152,7 +160,7 @@ public class MapEditor {
 
     /**
      * Gets Map
-     * 
+     *
      * @return loaded map
      */
     public Map getD_loadedMap() {
