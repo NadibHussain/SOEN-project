@@ -1,6 +1,5 @@
 package team14.warzone.GameEngine;
 
-public class Player {
 import team14.warzone.Console.Command;
 import team14.warzone.MapModule.Country;
 
@@ -11,6 +10,9 @@ public class Player {
     private int d_TotalNumberOfArmies;
     private ArrayList<Country> d_CountriesOwned;
     private ArrayList<Command> d_OrderList;
+
+    public Player() {
+    }
 
     public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned, ArrayList<Command> d_OrderList) {
         this.d_Name = d_Name;
@@ -25,6 +27,26 @@ public class Player {
 
     public void nextOrder() {
         d_OrderList.get(d_OrderList.size() - 1).execute();
+    }
+
+    public void setD_Name(String d_Name) {
+        this.d_Name = d_Name;
+    }
+
+    public void setD_TotalNumberOfArmies(int d_TotalNumberOfArmies) {
+        this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
+    }
+
+    public void setD_CountriesOwned(ArrayList<Country> d_CountriesOwned) {
+        this.d_CountriesOwned = d_CountriesOwned;
+    }
+
+    public void setD_OrderList(ArrayList<Command> d_OrderList) {
+        this.d_OrderList = d_OrderList;
+    }
+
+    public void addCountryOwned(Country p_Country){
+        this.d_CountriesOwned.add(p_Country);
     }
 
     public String getD_Name() {
