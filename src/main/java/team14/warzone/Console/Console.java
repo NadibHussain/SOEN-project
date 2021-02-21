@@ -105,4 +105,12 @@ public class Console {
     public void setD_CommandBuffer(Command d_CommandBuffer) {
         this.d_CommandBuffer = d_CommandBuffer;
     }
+
+    /**
+     * A method to display a message to the user
+     * @param p_Msg the message to be displayed
+     */
+    public static void displayMsg(String p_Msg){
+        System.out.println(p_Msg);
+    }
 }
