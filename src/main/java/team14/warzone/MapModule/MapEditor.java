@@ -11,7 +11,6 @@ import java.util.Stack;
 public class MapEditor {
 
     public Map d_loadedMap;
-
     public MapEditor() {
 
     }
@@ -31,6 +30,10 @@ public class MapEditor {
                 if (data.equals("[countries]")) {
                     while (true) {
                         String l_line = myReader.nextLine();
+                        if (l_line.length()>0 && l_line.charAt(0) == ';')
+                        {
+                            continue;
+                        }
                         ArrayList<Continent> l_continentList = l_map.getD_continents();
                         if (l_line.equals("")) {
                             break;
@@ -43,13 +46,17 @@ public class MapEditor {
                                     break;
                                 }
                             }
-                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[2],continentName);
+                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[1],continentName);
                         }
                     }
                 } else if (data.equals("[continents]")) {
                     int id = 1;
                     while (true) {
                         String l_line = myReader.nextLine();
+                        if (l_line.length()>0 && l_line.charAt(0) == ';')
+                        {
+                            continue;
+                        }
                         if (l_line.equals("")) {
                             break;
                         } else {
@@ -58,11 +65,16 @@ public class MapEditor {
                             id++;
                         }
                     }
+
                 } else if (data.equals("[borders]")) {
                     ArrayList<Country> l_countires = l_map.getD_countries();
                     int l_index = 0;
                     while (myReader.hasNextLine()) {
                         String l_line = myReader.nextLine();
+                        if (l_line.charAt(0) == ';'&& l_line.length()>0)
+                        {
+                            continue;
+                        }
                         if (l_line.equals("")) {
                             break;
                         } else {
@@ -123,9 +135,9 @@ public class MapEditor {
         }
 
         try {
-            FileWriter myWriter = new FileWriter(p_fileName);
-            myWriter.write(l_content);
-            myWriter.close();
+            FileWriter l_writer = new FileWriter(p_fileName);
+            l_writer.write(l_content);
+            l_writer.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");

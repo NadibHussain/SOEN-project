@@ -23,11 +23,6 @@ public class Map {
      */
 
     public ArrayList<Country> d_countries = new ArrayList<Country>();
-    /**
-     * Auto increment counters for generating integer ID for countries and continents
-     */
-    private static int d_IdTracker = 0;
-    private static int d_IdTracker1 = 0;
 
 
     public void showMap() {
@@ -40,7 +35,14 @@ public class Map {
      * @param p_ContinentID Continent to which the country belongs to
      */
     public void addCountry(int p_CountryIntID, String p_CountryID, String p_ContinentID) {
-        p_CountryIntID = ++d_IdTracker1;
+        if (d_countries.size() > 0)
+        {
+            p_CountryIntID = d_countries.get(d_countries.size()-1).getD_CountryIntID()+1;
+
+        }
+        else{
+            p_CountryIntID = 1;
+        }
         Country l_country = new Country(p_CountryIntID, p_CountryID, p_ContinentID, "", 0);
 
         for (int j = 0; j < d_countries.size(); j++) {
@@ -93,7 +95,14 @@ public class Map {
      */
     public void addContinent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue) {
         Iterator<Continent> itr = d_continents.iterator();
-        p_ContinentIntID = ++d_IdTracker;
+        if (d_continents.size() > 0)
+        {
+            p_ContinentIntID = d_continents.get(d_continents.size()-1).getD_ContinentIntID()+1;
+
+        }
+        else {
+            p_ContinentIntID = 1;
+        }
         boolean found = false;
         Continent l_continent = new Continent(p_ContinentIntID, p_ContinentID, p_ControlValue);
         while (itr.hasNext()) {
