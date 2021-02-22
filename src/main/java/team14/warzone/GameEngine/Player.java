@@ -1,6 +1,5 @@
 package team14.warzone.GameEngine;
 
-public class Player {
 import team14.warzone.Console.Command;
 import team14.warzone.MapModule.Country;
 
