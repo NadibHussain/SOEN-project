@@ -12,10 +12,16 @@ import java.util.Scanner;
 public class Console {
     static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
     private Command d_CommandBuffer;                    // store user command
-    private GameEngine d_GameEngine;
+//    private GameEngine d_GameEngine;
 
-    public Console(GameEngine d_GameEngine) {
-        this.d_GameEngine = d_GameEngine;
+//    public Console(GameEngine d_GameEngine) {
+//        this.d_GameEngine = d_GameEngine;
+//    }
+
+    /**
+     * Default constructor
+     */
+    public Console() {
     }
 
     /**
@@ -80,7 +86,7 @@ public class Console {
     /**
      * A method to filter user commands depending on the current game phase
      */
-    public void filterCommand() {
+    public void filterCommand(GameEngine p_GameEngine) {
         if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
             d_CommandBuffer.execute();
         } else {
@@ -91,7 +97,7 @@ public class Console {
                     break;
 
                 case GAMEPLAY:
-                    d_GameEngine.receiveCommand(d_CommandBuffer);
+                    p_GameEngine.receiveCommand(d_CommandBuffer);
                     break;
             }
         }

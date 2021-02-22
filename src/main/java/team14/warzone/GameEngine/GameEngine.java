@@ -14,8 +14,13 @@ public class GameEngine {
     private Player d_CurrentPlayer;
     private Map d_LoadedMap;
     private List<Player> d_PlayerList;
+    private Console d_Console;
 
     public GameEngine() {
+    }
+
+    public GameEngine(Console p_Console) {
+        d_Console = p_Console;
     }
 
     public void setD_LoadedMap(Map p_Map) {
@@ -70,15 +75,16 @@ public class GameEngine {
                 d_CurrentPlayer = d_PlayerList.get(i);
                 if (pass[i] == false) {
                     Console.displayMsg("Enter Command for player " + d_CurrentPlayer.getD_Name());
-//                    Console.readInput();
+                    d_Console.readInput();
+                    d_Console.filterCommand(this);
                 }
             }
         }
         Arrays.fill(pass, false);
         // execute all the commands
-            // loop through players
-            // check if command list is empty
-            // execute & remove command
+        // loop through players
+        // check if command list is empty
+        // execute & remove command
     }
 
     public void receiveCommand(Command p_Command) {
@@ -94,4 +100,7 @@ public class GameEngine {
         }
     }
 
+    public void setD_Console(Console p_Console) {
+        d_Console = p_Console;
+    }
 }
