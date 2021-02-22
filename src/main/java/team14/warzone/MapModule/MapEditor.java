@@ -2,6 +2,8 @@ package team14.warzone.MapModule;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -9,7 +11,6 @@ import java.util.Stack;
 public class MapEditor {
 
     public Map d_loadedMap;
-
     public MapEditor() {
 
     }
@@ -29,6 +30,10 @@ public class MapEditor {
                 if (data.equals("[countries]")) {
                     while (true) {
                         String l_line = myReader.nextLine();
+                        if (l_line.length()>0 && l_line.charAt(0) == ';')
+                        {
+                            continue;
+                        }
                         ArrayList<Continent> l_continentList = l_map.getD_continents();
                         if (l_line.equals("")) {
                             break;
@@ -48,6 +53,10 @@ public class MapEditor {
                     int id = 1;
                     while (true) {
                         String l_line = myReader.nextLine();
+                        if (l_line.length()>0 && l_line.charAt(0) == ';')
+                        {
+                            continue;
+                        }
                         if (l_line.equals("")) {
                             break;
                         } else {
@@ -56,11 +65,16 @@ public class MapEditor {
                             id++;
                         }
                     }
+
                 } else if (data.equals("[borders]")) {
                     ArrayList<Country> l_countires = l_map.getD_countries();
                     int l_index = 0;
                     while (myReader.hasNextLine()) {
                         String l_line = myReader.nextLine();
+                        if (l_line.charAt(0) == ';'&& l_line.length()>0)
+                        {
+                            continue;
+                        }
                         if (l_line.equals("")) {
                             break;
                         } else {
@@ -90,9 +104,45 @@ public class MapEditor {
     }
 
     /**
+     * This method is used to save a map in a text format
      * @param p_fileName
      */
     public void saveMap(String p_fileName) {
+        String l_content = "This map was created from a SOEN-6441 Project \n \n";
+        l_content+="[continents]\n";
+        for (Continent l_continent:d_loadedMap.getD_continents()) {
+            l_content += l_continent.getD_ContinentID()+" "+l_continent.getD_ControlValue()+"\n";
+        }
+        l_content+="\n[countries]\n";
+        for (Country l_country:d_loadedMap.getD_countries()) {
+            int l_continentIntId = -1;
+            for (Continent l_continent: d_loadedMap.getD_continents()) {
+                if (l_continent.getD_ContinentID().equals(l_country.getD_CountryContinentID()))
+                {
+                    l_continentIntId = l_continent.getD_ContinentIntID();
+                }
+            }
+            l_content += l_country.getD_CountryIntID()+" "+"-"+" "+l_continentIntId+"\n";
+        }
+
+        l_content+="\n[borders]\n";
+        for (Country l_country:d_loadedMap.getD_countries()) {
+            l_content += l_country.getD_CountryIntID()+" ";
+            for (Country l_neighbour:l_country.getD_neighbours()) {
+                l_content += l_neighbour.getD_CountryIntID()+ " ";
+            }
+            l_content += "\n";
+        }
+
+        try {
+            FileWriter l_writer = new FileWriter(p_fileName);
+            l_writer.write(l_content);
+            l_writer.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
     }
 

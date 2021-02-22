@@ -1,0 +1,245 @@
+; Sven Soehnel
+; Risk Map
+
+; Risk II Map
+; Dimensions: 677 x 425 Pixels
+
+[files]
+pic europass_pic.png
+map europass_map.gif
+crd europass.cards
+
+[continents]
+Skandinavien 4 yellow
+Westeuropa 5 red
+Mittelmeer 3 blue
+Mitteleuropa 4 orange
+Balkan 3 green
+Kleinasien 3 magenta
+Russland 7 red
+
+[countries]
+;the first number is the number of the country (they do have to be in order) the second two numbers are the x and y co-ordinates of the circle that will be put on that country
+1 Reykjavik 1 27 30
+2 Ostisland 1 76 41
+3 Aberdeen 2 121 143
+4 Glasgow 2 121 172
+5 Nordirland 2 98 179
+6 Dublin 2 72 184
+7 Suedirland 2 69 206
+8 Leeds 2 136 190
+9 Wales 2 115 209
+10 England 2 154 213
+11 London 2 126 230
+12 Lisabon 3 14 360
+13 Porto 3 41 338
+14 Baskenland 3 67 313
+15 Barcelona 3 142 342
+16 Madrid 3 81 352
+17 Ballearen 3 154 380
+18 Suedspanien 3 56 391
+19 Sardinien 3 216 382
+20 Korsika 2 212 346
+21 Suedfrankreich 2 147 320
+22 Marseille 2 188 325
+23 Zentral-Frankreich 2 146 294
+24 Turin 3 219 311
+25 Normandie 2 103 258
+26 Paris 2 168 269
+27 Nordfrankreich 2 156 242
+28 Elsa?-Lothringen 2 199 268
+29 Belgien 2 183 238
+30 Niederlande 2 189 213
+31 Sizilien 3 266 397
+32 Sueditalien 3 306 370
+33 Rom 3 272 345
+34 Vatikan 3 248 328
+35 Venedig 3 251 301
+36 Schweiz 4 214 287
+37 Oesterreich 4 277 279
+38 Bayern 4 247 264
+39 Nordrhein-Westfalen 4 215 243
+40 Sachsen 4 253 235
+41 Niedersachsen 4 226 215
+42 Berlin 4 260 209
+43 D?nemark 1 225 172
+44 Kopenhagen 1 251 176
+45 Malmoe 1 277 167
+46 Stockholm 1 288 125
+47 Zentralschweden 1 277 91
+48 Nordschweden 1 305 54
+49 Oslo 1 207 131
+50 Trondheim 1 242 78
+51 Tromsoe 1 265 32
+52 Hammerfest 1 311 11
+53 Nordfinnland 1 341 37
+54 Zentralfinnland 1 356 77
+55 Helsinki 1 331 109
+56 Estland 7 351 132
+57 Lettland 7 338 155
+58 Littauen 7 353 177
+59 Ostpreussen 4 324 186
+60 Warschau 4 336 213
+61 Pommern 4 298 192
+62 Posen 4 298 215
+63 Schlesien 4 307 235
+64 Krakau 4 345 238
+65 Tschechien 4 280 250
+66 Slowakei 4 325 261
+67 Ungarn 4 327 280
+68 Slowenien 5 284 289
+69 Kroatien 5 287 319
+70 Bosnien 5 316 315
+71 Belgrad 5 341 304
+72 Serbien 5 342 327
+73 Montenegro 5 365 339
+74 Albanien 6 333 358
+75 Thesaloniki 6 387 353
+76 Athen 6 363 396
+77 Kreta 6 427 415
+78 Izmir 6 467 385
+79 Bosporus 6 440 355
+80 Istanbul 6 433 339
+81 Bulgarien 5 398 326
+82 Bukarest 5 385 307
+83 Bessarabien 5 400 287
+84 Siebenbuergen 5 363 284
+85 West-Ukraine 7 381 240
+86 Brest 7 377 205
+87 Minsk 7 399 181
+88 Moskau 7 440 146
+89 Petersburg 7 394 114
+90 Onega 7 414 72
+91 Murmansk 7 406 19
+92 Nordrussland 7 534 15
+93 Archangelsk 7 506 66
+94 Saratov 7 561 96
+95 Kasachstan 7 606 137
+96 Voronez 7 521 174
+97 Kiew 7 430 229
+98 Wolgograd 7 569 224
+99 Ostukraine 7 496 226
+100 Sewastopol 7 483 251
+101 Krim 7 476 295
+102 Odessa 7 441 279
+103 Moldawien 7 415 264
+104 Kaukasus 7 576 262
+105 Georgien 7 571 288
+106 Aserbeischan 7 648 291
+107 Armenien 7 614 315
+108 Kurdistan 6 573 332
+109 Konya 6 535 364
+110 Ankara 6 491 329
+
+[borders]
+;the first number is the number of the country (need to be in order here as well I think) and the other numbers that follow are what countries that country is adjacent too
+1 2
+2 1 51 3
+3 2 4 49
+4 3 8 5
+5 4 6
+6 5 7
+7 6 14
+8 4 9 10
+9 8 10 11
+10 8 9 11
+11 9 10 27 25
+12 13 16 18
+13 12 14 16
+14 7 25 21 15 16 13
+15 14 21 17 16
+16 12 13 14 15 18
+17 18 15 19
+18 12 16 17
+19 17 20 31
+20 22 34 19
+21 14 15 22 23
+22 20 21 23 24 26 36
+23 21 22 26 25
+24 22 36 35 34
+25 11 14 23 26 27
+26 25 27 28 36 22 23
+27 25 26 28 29 11
+28 26 27 29 39 38 36
+29 27 28 30 39
+30 29 39 41
+31 19 32 77
+32 31 33 74
+33 32 34
+34 33 20 24 35
+35 24 36 37 68 34
+36 22 24 26 28 37 38 35
+37 35 36 38 65 66 67 68
+38 28 39 40 65 37 36
+39 28 29 30 41 40 38
+40 38 39 41 42 62 63 65
+41 30 39 40 42
+42 40 41 43 44 61 62
+43 49 44 42
+44 42 43 45
+45 44 46 57
+46 45 49 50 47 55
+47 46 50 48
+48 47 50 51 53
+49 3 50 46 43
+50 49 46 47 48 51
+51 50 48 52 53 2
+52 51 53 91
+53 48 51 52 91 90 54
+54 53 90 89 55
+55 54 89 56 46
+56 55 89 88 57
+57 56 88 87 58 45
+58 57 87 86 60 59
+59 58 60 61
+60 59 58 86 64 63 62 61
+61 59 60 62 42
+62 61 60 63 40 42
+63 62 60 64 66 65 40
+64 60 85 66 63
+65 63 66 37 38 40
+66 63 64 85 67 37 65
+67 66 85 84 71 69 68 37
+68 35 37 67 69
+69 68 67 71 70 72
+70 69 71 72
+71 67 84 82 81 72 70 69
+72 69 70 71 81 73 74
+73 72 81 75 74
+74 72 73 75 76 32
+75 74 73 81 80 76
+76 74 75 77
+77 31 76 78
+78 77 79 110 109
+79 80 110 78
+80 75 81 79
+81 82 80 75 73 72 71
+82 81 71 84 83
+83 82 84 85 102 103
+84 67 85 83 82 71
+85 86 97 102 103 83 84 67 66 64
+86 58 60 85 97 87
+87 57 58 86 97 96 88
+88 56 57 87 89 90 93 94 95 96
+89 54 55 56 88 90
+90 53 54 88 89 91 93
+91 52 53 90
+92 93
+93 88 90 92 94
+94 88 93 95
+95 88 94 96
+96 87 88 95 97 98
+97 85 86 87 96 98 99 100 102
+98 96 97 99 100 104
+99 97 98 100
+100 97 98 99 101 102
+101 100 102 104 110
+102 85 97 100 101 83 103
+103 83 85 102
+104 98 101 105 106
+105 104 106 107 108
+106 104 105 107 108
+107 105 106 108
+108 105 106 107 109 110
+109 78 108 110
+110 78 79 101 108 109
