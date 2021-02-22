@@ -45,5 +45,21 @@ public class TestMapEditor {
 
     }
 
-    
+    @Test 
+    void testValidateMap_allContinentHasCountry(){
+        me.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope.map");
+        Map p_map = me.getD_loadedMap();
+        ArrayList<Continent> l_mContinents = p_map.getD_continents();
+        ArrayList<Country> l_countries = p_map.getD_countries();
+        Stack<String> l_stackContinents = new Stack<String>(); 
+        for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
+            if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getD_CountryContinentID()))) {
+                l_stackContinents.push(l_countries.get(l_aCountryIndex).getD_CountryContinentID());
+            }
+        }
+        System.out.println(l_stackContinents.size());
+        System.out.println(l_mContinents.size()+1);
+        assert l_stackContinents.size() == l_mContinents.size();
+
+    }
 }
