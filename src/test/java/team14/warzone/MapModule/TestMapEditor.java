@@ -2,99 +2,105 @@ package team14.warzone.MapModule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import java.util.ArrayList;
 import java.util.Stack;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TestMapEditor {
 
-    public static MapEditor me;
+    public static MapEditor d_MapEditor;
     public static MapEditor me2;
 
     @BeforeAll
-    public static void init(){
-        me = new MapEditor();
-        me2 = new MapEditor();
-        me.loadMap("/home/nadib/Desktop/soen project/SOEN-project/europass.map");
+    public static void init() {
+        d_MapEditor = new MapEditor();
+        d_MapEditor.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope1.map");
     }
 
     @Test
     @DisplayName("Testing loading a map")
     public void testLoadMap() {
-        Map m = me.getD_loadedMap();
-        assertEquals(7,m.getD_continents().size());
-        assertEquals(110,m.getD_countries().size());
-        assertEquals(51,m.getD_countries().get(1).getD_neighbours().get(1).getD_CountryIntID());
+        // me2.loadMap("europass.map");
+        Map l_Map = d_MapEditor.getD_loadedMap();
+        assertEquals(7, l_Map.getD_continents().size());
+        assertEquals(110, l_Map.getD_countries().size());
+        assertEquals(51, l_Map.getD_countries().get(1).getD_neighbours().get(1).getD_CountryIntID());
     }
 
     @Test
     @DisplayName("Testing map validator")
     public void testValidateMap() {
-        Map m1 = me.getD_loadedMap();
-        boolean test = me.validateMap(m1);
-        assertEquals(true, test);
+        Map l_Map = d_MapEditor.getD_loadedMap();
+        boolean l_Test = d_MapEditor.validateMap(l_Map);
+        assertEquals(true, l_Test);
     }
 
     @Test
-    void testValidateMap_isConnected(){
-        me.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope.map");
-        Map p_map = me.getD_loadedMap();
-        ArrayList<Country> l_countries = p_map.getD_countries();
-        Stack<Integer> l_stackNodes = new Stack<Integer>();
-        for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
-            for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
-                    .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
-                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
-                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
+    void testValidateMap_isConnected() {
+        // me.loadMap("bigeurope.map");
+        Map p_Map = d_MapEditor.getD_loadedMap();
+        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        Stack<Integer> l_StackNodes = new Stack<Integer>();
+        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
+            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_neighbours()
+                    .size() > l_NeighbourIndex; l_NeighbourIndex++) {
+                if (!(l_StackNodes.contains(
+                        l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
+                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
+                            .getD_CountryIntID());
 
             }
         }
-        assert l_stackNodes.size() == l_countries.size();
+        assert l_StackNodes.size() == l_Countries.size();
 
     }
 
-    @Test 
-    void testValidateMap_allContinentHasCountry(){
-        me.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope.map");
-        Map p_map = me.getD_loadedMap();
-        ArrayList<Continent> l_mContinents = p_map.getD_continents();
-        ArrayList<Country> l_countries = p_map.getD_countries();
-        Stack<String> l_stackContinents = new Stack<String>(); 
-        for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
-            if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getD_CountryContinentID()))) {
-                l_stackContinents.push(l_countries.get(l_aCountryIndex).getD_CountryContinentID());
+    @Test
+    void testValidateMap_allContinentHasCountry() {
+        // me.loadMap("bigeurope.map");
+        Map p_Map = d_MapEditor.getD_loadedMap();
+        ArrayList<Continent> l_Continents = p_Map.getD_continents();
+        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        Stack<String> l_StackContinents = new Stack<String>();
+        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
+            if (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID()))) {
+                l_StackContinents.push(l_Countries.get(l_CountryIndex).getD_CountryContinentID());
             }
         }
-        assert l_stackContinents.size() == l_mContinents.size();
+        assert l_StackContinents.size() == l_Continents.size();
 
     }
 
-    @Test 
-    void testValidateMap_allCountryHasContinent(){
-        me.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope.map");
-        Map p_map = me.getD_loadedMap();
-        ArrayList<Country> l_countries = p_map.getD_countries();
-        boolean l_hasContinent = true;
-        for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
-            if (l_countries.get(l_aCountryIndex).getD_CountryContinentID().isEmpty()) {
-                l_hasContinent = false;
+    @Test
+    void testValidateMap_allCountryHasContinent() {
+        // me.loadMap("bigeurope.map");
+        Map p_Map = d_MapEditor.getD_loadedMap();
+        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        boolean l_HasContinent = true;
+        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
+            if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
+                l_HasContinent = false;
                 break;
             }
         }
-        assert l_hasContinent == true;
+        assert l_HasContinent == true;
+    }
+
+    @AfterAll
+    public static void tearDown() {
+        d_MapEditor = null;
     }
 
     @DisplayName("Testing save map feature")
     public void testSaveMap() {
-        me.saveMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
-        me.loadMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
-        me.validateMap(me.d_loadedMap);
+        // me.saveMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
+        // me.loadMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
+        // me.validateMap(me.d_LoadedMap);
 
     }
-
 
 }
