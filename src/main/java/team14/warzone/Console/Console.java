@@ -1,6 +1,7 @@
 package team14.warzone.Console;
 
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +87,9 @@ public class Console {
     /**
      * A method to filter user commands depending on the current game phase
      */
-    public void filterCommand(GameEngine p_GameEngine) {
+    public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
+        d_CommandBuffer.setD_GameEngine(p_GameEngine);
+        d_CommandBuffer.setD_MapEditor(p_MapEditor);
         if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
             d_CommandBuffer.execute();
         } else {
@@ -114,9 +117,10 @@ public class Console {
 
     /**
      * A method to display a message to the user
+     *
      * @param p_Msg the message to be displayed
      */
-    public static void displayMsg(String p_Msg){
+    public static void displayMsg(String p_Msg) {
         System.out.println(p_Msg);
     }
 }

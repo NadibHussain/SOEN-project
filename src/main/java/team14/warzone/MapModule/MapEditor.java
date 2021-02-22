@@ -1,7 +1,5 @@
 package team14.warzone.MapModule;
 
-import team14.warzone.GameEngine.GameEngine;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,14 +9,8 @@ import java.util.Stack;
 public class MapEditor {
 
     public Map d_loadedMap;
-    private GameEngine d_GameEngine;
 
     public MapEditor() {
-
-    }
-
-    public MapEditor(GameEngine p_GameEngine) {
-        d_GameEngine = p_GameEngine;
     }
 
     /**
@@ -93,7 +85,6 @@ public class MapEditor {
             e.printStackTrace();
         }
         this.d_loadedMap = l_map;
-        d_GameEngine.setD_LoadedMap(d_loadedMap);
     }
 
     /**

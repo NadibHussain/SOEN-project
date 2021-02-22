@@ -5,16 +5,26 @@ import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
+import team14.warzone.MapModule.MapEditor;
 
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class implements the functionalities of the game-play phase
+ *
+ * @author Anagh
+ * @author Zeina
+ * @version 1.0
+ */
 public class GameEngine {
 
     private Player d_CurrentPlayer;
     private Map d_LoadedMap;
     private List<Player> d_PlayerList;
+
     private Console d_Console;
+    private MapEditor d_MapEditor;
 
     public GameEngine() {
     }
@@ -23,9 +33,14 @@ public class GameEngine {
         d_Console = p_Console;
     }
 
-    public void setD_LoadedMap(Map p_Map) {
-//        MapEditor l_MapEditor = new MapEditor();
-        d_LoadedMap = p_Map;
+    public GameEngine(Console p_Console, MapEditor p_MapEditor) {
+        d_Console = p_Console;
+        d_MapEditor = p_MapEditor;
+    }
+
+    public void loadMap(String p_FileName) {
+        d_MapEditor.loadMap(p_FileName);
+        this.d_LoadedMap = d_MapEditor.getD_loadedMap();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
         // change gamephase to "STARTUP"
     }
@@ -66,6 +81,9 @@ public class GameEngine {
 
     /**
      * A method to loop the players list in a RR fashion, to give their order
+     * Has two stages:
+     * 1. Loop through all the players until everyone is done giving orders
+     * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
         // reinforcement
@@ -76,7 +94,7 @@ public class GameEngine {
                 if (pass[i] == false) {
                     Console.displayMsg("Enter Command for player " + d_CurrentPlayer.getD_Name());
                     d_Console.readInput();
-                    d_Console.filterCommand(this);
+                    d_Console.filterCommand(this, d_MapEditor);
                 }
             }
         }
@@ -100,7 +118,15 @@ public class GameEngine {
         }
     }
 
+    public void deploy() {
+
+    }
+
     public void setD_Console(Console p_Console) {
         d_Console = p_Console;
+    }
+
+    public Map getD_LoadedMap() {
+        return d_LoadedMap;
     }
 }
