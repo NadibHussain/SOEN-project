@@ -21,12 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.idea
-
 .classpath
 .project
 .settings/
 .vscode/
 target/
-SOEN-project.iml
-.DS_Store
+
+*.DS_Store
+
+# IDE files and folders
+*.iml
+.idea/
+
