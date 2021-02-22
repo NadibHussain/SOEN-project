@@ -2,6 +2,9 @@ package team14.warzone.MapModule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import org.junit.jupiter.api.Test;
 
 public class TestMapEditor {
@@ -23,4 +26,24 @@ public class TestMapEditor {
         boolean test = me.validateMap(m1);
         assertEquals(true, test);
     }
+
+    @Test
+    void testValidateMap_isConnected(){
+        me.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/europass.map");
+        Map p_map = me.getD_loadedMap();
+        ArrayList<Country> l_countries = p_map.getD_countries();
+        Stack<Integer> l_stackNodes = new Stack<Integer>();
+        for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
+            for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
+                    .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
+                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
+                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
+
+            }
+        }
+        assert l_stackNodes.size() == l_countries.size();
+
+    }
+
+    
 }
