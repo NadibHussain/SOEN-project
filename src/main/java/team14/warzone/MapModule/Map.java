@@ -74,7 +74,6 @@ public class Map {
     }
 
     /**
-     * @param p_CountryIntID integer ID of country
      * @param p_CountryID    ID of country to be added
      * @param p_ContinentID Continent to which the country belongs to
      */
@@ -134,7 +133,6 @@ public class Map {
 
 
     /**
-     * @param p_ContinentIntID integer ID of country
      * @param p_ContinentID ID of the continent to be added in our case the name
      * @param p_ControlValue Control Value of the continent
      */
