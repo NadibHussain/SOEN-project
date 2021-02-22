@@ -35,7 +35,7 @@ public class Country {
     /**
      * list of the country object of neighbours
      */
-    private ArrayList<Country> d_neighbours = new ArrayList<>();
+    private ArrayList<Country> d_Neighbours = new ArrayList<>();
 
     /**
      * Constructor for Country
@@ -148,34 +148,34 @@ public class Country {
     /**
      * get neighbour list
      */
-    public ArrayList<Country> getD_neighbours() {
-        return d_neighbours;
+    public ArrayList<Country> getd_Neighbours() {
+        return d_Neighbours;
     }
 
     /**
      * set neighbour list
-     * @param d_neighbours array list of the country object of the neighbour
+     * @param d_Neighbours array list of the country object of the neighbour
      */
-    public void setD_neighbours(ArrayList<Country> d_neighbours) {
-        this.d_neighbours = d_neighbours;
+    public void setd_Neighbours(ArrayList<Country> d_Neighbours) {
+        this.d_Neighbours = d_Neighbours;
     }
 
     public boolean addNeighbour(Country country) {
 
-        for (var i = 0; i < d_neighbours.size(); i++ ) {
-            if (d_neighbours.get(i).getD_CountryID() == country.getD_CountryID()) {
+        for (var i = 0; i < d_Neighbours.size(); i++ ) {
+            if (d_Neighbours.get(i).getD_CountryID() == country.getD_CountryID()) {
                 return false;
             }
         };
-        d_neighbours.add(new Country(country));
+        d_Neighbours.add(new Country(country));
         return true;
     }
 
     public boolean removeNeighbour(String  p_ID) {
 
-        for (var i = 0; i < d_neighbours.size(); i++) {
-            if (d_neighbours.get(i).getD_CountryID() == p_ID) {
-                d_neighbours.removeIf(c -> c.getD_CountryID() == p_ID);
+        for (var i = 0; i < d_Neighbours.size(); i++) {
+            if (d_Neighbours.get(i).getD_CountryID() == p_ID) {
+                d_Neighbours.removeIf(c -> c.getD_CountryID() == p_ID);
                 return true;
             }
         }
@@ -185,7 +185,7 @@ public class Country {
     @Override
     public String toString() {
         String neighbour_list = "[ ";
-        for (Country l_country: d_neighbours) {
+        for (Country l_country: d_Neighbours) {
             neighbour_list += l_country.getD_CountryIntID()+ ", ";
         }
         neighbour_list += " ]";
@@ -193,7 +193,7 @@ public class Country {
                 "Int ID=" + d_CountryIntID +
                 "," + "Name ID=" + d_CountryID +
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
-                ", d_neighbours=" + neighbour_list +
+                ", d_Neighbours=" + neighbour_list +
                 '}';
     }
 }
