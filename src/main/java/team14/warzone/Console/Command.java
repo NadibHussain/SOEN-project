@@ -16,6 +16,9 @@ public class Command {
     private String d_Keyword;
     private Option d_Option = new Option();
 
+    private GameEngine d_GameEngine;
+    private MapEditor d_MapEditor;
+
     /**
      * Class default constructor
      */
@@ -39,46 +42,54 @@ public class Command {
      */
     public void execute() {
         List<String> l_CommandArgs = this.getD_Options().getD_Arguments();
-        String l_optionName = this.getD_Options().getD_Name();
-        MapEditor l_MapEditor = new MapEditor();
-        Map l_Map = new Map();
-        GameEngine l_gameEng = new GameEngine();
+        String l_OptionName = this.getD_Options().getD_Name();
 
         switch (this.getD_Keyword()) {
             case "editcontinent":
-                if (l_optionName.equals("-add"))
-                    l_MapEditor.getD_loadedMap().addContinent(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                if (l_OptionName.equals("-add"))
+                    d_MapEditor.getD_loadedMap().addContinent(l_CommandArgs.get(0),
+                            Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
-                    l_MapEditor.getD_loadedMap().removeContinent(l_CommandArgs.get(0));
+                    d_MapEditor.getD_loadedMap().removeContinent(l_CommandArgs.get(0));
+
             case "editcountry":
-                if (l_optionName.equals("-add"))
-                    l_MapEditor.getD_loadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                if (l_OptionName.equals("-add"))
+                    d_MapEditor.getD_loadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    l_MapEditor.getD_loadedMap().removeCountry(l_CommandArgs.get(0));
+                    d_MapEditor.getD_loadedMap().removeCountry(l_CommandArgs.get(0));
+
             case "editneighbor":
-                if (l_optionName.equals("-add"))
-                    l_MapEditor.getD_loadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                if (l_OptionName.equals("-add"))
+                    d_MapEditor.getD_loadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    l_MapEditor.getD_loadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_MapEditor.getD_loadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+
             case "savemap":
-                l_MapEditor.saveMap(l_CommandArgs.get(0));
+                d_MapEditor.saveMap(l_CommandArgs.get(0));
+
             case "editmap":
-                l_MapEditor.loadMap(l_CommandArgs.get(0));
+                d_MapEditor.loadMap(l_CommandArgs.get(0));
+
             case "validatemap":
-                l_MapEditor.validateMap(MapEditor.d_loadedMap);
+                d_MapEditor.validateMap(d_MapEditor.getD_loadedMap());
+
             case "loadmap":
-                l_MapEditor.loadMap(l_CommandArgs.get(0));
+                d_GameEngine.loadMap(l_CommandArgs.get(0));
+
             case "showmap":
-                l_Map.showMap();
+                d_GameEngine.getD_LoadedMap().showMap();
+
             case "gameplayer":
-                if (l_optionName.equals("-add"))
-                    l_gameEng.addPlayer(l_CommandArgs.get(0));
+                if (l_OptionName.equals("-add"))
+                    d_GameEngine.addPlayer(l_CommandArgs.get(0));
                 else //-remove option
-                    l_gameEng.removePlayer(l_CommandArgs.get(0));
+                    d_GameEngine.removePlayer(l_CommandArgs.get(0));
+
             case "assigncountries":
-                l_gameEng.assignCountries();
+                d_GameEngine.assignCountries();
+
             case "deploy":
-                l_gameEng.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
         }
     }
 
@@ -98,6 +109,14 @@ public class Command {
      */
     public void setD_Keyword(String p_Keyword) {
         this.d_Keyword = p_Keyword;
+    }
+
+    public void setD_GameEngine(GameEngine p_GameEngine) {
+        d_GameEngine = p_GameEngine;
+    }
+
+    public void setD_MapEditor(MapEditor p_MapEditor) {
+        d_MapEditor = p_MapEditor;
     }
 
     /**
