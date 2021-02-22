@@ -68,11 +68,11 @@ public class Map {
     }
 
     /**
-     * @param p_CountryIntID integer ID of country
      * @param p_CountryID    ID of country to be added
      * @param p_ContinentID Continent to which the country belongs to
      */
-    public void addCountry(int p_CountryIntID, String p_CountryID, String p_ContinentID) {
+    public void addCountry(String p_CountryID, String p_ContinentID) {
+        int p_CountryIntID;
         if (d_countries.size() > 0)
         {
             p_CountryIntID = d_countries.get(d_countries.size()-1).getD_CountryIntID()+1;
@@ -127,12 +127,12 @@ public class Map {
 
 
     /**
-     * @param p_ContinentIntID integer ID of country
      * @param p_ContinentID ID of the continent to be added in our case the name
      * @param p_ControlValue Control Value of the continent
      */
-    public void addContinent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue) {
+    public void addContinent(String p_ContinentID, int p_ControlValue) {
         Iterator<Continent> itr = d_continents.iterator();
+        int p_ContinentIntID;
         if (d_continents.size() > 0)
         {
             p_ContinentIntID = d_continents.get(d_continents.size()-1).getD_ContinentIntID()+1;

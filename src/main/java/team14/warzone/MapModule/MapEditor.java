@@ -12,7 +12,6 @@ public class MapEditor {
 
     public Map d_loadedMap;
     public MapEditor() {
-
     }
 
     /**
@@ -46,11 +45,10 @@ public class MapEditor {
                                     break;
                                 }
                             }
-                            l_map.addCountry(Integer.parseInt(l_country_array[0]),l_country_array[1],continentName);
+                            l_map.addCountry(l_country_array[1],continentName);
                         }
                     }
                 } else if (data.equals("[continents]")) {
-                    int id = 1;
                     while (true) {
                         String l_line = myReader.nextLine();
                         if (l_line.length()>0 && l_line.charAt(0) == ';')
@@ -61,8 +59,7 @@ public class MapEditor {
                             break;
                         } else {
                             String[] l_continent_array = l_line.split(" ");
-                            l_map.addContinent(id,l_continent_array[0], Integer.parseInt(l_continent_array[1]));
-                            id++;
+                            l_map.addContinent(l_continent_array[0], Integer.parseInt(l_continent_array[1]));
                         }
                     }
 
