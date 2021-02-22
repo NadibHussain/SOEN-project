@@ -18,7 +18,7 @@ public class TestMapEditor {
     @BeforeAll
     public static void init() {
         d_MapEditor = new MapEditor();
-        d_MapEditor.loadMap("D:/Concordia Courses/SOEN 6441/Project Tools/bigeurope1.map");
+        d_MapEditor.loadMap("europass.map");
     }
 
     @Test
