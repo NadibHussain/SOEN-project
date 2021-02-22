@@ -42,7 +42,17 @@ public class Map {
             l_data[l_index][0] = l_index;
             l_data[l_index][1] = this.d_countries.get(l_index).getD_CountryID();
             l_data[l_index][2] = this.d_countries.get(l_index).getD_CountryContinentID();
-            // l_data[l_index][3] = this.d_countries.get(l_index).getD_neighbours();
+            
+            // Concating all neighbour names in 'neighbours' string
+            String neighbours = "";
+            for(int l_aNeighbourIndex = 0; l_aNeighbourIndex < this.d_countries.get(l_index).getD_neighbours().size(); l_aNeighbourIndex++){
+                neighbours = neighbours +this.d_countries.get(l_index).getD_neighbours().get(l_aNeighbourIndex).getD_CountryID();
+                if(l_aNeighbourIndex !=this.d_countries.get(l_index).getD_neighbours().size()-1 ){
+                    neighbours = neighbours + " ,";
+                }
+            }
+
+            l_data[l_index][3] = neighbours;
             l_data[l_index][4] = this.d_countries.get(l_index).getD_CurrentOwner();
             l_data[l_index][5] = this.d_countries.get(l_index).getNumberOfArmies();
 
@@ -56,7 +66,6 @@ public class Map {
         //Create and set up the content pane.
         frame.add(new JScrollPane(l_table));
         
-
         //Display the window.
         frame.pack();
         frame.setVisible(true);
