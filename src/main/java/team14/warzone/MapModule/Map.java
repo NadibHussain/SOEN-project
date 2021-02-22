@@ -33,7 +33,13 @@ public class Map {
     private static int d_IdTracker = 0;
     private static int d_IdTracker1 = 0;
 
-
+    /**
+     * @author tanzia-ahmed
+     * this method triggers a window displaying the map 
+     * each column represents - #SL, Country, Continent, Neighbours, Current Owner, No. of Armies
+     * each row represents each country object
+     *
+     */
     public void showMap() {
         String[] l_columnNames = {"SL.","Country", "Continent","Neighbours", "Current Owner", "No. of Armies"};
         Object[][] l_data = new Object [this.d_countries.size()][6];
