@@ -84,7 +84,7 @@ public class MapEditor {
                                     }
                                 }
                             }
-                            l_countires.get(l_index).setD_neighbours(l_neighbourID_array);
+                            l_countires.get(l_index).setd_Neighbours(l_neighbourID_array);
                             l_index++;
                         }
                     }
@@ -125,7 +125,7 @@ public class MapEditor {
         l_content+="\n[borders]\n";
         for (Country l_country:d_loadedMap.getD_countries()) {
             l_content += l_country.getD_CountryIntID()+" ";
-            for (Country l_neighbour:l_country.getD_neighbours()) {
+            for (Country l_neighbour:l_country.getd_Neighbours()) {
                 l_content += l_neighbour.getD_CountryIntID()+ " ";
             }
             l_content += "\n";
@@ -164,10 +164,10 @@ public class MapEditor {
         //executing bfs on countries list and stacking connected nodes/country; used for later
         
         for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
-            for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
+            for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getd_Neighbours()
                     .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
-                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
-                l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
+                if(!(l_stackNodes.contains(l_countries.get(l_aCountryIndex).getd_Neighbours().get(l_aNeighbourIndex).getD_CountryIntID())))
+                l_stackNodes.push(l_countries.get(l_aCountryIndex).getd_Neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
 
             }
             //stacking continent names for each country; used for later

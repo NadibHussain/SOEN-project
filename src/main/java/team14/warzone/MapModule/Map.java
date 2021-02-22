@@ -46,9 +46,9 @@ public class Map {
             
             // Concating all neighbour names in 'neighbours' string
             String neighbours = "";
-            for(int l_aNeighbourIndex = 0; l_aNeighbourIndex < this.d_countries.get(l_index).getD_neighbours().size(); l_aNeighbourIndex++){
-                neighbours = neighbours +this.d_countries.get(l_index).getD_neighbours().get(l_aNeighbourIndex).getD_CountryID();
-                if(l_aNeighbourIndex !=this.d_countries.get(l_index).getD_neighbours().size()-1 ){
+            for(int l_aNeighbourIndex = 0; l_aNeighbourIndex < this.d_countries.get(l_index).getd_Neighbours().size(); l_aNeighbourIndex++){
+                neighbours = neighbours +this.d_countries.get(l_index).getd_Neighbours().get(l_aNeighbourIndex).getD_CountryID();
+                if(l_aNeighbourIndex !=this.d_countries.get(l_index).getd_Neighbours().size()-1 ){
                     neighbours = neighbours + " ,";
                 }
             }
