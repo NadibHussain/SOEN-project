@@ -184,11 +184,16 @@ public class Country {
 
     @Override
     public String toString() {
+        String neighbour_list = "[ ";
+        for (Country l_country: d_neighbours) {
+            neighbour_list += l_country.getD_CountryIntID()+ ", ";
+        }
+        neighbour_list += " ]";
         return "Country{" +
                 "Int ID=" + d_CountryIntID +
                 "," + "Name ID=" + d_CountryID +
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
-                ", d_neighbours=" + d_neighbours +
+                ", d_neighbours=" + neighbour_list +
                 '}';
     }
 }
