@@ -150,6 +150,9 @@ public class MapEditor {
      * @author tanzia-ahmed
      * @param p_map
      * @return boolean
+     * 
+     * checking if the map is connected, all countries belong to at least one
+     * continent, all continents have at least one country
      */
     public boolean validateMap(Map p_map) {
         ArrayList<Country> l_countries = p_map.getD_countries();
@@ -158,12 +161,11 @@ public class MapEditor {
         boolean l_connected = false;
         boolean l_hasContinent = false;
 
-        /**
-         * checking if the map is connected, all countries belong to at least one
-         * continent, all continents have at least one country
-         */
         Stack<Integer> l_stackNodes = new Stack<Integer>();
         Stack<String> l_stackContinents = new Stack<String>();
+
+        //executing bfs on countries list and stacking connected nodes/country; used for later
+        
         for (int l_aCountryIndex = 0; l_aCountryIndex < l_countries.size(); l_aCountryIndex++) {
             for (int l_aNeighbourIndex = 0; l_countries.get(l_aCountryIndex).getD_neighbours()
                     .size() > l_aNeighbourIndex; l_aNeighbourIndex++) {
@@ -171,10 +173,12 @@ public class MapEditor {
                 l_stackNodes.push(l_countries.get(l_aCountryIndex).getD_neighbours().get(l_aNeighbourIndex).getD_CountryIntID());
 
             }
+            //stacking continent names for each country; used for later
             if (!(l_stackContinents.contains(l_countries.get(l_aCountryIndex).getD_CountryContinentID()))) {
                 l_stackContinents.push(l_countries.get(l_aCountryIndex).getD_CountryContinentID());
             }
 
+            //checking if current country has continent
             if (l_countries.get(l_aCountryIndex).getD_CountryContinentID().isEmpty()) {
                 System.out.println(
                         l_countries.get(l_aCountryIndex).getD_CountryID() + " country does not belong to any continent.");
@@ -185,10 +189,12 @@ public class MapEditor {
 
         }
 
+        //checking if all continent has at least one country
         if (l_stackContinents.size() != l_mContinents.size()) {
             System.out.println("A continent without a country found.");
             return false;
         }
+        //checking if map is connected
         if (l_stackNodes.size() == l_countries.size())
             l_connected = true;
         if (l_connected && l_hasContinent)
