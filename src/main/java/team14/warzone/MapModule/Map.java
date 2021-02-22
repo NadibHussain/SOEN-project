@@ -72,16 +72,17 @@ public class Map {
      * @param p_CountryID    ID of country to be added
      * @param p_ContinentID Continent to which the country belongs to
      */
-    public void addCountry(int p_CountryIntID, String p_CountryID, String p_ContinentID) {
+    public void addCountry(String p_CountryID, String p_ContinentID) {
+        int l_CountryIntID=0;
         if (d_countries.size() > 0)
         {
-            p_CountryIntID = d_countries.get(d_countries.size()-1).getD_CountryIntID()+1;
+            l_CountryIntID = d_countries.get(d_countries.size()-1).getD_CountryIntID()+1;
 
         }
         else{
-            p_CountryIntID = 1;
+            l_CountryIntID = 1;
         }
-        Country l_country = new Country(p_CountryIntID, p_CountryID, p_ContinentID, "", 0);
+        Country l_country = new Country(l_CountryIntID, p_CountryID, p_ContinentID, "", 0);
 
         for (int j = 0; j < d_countries.size(); j++) {
             if (d_countries.get(j).getD_CountryID() == p_CountryID) {
@@ -131,18 +132,19 @@ public class Map {
      * @param p_ContinentID ID of the continent to be added in our case the name
      * @param p_ControlValue Control Value of the continent
      */
-    public void addContinent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue) {
+    public void addContinent(String p_ContinentID, int p_ControlValue) {
+        int l_ContinentIntID=0;
         Iterator<Continent> itr = d_continents.iterator();
         if (d_continents.size() > 0)
         {
-            p_ContinentIntID = d_continents.get(d_continents.size()-1).getD_ContinentIntID()+1;
+            l_ContinentIntID = d_continents.get(d_continents.size()-1).getD_ContinentIntID()+1;
 
         }
         else {
-            p_ContinentIntID = 1;
+            l_ContinentIntID = 1;
         }
         boolean found = false;
-        Continent l_continent = new Continent(p_ContinentIntID, p_ContinentID, p_ControlValue);
+        Continent l_continent = new Continent(l_ContinentIntID, p_ContinentID, p_ControlValue);
         while (itr.hasNext()) {
             Continent cur = (Continent) itr.next();
             if (cur.getD_ContinentID() == p_ContinentID) {
