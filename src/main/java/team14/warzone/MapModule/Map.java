@@ -291,13 +291,13 @@ public class Map {
 
     /**
      * Finds List of country for a specific Continent
-     * @param p_continentID Continent id
+     * @param p_ContinentID Continent id
      * @return Arraylist of the countries
      */
-    public ArrayList<Country> getCountryListOfContinent(String p_continentID){
+    public ArrayList<Country> getCountryListOfContinent(String p_ContinentID){
         ArrayList<Country> l_CountryArrayList = new ArrayList<>();
         for (Country l_Country:d_Countries) {
-            if (l_Country.getD_CountryContinentID().equals(p_continentID))
+            if (l_Country.getD_CountryContinentID().equals(p_ContinentID))
             {
                 l_CountryArrayList.add(l_Country);
             }
