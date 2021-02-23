@@ -117,10 +117,20 @@ public class GameEngine {
         }
     }
 
+    /**
+     * This method implements the deploy command
+     * Increases the number of armies in the country to be deployed to
+     * Decreases total number of armies of the player that issued this command
+     *
+     * @param p_CountryName    name of the country where armies are to be deployed
+     * @param p_NumberOfArmies number of armies to deploy
+     */
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
         // increase armies in country
-//        d_LoadedMap.findCountry().setNumberOfArmies();
+        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        l_CountryToDeployIn.setNumberOfArmies(l_CountryToDeployIn.getNumberOfArmies() + p_NumberOfArmies);
         // decrease army from player
+        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
     }
 
     public void setD_Console(Console p_Console) {
