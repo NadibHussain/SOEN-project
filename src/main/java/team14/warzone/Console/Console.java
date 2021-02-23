@@ -126,6 +126,10 @@ public class Console {
         this.d_CommandBuffer = d_CommandBuffer;
     }
 
+    public Command getD_CommandBuffer() {
+        return d_CommandBuffer;
+    }
+
     /**
      * A method to display a message to the user
      *

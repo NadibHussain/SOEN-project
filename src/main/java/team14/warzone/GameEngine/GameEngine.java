@@ -9,6 +9,7 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -144,25 +145,29 @@ public class GameEngine {
         }
         */
 
-        //deploy orders
-        boolean[] l_Status = new boolean[d_PlayerList.size()];//An array to store players status
+        // Take and queue orders
+        ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
+        Collections.fill(l_Flag, Boolean.FALSE);
         //keep looping through the players list until all of them finished issuing their orders
-        while (Arrays.asList(l_Status).contains(false)) {
+        while (l_Flag.contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
-                if (l_Status[i] == false) {
+                if (l_Flag.get(i) == false) {
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
                     d_Console.readInput();
-                    d_Console.filterCommand(this, d_MapEditor);
+                    if (d_Console.getD_CommandBuffer().getD_Keyword() == "pass")
+                        l_Flag.set(i, Boolean.TRUE);
+                    else
+                        d_Console.filterCommand(this, d_MapEditor);
                 }
             }
         }
-        Arrays.fill(l_Status, false);
+        Collections.fill(l_Flag, Boolean.FALSE);
         //execute all the commands until all players orders lists are empty
-        while (Arrays.asList(l_Status).contains(false)) {
+        while (l_Flag.contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
                 d_PlayerList.get(i).nextOrder();
                 if (d_PlayerList.get(i).getD_OrderList().isEmpty())
-                    l_Status[i] = true;
+                    l_Flag.set(i, Boolean.TRUE);
             }
         }
     }
