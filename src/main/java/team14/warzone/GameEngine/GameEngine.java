@@ -118,7 +118,7 @@ public class GameEngine {
         }
     }
 
-    public void deploy() {
+    public void deploy(String p_CountryName, int p_NumberOfArmies) {
 
     }
 

@@ -1,7 +1,6 @@
 package team14.warzone.Console;
 
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
  * This class is used to create objects representing the commands entered by user in the command line
  *
  * @author zeina
+ * @author Anagh
  * @version 1.0
  */
 public class Command {
