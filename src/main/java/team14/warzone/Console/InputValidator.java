@@ -438,7 +438,7 @@ public class InputValidator {
      *
      * @param p_CurrentPhase current phase to be set
      */
-    public static void setCurrentPhase(Phase p_CurrentPhase) {
-        CURRENT_PHASE = p_CurrentPhase;
+    public static void setCurrentPhase(String p_CurrentPhase) {
+        CURRENT_PHASE = Phase.valueOf(p_CurrentPhase);
     }
 }
