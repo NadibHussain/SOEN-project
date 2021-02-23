@@ -64,21 +64,21 @@ public class Command {
                 l_MapEditor.saveMap(l_CommandArgs.get(0));
             case "editmap":
                 l_MapEditor.loadMap(l_CommandArgs.get(0));
-            case "validatemap":
-                l_MapEditor.validateMap(MapEditor.d_loadedMap);
-            case "loadmap":
-                l_MapEditor.loadMap(l_CommandArgs.get(0));
-            case "showmap":
-                l_Map.showMap();
-            case "gameplayer":
-                if (l_optionName.equals("-add"))
-                    l_gameEng.addPlayer(l_CommandArgs.get(0));
-                else //-remove option
-                    l_gameEng.removePlayer(l_CommandArgs.get(0));
-            case "assigncountries":
-                l_gameEng.assignCountries();
-            case "deploy":
-                l_gameEng.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+//            case "validatemap":
+//                l_MapEditor.validateMap(MapEditor.d_loadedMap);
+//            case "loadmap":
+//                l_MapEditor.loadMap(l_CommandArgs.get(0));
+//            case "showmap":
+//                l_Map.showMap();
+//            case "gameplayer":
+//                if (l_optionName.equals("-add"))
+//                    l_gameEng.addPlayer(l_CommandArgs.get(0));
+//                else //-remove option
+//                    l_gameEng.removePlayer(l_CommandArgs.get(0));
+//            case "assigncountries":
+//                l_gameEng.assignCountries();
+//            case "deploy":
+//                l_gameEng.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
         }
     }
 
