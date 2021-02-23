@@ -8,6 +8,7 @@ import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,26 +51,35 @@ public class GameEngine {
     }
 
     public void assignCountries() {
-        //if number of players bigger than or equal to 2, assign countries to players randomly
-        List<Country> l_Countries = d_LoadedMap.getD_countries();
+        ArrayList<Country> l_Countries = d_LoadedMap.getD_countries();
         if (d_PlayerList.size() >= 2) {
             for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
                 for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
+                    // add country to player's country-list
                     d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
+                    // set country's current owner to player
+                    l_Countries.get(l_I).setD_CurrentOwner(d_PlayerList.get(l_J).getD_Name());
                     l_I++;
                 }
             }
+            Console.displayMsg("Success: countries assigned");
+        } else {
+            Console.displayMsg("Failed: 2-5 players required");
         }
-        //change phase to game play
+        // change phase to game play
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
+    public int generateRandomNumber(int p_Min, int p_Max) {
+        return p_Min + (int) (Math.random() * ((p_Max - p_Min) + 1));
+    }
 
     public void addPlayer(String p_PlayerName) {
         Player l_LocalPlayer = new Player(p_PlayerName);
 //        l_LocalPlayer.setD_Name(p_PlayerName);
 //        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
         d_PlayerList.add(l_LocalPlayer);
+        Console.displayMsg("Player added: " + p_PlayerName);
     }
 
     public void removePlayer(String p_PlayerName) {
@@ -77,6 +87,7 @@ public class GameEngine {
             if (l_Player.getD_Name().equals(p_PlayerName))
                 d_PlayerList.remove(l_Player);
         }
+        Console.displayMsg("Player removed: " + p_PlayerName);
     }
 
     /**
@@ -128,21 +139,26 @@ public class GameEngine {
 
     public void receiveCommand(Command p_Command) {
         // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command); //store order in current player orders list
-        switch (p_Command.getD_Keyword()) {
-            case "deploy": //decrease number of armies for the current player
-                int l_ArmiesOwned = d_CurrentPlayer.getD_TotalNumberOfArmies();
-                int l_ArmiesToDeploy = Integer.parseInt(p_Command.getD_Options().getD_Arguments().get(1));
-                d_CurrentPlayer.setD_TotalNumberOfArmies(l_ArmiesOwned - l_ArmiesToDeploy);
-                break;
-            default:
-        }
+        d_CurrentPlayer.issueOrder(p_Command); // store order in current player orders list
     }
 
+    /**
+     * This method implements the deploy command
+     * Increases the number of armies in the country to be deployed to
+     * Decreases total number of armies of the player that issued this command
+     *
+     * @param p_CountryName    name of the country where armies are to be deployed
+     * @param p_NumberOfArmies number of armies to deploy
+     */
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
         // increase armies in country
-//        d_LoadedMap.findCountry().setNumberOfArmies();
+        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        l_CountryToDeployIn.setNumberOfArmies(l_CountryToDeployIn.getNumberOfArmies() + p_NumberOfArmies);
         // decrease army from player
+        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
+
+        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies in "
+                + p_CountryName);
     }
 
     public void setD_Console(Console p_Console) {
