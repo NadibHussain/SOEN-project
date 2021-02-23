@@ -7,6 +7,7 @@ import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -49,29 +50,19 @@ public class GameEngine {
     }
 
     public void assignCountries() {
-        //if number of players bigger than or equal to 2, assign countries to players randomly
-        List<Country> l_Countries = d_LoadedMap.getD_countries();
-//        if (d_PlayerList.size() >= 2) {
-//            for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
-//                for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
-//                    d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
-//                    l_I++;
-//                }
-//            }
-//        }
+        ArrayList<Country> l_Countries = d_LoadedMap.getD_countries();
         if (d_PlayerList.size() >= 2) {
-            while (!l_Countries.isEmpty()) {
-                for (Player l_Player : d_PlayerList) {
-                    // get random country and remove from list
-                    Country l_RandomCountry = l_Countries.remove(generateRandomNumber(0, l_Countries.size() - 1));
-                    // assign a random country to player
-                    l_Player.addCountryOwned(l_RandomCountry);
-                    // set country's owner to l_player
-                    l_RandomCountry.setD_CurrentOwner(l_Player.getD_Name());
+            for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
+                for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
+                    // add country to player's country-list
+                    d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
+                    // set country's current owner to player
+                    l_Countries.get(l_I).setD_CurrentOwner(d_PlayerList.get(l_J).getD_Name());
+                    l_I++;
                 }
             }
         }
-        //change phase to game play
+        // change phase to game play
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
