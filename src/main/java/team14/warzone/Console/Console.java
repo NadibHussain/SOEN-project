@@ -28,11 +28,13 @@ public class Console {
     /**
      * A method to read input from user console
      */
-    public void readInput() {
+    public String readInput() {
         String[] l_UserInput = d_Scanner.nextLine().split(" ");
         //if user wants to exit the game
         if (l_UserInput[0].equals("exit"))
             System.exit(0);
+        else if (l_UserInput[0].equals("pass"))
+            return "pass"; // if the player doesn't have more orders, send "pass" to the GameEngine
         //define keywords and argument for the command
         String l_Keyword = l_UserInput[0];
         String l_OptName = ""; //to store command option
@@ -91,11 +93,13 @@ public class Console {
                     System.out.println("invalid command");
             }
         }
-
+        return "success";
     }
 
     /**
      * A method to filter user commands depending on the current game phase
+     * @param p_GameEngine
+     * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
         d_CommandBuffer.setD_GameEngine(p_GameEngine);
