@@ -53,6 +53,10 @@ public class Country {
         this.d_NumberOfArmies = p_NumberOfArmies;
     }
 
+    /**
+     * Initializing a country
+     * @param p_Country country type with all attributes
+     */
     public Country(Country p_Country) {
         this(p_Country.getD_CountryIntID(), p_Country.getD_CountryID(),p_Country.getD_CountryContinentID(), p_Country.getD_CurrentOwner(), p_Country.getD_NumberOfArmies());
     }
@@ -139,14 +143,16 @@ public class Country {
     }
 
     /**
-     * Print Country
+     * Prints the country
+     * @return country type with all attributes
      */
     public String printCountry () {
         return String.format("%d %s %s %s %d",d_CountryIntID,  d_CountryID, d_CountryContinentID, d_CurrentOwner, d_NumberOfArmies);
     }
 
     /**
-     * get neighbour list
+     * Get neighbours method
+     * @return returns an array with all neighbours
      */
     public ArrayList<Country> getD_neighbours() {
         return d_Neighbours;
@@ -160,6 +166,11 @@ public class Country {
         this.d_Neighbours = p_Neighbours;
     }
 
+    /**
+     * Add neighbour method
+     * @param p_Country Country object to be added
+     * @return boolean to check if valid country or not
+     */
     public boolean addNeighbour(Country p_Country) {
 
         for (var i = 0; i < d_Neighbours.size(); i++ ) {
@@ -171,6 +182,11 @@ public class Country {
         return true;
     }
 
+    /**
+     * Remove neighbour method
+     * @param p_ID String ID of country which is to be removed from neighbours list
+     * @return boolean to check if valid country
+     */
     public boolean removeNeighbour(String  p_ID) {
 
         for (var i = 0; i < d_Neighbours.size(); i++) {

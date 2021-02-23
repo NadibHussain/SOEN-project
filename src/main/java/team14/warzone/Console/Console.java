@@ -86,6 +86,8 @@ public class Console {
 
     /**
      * A method to filter user commands depending on the current game phase
+     * @param p_GameEngine
+     * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
         d_CommandBuffer.setD_GameEngine(p_GameEngine);
