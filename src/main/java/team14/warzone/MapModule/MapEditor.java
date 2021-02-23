@@ -15,14 +15,14 @@ public class MapEditor {
     }
 
     /**
-     * @param p_fileName
+     * @param p_FileName
      * @return Map
      */
 
-    public void loadMap(String p_fileName) {
+    public void loadMap(String p_FileName) {
         Map l_Map = new Map();
         try {
-            File l_FileObject = new File(p_fileName);
+            File l_FileObject = new File(p_FileName);
             Scanner l_ReaderObject = new Scanner(l_FileObject);
             while (l_ReaderObject.hasNextLine()) {
                 String l_Data = l_ReaderObject.nextLine();
@@ -102,9 +102,9 @@ public class MapEditor {
 
     /**
      * This method is used to save a map in a text format
-     * @param p_fileName
+     * @param p_FileName
      */
-    public void saveMap(String p_fileName) {
+    public void saveMap(String p_FileName) {
         String l_Content = "This map was created from a SOEN-6441 Project \n \n";
         l_Content+="[continents]\n";
         for (Continent l_Continent:d_LoadedMap.getD_continents()) {
@@ -132,7 +132,7 @@ public class MapEditor {
         }
 
         try {
-            FileWriter l_Writer = new FileWriter(p_fileName);
+            FileWriter l_Writer = new FileWriter(p_FileName);
             l_Writer.write(l_Content);
             l_Writer.close();
             System.out.println("Successfully wrote to the file.");
