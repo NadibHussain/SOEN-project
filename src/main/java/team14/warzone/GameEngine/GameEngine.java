@@ -61,6 +61,9 @@ public class GameEngine {
                     l_I++;
                 }
             }
+            Console.displayMsg("Success: countries assigned");
+        } else {
+            Console.displayMsg("Failed: 2-5 players required");
         }
         // change phase to game play
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
@@ -75,6 +78,7 @@ public class GameEngine {
 //        l_LocalPlayer.setD_Name(p_PlayerName);
 //        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
         d_PlayerList.add(l_LocalPlayer);
+        Console.displayMsg("Player added: " + p_PlayerName);
     }
 
     public void removePlayer(String p_PlayerName) {
@@ -82,6 +86,7 @@ public class GameEngine {
             if (l_Player.getD_Name().equals(p_PlayerName))
                 d_PlayerList.remove(l_Player);
         }
+        Console.displayMsg("Player removed: " + p_PlayerName);
     }
 
     /**
@@ -112,15 +117,7 @@ public class GameEngine {
 
     public void receiveCommand(Command p_Command) {
         // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command); //store order in current player orders list
-        switch (p_Command.getD_Keyword()) {
-            case "deploy": //decrease number of armies for the current player
-                int l_ArmiesOwned = d_CurrentPlayer.getD_TotalNumberOfArmies();
-                int l_ArmiesToDeploy = Integer.parseInt(p_Command.getD_Options().getD_Arguments().get(1));
-                d_CurrentPlayer.setD_TotalNumberOfArmies(l_ArmiesOwned - l_ArmiesToDeploy);
-                break;
-            default:
-        }
+        d_CurrentPlayer.issueOrder(p_Command); // store order in current player orders list
     }
 
     /**
@@ -137,6 +134,9 @@ public class GameEngine {
         l_CountryToDeployIn.setNumberOfArmies(l_CountryToDeployIn.getNumberOfArmies() + p_NumberOfArmies);
         // decrease army from player
         d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
+
+        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies in "
+                + p_CountryName);
     }
 
     public void setD_Console(Console p_Console) {
