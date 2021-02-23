@@ -40,7 +40,7 @@ public class Console {
         boolean l_ValidCommand = true;// to store the command validity
         //check one word command : a keyword only, no options or arguments
         if (l_UserInput.length == 1) {
-            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)){
+            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
                 //Create Command object, passing keyword and option
                 Option l_opt = new Option();
                 Command l_UserCommand = new Command(l_Keyword, l_opt);
@@ -51,7 +51,7 @@ public class Console {
         //check two words command : : a keyword with an argument, no options
         else if (l_UserInput.length == 2) {
             l_Arguments.add(l_UserInput[1]);
-            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)){
+            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
                 System.out.println("valid command");
                 //Create Command object, passing keyword and option
                 Option l_opt = new Option();
@@ -70,6 +70,7 @@ public class Console {
                         i++;
                     }
                 } else {
+                    l_OptName = "noOption";
                     //if the word is not an option then add it to the arguments list
                     while (i < l_UserInput.length) {
                         l_Arguments.add(l_UserInput[i]);
@@ -95,6 +96,7 @@ public class Console {
 
     /**
      * A method to filter user commands depending on the current game phase
+     *
      * @param p_GameEngine
      * @param p_MapEditor
      */

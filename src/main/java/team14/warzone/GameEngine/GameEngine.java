@@ -3,6 +3,7 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
@@ -42,8 +43,7 @@ public class GameEngine {
     }
 
     /**
-     *
-     * @param p_Console Console parameter
+     * @param p_Console   Console parameter
      * @param p_MapEditor MapEditor parameter
      */
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
@@ -54,6 +54,7 @@ public class GameEngine {
 
     /**
      * LoadMap method
+     *
      * @param p_FileName String FileName as parameter
      */
     public void loadMap(String p_FileName) {
@@ -95,6 +96,7 @@ public class GameEngine {
 
     /**
      * Add player method
+     *
      * @param p_PlayerName String PlayerName as parameter
      */
     public void addPlayer(String p_PlayerName) {
@@ -107,6 +109,7 @@ public class GameEngine {
 
     /**
      * Remove Player
+     *
      * @param p_PlayerName String PlayerName as parameter
      */
     public void removePlayer(String p_PlayerName) {
@@ -124,15 +127,14 @@ public class GameEngine {
      * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
-        /*
         // reinforcement
-        for(Player l_Player: d_PlayerList){
+        for (Player l_Player : d_PlayerList) {
             //1. # of territories owned divided by 3
             int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
             //2. if the player owns all the territories of an entire continent the player is given
             // a control bonus value
             int l_ControlValueEnforcement = 0;
-            for (Continent l_Continent: d_LoadedMap.getD_Continents()) {
+            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
                 //check if all countries belong to the l_Continent are owned by l_Player
                 if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
                     l_ControlValueEnforcement += l_Continent.getD_ControlValue();
@@ -143,18 +145,18 @@ public class GameEngine {
             //give reinforcement to the player
             l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
-        */
 
         // Take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);
         //keep looping through the players list until all of them finished issuing their orders
-        while (l_Flag.contains(false)) {
+        while (l_Flag.contains(Boolean.FALSE)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
                 if (l_Flag.get(i) == false) {
+                    d_CurrentPlayer = d_PlayerList.get(i);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
                     d_Console.readInput();
-                    if (d_Console.getD_CommandBuffer().getD_Keyword() == "pass")
+                    if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
                         l_Flag.set(i, Boolean.TRUE);
                     else
                         d_Console.filterCommand(this, d_MapEditor);
@@ -165,6 +167,7 @@ public class GameEngine {
         //execute all the commands until all players orders lists are empty
         while (l_Flag.contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
+                d_CurrentPlayer = d_PlayerList.get(i);
                 d_PlayerList.get(i).nextOrder();
                 if (d_PlayerList.get(i).getD_OrderList().isEmpty())
                     l_Flag.set(i, Boolean.TRUE);
@@ -174,6 +177,7 @@ public class GameEngine {
 
     /**
      * Receive Command method
+     *
      * @param p_Command command type as parameter
      */
     public void receiveCommand(Command p_Command) {
@@ -202,6 +206,7 @@ public class GameEngine {
 
     /**
      * Set console
+     *
      * @param p_Console
      */
     public void setD_Console(Console p_Console) {
@@ -210,6 +215,7 @@ public class GameEngine {
 
     /**
      * Get loaded map
+     *
      * @return returns a loaded map
      */
     public Map getD_LoadedMap() {
