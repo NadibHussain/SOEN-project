@@ -263,10 +263,10 @@ public class Map {
      * @param p_countryName String country name
      * @return String country name
      */
-    public Country findCountry(String p_countryName){
+    public Country findCountry(String p_CountryName){
 
         for (Country l_CountryIndex: d_Countries) {
-            if(l_CountryIndex.getD_CountryID().equals(p_countryName))
+            if(l_CountryIndex.getD_CountryID().equals(p_CountryName))
             {
                 return l_CountryIndex;
             }
@@ -279,9 +279,9 @@ public class Map {
      * @param p_continetName String continent name
      * @return String continent name
      */
-    public Continent findContinent(String p_continetName){
+    public Continent findContinent(String p_ContinetName){
         for (Continent l_ContIndex: d_Continents) {
-            if(l_ContIndex.getD_ContinentID().equals(p_continetName))
+            if(l_ContIndex.getD_ContinentID().equals(p_ContinetName))
             {
                 return l_ContIndex;
             }
