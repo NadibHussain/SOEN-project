@@ -54,7 +54,7 @@ public class Country {
     }
 
     public Country(Country p_Country) {
-        this(p_Country.getD_CountryIntID(), p_Country.getD_CountryID(),p_Country.getD_CountryContinentID(), p_Country.getD_CurrentOwner(), p_Country.getNumberOfArmies());
+        this(p_Country.getD_CountryIntID(), p_Country.getD_CountryID(),p_Country.getD_CountryContinentID(), p_Country.getD_CurrentOwner(), p_Country.getD_NumberOfArmies());
     }
 
     /**
@@ -126,7 +126,7 @@ public class Country {
      * Returns the number of armies on the country
      * @return An int with number of armies
      */
-    public int getNumberOfArmies() {
+    public int getD_NumberOfArmies() {
         return d_NumberOfArmies;
     }
 
@@ -134,7 +134,7 @@ public class Country {
      * Sets the number of armies on the country
      * @param p_NumberOfArmies with current player who owns the country
      */
-    public void setNumberOfArmies(int p_NumberOfArmies) {
+    public void setD_NumberOfArmies(int p_NumberOfArmies) {
         this.d_NumberOfArmies = p_NumberOfArmies;
     }
 

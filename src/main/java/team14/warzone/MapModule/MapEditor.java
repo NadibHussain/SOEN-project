@@ -33,7 +33,7 @@ public class MapEditor {
                         {
                             continue;
                         }
-                        ArrayList<Continent> l_ContinentList = l_Map.getD_continents();
+                        ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
                         if (l_Line.equals("")) {
                             break;
                         } else {
@@ -64,7 +64,7 @@ public class MapEditor {
                     }
 
                 } else if (l_Data.equals("[borders]")) {
-                    ArrayList<Country> l_Countires = l_Map.getD_countries();
+                    ArrayList<Country> l_Countires = l_Map.getD_Countries();
                     int l_Index = 0;
                     while (l_ReaderObject.hasNextLine()) {
                         String l_Line = l_ReaderObject.nextLine();
@@ -107,13 +107,13 @@ public class MapEditor {
     public void saveMap(String p_FileName) {
         String l_Content = "This map was created from a SOEN-6441 Project \n \n";
         l_Content+="[continents]\n";
-        for (Continent l_Continent:d_LoadedMap.getD_continents()) {
+        for (Continent l_Continent:d_LoadedMap.getD_Continents()) {
             l_Content += l_Continent.getD_ContinentID()+" "+l_Continent.getD_ControlValue()+"\n";
         }
         l_Content+="\n[countries]\n";
-        for (Country l_Country:d_LoadedMap.getD_countries()) {
+        for (Country l_Country:d_LoadedMap.getD_Countries()) {
             int l_ContinentIntId = -1;
-            for (Continent l_continent: d_LoadedMap.getD_continents()) {
+            for (Continent l_continent: d_LoadedMap.getD_Continents()) {
                 if (l_continent.getD_ContinentID().equals(l_Country.getD_CountryContinentID()))
                 {
                     l_ContinentIntId = l_continent.getD_ContinentIntID();
@@ -123,7 +123,7 @@ public class MapEditor {
         }
 
         l_Content+="\n[borders]\n";
-        for (Country l_Country:d_LoadedMap.getD_countries()) {
+        for (Country l_Country:d_LoadedMap.getD_Countries()) {
             l_Content += l_Country.getD_CountryIntID()+" ";
             for (Country l_neighbour:l_Country.getD_neighbours()) {
                 l_Content += l_neighbour.getD_CountryIntID()+ " ";
@@ -152,8 +152,8 @@ public class MapEditor {
      * continent, all continents have at least one country
      */
     public boolean validateMap(Map p_Map) {
-        ArrayList<Country> l_Countries = p_Map.getD_countries();
-        ArrayList<Continent> l_Continents = p_Map.getD_continents();
+        ArrayList<Country> l_Countries = p_Map.getD_Countries();
+        ArrayList<Continent> l_Continents = p_Map.getD_Continents();
 
         boolean l_Connected = false;
         boolean l_HasContinent = false;
@@ -208,7 +208,7 @@ public class MapEditor {
      *
      * @return loaded map
      */
-    public Map getD_loadedMap() {
+    public Map getD_LoadedMap() {
         return d_LoadedMap;
     }
 

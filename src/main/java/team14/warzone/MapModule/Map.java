@@ -55,7 +55,7 @@ public class Map {
 
             l_Data[l_Index][3] = l_Neighbours;
             l_Data[l_Index][4] = this.d_Countries.get(l_Index).getD_CurrentOwner();
-            l_Data[l_Index][5] = this.d_Countries.get(l_Index).getNumberOfArmies();
+            l_Data[l_Index][5] = this.d_Countries.get(l_Index).getD_NumberOfArmies();
 
         }
         JTable l_Table = new JTable(l_Data, l_ColumnNames);
@@ -243,7 +243,7 @@ public class Map {
     /**
      * @return ArrayList<Continent>
      */
-    public ArrayList<Continent> getD_continents() {
+    public ArrayList<Continent> getD_Continents() {
         return d_Continents;
     }
 
@@ -251,7 +251,7 @@ public class Map {
     /**
      * @return ArrayList<Country>
      */
-    public ArrayList<Country> getD_countries() {
+    public ArrayList<Country> getD_Countries() {
         return d_Countries;
     }
 
