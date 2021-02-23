@@ -23,38 +23,38 @@ public class TestMap {
     @Test
     @DisplayName("Testing Add Continent")
     public void testAddContinent() {
-        int l_ContinentCount = d_M1.getD_continents().size();
+        int l_ContinentCount = d_M1.getD_Continents().size();
         d_M1.addContinent("Asia", 5);
         assertNotNull(d_M1.findContinent("Asia"));
-        assertEquals(l_ContinentCount+1, d_M1.getD_continents().size());
+        assertEquals(l_ContinentCount+1, d_M1.getD_Continents().size());
     }
 
     @Test
     @DisplayName("Testing Add Country")
     public void testAddCountry() {
-        int l_CountryCount = d_M1.getD_countries().size();
+        int l_CountryCount = d_M1.getD_Countries().size();
         d_M1.addCountry("Uganda", "Africa");
         assertNotNull(d_M1.findCountry("Uganda"));
-        assertEquals(l_CountryCount+1, d_M1.getD_countries().size());
+        assertEquals(l_CountryCount+1, d_M1.getD_Countries().size());
 
     }
 
     @Test
     @DisplayName("Testing Remove Country")
     public void testRemoveCountry() {
-        int l_CountryCount = d_M1.getD_countries().size();
+        int l_CountryCount = d_M1.getD_Countries().size();
         d_M1.removeCountry("Uganda");
         assertNull(d_M1.findCountry("Uganda"));
-        assertEquals(l_CountryCount-1, d_M1.getD_countries().size());
+        assertEquals(l_CountryCount-1, d_M1.getD_Countries().size());
     }
 
     @Test
     @DisplayName("Testing Remove Continent")
     public void testRemoveContinent() {
-        int l_ContinentCount = d_M1.getD_continents().size();
+        int l_ContinentCount = d_M1.getD_Continents().size();
         d_M1.removeContinent("Asia");
         assertNull(d_M1.findContinent("Asia"));
-        assertEquals(l_ContinentCount-1, d_M1.getD_continents().size());
+        assertEquals(l_ContinentCount-1, d_M1.getD_Continents().size());
     }
 
     @Test
