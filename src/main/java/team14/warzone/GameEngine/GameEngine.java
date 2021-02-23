@@ -9,7 +9,6 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -22,7 +21,7 @@ public class GameEngine {
 
     private Player d_CurrentPlayer;
     private Map d_LoadedMap;
-    private List<Player> d_PlayerList;
+    private ArrayList<Player> d_PlayerList;
 
     private Console d_Console;
     private MapEditor d_MapEditor;
@@ -32,11 +31,13 @@ public class GameEngine {
 
     public GameEngine(Console p_Console) {
         d_Console = p_Console;
+        d_PlayerList = new ArrayList<Player>();
     }
 
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
+        d_PlayerList = new ArrayList<Player>();
     }
 
     public void loadMap(String p_FileName) {
