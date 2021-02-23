@@ -51,45 +51,56 @@ public class Command {
                             Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
                     d_MapEditor.getD_loadedMap().removeContinent(l_CommandArgs.get(0));
+                break;
 
             case "editcountry":
                 if (l_OptionName.equals("-add"))
                     d_MapEditor.getD_loadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
                     d_MapEditor.getD_loadedMap().removeCountry(l_CommandArgs.get(0));
+                break;
 
             case "editneighbor":
                 if (l_OptionName.equals("-add"))
                     d_MapEditor.getD_loadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
                     d_MapEditor.getD_loadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                break;
 
             case "savemap":
                 d_MapEditor.saveMap(l_CommandArgs.get(0));
+                break;
 
             case "editmap":
                 d_MapEditor.loadMap(l_CommandArgs.get(0));
+                break;
 
             case "validatemap":
                 d_MapEditor.validateMap(d_MapEditor.getD_loadedMap());
+                break;
 
             case "loadmap":
                 d_GameEngine.loadMap(l_CommandArgs.get(0));
+                break;
 
             case "showmap":
                 d_GameEngine.getD_LoadedMap().showMap();
+                break;
 
             case "gameplayer":
                 if (l_OptionName.equals("-add"))
                     d_GameEngine.addPlayer(l_CommandArgs.get(0));
                 else //-remove option
                     d_GameEngine.removePlayer(l_CommandArgs.get(0));
+                break;
 
             case "assigncountries":
                 d_GameEngine.assignCountries();
+                break;
 
             case "deploy":
                 d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                break;
         }
     }
 

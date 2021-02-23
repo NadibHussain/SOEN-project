@@ -3,7 +3,6 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
-import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
@@ -97,6 +96,7 @@ public class GameEngine {
      * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
+        /*
         // reinforcement
         for(Player l_Player: d_PlayerList){
             //1. # of territories owned divided by 3
@@ -114,6 +114,8 @@ public class GameEngine {
             //give reinforcement to the player
             l_Player.setD_TotalNumberOfArmies(l_PlayerEnforcement);
         }
+        */
+
         //deploy orders
         boolean[] l_Status = new boolean[d_PlayerList.size()];//An array to store players status
         //keep looping through the players list until all of them finished issuing their orders
@@ -131,7 +133,7 @@ public class GameEngine {
         while (Arrays.asList(l_Status).contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
                 d_PlayerList.get(i).nextOrder();
-                if(d_PlayerList.get(i).getD_OrderList().isEmpty())
+                if (d_PlayerList.get(i).getD_OrderList().isEmpty())
                     l_Status[i] = true;
             }
         }
