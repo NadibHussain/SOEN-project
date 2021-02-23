@@ -38,8 +38,11 @@ public class Player {
     }
 
     public void nextOrder() {
-        d_OrderList.get(d_OrderList.size() - 1).execute();
-        // remove the command after execution
+        if(d_OrderList.isEmpty()){
+            d_OrderList.get(0).execute();//execute first order from the order list
+            // remove the command after execution
+            d_OrderList.remove(0);// remove first order from the order list
+        }
     }
 
     public void setD_Name(String d_Name) {

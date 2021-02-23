@@ -28,7 +28,7 @@ public class Console {
     /**
      * A method to read input from user console
      */
-    public void readInput() {
+    public boolean readInput() {
         while (true) {
             String[] l_UserInput = d_Scanner.nextLine().split(" ");
             //if user wants to exit the game
@@ -71,9 +71,9 @@ public class Console {
                     l_ValidCommand = l_ValidCommand && InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
                     if (l_ValidCommand) {
                         System.out.println("valid command");
-                        //Set options for the user command
+                        //set options for the user command
                         Option l_opt = new Option(l_OptName, l_Arguments);
-                        //Create Command object, passing keyword and option
+                        //create Command object, passing keyword and option
                         Command l_UserCommand = new Command(l_Keyword, l_opt);
                         setD_CommandBuffer(l_UserCommand);
 

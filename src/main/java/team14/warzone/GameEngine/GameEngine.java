@@ -3,6 +3,7 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
@@ -86,22 +87,43 @@ public class GameEngine {
      */
     public void gameLoop() {
         // reinforcement
-        boolean[] pass = new boolean[d_PlayerList.size()];
-        while (Arrays.asList(pass).contains(false)) {
+        for(Player l_Player: d_PlayerList){
+            //1. # of territories owned divided by 3
+            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+            //2. if the player owns all the territories of an entire continent the player is given
+            // a control bonus value
+            int l_ControlValueEnforcement = 0;
+            for (Continent l_Continent: d_LoadedMap.getD_continents()) {
+                if (l_Player.getD_CountriesOwned().containsAll(l_Continent.getD_Countries()))
+                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+            }
+            //3.the minimal number of reinforcement armies for any player is 3 + control values
+            // of continents he owns
+            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+            //give reinforcement to the player
+            l_Player.setD_TotalNumberOfArmies(l_PlayerEnforcement);
+        }
+        //deploy orders
+        boolean[] l_Status = new boolean[d_PlayerList.size()];//An array to store players status
+        //keep looping through the players list until all of them finished issuing their orders
+        while (Arrays.asList(l_Status).contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
-                d_CurrentPlayer = d_PlayerList.get(i);
-                if (pass[i] == false) {
-                    Console.displayMsg("Enter Command for player " + d_CurrentPlayer.getD_Name());
+                if (l_Status[i] == false) {
+                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
                     d_Console.readInput();
                     d_Console.filterCommand(this, d_MapEditor);
                 }
             }
         }
-        Arrays.fill(pass, false);
-        // execute all the commands
-        // loop through players
-        // check if command list is empty
-        // execute & remove command
+        Arrays.fill(l_Status, false);
+        //execute all the commands until all players orders lists are empty
+        while (Arrays.asList(l_Status).contains(false)) {
+            for (int i = 0; i < d_PlayerList.size(); i++) {
+                d_PlayerList.get(i).nextOrder();
+                if(d_PlayerList.get(i).getD_OrderList().isEmpty())
+                    l_Status[i] = true;
+            }
+        }
     }
 
     public void receiveCommand(Command p_Command) {
