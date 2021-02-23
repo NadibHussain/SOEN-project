@@ -241,7 +241,8 @@ public class Map {
     }
 
     /**
-     * @return ArrayList<Continent>
+     * Returns an array list of all continents
+     * @return Arraylist of continents
      */
     public ArrayList<Continent> getD_Continents() {
         return d_Continents;
@@ -249,7 +250,8 @@ public class Map {
 
 
     /**
-     * @return ArrayList<Country>
+     * Returns an arraylist of all countries
+     * @return Arraylist of countries
      */
     public ArrayList<Country> getD_Countries() {
         return d_Countries;
@@ -257,8 +259,9 @@ public class Map {
 
 
     /**
-     * Finds country from the name
-     * @return country object with a specific name
+     * Find a country using its name
+     * @param p_countryName String country name
+     * @return String country name
      */
     public Country findCountry(String p_countryName){
 
@@ -272,8 +275,9 @@ public class Map {
     }
 
     /**
-     * Finds country from the name
-     * @return continent object with a specific name
+     * Find Continent using its name
+     * @param p_continetName String continent name
+     * @return String continent name
      */
     public Continent findContinent(String p_continetName){
         for (Continent l_ContIndex: d_Continents) {

@@ -8,17 +8,28 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * This is the main class for Mapeditor functions
+ */
+
 public class MapEditor {
 
+    /**
+     * loaded map object
+     */
     public Map d_LoadedMap;
+
+    /**
+     * Mapeditor method
+     */
     public MapEditor() {
     }
 
-    /**
-     * @param p_FileName
-     * @return Map
-     */
 
+    /**
+     * Loadmap from file
+     * @param p_FileName String filename
+     */
     public void loadMap(String p_FileName) {
         Map l_Map = new Map();
         try {
@@ -102,7 +113,7 @@ public class MapEditor {
 
     /**
      * This method is used to save a map in a text format
-     * @param p_FileName
+     * @param p_FileName String filename
      */
     public void saveMap(String p_FileName) {
         String l_Content = "This map was created from a SOEN-6441 Project \n \n";
@@ -144,12 +155,11 @@ public class MapEditor {
     }
 
     /**
-     * @author tanzia-ahmed
-     * @param p_Map
-     * @return boolean
-     *
+     * @author tanzia
      * checking if the map is connected, all countries belong to at least one
      * continent, all continents have at least one country
+     * @param p_Map Map object
+     * @return checking validity
      */
     public boolean validateMap(Map p_Map) {
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
@@ -204,9 +214,8 @@ public class MapEditor {
     }
 
     /**
-     * Gets Map
-     *
-     * @return loaded map
+     * Get a loaded map
+     * @return a loaded map file
      */
     public Map getD_LoadedMap() {
         return d_LoadedMap;

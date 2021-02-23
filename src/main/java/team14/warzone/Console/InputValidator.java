@@ -11,13 +11,33 @@ import java.util.List;
  * @version 1.0
  */
 public class InputValidator {
+
+    /**
+     * Phase enum consists of MAPEDITOR, STARTUP, GAMEPLAY
+     */
     public enum Phase {
+        /**
+         * constant MAPEDITOR
+         */
         MAPEDITOR,
+        /**
+         * constant STARTUP
+         */
         STARTUP,
+        /**
+         * constant GAMEPLAY
+         */
         GAMEPLAY
     }
 
+    /**
+     * static variable CURRENT_PHASE of type Phase
+     */
     public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
+
+    /**
+     * static variable VALID_MAPEDITOR_OPTIONS of type String
+     */
     public static ArrayList<String> VALID_MAPEDITOR_OPTIONS = new ArrayList<>(
             Arrays.asList(
                     "-add",

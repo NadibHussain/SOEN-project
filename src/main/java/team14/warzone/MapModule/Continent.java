@@ -89,7 +89,8 @@ public class Continent {
     }
 
     /**
-     * Print continent
+     * Prints the continent
+     * @return Continent type with all attributes
      */
     public String printContinent() {
         return String.format("%d %s %d",this.d_ContinentIntID,  this.d_ContinentID, this.d_ControlValue);
