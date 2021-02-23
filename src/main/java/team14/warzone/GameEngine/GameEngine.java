@@ -52,7 +52,7 @@ public class GameEngine {
 
     public void assignCountries() {
         ArrayList<Country> l_Countries = d_LoadedMap.getD_countries();
-        if (d_PlayerList.size() >= 2) {
+        if (d_PlayerList.size() >= 2 && d_PlayerList.size() <= 5) {
             for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
                 for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
                     // add country to player's country-list
