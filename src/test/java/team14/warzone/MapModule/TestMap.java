@@ -1,6 +1,7 @@
 package team14.warzone.MapModule;
+import static junit.framework.TestCase.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 import org.junit.jupiter.api.BeforeAll;
@@ -12,28 +13,64 @@ public class TestMap {
     public static Map d_M1;
     public static Continent d_Asia, d_Africa;
     public static Country d_India, d_Kenya;
-
     @BeforeAll
     public static void initialize() {
         d_M1 = new Map();
-        d_Asia = new Continent(1, "Asia", 5);
-        d_Africa = new Continent(2, "Africa", 3);
-        d_India = new Country(1, "India", "Asia", null, 0);
-        d_Kenya = new Country(2, "Kenya", "Africa", null, 0);
+        d_M1.addContinent("Africa",6);
+        d_M1.addCountry("South-Africa","Africa");
     }
 
     @Test
     @DisplayName("Testing Add Continent")
     public void testAddContinent() {
+        int l_ContinentCount = d_M1.getD_continents().size();
         d_M1.addContinent("Asia", 5);
-        assertEquals("Asia", d_Asia.getD_ContinentID());
+        assertNotNull(d_M1.findContinent("Asia"));
+        assertEquals(l_ContinentCount+1, d_M1.getD_continents().size());
     }
 
     @Test
     @DisplayName("Testing Add Country")
     public void testAddCountry() {
-        d_M1.addCountry("India", "Asia");
-        assertEquals("India", d_India.getD_CountryID());
+        int l_CountryCount = d_M1.getD_countries().size();
+        d_M1.addCountry("Uganda", "Africa");
+        assertNotNull(d_M1.findCountry("Uganda"));
+        assertEquals(l_CountryCount+1, d_M1.getD_countries().size());
+
     }
+
+    @Test
+    @DisplayName("Testing Remove Country")
+    public void testRemoveCountry() {
+        int l_CountryCount = d_M1.getD_countries().size();
+        d_M1.removeCountry("Uganda");
+        assertNull(d_M1.findCountry("Uganda"));
+        assertEquals(l_CountryCount-1, d_M1.getD_countries().size());
+    }
+
+    @Test
+    @DisplayName("Testing Remove Continent")
+    public void testRemoveContinent() {
+        int l_ContinentCount = d_M1.getD_continents().size();
+        d_M1.removeContinent("Asia");
+        assertNull(d_M1.findContinent("Asia"));
+        assertEquals(l_ContinentCount-1, d_M1.getD_continents().size());
+    }
+
+    @Test
+    @DisplayName("Testing find Continent")
+    public void testFindContinent() {
+        assertNotNull(d_M1.findContinent("Africa"));
+    }
+
+    @Test
+    @DisplayName("Testing find Country")
+    public void testFindCountry() {
+        assertNotNull(d_M1.findCountry("South-Africa"));
+    }
+
+
+
+
 
 }

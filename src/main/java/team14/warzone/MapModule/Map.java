@@ -28,7 +28,7 @@ public class Map {
 
     public ArrayList<Country> d_Countries = new ArrayList<Country>();
 
-    /**p_fileName
+    /**
      * @author tanzia-ahmed
      * this method triggers a window displaying the map 
      * each column represents - #SL, Country, Continent, Neighbours, Current Owner, No. of Armies
