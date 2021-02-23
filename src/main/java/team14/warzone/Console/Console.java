@@ -40,14 +40,25 @@ public class Console {
         boolean l_ValidCommand = true;// to store the command validity
         //check one word command : a keyword only, no options or arguments
         if (l_UserInput.length == 1) {
-            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments))
+            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)){
+                //Create Command object, passing keyword and option
+                Option l_opt = new Option();
+                Command l_UserCommand = new Command(l_Keyword, l_opt);
+                setD_CommandBuffer(l_UserCommand);
                 System.out.println("valid command");
+            }
         }
         //check two words command : : a keyword with an argument, no options
         else if (l_UserInput.length == 2) {
             l_Arguments.add(l_UserInput[1]);
-            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments))
+            if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)){
                 System.out.println("valid command");
+                //Create Command object, passing keyword and option
+                Option l_opt = new Option();
+                l_opt.addArgument(l_Arguments.get(0));
+                Command l_UserCommand = new Command(l_Keyword, l_opt);
+                setD_CommandBuffer(l_UserCommand);
+            }
         } else { //check three words or more command
             for (int i = 1; i < l_UserInput.length; i++) {
                 if (l_UserInput[i].charAt(0) == '-') { //check if a word is an option
