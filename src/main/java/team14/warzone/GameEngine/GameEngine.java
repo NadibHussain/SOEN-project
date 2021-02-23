@@ -118,7 +118,9 @@ public class GameEngine {
     }
 
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
-
+        // increase armies in country
+//        d_LoadedMap.findCountry().setNumberOfArmies();
+        // decrease army from player
     }
 
     public void setD_Console(Console p_Console) {
