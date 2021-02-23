@@ -284,4 +284,20 @@ public class Map {
         }
         return null;
     }
+
+    /**
+     * Finds List of country for a specific Continent
+     * @param p_continentID Continent id
+     * @return Arraylist of the countries
+     */
+    public ArrayList<Country> getCountryListOfContinent(String p_continentID){
+        ArrayList<Country> l_CountryArrayList = new ArrayList<>();
+        for (Country l_Country:d_Countries) {
+            if (l_Country.getD_CountryContinentID().equals(p_continentID))
+            {
+                l_CountryArrayList.add(l_Country);
+            }
+        }
+        return l_CountryArrayList;
+    }
 }
