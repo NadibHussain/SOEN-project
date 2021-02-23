@@ -4,6 +4,7 @@ import team14.warzone.Console.Command;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Class implements the player model
@@ -26,6 +27,10 @@ public class Player {
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
         this.d_CountriesOwned = d_CountriesOwned;
         this.d_OrderList = d_OrderList;
+    }
+
+    public Player(String p_Name) {
+        this(p_Name, 20, new ArrayList<Country>(Arrays.asList()), new ArrayList<Command>(Arrays.asList()));
     }
 
     public void issueOrder(Command p_Command) {
@@ -53,7 +58,7 @@ public class Player {
         this.d_OrderList = d_OrderList;
     }
 
-    public void addCountryOwned(Country p_Country){
+    public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
     }
 
