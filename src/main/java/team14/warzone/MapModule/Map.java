@@ -3,6 +3,10 @@ package team14.warzone.MapModule;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 /**
  * This class consists the information and functionality of the map
  *
@@ -17,49 +21,92 @@ public class Map {
      * Array List of Continents defined in our map
      */
 
-    public ArrayList<Continent> d_continents = new ArrayList<Continent>();
+    public ArrayList<Continent> d_Continents = new ArrayList<Continent>();
     /**
      * Array List of Countries defined in our map
      */
 
-    public ArrayList<Country> d_countries = new ArrayList<Country>();
+    public ArrayList<Country> d_Countries = new ArrayList<Country>();
+
     /**
-     * Auto increment counters for generating integer ID for countries and continents
+     * @author tanzia-ahmed
+     * this method triggers a window displaying the map 
+     * each column represents - #SL, Country, Continent, Neighbours, Current Owner, No. of Armies
+     * each row represents each country object
+     *
      */
-    private static int d_IdTracker = 0;
-    private static int d_IdTracker1 = 0;
-
-
     public void showMap() {
+        String[] l_ColumnNames = {"SL.","Country", "Continent","Neighbours", "Current Owner", "No. of Armies"};
+        Object[][] l_Data = new Object [this.d_Countries.size()][6];
+
+        for (int l_Index = 0; l_Index<this.d_Countries.size();l_Index++){
+            l_Data[l_Index][0] = l_Index;
+            l_Data[l_Index][1] = this.d_Countries.get(l_Index).getD_CountryID();
+            l_Data[l_Index][2] = this.d_Countries.get(l_Index).getD_CountryContinentID();
+            
+            // Concating all neighbour names in 'neighbours' string
+            String l_Neighbours = "";
+            for(int l_NeighbourIndex = 0; l_NeighbourIndex < this.d_Countries.get(l_Index).getD_neighbours().size(); l_NeighbourIndex++){
+                l_Neighbours = l_Neighbours +this.d_Countries.get(l_Index).getD_neighbours().get(l_NeighbourIndex).getD_CountryID();
+                if(l_NeighbourIndex !=this.d_Countries.get(l_Index).getD_neighbours().size()-1 ){
+                    l_Neighbours = l_Neighbours + " ,";
+                }
+            }
+
+            l_Data[l_Index][3] = l_Neighbours;
+            l_Data[l_Index][4] = this.d_Countries.get(l_Index).getD_CurrentOwner();
+            l_Data[l_Index][5] = this.d_Countries.get(l_Index).getNumberOfArmies();
+
+        }
+        JTable l_Table = new JTable(l_Data, l_ColumnNames);
+
+        //Create and set up the window.
+        JFrame l_Frame = new JFrame("Map");
+        l_Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        l_Frame.add(new JScrollPane(l_Table));
+        
+        //Display the window.
+        l_Frame.pack();
+        l_Frame.setVisible(true);
 
     }
 
     /**
-     * @param p_CountryIntID integer ID of country
      * @param p_CountryID    ID of country to be added
      * @param p_ContinentID Continent to which the country belongs to
      */
-    public void addCountry(int p_CountryIntID, String p_CountryID, String p_ContinentID) {
-        p_CountryIntID = ++d_IdTracker1;
-        Country l_country = new Country(p_CountryIntID, p_CountryID, p_ContinentID, "", 0);
+    public void addCountry(String p_CountryID, String p_ContinentID) {
+        int l_CountryIntID=0;
+        if (d_Countries.size() > 0)
+        {
+            l_CountryIntID = d_Countries.get(d_Countries.size()-1).getD_CountryIntID()+1;
 
-        for (int j = 0; j < d_countries.size(); j++) {
-            if (d_countries.get(j).getD_CountryID() == p_CountryID) {
+        }
+        else{
+            l_CountryIntID = 1;
+        }
+        Country l_Country = new Country(l_CountryIntID, p_CountryID, p_ContinentID, "", 0);
+
+        for (int l_CountryIndex = 0; l_CountryIndex < d_Countries.size(); l_CountryIndex++) {
+            if (d_Countries.get(l_CountryIndex).getD_CountryID() == p_CountryID) {
                 System.out.println("Country already exists");
                 return;
             }
         }
 
-        boolean invalid = false;
-        for (int i = 0; i < d_continents.size(); i++) {
-            if (d_continents.get(i).getD_ContinentID().equals(p_ContinentID)) {
-                d_countries.add(l_country);
-                invalid = true;
+        boolean l_Invalid = false;
+        for (int l_ContIndex = 0; l_ContIndex < d_Continents.size(); l_ContIndex++) {
+            if (d_Continents.get(l_ContIndex).getD_ContinentID().equals(p_ContinentID)) {
+                d_Countries.add(l_Country);
+                l_Invalid = true;
                 break;
             }
         }
-        if (!invalid) {
+        if (!l_Invalid) {
             System.out.println("Continent does not exist");
+
         }
     }
 
@@ -68,44 +115,51 @@ public class Map {
      * @param p_CountryID ID of the country to be removed
      */
     public void removeCountry(String p_CountryID) {
-        Iterator itr = d_countries.iterator();
+        Iterator l_Itr = d_Countries.iterator();
 
-        boolean found = false;
-        while (itr.hasNext()) {
-            Country l_country = (Country) itr.next();
-            l_country.removeNeighbour(p_CountryID);
-            if (l_country.getD_CountryID().equals(p_CountryID)) {
-                found = true;
-                itr.remove();
+        boolean l_Found = false;
+        while (l_Itr.hasNext()) {
+            Country l_Country = (Country) l_Itr.next();
+            l_Country.removeNeighbour(p_CountryID);
+            if (l_Country.getD_CountryID().equals(p_CountryID)) {
+                l_Found = true;
+                l_Itr.remove();
             }
         }
-        if (!found) {
+        if (!l_Found) {
             System.out.println("Country does not exist");
         }
     }
 
 
     /**
-     * @param p_ContinentIntID integer ID of country
      * @param p_ContinentID ID of the continent to be added in our case the name
      * @param p_ControlValue Control Value of the continent
      */
-    public void addContinent(int p_ContinentIntID, String p_ContinentID, int p_ControlValue) {
-        Iterator<Continent> itr = d_continents.iterator();
-        p_ContinentIntID = ++d_IdTracker;
-        boolean found = false;
-        Continent l_continent = new Continent(p_ContinentIntID, p_ContinentID, p_ControlValue);
-        while (itr.hasNext()) {
-            Continent cur = (Continent) itr.next();
-            if (cur.getD_ContinentID() == p_ContinentID) {
-                found = true;
+    public void addContinent(String p_ContinentID, int p_ControlValue) {
+        int l_ContinentIntID=0;
+        Iterator<Continent> l_Itr = d_Continents.iterator();
+        if (d_Continents.size() > 0)
+        {
+            l_ContinentIntID = d_Continents.get(d_Continents.size()-1).getD_ContinentIntID()+1;
+
+        }
+        else {
+            l_ContinentIntID = 1;
+        }
+        boolean l_Found = false;
+        Continent l_Continent = new Continent(l_ContinentIntID, p_ContinentID, p_ControlValue);
+        while (l_Itr.hasNext()) {
+            Continent l_Cur = (Continent) l_Itr.next();
+            if (l_Cur.getD_ContinentID() == p_ContinentID) {
+                l_Found = true;
 
                 System.out.println("Continent already exists");
                 break;
             }
         }
-        if (!found) {
-            d_continents.add(l_continent);
+        if (!l_Found) {
+            d_Continents.add(l_Continent);
         }
     }
 
@@ -114,25 +168,25 @@ public class Map {
      * @param p_ContinentID Name of the continent to be removed
      */
     public void removeContinent(String p_ContinentID) {
-        Iterator itr = d_continents.iterator();
-        Iterator itr1 = d_countries.iterator();
-        boolean found = false;
+        Iterator l_Itr = d_Continents.iterator();
+        Iterator l_Itr1 = d_Countries.iterator();
+        boolean l_Found = false;
 
-        while (itr.hasNext()) {
-            Continent l_continent = (Continent) itr.next();
-            if (l_continent.getD_ContinentID().equals(p_ContinentID)) {
-                found = true;
-                itr.remove();
+        while (l_Itr.hasNext()) {
+            Continent l_Continent = (Continent) l_Itr.next();
+            if (l_Continent.getD_ContinentID().equals(p_ContinentID)) {
+                l_Found = true;
+                l_Itr.remove();
                 break;
             }
         }
-        while (itr1.hasNext()) {
-            Country l_country = (Country) itr1.next();
-            if (l_country.getD_CountryContinentID().equals(p_ContinentID)) {
-                itr1.remove();
+        while (l_Itr1.hasNext()) {
+            Country l_Country = (Country) l_Itr1.next();
+            if (l_Country.getD_CountryContinentID().equals(p_ContinentID)) {
+                l_Itr1.remove();
             }
         }
-        if (!found) {
+        if (!l_Found) {
             System.out.println("Continent does not exist");
         }
     }
@@ -140,44 +194,48 @@ public class Map {
 
     /**
      * @param p_CountryID   Country to which the neighbour is to be added
-     * @param p_neighbourID Name of the neighbour country to be added
+     * @param p_NeighbourID Name of the neighbour country to be added
      */
-    public void addNeighbour(Country p_CountryID, Country p_neighbourID) {
-        boolean invalid1 = true;
-        boolean invalid2 = true;
-        for (int i = 0; i < d_countries.size(); i++) {
-            if (d_countries.get(i).getD_CountryID() == p_CountryID.getD_CountryID()) {
-                d_countries.get(i).addNeighbour(p_neighbourID);
-                invalid1 = false;
+    public void addNeighbour(String p_CountryID, String p_NeighbourID) {
+        boolean l_Invalid1 = true;
+        boolean l_Invalid2 = true;
+        Country l_Country = findCountry(p_CountryID);
+        Country l_Neighbour = findCountry(p_NeighbourID);
+        for (Country l_CountryIndex : d_Countries) {
+            if (l_CountryIndex.getD_CountryID().equals(l_Country.getD_CountryID())) {
+                l_CountryIndex.addNeighbour(l_Country);
+                l_Invalid1 = false;
             }
-            if (d_countries.get(i).getD_CountryID() == p_neighbourID.getD_CountryID()) {
-                d_countries.get(i).addNeighbour(p_CountryID);
-                invalid2 = false;
+            if (l_CountryIndex.getD_CountryID().equals(l_Neighbour.getD_CountryID())) {
+                l_CountryIndex.addNeighbour(l_Neighbour);
+                l_Invalid2 = false;
             }
         }
 
-        if (invalid1 || invalid2) {
+        if (l_Invalid1 || l_Invalid2) {
             System.out.println("Invalid Country");
         }
     }
 
     /**
      * @param p_CountryID   Country from which the neighbour is to be removed
-     * @param p_neighbourID Name of the neighbour to be removed
+     * @param p_NeighbourID Name of the neighbour to be removed
      */
-    public void removeNeighbour(Country p_CountryID, Country p_neighbourID) {
-        boolean invalid1 = true;
-        boolean invalid2 = true;
-        for (int i = 0; i < d_countries.size(); i++) {
-            if (d_countries.get(i).getD_CountryID() == p_CountryID.getD_CountryID()) {
-                invalid1 = !d_countries.get(i).removeNeighbour(p_neighbourID.getD_CountryID());
+    public void removeNeighbour(String p_CountryID, String p_NeighbourID) {
+        boolean l_Invalid1 = true;
+        boolean l_Invalid2 = true;
+        Country l_Country = findCountry(p_CountryID);
+        Country l_Neighbour = findCountry(p_NeighbourID);
+        for (Country l_CountryIndex : d_Countries) {
+            if (l_CountryIndex.getD_CountryID().equals(l_Country.getD_CountryID())) {
+                l_Invalid1 = !l_CountryIndex.removeNeighbour(l_Neighbour.getD_CountryID());
             }
-            if (d_countries.get(i).getD_CountryID() == p_neighbourID.getD_CountryID()) {
-                invalid2 = !d_countries.get(i).removeNeighbour(p_CountryID.getD_CountryID());
+            if (l_CountryIndex.getD_CountryID().equals(l_Neighbour.getD_CountryID())) {
+                l_Invalid2 = !l_CountryIndex.removeNeighbour(l_Country.getD_CountryID());
             }
         }
 
-        if (invalid1 || invalid2) {
+        if (l_Invalid1 || l_Invalid2) {
             System.out.println("Invalid Neighbour country");
         }
     }
@@ -186,7 +244,7 @@ public class Map {
      * @return ArrayList<Continent>
      */
     public ArrayList<Continent> getD_continents() {
-        return d_continents;
+        return d_Continents;
     }
 
 
@@ -194,6 +252,36 @@ public class Map {
      * @return ArrayList<Country>
      */
     public ArrayList<Country> getD_countries() {
-        return d_countries;
+        return d_Countries;
+    }
+
+
+    /**
+     * Finds country from the name
+     * @return country object with a specific name
+     */
+    public Country findCountry(String p_countryName){
+
+        for (Country l_CountryIndex: d_Countries) {
+            if(l_CountryIndex.getD_CountryID().equals(p_countryName))
+            {
+                return l_CountryIndex;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Finds country from the name
+     * @return continent object with a specific name
+     */
+    public Continent findContinent(String p_continetName){
+        for (Continent l_ContIndex: d_Continents) {
+            if(l_ContIndex.getD_ContinentID().equals(p_continetName))
+            {
+                return l_ContIndex;
+            }
+        }
+        return null;
     }
 }
