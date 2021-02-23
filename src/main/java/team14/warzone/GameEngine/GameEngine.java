@@ -42,11 +42,10 @@ public class GameEngine {
         d_MapEditor.loadMap(p_FileName);
         this.d_LoadedMap = d_MapEditor.getD_loadedMap();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
-        // change gamephase to "STARTUP"
     }
 
     public void showMap() {
-//        d_LoadedMap.showMap();
+        d_LoadedMap.showMap();
     }
 
     public void assignCountries() {
@@ -61,14 +60,14 @@ public class GameEngine {
             }
         }
         //change phase to game play
-        InputValidator.setCurrentPhase("GAMEPLAY");
+        InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
 
     public void addPlayer(String p_PlayerName) {
-        Player l_LocalPlayer = new Player();
-        l_LocalPlayer.setD_Name(p_PlayerName);
-        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
+        Player l_LocalPlayer = new Player(p_PlayerName);
+//        l_LocalPlayer.setD_Name(p_PlayerName);
+//        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
         d_PlayerList.add(l_LocalPlayer);
     }
 
