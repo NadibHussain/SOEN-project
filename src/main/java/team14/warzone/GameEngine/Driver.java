@@ -4,7 +4,15 @@ import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * This is a driver class for the game engine
+ */
+
 public class Driver {
+    /**
+     * Main class to run Driver
+     * @param args
+     */
     public static void main(String[] args) {
         Console l_Console = new Console();
         MapEditor l_ME = new MapEditor();

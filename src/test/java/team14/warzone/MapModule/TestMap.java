@@ -69,7 +69,17 @@ public class TestMap {
         assertNotNull(d_M1.findCountry("South-Africa"));
     }
 
+    @Test
+    @DisplayName("Testing getting list of country of continent")
+    public void testGetCountryListOfContinent() {
+        d_M1.addContinent("Europe",10);
+        d_M1.addCountry("Germany","Europe");
+        d_M1.addCountry("Denmark","Europe");
+        d_M1.addCountry("Iceland","Europe");
+        d_M1.addCountry("England","Europe");
+        assertEquals(d_M1.getCountryListOfContinent("Europe").size(),4);
 
+    }
 
 
 

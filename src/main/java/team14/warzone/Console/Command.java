@@ -111,10 +111,18 @@ public class Command {
         this.d_Keyword = p_Keyword;
     }
 
+    /**
+     * A method to set the GameEngine
+     * @param p_GameEngine
+     */
     public void setD_GameEngine(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
     }
 
+    /**
+     * A method to set the MapEditor
+     * @param p_MapEditor
+     */
     public void setD_MapEditor(MapEditor p_MapEditor) {
         d_MapEditor = p_MapEditor;
     }
