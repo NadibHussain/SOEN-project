@@ -26,28 +26,49 @@ public class GameEngine {
     private Console d_Console;
     private MapEditor d_MapEditor;
 
+    /**
+     * public method of GameEngine
+     */
     public GameEngine() {
     }
 
+    /**
+     * @param p_Console Console parameter
+     */
     public GameEngine(Console p_Console) {
         d_Console = p_Console;
     }
 
+    /**
+     *
+     * @param p_Console Console parameter
+     * @param p_MapEditor MapEditor parameter
+     */
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
     }
 
+    /**
+     * LoadMap method
+     * @param p_FileName String FileName as parameter
+     */
     public void loadMap(String p_FileName) {
         d_MapEditor.loadMap(p_FileName);
         this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
     }
 
+    /**
+     * Showmap method
+     */
     public void showMap() {
         d_LoadedMap.showMap();
     }
 
+    /**
+     * Assign Countries method
+     */
     public void assignCountries() {
         //if number of players bigger than or equal to 2, assign countries to players randomly
         List<Country> l_Countries = d_LoadedMap.getD_Countries();
@@ -63,7 +84,10 @@ public class GameEngine {
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
-
+    /**
+     * Add player method
+     * @param p_PlayerName String PlayerName as parameter
+     */
     public void addPlayer(String p_PlayerName) {
         Player l_LocalPlayer = new Player(p_PlayerName);
 //        l_LocalPlayer.setD_Name(p_PlayerName);
@@ -71,6 +95,10 @@ public class GameEngine {
         d_PlayerList.add(l_LocalPlayer);
     }
 
+    /**
+     * Remove Player
+     * @param p_PlayerName String PlayerName as parameter
+     */
     public void removePlayer(String p_PlayerName) {
         for (Player l_Player : d_PlayerList) {
             if (l_Player.getD_Name().equals(p_PlayerName))
@@ -104,6 +132,10 @@ public class GameEngine {
         // execute & remove command
     }
 
+    /**
+     * Receive Command method
+     * @param p_Command command type as parameter
+     */
     public void receiveCommand(Command p_Command) {
         // store received command in the current players order list
         d_CurrentPlayer.issueOrder(p_Command); //store order in current player orders list
@@ -117,14 +149,27 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Deploy method
+     * @param p_CountryName String type CountryName
+     * @param p_NumberOfArmies int type Number of Armies
+     */
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
 
     }
 
+    /**
+     * Set console
+     * @param p_Console
+     */
     public void setD_Console(Console p_Console) {
         d_Console = p_Console;
     }
 
+    /**
+     * Get loaded map
+     * @return returns a loaded map
+     */
     public Map getD_LoadedMap() {
         return d_LoadedMap;
     }

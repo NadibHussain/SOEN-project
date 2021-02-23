@@ -30,7 +30,7 @@ public class Map {
 
     /**
      * @author tanzia-ahmed
-     * this method triggers a window displaying the map 
+     * this method triggers a window displaying the map
      * each column represents - #SL, Country, Continent, Neighbours, Current Owner, No. of Armies
      * each row represents each country object
      *
@@ -43,7 +43,7 @@ public class Map {
             l_Data[l_Index][0] = l_Index;
             l_Data[l_Index][1] = this.d_Countries.get(l_Index).getD_CountryID();
             l_Data[l_Index][2] = this.d_Countries.get(l_Index).getD_CountryContinentID();
-            
+
             // Concating all neighbour names in 'neighbours' string
             String l_Neighbours = "";
             for(int l_NeighbourIndex = 0; l_NeighbourIndex < this.d_Countries.get(l_Index).getD_neighbours().size(); l_NeighbourIndex++){
@@ -66,7 +66,7 @@ public class Map {
 
         //Create and set up the content pane.
         l_Frame.add(new JScrollPane(l_Table));
-        
+
         //Display the window.
         l_Frame.pack();
         l_Frame.setVisible(true);
@@ -241,7 +241,8 @@ public class Map {
     }
 
     /**
-     * @return ArrayList<Continent>
+     * Returns an array list of all continents
+     * @return Arraylist of continents
      */
     public ArrayList<Continent> getD_Continents() {
         return d_Continents;
@@ -249,7 +250,8 @@ public class Map {
 
 
     /**
-     * @return ArrayList<Country>
+     * Returns an arraylist of all countries
+     * @return Arraylist of countries
      */
     public ArrayList<Country> getD_Countries() {
         return d_Countries;
@@ -257,8 +259,9 @@ public class Map {
 
 
     /**
-     * Finds country from the name
-     * @return country object with a specific name
+     * Find a country using its name
+     * @param p_countryName String country name
+     * @return String country name
      */
     public Country findCountry(String p_countryName){
 
@@ -272,8 +275,9 @@ public class Map {
     }
 
     /**
-     * Finds country from the name
-     * @return continent object with a specific name
+     * Find Continent using its name
+     * @param p_continetName String continent name
+     * @return String continent name
      */
     public Continent findContinent(String p_continetName){
         for (Continent l_ContIndex: d_Continents) {
