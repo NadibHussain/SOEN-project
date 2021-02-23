@@ -40,7 +40,7 @@ public class GameEngine {
 
     public void loadMap(String p_FileName) {
         d_MapEditor.loadMap(p_FileName);
-        this.d_LoadedMap = d_MapEditor.getD_loadedMap();
+        this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
     }
 
@@ -50,7 +50,7 @@ public class GameEngine {
 
     public void assignCountries() {
         //if number of players bigger than or equal to 2, assign countries to players randomly
-        List<Country> l_Countries = d_LoadedMap.getD_countries();
+        List<Country> l_Countries = d_LoadedMap.getD_Countries();
         if (d_PlayerList.size() >= 2) {
             for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
                 for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {

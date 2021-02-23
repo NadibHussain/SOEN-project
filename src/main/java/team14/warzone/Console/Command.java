@@ -47,22 +47,22 @@ public class Command {
         switch (this.getD_Keyword()) {
             case "editcontinent":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_loadedMap().addContinent(l_CommandArgs.get(0),
+                    d_MapEditor.getD_LoadedMap().addContinent(l_CommandArgs.get(0),
                             Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
-                    d_MapEditor.getD_loadedMap().removeContinent(l_CommandArgs.get(0));
+                    d_MapEditor.getD_LoadedMap().removeContinent(l_CommandArgs.get(0));
 
             case "editcountry":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_loadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_MapEditor.getD_LoadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    d_MapEditor.getD_loadedMap().removeCountry(l_CommandArgs.get(0));
+                    d_MapEditor.getD_LoadedMap().removeCountry(l_CommandArgs.get(0));
 
             case "editneighbor":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_loadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_MapEditor.getD_LoadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
-                    d_MapEditor.getD_loadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_MapEditor.getD_LoadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
 
             case "savemap":
                 d_MapEditor.saveMap(l_CommandArgs.get(0));
@@ -71,7 +71,7 @@ public class Command {
                 d_MapEditor.loadMap(l_CommandArgs.get(0));
 
             case "validatemap":
-                d_MapEditor.validateMap(d_MapEditor.getD_loadedMap());
+                d_MapEditor.validateMap(d_MapEditor.getD_LoadedMap());
 
             case "loadmap":
                 d_GameEngine.loadMap(l_CommandArgs.get(0));

@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 public class TestMapEditor {
 
     public static MapEditor d_MapEditor;
-    public static MapEditor me2;
 
     @BeforeAll
     public static void init() {
@@ -24,26 +23,24 @@ public class TestMapEditor {
     @Test
     @DisplayName("Testing loading a map")
     public void testLoadMap() {
-        // me2.loadMap("europass.map");
-        Map l_Map = d_MapEditor.getD_loadedMap();
-        assertEquals(7, l_Map.getD_continents().size());
-        assertEquals(110, l_Map.getD_countries().size());
-        assertEquals(51, l_Map.getD_countries().get(1).getD_neighbours().get(1).getD_CountryIntID());
+        Map l_Map = d_MapEditor.getD_LoadedMap();
+        assertEquals(7, l_Map.getD_Continents().size());
+        assertEquals(110, l_Map.getD_Countries().size());
+        assertEquals(51, l_Map.getD_Countries().get(1).getD_neighbours().get(1).getD_CountryIntID());
     }
 
     @Test
     @DisplayName("Testing map validator")
     public void testValidateMap() {
-        Map l_Map = d_MapEditor.getD_loadedMap();
+        Map l_Map = d_MapEditor.getD_LoadedMap();
         boolean l_Test = d_MapEditor.validateMap(l_Map);
         assertEquals(true, l_Test);
     }
 
     @Test
     void testValidateMap_isConnected() {
-        // me.loadMap("bigeurope.map");
-        Map p_Map = d_MapEditor.getD_loadedMap();
-        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        Map p_Map = d_MapEditor.getD_LoadedMap();
+        ArrayList<Country> l_Countries = p_Map.getD_Countries();
         Stack<Integer> l_StackNodes = new Stack<Integer>();
         for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
             for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_neighbours()
@@ -61,10 +58,9 @@ public class TestMapEditor {
 
     @Test
     void testValidateMap_allContinentHasCountry() {
-        // me.loadMap("bigeurope.map");
-        Map p_Map = d_MapEditor.getD_loadedMap();
-        ArrayList<Continent> l_Continents = p_Map.getD_continents();
-        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        Map p_Map = d_MapEditor.getD_LoadedMap();
+        ArrayList<Continent> l_Continents = p_Map.getD_Continents();
+        ArrayList<Country> l_Countries = p_Map.getD_Countries();
         Stack<String> l_StackContinents = new Stack<String>();
         for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
             if (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID()))) {
@@ -77,9 +73,8 @@ public class TestMapEditor {
 
     @Test
     void testValidateMap_allCountryHasContinent() {
-        // me.loadMap("bigeurope.map");
-        Map p_Map = d_MapEditor.getD_loadedMap();
-        ArrayList<Country> l_Countries = p_Map.getD_countries();
+        Map p_Map = d_MapEditor.getD_LoadedMap();
+        ArrayList<Country> l_Countries = p_Map.getD_Countries();
         boolean l_HasContinent = true;
         for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
             if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
