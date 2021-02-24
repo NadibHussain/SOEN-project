@@ -21,7 +21,8 @@ public class Driver {
         System.out.println("Welcome to warzone game, please enter your command : ");
         while (InputValidator.CURRENT_PHASE != InputValidator.Phase.GAMEPLAY) {
             l_Console.readInput();
-            l_Console.filterCommand(l_GE, l_ME);
+            if(l_Console.g_ValidCommand)
+                l_Console.filterCommand(l_GE, l_ME);
         }
         while (true) {
             l_GE.gameLoop();
