@@ -13,12 +13,13 @@ import java.util.Scanner;
  */
 public class Console {
     static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
-    private List<Command> d_CommandBuffer = new ArrayList<>(); // store user commands
+    private List<Command> d_CommandBuffer; // store user commands
 
     /**
      * Default constructor
      */
     public Console() {
+        d_CommandBuffer = new ArrayList<>();
     }
 
     /**
@@ -97,17 +98,20 @@ public class Console {
      * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
+        List<Command> l_CommandToRemove = new ArrayList<>();
         if(!d_CommandBuffer.isEmpty()){
             for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
                 d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
                 d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
                 if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
                     d_CommandBuffer.get(l_I).execute();
+                    l_CommandToRemove.add(d_CommandBuffer.get(l_I));
                 } else {
                     switch (InputValidator.CURRENT_PHASE) {
                         case MAPEDITOR:
                         case STARTUP:
                             d_CommandBuffer.get(l_I).execute();
+                            l_CommandToRemove.add(d_CommandBuffer.get(l_I));
                             break;
 
                         case GAMEPLAY:
@@ -116,7 +120,7 @@ public class Console {
                     }
                 }
             }
-            d_CommandBuffer.clear();
+            d_CommandBuffer.removeAll(l_CommandToRemove);
         }
     }
 
@@ -131,8 +135,11 @@ public class Console {
 
     public Command getD_CommandBuffer() {
         Command l_Command = d_CommandBuffer.get(0);
-        d_CommandBuffer.remove(l_Command);
         return l_Command;
+    }
+
+    public List<Command> get_BufferCommands(){
+        return d_CommandBuffer;
     }
 
     /**

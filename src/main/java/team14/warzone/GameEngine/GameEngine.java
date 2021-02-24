@@ -178,8 +178,9 @@ public class GameEngine {
                     }
                     // move to next player only if current player issued valid game-play command or passed his turn
                 }
-                if ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
-                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")))
+                if (!d_Console.get_BufferCommands().isEmpty() &&
+                        ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
+                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))))
                     l_Counter++;
             }
         }
