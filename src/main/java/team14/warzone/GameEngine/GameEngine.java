@@ -160,7 +160,7 @@ public class GameEngine {
             l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
 
-        // Take and queue orders
+        // take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);
         //keep looping through the players list until all of them finished issuing their orders
@@ -173,11 +173,13 @@ public class GameEngine {
                     d_Console.readInput();
                     if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
                         l_Flag.set(l_Counter, Boolean.TRUE);
-                    else
+                    else{
                         d_Console.filterCommand(this, d_MapEditor);
+                    }
                     // move to next player only if current player issued valid game-play command or passed his turn
                 }
-                if (InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword()) || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
+                if ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
+                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")))
                     l_Counter++;
             }
         }
