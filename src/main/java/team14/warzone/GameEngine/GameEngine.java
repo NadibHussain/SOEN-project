@@ -152,20 +152,25 @@ public class GameEngine {
         Collections.fill(l_Flag, Boolean.FALSE);
         //keep looping through the players list until all of them finished issuing their orders
         while (l_Flag.contains(Boolean.FALSE)) {
-            for (int i = 0; i < d_PlayerList.size(); i++) {
-                if (!l_Flag.get(i)) {
-                    d_CurrentPlayer = d_PlayerList.get(i);
-                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
+            int l_Counter = 0;
+            while (l_Counter < d_PlayerList.size()) {
+                if (!l_Flag.get(l_Counter)) {
+                    d_CurrentPlayer = d_PlayerList.get(l_Counter);
+                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
                     if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
-                        l_Flag.set(i, Boolean.TRUE);
+                        l_Flag.set(l_Counter, Boolean.TRUE);
                     else
                         d_Console.filterCommand(this, d_MapEditor);
+                    // move to next player only if current player issued valid game-play command or passed his turn
                 }
+                if (InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword()) || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
+                    l_Counter++;
             }
         }
-        Collections.fill(l_Flag, Boolean.FALSE);
+
         //execute all the commands until all players orders lists are empty
+        Collections.fill(l_Flag, Boolean.FALSE);
         while (l_Flag.contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
                 d_CurrentPlayer = d_PlayerList.get(i);
