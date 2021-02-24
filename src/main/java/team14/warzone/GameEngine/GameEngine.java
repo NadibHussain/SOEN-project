@@ -183,6 +183,7 @@ public class GameEngine {
                     d_Console.get_BufferCommands().remove(d_Console.getD_CommandBuffer());
                     l_Counter++;
                 }
+                if (!l_Flag.contains(Boolean.FALSE)) break; // break out of infinite loop
             }
         }
 
@@ -219,12 +220,19 @@ public class GameEngine {
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
         // increase armies in country
         Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
-        l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
-        // decrease army from player
-        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
+        // check if country is owned by the player
+        if (d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
+            l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
+            // decrease army from player
+            d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
 
-        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies in "
-                + p_CountryName);
+            Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies" +
+                    " in "
+                    + p_CountryName);
+        } else {
+            // if contry not owned by player then send error msg
+            Console.displayMsg("Error: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
+        }
     }
 
     /**

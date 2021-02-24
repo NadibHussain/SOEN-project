@@ -68,8 +68,9 @@ public class Player {
      * </ul>
      */
     public void nextOrder() {
-        if(!d_OrderList.isEmpty()){
-            d_OrderList.get(0).execute();//execute first order from the order list
+        if (!d_OrderList.isEmpty()) {
+            if (!d_OrderList.get(0).getD_Keyword().equals("pass"))
+                d_OrderList.get(0).execute();//execute first order from the order list
             // remove the command after execution
             d_OrderList.remove(0);// remove first order from the order list
         }
