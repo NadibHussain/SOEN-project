@@ -1,11 +1,8 @@
 package team14.warzone.MapModule;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 /**
  * This class consists the information and functionality of the map
@@ -62,7 +59,6 @@ public class Map {
 
         //Create and set up the window.
         JFrame l_Frame = new JFrame("Map");
-        l_Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
         l_Frame.add(new JScrollPane(l_Table));
