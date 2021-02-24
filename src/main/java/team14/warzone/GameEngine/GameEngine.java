@@ -217,22 +217,22 @@ public class GameEngine {
      * @param p_CountryName    name of the country where armies are to be deployed
      * @param p_NumberOfArmies number of armies to deploy
      */
-    public void deploy(String p_CountryName, int p_NumberOfArmies) {
-        // increase armies in country
-        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+    public void deploy(String p_CountryName, int p_NumberOfArmies) throws Exception {
+        // check if numberOfArmies is more than what he has
+        if (d_CurrentPlayer.getD_TotalNumberOfArmies() < p_NumberOfArmies)
+            throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " has " + d_CurrentPlayer.getD_TotalNumberOfArmies() + " < " + p_NumberOfArmies);
         // check if country is owned by the player
-        if (d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
-            l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
-            // decrease army from player
-            d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
-
-            Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies" +
-                    " in "
-                    + p_CountryName);
-        } else {
-            // if contry not owned by player then send error msg
-            Console.displayMsg("Error: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
+        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        if (!d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
+            throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
         }
+
+        // increase armies in country
+        l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
+        // decrease army from player
+        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
+        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies" +
+                " in " + p_CountryName);
     }
 
     /**

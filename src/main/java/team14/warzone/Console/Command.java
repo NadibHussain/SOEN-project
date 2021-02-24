@@ -102,7 +102,11 @@ public class Command {
                 break;
 
             case "deploy":
-                d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                try {
+                    d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
         }
     }
@@ -127,6 +131,7 @@ public class Command {
 
     /**
      * A method to set the GameEngine
+     *
      * @param p_GameEngine
      */
     public void setD_GameEngine(GameEngine p_GameEngine) {
@@ -135,6 +140,7 @@ public class Command {
 
     /**
      * A method to set the MapEditor
+     *
      * @param p_MapEditor
      */
     public void setD_MapEditor(MapEditor p_MapEditor) {
