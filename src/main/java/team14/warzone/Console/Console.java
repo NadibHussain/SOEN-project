@@ -66,7 +66,6 @@ public class Console {
                         l_Arguments.add(l_UserInput[i + 1]);
                         i++;
                     }
-                    System.out.println("in buffer : " + Arrays.toString(d_CommandBuffer.toArray()));
                 } else {
                     l_OptName = "noOption";
                     //if the word is not an option then add it to the arguments list
@@ -76,16 +75,16 @@ public class Console {
                     }
                 }
                 //check command validity
-                System.out.println("keyword : " + l_Keyword + ", options: " + l_OptName + ", arguments : " + l_Arguments);
                 l_ValidCommand = InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
                 if (l_ValidCommand) {
                     System.out.println("valid command");
                     //Set options for the user command
-                    Option l_opt = new Option(l_OptName, l_Arguments);
+                    ArrayList<String> l_TempArgs = new ArrayList<>();
+                    l_TempArgs.addAll(l_Arguments);
+                    Option l_opt = new Option(l_OptName, l_TempArgs);
                     //Create Command object, passing keyword and option
                     Command l_UserCommand = new Command(l_Keyword, l_opt);
                     setD_CommandBuffer(l_UserCommand);
-                    System.out.println("after adding : " + Arrays.toString(d_CommandBuffer.toArray()));
                 }
             }
         }
@@ -99,7 +98,7 @@ public class Console {
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
         List<Command> l_CommandToRemove = new ArrayList<>();
-        if(!d_CommandBuffer.isEmpty()){
+        if (!d_CommandBuffer.isEmpty()) {
             for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
                 d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
                 d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
@@ -138,7 +137,7 @@ public class Console {
         return l_Command;
     }
 
-    public List<Command> get_BufferCommands(){
+    public List<Command> get_BufferCommands() {
         return d_CommandBuffer;
     }
 

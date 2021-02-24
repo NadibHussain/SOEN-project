@@ -101,11 +101,11 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void addPlayer(String p_PlayerName) {
-        if(d_PlayerList.size() == 5)
+        if (d_PlayerList.size() == 5)
             Console.displayMsg("You can not addd more than 5 players");
-        else if(d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
+        else if (d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
             Console.displayMsg("Player already exists!");
-        else{
+        else {
             Player l_LocalPlayer = new Player(p_PlayerName);
             d_PlayerList.add(l_LocalPlayer);
             Console.displayMsg("Player added: " + p_PlayerName);
@@ -118,12 +118,11 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void removePlayer(String p_PlayerName) {
-        if(d_PlayerList.isEmpty())
+        if (d_PlayerList.isEmpty())
             Console.displayMsg("You can not remove a player, player list is empty!");
-        else if(!d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName))){
+        else if (!d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName))) {
             Console.displayMsg("Player " + p_PlayerName + " does not exist!");
-        }
-        else{
+        } else {
             Player l_PlayerToRemove = new Player();
             for (Player l_Player : d_PlayerList) {
                 if (l_Player.getD_Name().equals(p_PlayerName))
@@ -171,17 +170,19 @@ public class GameEngine {
                     d_CurrentPlayer = d_PlayerList.get(l_Counter);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
-                    if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
+                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
                         l_Flag.set(l_Counter, Boolean.TRUE);
-                    else{
+                    else {
                         d_Console.filterCommand(this, d_MapEditor);
                     }
                     // move to next player only if current player issued valid game-play command or passed his turn
                 }
                 if (!d_Console.get_BufferCommands().isEmpty() &&
                         ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
-                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))))
+                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")))) {
+                    d_Console.get_BufferCommands().remove(d_Console.getD_CommandBuffer());
                     l_Counter++;
+                }
             }
         }
 
