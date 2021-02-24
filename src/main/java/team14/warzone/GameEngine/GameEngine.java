@@ -3,12 +3,14 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -21,7 +23,7 @@ public class GameEngine {
 
     private Player d_CurrentPlayer;
     private Map d_LoadedMap;
-    private List<Player> d_PlayerList;
+    private ArrayList<Player> d_PlayerList;
 
     private Console d_Console;
     private MapEditor d_MapEditor;
@@ -37,20 +39,22 @@ public class GameEngine {
      */
     public GameEngine(Console p_Console) {
         d_Console = p_Console;
+        d_PlayerList = new ArrayList<Player>();
     }
 
     /**
-     *
-     * @param p_Console Console parameter
+     * @param p_Console   Console parameter
      * @param p_MapEditor MapEditor parameter
      */
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
+        d_PlayerList = new ArrayList<Player>();
     }
 
     /**
      * LoadMap method
+     *
      * @param p_FileName String FileName as parameter
      */
     public void loadMap(String p_FileName) {
@@ -70,22 +74,29 @@ public class GameEngine {
      * Assign Countries method
      */
     public void assignCountries() {
-        //if number of players bigger than or equal to 2, assign countries to players randomly
-        List<Country> l_Countries = d_LoadedMap.getD_Countries();
-        if (d_PlayerList.size() >= 2) {
+        ArrayList<Country> l_Countries = d_LoadedMap.getD_Countries();
+        //if number of players between 2 and 5, assign countries to players randomly
+        if (d_PlayerList.size() >= 2 && d_PlayerList.size() <= 5) {
             for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
                 for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
+                    // add country to player's country-list
                     d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
+                    // set country's current owner to player
+                    l_Countries.get(l_I).setD_CurrentOwner(d_PlayerList.get(l_J).getD_Name());
                     l_I++;
                 }
             }
+            Console.displayMsg("Success: countries assigned");
+        } else {
+            Console.displayMsg("Failed: 2-5 players required");
         }
-        //change phase to game play
+        // change phase to game play
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
     /**
      * Add player method
+     *
      * @param p_PlayerName String PlayerName as parameter
      */
     public void addPlayer(String p_PlayerName) {
@@ -93,10 +104,12 @@ public class GameEngine {
 //        l_LocalPlayer.setD_Name(p_PlayerName);
 //        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
         d_PlayerList.add(l_LocalPlayer);
+        Console.displayMsg("Player added: " + p_PlayerName);
     }
 
     /**
      * Remove Player
+     *
      * @param p_PlayerName String PlayerName as parameter
      */
     public void removePlayer(String p_PlayerName) {
@@ -104,6 +117,7 @@ public class GameEngine {
             if (l_Player.getD_Name().equals(p_PlayerName))
                 d_PlayerList.remove(l_Player);
         }
+        Console.displayMsg("Player removed: " + p_PlayerName);
     }
 
     /**
@@ -114,52 +128,85 @@ public class GameEngine {
      */
     public void gameLoop() {
         // reinforcement
-        boolean[] pass = new boolean[d_PlayerList.size()];
-        while (Arrays.asList(pass).contains(false)) {
+        for (Player l_Player : d_PlayerList) {
+            //1. # of territories owned divided by 3
+            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+            //2. if the player owns all the territories of an entire continent the player is given
+            // a control bonus value
+            int l_ControlValueEnforcement = 0;
+            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
+                //check if all countries belong to the l_Continent are owned by l_Player
+                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
+                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+            }
+            //3.the minimal number of reinforcement armies for any player is 3 + control values
+            // of continents he owns
+            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+            //give reinforcement to the player
+            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
+        }
+
+        // Take and queue orders
+        ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
+        Collections.fill(l_Flag, Boolean.FALSE);
+        //keep looping through the players list until all of them finished issuing their orders
+        while (l_Flag.contains(Boolean.FALSE)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
-                d_CurrentPlayer = d_PlayerList.get(i);
-                if (pass[i] == false) {
-                    Console.displayMsg("Enter Command for player " + d_CurrentPlayer.getD_Name());
+                if (l_Flag.get(i) == false) {
+                    d_CurrentPlayer = d_PlayerList.get(i);
+                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
                     d_Console.readInput();
-                    d_Console.filterCommand(this, d_MapEditor);
+                    if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
+                        l_Flag.set(i, Boolean.TRUE);
+                    else
+                        d_Console.filterCommand(this, d_MapEditor);
                 }
             }
         }
-        Arrays.fill(pass, false);
-        // execute all the commands
-        // loop through players
-        // check if command list is empty
-        // execute & remove command
+        Collections.fill(l_Flag, Boolean.FALSE);
+        //execute all the commands until all players orders lists are empty
+        while (l_Flag.contains(false)) {
+            for (int i = 0; i < d_PlayerList.size(); i++) {
+                d_CurrentPlayer = d_PlayerList.get(i);
+                d_PlayerList.get(i).nextOrder();
+                if (d_PlayerList.get(i).getD_OrderList().isEmpty())
+                    l_Flag.set(i, Boolean.TRUE);
+            }
+        }
     }
 
     /**
      * Receive Command method
+     *
      * @param p_Command command type as parameter
      */
     public void receiveCommand(Command p_Command) {
         // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command); //store order in current player orders list
-        switch (p_Command.getD_Keyword()) {
-            case "deploy": //decrease number of armies for the current player
-                int l_ArmiesOwned = d_CurrentPlayer.getD_TotalNumberOfArmies();
-                int l_ArmiesToDeploy = Integer.parseInt(p_Command.getD_Options().getD_Arguments().get(1));
-                d_CurrentPlayer.setD_TotalNumberOfArmies(l_ArmiesOwned - l_ArmiesToDeploy);
-                break;
-            default:
-        }
+        d_CurrentPlayer.issueOrder(p_Command); // store order in current player orders list
     }
 
     /**
-     * Deploy method
-     * @param p_CountryName String type CountryName
-     * @param p_NumberOfArmies int type Number of Armies
+     * This method implements the deploy command
+     * Increases the number of armies in the country to be deployed to
+     * Decreases total number of armies of the player that issued this command
+     *
+     * @param p_CountryName    name of the country where armies are to be deployed
+     * @param p_NumberOfArmies number of armies to deploy
      */
     public void deploy(String p_CountryName, int p_NumberOfArmies) {
+        // increase armies in country
+        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
+        // decrease army from player
+        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
 
+        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies in "
+                + p_CountryName);
     }
 
     /**
      * Set console
+     *
      * @param p_Console
      */
     public void setD_Console(Console p_Console) {
@@ -168,6 +215,7 @@ public class GameEngine {
 
     /**
      * Get loaded map
+     *
      * @return returns a loaded map
      */
     public Map getD_LoadedMap() {

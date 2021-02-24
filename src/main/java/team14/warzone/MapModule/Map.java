@@ -1,11 +1,8 @@
 package team14.warzone.MapModule;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 /**
  * This class consists the information and functionality of the map

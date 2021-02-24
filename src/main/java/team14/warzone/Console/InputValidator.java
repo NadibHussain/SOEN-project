@@ -57,6 +57,9 @@ public class InputValidator {
     public static boolean validateInput(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
         // switch to call method for each command
         switch (p_CommandName) {
+            case "pass":
+                return true;
+
             case "editcontinent":
                 try {
                     return validateEditContinent(p_OptionName, p_Arguments);
@@ -394,7 +397,7 @@ public class InputValidator {
             throw new Exception("Invalid option");
 
         // Validate arguments
-        if (p_Arguments.size() != 2 || !isNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
+        if (p_Arguments.size() != 2 || !isAlphaNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
             throw new Exception("Invalid arguments");
 
         return true;
