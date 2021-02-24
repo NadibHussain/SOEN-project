@@ -238,7 +238,7 @@ public class GameEngine {
     /**
      * Set console
      *
-     * @param p_Console
+     * @param p_Console console parameter
      */
     public void setD_Console(Console p_Console) {
         d_Console = p_Console;

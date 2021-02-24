@@ -4,16 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class TestMap {
 
     public static Map d_M1;
     public static Continent d_Asia, d_Africa;
     public static Country d_India, d_Kenya;
-    @BeforeAll
+    @BeforeClass
     public static void initialize() {
         d_M1 = new Map();
         d_M1.addContinent("Africa",6);

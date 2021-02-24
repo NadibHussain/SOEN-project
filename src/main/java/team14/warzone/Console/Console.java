@@ -93,8 +93,8 @@ public class Console {
     /**
      * A method to filter user commands depending on the current game phase
      *
-     * @param p_GameEngine
-     * @param p_MapEditor
+     * @param p_GameEngine GameEngine param
+     * @param p_MapEditor MapEditor param
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
         List<Command> l_CommandToRemove = new ArrayList<>();
@@ -132,6 +132,10 @@ public class Console {
         this.d_CommandBuffer.add(p_Command);
     }
 
+    /**
+     * A method to get Command Buffer object
+     * @return d_CommandBuffer command object
+     */
     public Command getD_CommandBuffer() {
         Command l_Command = d_CommandBuffer.get(0);
         return l_Command;
