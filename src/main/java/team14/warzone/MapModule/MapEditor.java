@@ -102,8 +102,7 @@ public class MapEditor {
             }
             l_ReaderObject.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("The map file does not exist");
         }
         this.d_LoadedMap = l_Map;
 
@@ -146,8 +145,7 @@ public class MapEditor {
             l_Writer.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("Saving the map file was unsuccessful.");
         }
 
     }
