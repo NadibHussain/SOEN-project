@@ -101,11 +101,15 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void addPlayer(String p_PlayerName) {
-        Player l_LocalPlayer = new Player(p_PlayerName);
-//        l_LocalPlayer.setD_Name(p_PlayerName);
-//        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
-        d_PlayerList.add(l_LocalPlayer);
-        Console.displayMsg("Player added: " + p_PlayerName);
+        if(d_PlayerList.size() == 5)
+            Console.displayMsg("You can not addd more than 5 players");
+        else if(d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
+            Console.displayMsg("Player already exists!");
+        else{
+            Player l_LocalPlayer = new Player(p_PlayerName);
+            d_PlayerList.add(l_LocalPlayer);
+            Console.displayMsg("Player added: " + p_PlayerName);
+        }
     }
 
     /**
@@ -114,11 +118,20 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void removePlayer(String p_PlayerName) {
-        for (Player l_Player : d_PlayerList) {
-            if (l_Player.getD_Name().equals(p_PlayerName))
-                d_PlayerList.remove(l_Player);
+        if(d_PlayerList.isEmpty())
+            Console.displayMsg("You can not remove a player, player list is empty!");
+        else if(!d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName))){
+            Console.displayMsg("Player " + p_PlayerName + " does not exist!");
         }
-        Console.displayMsg("Player removed: " + p_PlayerName);
+        else{
+            Player l_PlayerToRemove = new Player();
+            for (Player l_Player : d_PlayerList) {
+                if (l_Player.getD_Name().equals(p_PlayerName))
+                    l_PlayerToRemove = l_Player;
+            }
+            d_PlayerList.remove(l_PlayerToRemove);
+            Console.displayMsg("Player removed: " + p_PlayerName);
+        }
     }
 
     /**
