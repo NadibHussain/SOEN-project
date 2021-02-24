@@ -77,13 +77,14 @@ public class GameEngine {
         ArrayList<Country> l_Countries = d_LoadedMap.getD_Countries();
         //if number of players between 2 and 5, assign countries to players randomly
         if (d_PlayerList.size() >= 2 && d_PlayerList.size() <= 5) {
-            for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
-                for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
+            int l_CountryCounter = 0;
+            while (l_CountryCounter < l_Countries.size()) {
+                for (int l_PlayerIterator = 0; l_PlayerIterator < d_PlayerList.size() && l_CountryCounter < l_Countries.size(); l_PlayerIterator++) {
                     // add country to player's country-list
-                    d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
+                    d_PlayerList.get(l_PlayerIterator).addCountryOwned(l_Countries.get(l_CountryCounter));
                     // set country's current owner to player
-                    l_Countries.get(l_I).setD_CurrentOwner(d_PlayerList.get(l_J).getD_Name());
-                    l_I++;
+                    l_Countries.get(l_CountryCounter).setD_CurrentOwner(d_PlayerList.get(l_PlayerIterator).getD_Name());
+                    l_CountryCounter++;
                 }
             }
             Console.displayMsg("Success: countries assigned");
@@ -152,7 +153,7 @@ public class GameEngine {
         //keep looping through the players list until all of them finished issuing their orders
         while (l_Flag.contains(Boolean.FALSE)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
-                if (l_Flag.get(i) == false) {
+                if (!l_Flag.get(i)) {
                     d_CurrentPlayer = d_PlayerList.get(i);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
                     d_Console.readInput();
