@@ -35,6 +35,12 @@ public class InputValidator {
      */
     public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
 
+    public static ArrayList<String> VALID_GAMEPLAY_COMMANDS = new ArrayList<>(
+            Arrays.asList(
+                    "deploy"
+            )
+    );
+
     /**
      * static variable VALID_MAPEDITOR_OPTIONS of type String
      */

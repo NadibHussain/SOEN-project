@@ -84,7 +84,10 @@ public class Command {
                 break;
 
             case "showmap":
-                d_GameEngine.getD_LoadedMap().showMap();
+                if (d_GameEngine.getD_LoadedMap() == null)
+                    System.out.println("Please load a map first!");
+                else
+                    d_GameEngine.getD_LoadedMap().showMap();
                 break;
 
             case "gameplayer":

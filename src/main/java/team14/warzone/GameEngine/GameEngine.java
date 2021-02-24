@@ -77,13 +77,14 @@ public class GameEngine {
         ArrayList<Country> l_Countries = d_LoadedMap.getD_Countries();
         //if number of players between 2 and 5, assign countries to players randomly
         if (d_PlayerList.size() >= 2 && d_PlayerList.size() <= 5) {
-            for (int l_I = 0; l_I < l_Countries.size(); l_I++) {
-                for (int l_J = 0; l_J < d_PlayerList.size() && l_I < l_Countries.size(); l_J++) {
+            int l_CountryCounter = 0;
+            while (l_CountryCounter < l_Countries.size()) {
+                for (int l_PlayerIterator = 0; l_PlayerIterator < d_PlayerList.size() && l_CountryCounter < l_Countries.size(); l_PlayerIterator++) {
                     // add country to player's country-list
-                    d_PlayerList.get(l_J).addCountryOwned(l_Countries.get(l_I));
+                    d_PlayerList.get(l_PlayerIterator).addCountryOwned(l_Countries.get(l_CountryCounter));
                     // set country's current owner to player
-                    l_Countries.get(l_I).setD_CurrentOwner(d_PlayerList.get(l_J).getD_Name());
-                    l_I++;
+                    l_Countries.get(l_CountryCounter).setD_CurrentOwner(d_PlayerList.get(l_PlayerIterator).getD_Name());
+                    l_CountryCounter++;
                 }
             }
             Console.displayMsg("Success: countries assigned");
@@ -100,11 +101,15 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void addPlayer(String p_PlayerName) {
-        Player l_LocalPlayer = new Player(p_PlayerName);
-//        l_LocalPlayer.setD_Name(p_PlayerName);
-//        l_LocalPlayer.setD_TotalNumberOfArmies(20); //at game start assign 20 armies for each player
-        d_PlayerList.add(l_LocalPlayer);
-        Console.displayMsg("Player added: " + p_PlayerName);
+        if(d_PlayerList.size() == 5)
+            Console.displayMsg("You can not addd more than 5 players");
+        else if(d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
+            Console.displayMsg("Player already exists!");
+        else{
+            Player l_LocalPlayer = new Player(p_PlayerName);
+            d_PlayerList.add(l_LocalPlayer);
+            Console.displayMsg("Player added: " + p_PlayerName);
+        }
     }
 
     /**
@@ -113,11 +118,20 @@ public class GameEngine {
      * @param p_PlayerName String PlayerName as parameter
      */
     public void removePlayer(String p_PlayerName) {
-        for (Player l_Player : d_PlayerList) {
-            if (l_Player.getD_Name().equals(p_PlayerName))
-                d_PlayerList.remove(l_Player);
+        if(d_PlayerList.isEmpty())
+            Console.displayMsg("You can not remove a player, player list is empty!");
+        else if(!d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName))){
+            Console.displayMsg("Player " + p_PlayerName + " does not exist!");
         }
-        Console.displayMsg("Player removed: " + p_PlayerName);
+        else{
+            Player l_PlayerToRemove = new Player();
+            for (Player l_Player : d_PlayerList) {
+                if (l_Player.getD_Name().equals(p_PlayerName))
+                    l_PlayerToRemove = l_Player;
+            }
+            d_PlayerList.remove(l_PlayerToRemove);
+            Console.displayMsg("Player removed: " + p_PlayerName);
+        }
     }
 
     /**
@@ -146,25 +160,33 @@ public class GameEngine {
             l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
 
-        // Take and queue orders
+        // take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);
         //keep looping through the players list until all of them finished issuing their orders
         while (l_Flag.contains(Boolean.FALSE)) {
-            for (int i = 0; i < d_PlayerList.size(); i++) {
-                if (l_Flag.get(i) == false) {
-                    d_CurrentPlayer = d_PlayerList.get(i);
-                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(i).getD_Name());
+            int l_Counter = 0;
+            while (l_Counter < d_PlayerList.size()) {
+                if (!l_Flag.get(l_Counter)) {
+                    d_CurrentPlayer = d_PlayerList.get(l_Counter);
+                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
                     if (d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
-                        l_Flag.set(i, Boolean.TRUE);
-                    else
+                        l_Flag.set(l_Counter, Boolean.TRUE);
+                    else{
                         d_Console.filterCommand(this, d_MapEditor);
+                    }
+                    // move to next player only if current player issued valid game-play command or passed his turn
                 }
+                if (!d_Console.get_BufferCommands().isEmpty() &&
+                        ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
+                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))))
+                    l_Counter++;
             }
         }
-        Collections.fill(l_Flag, Boolean.FALSE);
+
         //execute all the commands until all players orders lists are empty
+        Collections.fill(l_Flag, Boolean.FALSE);
         while (l_Flag.contains(false)) {
             for (int i = 0; i < d_PlayerList.size(); i++) {
                 d_CurrentPlayer = d_PlayerList.get(i);

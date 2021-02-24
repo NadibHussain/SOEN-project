@@ -4,6 +4,7 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,17 +13,13 @@ import java.util.Scanner;
  */
 public class Console {
     static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
-    private Command d_CommandBuffer;                    // store user command
-//    private GameEngine d_GameEngine;
-
-//    public Console(GameEngine d_GameEngine) {
-//        this.d_GameEngine = d_GameEngine;
-//    }
+    private List<Command> d_CommandBuffer; // store user commands
 
     /**
      * Default constructor
      */
     public Console() {
+        d_CommandBuffer = new ArrayList<>();
     }
 
     /**
@@ -69,6 +66,7 @@ public class Console {
                         l_Arguments.add(l_UserInput[i + 1]);
                         i++;
                     }
+                    System.out.println("in buffer : " + Arrays.toString(d_CommandBuffer.toArray()));
                 } else {
                     l_OptName = "noOption";
                     //if the word is not an option then add it to the arguments list
@@ -79,7 +77,7 @@ public class Console {
                 }
                 //check command validity
                 System.out.println("keyword : " + l_Keyword + ", options: " + l_OptName + ", arguments : " + l_Arguments);
-                l_ValidCommand = l_ValidCommand && InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
+                l_ValidCommand = InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
                 if (l_ValidCommand) {
                     System.out.println("valid command");
                     //Set options for the user command
@@ -87,9 +85,8 @@ public class Console {
                     //Create Command object, passing keyword and option
                     Command l_UserCommand = new Command(l_Keyword, l_opt);
                     setD_CommandBuffer(l_UserCommand);
-
-                } else
-                    System.out.println("invalid command");
+                    System.out.println("after adding : " + Arrays.toString(d_CommandBuffer.toArray()));
+                }
             }
         }
     }
@@ -101,34 +98,47 @@ public class Console {
      * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
-        d_CommandBuffer.setD_GameEngine(p_GameEngine);
-        d_CommandBuffer.setD_MapEditor(p_MapEditor);
-        if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
-            d_CommandBuffer.execute();
-        } else {
-            switch (InputValidator.CURRENT_PHASE) {
-                case MAPEDITOR:
-                case STARTUP:
-                    d_CommandBuffer.execute();
-                    break;
+        List<Command> l_CommandToRemove = new ArrayList<>();
+        if(!d_CommandBuffer.isEmpty()){
+            for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
+                d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
+                d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
+                if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
+                    d_CommandBuffer.get(l_I).execute();
+                    l_CommandToRemove.add(d_CommandBuffer.get(l_I));
+                } else {
+                    switch (InputValidator.CURRENT_PHASE) {
+                        case MAPEDITOR:
+                        case STARTUP:
+                            d_CommandBuffer.get(l_I).execute();
+                            l_CommandToRemove.add(d_CommandBuffer.get(l_I));
+                            break;
 
-                case GAMEPLAY:
-                    p_GameEngine.receiveCommand(d_CommandBuffer);
-                    break;
+                        case GAMEPLAY:
+                            p_GameEngine.receiveCommand(d_CommandBuffer.get(l_I));
+                            break;
+                    }
+                }
             }
+            d_CommandBuffer.removeAll(l_CommandToRemove);
         }
     }
 
     /**
      * A method to store user Command object
      *
-     * @param d_CommandBuffer user Command object
+     * @param p_Command user Command object
      */
-    public void setD_CommandBuffer(Command d_CommandBuffer) {
-        this.d_CommandBuffer = d_CommandBuffer;
+    public void setD_CommandBuffer(Command p_Command) {
+        this.d_CommandBuffer.add(p_Command);
     }
 
     public Command getD_CommandBuffer() {
+        Command l_Command = d_CommandBuffer.get(0);
+        return l_Command;
+    }
+
+    public List<Command> get_BufferCommands(){
         return d_CommandBuffer;
     }
 
