@@ -256,7 +256,7 @@ public class Map {
 
     /**
      * Find a country using its name
-     * @param p_countryName String country name
+     * @param p_CountryName String country name
      * @return String country name
      */
     public Country findCountry(String p_CountryName){
@@ -272,7 +272,7 @@ public class Map {
 
     /**
      * Find Continent using its name
-     * @param p_continetName String continent name
+     * @param p_ContinetName String continent name
      * @return String continent name
      */
     public Continent findContinent(String p_ContinetName){

@@ -10,8 +10,8 @@ import team14.warzone.MapModule.MapEditor;
 
 public class Driver {
     /**
-     * Main class to run Driver
-     * @param args
+     * Main class to run driver
+     * @param args main args
      */
     public static void main(String[] args) {
         Console l_Console = new Console();
