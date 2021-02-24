@@ -7,6 +7,7 @@ import team14.warzone.MapModule.TestMapEditor;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+        CommandTest.class,
         InputValidatorTest.class,
         OptionTest.class
 })
