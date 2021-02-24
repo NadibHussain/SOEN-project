@@ -85,6 +85,39 @@ public class TestMapEditor {
         assert l_HasContinent == true;
     }
 
+    @Test void testValidateMap_hasConnectedSubGraphs(){
+        Map p_Map = d_MapEditor.getD_LoadedMap();
+        ArrayList<Continent> l_Continents = p_Map.getD_Continents();
+        boolean l_ConnectedSubGraph = false;
+        //Running bfs
+        for (int l_ContIndex = 0; l_ContIndex < l_Continents.size(); l_ContIndex++) {
+            System.out.println(l_Continents.get(l_ContIndex).getD_ContinentID());
+            ArrayList<Country> l_Countries2 = p_Map.getCountryListOfContinent(l_Continents.get(l_ContIndex).getD_ContinentID());
+            Stack<Integer> l_StackNodes2 = new Stack<Integer>();
+
+            for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size(); l_CountryIndex++) {
+                
+                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_neighbours()
+                        .size() > l_NeighbourIndex; l_NeighbourIndex++) {
+                    if(!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID()))
+                    && l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
+                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID());
+    
+                }
+            }
+            System.out.println(l_StackNodes2.size() + " "+l_Countries2.size());
+
+            //checking if subgraph is connected
+            if(l_StackNodes2.size() == l_Countries2.size())
+                l_ConnectedSubGraph = true;
+                else{
+                    l_ConnectedSubGraph = false;
+                    break;
+                } 
+        }
+            assert l_ConnectedSubGraph == true;
+    }
+
     @AfterAll
     public static void tearDown() {
         d_MapEditor = null;
