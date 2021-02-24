@@ -166,21 +166,22 @@ public class GameEngine {
         while (l_Flag.contains(Boolean.FALSE)) {
             int l_Counter = 0;
             while (l_Counter < d_PlayerList.size()) {
-                if (!l_Flag.get(l_Counter)) {
+                if (!l_Flag.get(l_Counter)) { // if player has not already passed
                     d_CurrentPlayer = d_PlayerList.get(l_Counter);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
-                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword().equals("pass"))
+                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")) {
                         l_Flag.set(l_Counter, Boolean.TRUE);
-                    else {
+                        l_Counter++;
+                        d_Console.clearCommandBuffer();
+                    } else {
+                        // check if valid gameplay command and change player turn
+                        if (isGamePhaseCommand(d_Console.getD_CommandBuffer()))
+                            l_Counter++;
                         d_Console.filterCommand(this, d_MapEditor);
                     }
-                    // move to next player only if current player issued valid game-play command or passed his turn
-                }
-                if (!d_Console.get_BufferCommands().isEmpty() &&
-                        ((InputValidator.VALID_GAMEPLAY_COMMANDS.contains(d_Console.getD_CommandBuffer().getD_Keyword())
-                                || d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")))) {
-                    d_Console.get_BufferCommands().remove(d_Console.getD_CommandBuffer());
+                } else {
+                    // if player has already passed just skip turn
                     l_Counter++;
                 }
                 if (!l_Flag.contains(Boolean.FALSE)) break; // break out of infinite loop
@@ -233,6 +234,16 @@ public class GameEngine {
         d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
         Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies" +
                 " in " + p_CountryName);
+    }
+
+    /**
+     * Method checks if the passed command is a valid gamephase command
+     *
+     * @param p_Command command to be checked
+     * @return true if valid; else return false
+     */
+    public boolean isGamePhaseCommand(Command p_Command) {
+        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_Command.getD_Keyword());
     }
 
     /**

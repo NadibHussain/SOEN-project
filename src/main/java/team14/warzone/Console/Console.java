@@ -4,7 +4,6 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -97,20 +96,18 @@ public class Console {
      * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
-        List<Command> l_CommandToRemove = new ArrayList<>();
+//        List<Command> l_CommandToRemove = new ArrayList<>();
         if (!d_CommandBuffer.isEmpty()) {
             for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
                 d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
                 d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
                 if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
                     d_CommandBuffer.get(l_I).execute();
-                    l_CommandToRemove.add(d_CommandBuffer.get(l_I));
                 } else {
                     switch (InputValidator.CURRENT_PHASE) {
                         case MAPEDITOR:
                         case STARTUP:
                             d_CommandBuffer.get(l_I).execute();
-                            l_CommandToRemove.add(d_CommandBuffer.get(l_I));
                             break;
 
                         case GAMEPLAY:
@@ -119,8 +116,12 @@ public class Console {
                     }
                 }
             }
-            d_CommandBuffer.removeAll(l_CommandToRemove);
+            clearCommandBuffer();
         }
+    }
+
+    public void clearCommandBuffer() {
+        d_CommandBuffer.clear();
     }
 
     /**
