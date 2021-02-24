@@ -59,7 +59,6 @@ public class Map {
 
         //Create and set up the window.
         JFrame l_Frame = new JFrame("Map");
-        l_Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
         l_Frame.add(new JScrollPane(l_Table));
