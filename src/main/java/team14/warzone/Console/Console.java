@@ -96,7 +96,6 @@ public class Console {
      * @param p_MapEditor
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
-//        List<Command> l_CommandToRemove = new ArrayList<>();
         if (!d_CommandBuffer.isEmpty()) {
             for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
                 d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
