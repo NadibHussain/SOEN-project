@@ -120,6 +120,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method clears the command buffer
+     */
     public void clearCommandBuffer() {
         d_CommandBuffer.clear();
     }
@@ -133,11 +136,21 @@ public class Console {
         this.d_CommandBuffer.add(p_Command);
     }
 
+    /**
+     * Getter method to get the command stored in buffer
+     *
+     * @return command object stored in buffer
+     */
     public Command getD_CommandBuffer() {
         Command l_Command = d_CommandBuffer.get(0);
         return l_Command;
     }
 
+    /**
+     * Getter method to get list of commands stored in buffer
+     *
+     * @return list of command objects
+     */
     public List<Command> get_BufferCommands() {
         return d_CommandBuffer;
     }
