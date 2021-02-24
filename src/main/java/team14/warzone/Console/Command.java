@@ -131,8 +131,7 @@ public class Command {
 
     /**
      * A method to set the GameEngine
-     *
-     * @param p_GameEngine
+     * @param p_GameEngine GameEngine param
      */
     public void setD_GameEngine(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
@@ -140,8 +139,7 @@ public class Command {
 
     /**
      * A method to set the MapEditor
-     *
-     * @param p_MapEditor
+     * @param p_MapEditor MapEditor param
      */
     public void setD_MapEditor(MapEditor p_MapEditor) {
         d_MapEditor = p_MapEditor;
