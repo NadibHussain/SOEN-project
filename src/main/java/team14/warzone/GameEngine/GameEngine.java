@@ -267,9 +267,10 @@ public class GameEngine {
         return d_LoadedMap;
     }
 
-    
-    /** 
-     * @return ArrayList<Player> player arraylist
+
+    /**
+     * Get player list
+     * @return d_PlayerList Player list is returned
      */
     public ArrayList<Player> getD_PlayerList() {
         return d_PlayerList;
