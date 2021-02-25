@@ -143,7 +143,7 @@ public class MapEditor {
                     l_ContinentIntId = l_Continent.getD_ContinentIntID();
                 }
             }
-            l_Content += l_Country.getD_CountryIntID() + " " + "-" + " " + l_ContinentIntId + "\n";
+            l_Content += l_Country.getD_CountryIntID() + " " + l_Country.getD_CountryID() + " " + l_ContinentIntId + "\n";
         }
 
         // writing all the borders
