@@ -267,10 +267,18 @@ public class GameEngine {
         return d_LoadedMap;
     }
 
+    
+    /** 
+     * @return ArrayList<Player>
+     */
     public ArrayList<Player> getD_PlayerList() {
         return d_PlayerList;
     }
 
+    
+    /** 
+     * @param p_PlayerList
+     */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
         d_PlayerList = p_PlayerList;
     }

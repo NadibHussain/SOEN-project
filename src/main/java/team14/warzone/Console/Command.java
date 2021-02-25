@@ -178,6 +178,10 @@ public class Command {
         this.d_Option = p_Option;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Command{" +

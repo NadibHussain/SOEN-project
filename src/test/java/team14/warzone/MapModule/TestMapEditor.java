@@ -18,6 +18,10 @@ public class TestMapEditor {
     public static MapEditor d_MapEditor;
 
 
+    
+    /** 
+     * @throws FileNotFoundException
+     */
     @BeforeClass
     public static void init() throws FileNotFoundException {
 
