@@ -8,24 +8,17 @@ import java.util.Stack;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.Test;
-
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Stack;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestMapEditor {
 
     public static MapEditor d_MapEditor;
 
 
-    @BeforeAll
+    @BeforeClass
     public static void init() throws FileNotFoundException {
 
         d_MapEditor = new MapEditor();
@@ -38,7 +31,7 @@ public class TestMapEditor {
         Map l_Map = d_MapEditor.getD_LoadedMap();
         assertEquals(7, l_Map.getD_Continents().size());
         assertEquals(110, l_Map.getD_Countries().size());
-        assertEquals(51, l_Map.getD_Countries().get(1).getD_neighbours().get(1).getD_CountryIntID());
+        assertEquals(51, l_Map.getD_Countries().get(1).getD_Neighbours().get(1).getD_CountryIntID());
     }
 
     @Test
@@ -55,11 +48,11 @@ public class TestMapEditor {
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         Stack<Integer> l_StackNodes = new Stack<Integer>();
         for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
-            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_neighbours()
+            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_Neighbours()
                     .size() > l_NeighbourIndex; l_NeighbourIndex++) {
                 if (!(l_StackNodes.contains(
-                        l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
-                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
+                        l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
+                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
                             .getD_CountryIntID());
 
             }
@@ -104,17 +97,16 @@ public class TestMapEditor {
         boolean l_ConnectedSubGraph = false;
         //Running bfs
         for (int l_ContIndex = 0; l_ContIndex < l_Continents.size(); l_ContIndex++) {
-            System.out.println(l_Continents.get(l_ContIndex).getD_ContinentID());
             ArrayList<Country> l_Countries2 = p_Map.getCountryListOfContinent(l_Continents.get(l_ContIndex).getD_ContinentID());
             Stack<Integer> l_StackNodes2 = new Stack<Integer>();
 
             for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size(); l_CountryIndex++) {
                 
-                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_neighbours()
+                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_Neighbours()
                         .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-                    if(!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID()))
-                    && l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
-                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID());
+                    if(!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID()))
+                    && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
+                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID());
     
                 }
             }
@@ -136,12 +128,5 @@ public class TestMapEditor {
         d_MapEditor = null;
     }
 
-    @DisplayName("Testing save map feature")
-    public void testSaveMap() {
-        // me.saveMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
-        // me.loadMap("/home/nadib/Desktop/soen project/SOEN-project/test.map");
-        // me.validateMap(me.d_LoadedMap);
-
-    }
 
 }

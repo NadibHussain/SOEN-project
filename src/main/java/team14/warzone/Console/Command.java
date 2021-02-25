@@ -85,11 +85,7 @@ public class Command {
                 break;
 
             case "editmap":
-                try {
-                    d_MapEditor.loadMap(l_CommandArgs.get(0));
-                } catch (FileNotFoundException e) {
-                    System.out.println("Error: invalid filename");
-                }
+                d_MapEditor.editMap(l_CommandArgs.get(0));
                 break;
 
             case "validatemap":
