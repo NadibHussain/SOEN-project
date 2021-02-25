@@ -14,10 +14,22 @@ import java.util.List;
  * @version 1.0
  */
 public class Command {
+    /**
+     * field stores keyword for the command
+     */
     private String d_Keyword;
+    /**
+     * field stores option object
+     */
     private Option d_Option = new Option();
 
+    /**
+     * field stores instance of the game engine
+     */
     private GameEngine d_GameEngine;
+    /**
+     * field stores instance of the map editor
+     */
     private MapEditor d_MapEditor;
 
     /**
@@ -136,6 +148,7 @@ public class Command {
 
     /**
      * A method to set the GameEngine
+     *
      * @param p_GameEngine GameEngine param
      */
     public void setD_GameEngine(GameEngine p_GameEngine) {
@@ -144,6 +157,7 @@ public class Command {
 
     /**
      * A method to set the MapEditor
+     *
      * @param p_MapEditor MapEditor param
      */
     public void setD_MapEditor(MapEditor p_MapEditor) {

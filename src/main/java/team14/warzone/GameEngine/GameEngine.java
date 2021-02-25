@@ -30,22 +30,8 @@ public class GameEngine {
     private MapEditor d_MapEditor;
 
     /**
-     * public method of GameEngine
-     */
-    public GameEngine() {
-    }
-
-    /**
-     * @param p_Console Console parameter
-     */
-    public GameEngine(Console p_Console) {
-        d_Console = p_Console;
-        d_PlayerList = new ArrayList<Player>();
-    }
-
-    /**
-     * @param p_Console   Console parameter
-     * @param p_MapEditor MapEditor parameter
+     * @param p_Console   console object
+     * @param p_MapEditor map editor object
      */
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
@@ -54,14 +40,17 @@ public class GameEngine {
     }
 
     /**
-     * LoadMap method
+     * Method loads a map from a dominion map file
      *
-     * @param p_FileName String FileName as parameter
+     * @param p_FileName file name to be loaded
      */
     public void loadMap(String p_FileName) {
         try {
             d_MapEditor.loadMap(p_FileName);
             this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
+            // validate map right after loading
+            d_MapEditor.validateMap(d_LoadedMap);
+            System.out.println("Map loaded and validated");
             InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
         } catch (FileNotFoundException e) {
             System.out.println("Error: invalid filename");
@@ -101,9 +90,9 @@ public class GameEngine {
     }
 
     /**
-     * Add player method
+     * Method adds players to the player list
      *
-     * @param p_PlayerName String PlayerName as parameter
+     * @param p_PlayerName String name of the player
      */
     public void addPlayer(String p_PlayerName) {
         if (d_PlayerList.size() == 5)
@@ -118,9 +107,9 @@ public class GameEngine {
     }
 
     /**
-     * Remove Player
+     * Method remove a player from the player list
      *
-     * @param p_PlayerName String PlayerName as parameter
+     * @param p_PlayerName String name of the player
      */
     public void removePlayer(String p_PlayerName) {
         if (d_PlayerList.isEmpty())
@@ -229,6 +218,8 @@ public class GameEngine {
      *
      * @param p_CountryName    name of the country where armies are to be deployed
      * @param p_NumberOfArmies number of armies to deploy
+     * @throws Exception when deploy fails. Either country is not owned by player or player does not have enough
+     * armies to deploy
      */
     public void deploy(String p_CountryName, int p_NumberOfArmies) throws Exception {
         // check if numberOfArmies is more than what he has

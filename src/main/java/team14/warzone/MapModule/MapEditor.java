@@ -29,6 +29,7 @@ public class MapEditor {
      * Loadmap from file
      *
      * @param p_FileName String filename
+     * @throws FileNotFoundException throws exception when filename is invalid
      */
     public void loadMap(String p_FileName) throws FileNotFoundException {
         Map l_Map = new Map();

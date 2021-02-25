@@ -11,8 +11,14 @@ import java.util.Scanner;
  * This class is used to read commands from user console, validate it then send the commands to the appropriate classes
  */
 public class Console {
-    static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
-    private List<Command> d_CommandBuffer; // store user commands
+    /**
+     * A scanner to read user input
+     */
+    static Scanner d_Scanner = new Scanner(System.in);
+    /**
+     * temporarily store user commands
+     */
+    private List<Command> d_CommandBuffer;
 
     /**
      * Default constructor
@@ -93,7 +99,7 @@ public class Console {
      * A method to filter user commands depending on the current game phase
      *
      * @param p_GameEngine GameEngine param
-     * @param p_MapEditor MapEditor param
+     * @param p_MapEditor  MapEditor param
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
         if (!d_CommandBuffer.isEmpty()) {
@@ -141,8 +147,7 @@ public class Console {
      * @return command object stored in buffer
      */
     public Command getD_CommandBuffer() {
-        Command l_Command = d_CommandBuffer.get(0);
-        return l_Command;
+        return d_CommandBuffer.get(0);
     }
 
     /**
