@@ -6,16 +6,19 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.MapModule.MapEditor;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test reinforcement in GameEngine class
+ */
 public class GameEngineReinforcementTest {
-    public static GameEngine d_GE;
-    public static List<Player> d_PlayerList;
-    public static Console d_Console;
-    public static MapEditor d_MapEditor;
+    public static GameEngine d_GE; //game engine instance
+    public static Console d_Console;//console used by game engine
+    public static MapEditor d_MapEditor;//map editor used by game engine
 
+    /**
+     * A method to initialize variables to be used during test
+     */
     @BeforeClass
     public static void initialize() {
         d_Console = new Console();
@@ -27,11 +30,16 @@ public class GameEngineReinforcementTest {
         d_GE.assignCountries();
     }
 
+    /**
+     * A method to check "reinforcement" number of armies given to each player at the beginning of each turn
+     */
     @Test
     @DisplayName("Testing Reinforcement")
     public void testReinforcement() {
+        //check if the player is given 20 armies after initialization
         assertEquals(20, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
         d_GE.reInforcement();
+        //check if the reinforcement of the player equals to the expected value
         assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
     }
 }

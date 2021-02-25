@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -193,7 +192,7 @@ public class GameEngine {
     /**
      * This method calculates and assign the reinforcement at the beginning of each turn
      */
-    public void reInforcement(){
+    public void reInforcement() {
         for (Player l_Player : d_PlayerList) {
             //1. # of territories owned divided by 3
             int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
