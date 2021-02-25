@@ -190,6 +190,9 @@ public class GameEngine {
         }
     }
 
+    /**
+     * This method calculates and assign the reinforcement at the beginning of each turn
+     */
     public void reInforcement(){
         for (Player l_Player : d_PlayerList) {
             //1. # of territories owned divided by 3
