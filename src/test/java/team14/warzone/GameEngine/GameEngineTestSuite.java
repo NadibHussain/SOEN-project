@@ -5,8 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        GameEngineTest.class,
-        GameEngineDeployTest.class,
+        GameEngineReinforcementTest.class,
+        GameEngineDeployTest.class
 })
 
 public class GameEngineTestSuite {
