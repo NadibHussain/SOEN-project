@@ -10,19 +10,32 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test for InputValidator class
+ * Runs a parameterized test, that tests several validator methods
+ */
 @RunWith(Parameterized.class)
 public class InputValidatorTest {
 
+    /**
+     * field to instantiate command obj
+     */
     private String d_CommandName;
+    /**
+     * field to instantiate option name
+     */
     private String d_OptionName;
+    /**
+     * field for arguments
+     */
     private List<String> d_Arguments;
 
     /**
      * Contructor for the class
      *
      * @param p_CommandName name of the command
-     * @param p_OptionName name of the option ("-add" or "-remove" or "noOption")
-     * @param p_Arguments list of arguments
+     * @param p_OptionName  name of the option ("-add" or "-remove" or "noOption")
+     * @param p_Arguments   list of arguments
      */
     public InputValidatorTest(String p_CommandName, String p_OptionName, List<String> p_Arguments) {
         this.d_CommandName = p_CommandName;

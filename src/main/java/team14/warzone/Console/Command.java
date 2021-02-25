@@ -3,6 +3,7 @@ package team14.warzone.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -13,10 +14,22 @@ import java.util.List;
  * @version 1.0
  */
 public class Command {
+    /**
+     * field stores keyword for the command
+     */
     private String d_Keyword;
+    /**
+     * field stores option object
+     */
     private Option d_Option = new Option();
 
+    /**
+     * field stores instance of the game engine
+     */
     private GameEngine d_GameEngine;
+    /**
+     * field stores instance of the map editor
+     */
     private MapEditor d_MapEditor;
 
     /**
@@ -72,7 +85,11 @@ public class Command {
                 break;
 
             case "editmap":
-                d_MapEditor.loadMap(l_CommandArgs.get(0));
+                try {
+                    d_MapEditor.loadMap(l_CommandArgs.get(0));
+                } catch (FileNotFoundException e) {
+                    System.out.println("Error: invalid filename");
+                }
                 break;
 
             case "validatemap":
@@ -84,7 +101,10 @@ public class Command {
                 break;
 
             case "showmap":
-                d_GameEngine.getD_LoadedMap().showMap();
+                if (d_GameEngine.getD_LoadedMap() == null)
+                    System.out.println("Please load a map first!");
+                else
+                    d_GameEngine.getD_LoadedMap().showMap();
                 break;
 
             case "gameplayer":
@@ -99,7 +119,11 @@ public class Command {
                 break;
 
             case "deploy":
-                d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                try {
+                    d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
         }
     }
@@ -124,7 +148,8 @@ public class Command {
 
     /**
      * A method to set the GameEngine
-     * @param p_GameEngine
+     *
+     * @param p_GameEngine GameEngine param
      */
     public void setD_GameEngine(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
@@ -132,7 +157,8 @@ public class Command {
 
     /**
      * A method to set the MapEditor
-     * @param p_MapEditor
+     *
+     * @param p_MapEditor MapEditor param
      */
     public void setD_MapEditor(MapEditor p_MapEditor) {
         d_MapEditor = p_MapEditor;

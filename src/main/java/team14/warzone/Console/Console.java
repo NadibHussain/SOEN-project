@@ -11,18 +11,20 @@ import java.util.Scanner;
  * This class is used to read commands from user console, validate it then send the commands to the appropriate classes
  */
 public class Console {
-    static Scanner d_Scanner = new Scanner(System.in);  // A scanner to read user input
-    private Command d_CommandBuffer;                    // store user command
-//    private GameEngine d_GameEngine;
-
-//    public Console(GameEngine d_GameEngine) {
-//        this.d_GameEngine = d_GameEngine;
-//    }
+    /**
+     * A scanner to read user input
+     */
+    static Scanner d_Scanner = new Scanner(System.in);
+    /**
+     * temporarily store user commands
+     */
+    private List<Command> d_CommandBuffer;
 
     /**
      * Default constructor
      */
     public Console() {
+        d_CommandBuffer = new ArrayList<>();
     }
 
     /**
@@ -78,18 +80,17 @@ public class Console {
                     }
                 }
                 //check command validity
-                System.out.println("keyword : " + l_Keyword + ", options: " + l_OptName + ", arguments : " + l_Arguments);
-                l_ValidCommand = l_ValidCommand && InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
+                l_ValidCommand = InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
                 if (l_ValidCommand) {
                     System.out.println("valid command");
                     //Set options for the user command
-                    Option l_opt = new Option(l_OptName, l_Arguments);
+                    ArrayList<String> l_TempArgs = new ArrayList<>();
+                    l_TempArgs.addAll(l_Arguments);
+                    Option l_opt = new Option(l_OptName, l_TempArgs);
                     //Create Command object, passing keyword and option
                     Command l_UserCommand = new Command(l_Keyword, l_opt);
                     setD_CommandBuffer(l_UserCommand);
-
-                } else
-                    System.out.println("invalid command");
+                }
             }
         }
     }
@@ -97,38 +98,64 @@ public class Console {
     /**
      * A method to filter user commands depending on the current game phase
      *
-     * @param p_GameEngine
-     * @param p_MapEditor
+     * @param p_GameEngine GameEngine param
+     * @param p_MapEditor  MapEditor param
      */
     public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
-        d_CommandBuffer.setD_GameEngine(p_GameEngine);
-        d_CommandBuffer.setD_MapEditor(p_MapEditor);
-        if (d_CommandBuffer.getD_Keyword().equals("showmap")) {
-            d_CommandBuffer.execute();
-        } else {
-            switch (InputValidator.CURRENT_PHASE) {
-                case MAPEDITOR:
-                case STARTUP:
-                    d_CommandBuffer.execute();
-                    break;
+        if (!d_CommandBuffer.isEmpty()) {
+            for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
+                d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
+                d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
+                if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
+                    d_CommandBuffer.get(l_I).execute();
+                } else {
+                    switch (InputValidator.CURRENT_PHASE) {
+                        case MAPEDITOR:
+                        case STARTUP:
+                            d_CommandBuffer.get(l_I).execute();
+                            break;
 
-                case GAMEPLAY:
-                    p_GameEngine.receiveCommand(d_CommandBuffer);
-                    break;
+                        case GAMEPLAY:
+                            p_GameEngine.receiveCommand(d_CommandBuffer.get(l_I));
+                            break;
+                    }
+                }
             }
+            clearCommandBuffer();
         }
+    }
+
+    /**
+     * Method clears the command buffer
+     */
+    public void clearCommandBuffer() {
+        d_CommandBuffer.clear();
     }
 
     /**
      * A method to store user Command object
      *
-     * @param d_CommandBuffer user Command object
+     * @param p_Command user Command object
      */
-    public void setD_CommandBuffer(Command d_CommandBuffer) {
-        this.d_CommandBuffer = d_CommandBuffer;
+    public void setD_CommandBuffer(Command p_Command) {
+        this.d_CommandBuffer.add(p_Command);
     }
 
+    /**
+     * Getter method to get the command stored in buffer
+     *
+     * @return command object stored in buffer
+     */
     public Command getD_CommandBuffer() {
+        return d_CommandBuffer.get(0);
+    }
+
+    /**
+     * Getter method to get list of commands stored in buffer
+     *
+     * @return list of command objects
+     */
+    public List<Command> get_BufferCommands() {
         return d_CommandBuffer;
     }
 

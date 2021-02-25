@@ -27,90 +27,88 @@ public class MapEditor {
 
     /**
      * Loadmap from file
-     * 
+     *
      * @param p_FileName String filename
+     * @throws FileNotFoundException throws exception when filename is invalid
      */
-    public void loadMap(String p_FileName) {
+    public void loadMap(String p_FileName) throws FileNotFoundException {
         Map l_Map = new Map();
-        try {
-            File l_FileObject = new File(p_FileName);
-            Scanner l_ReaderObject = new Scanner(l_FileObject);
-            while (l_ReaderObject.hasNextLine()) {
-                String l_Data = l_ReaderObject.nextLine();
-                if (l_Data.equals("[countries]")) {
-                    while (true) {
-                        String l_Line = l_ReaderObject.nextLine();
-                        if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
-                            continue;
-                        }
-                        ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
-                        if (l_Line.equals("")) {
-                            break;
-                        } else {
-                            String[] l_CountryArray = l_Line.split(" ");
-                            String l_ContinentName = "";
-                            for (Continent l_Conrinent : l_ContinentList) {
-                                if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
-                                    l_ContinentName = l_Conrinent.getD_ContinentID();
-                                    break;
-                                }
-                            }
-                            l_Map.addCountry(l_CountryArray[1], l_ContinentName);
-                        }
+        File l_FileObject = new File(p_FileName);
+        Scanner l_ReaderObject = new Scanner(l_FileObject);
+        while (l_ReaderObject.hasNextLine()) {
+            String l_Data = l_ReaderObject.nextLine();
+            if (l_Data.equals("[countries]")) {
+                while (true) {
+                    String l_Line = l_ReaderObject.nextLine();
+                    if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
+                        continue;
                     }
-                } else if (l_Data.equals("[continents]")) {
-                    while (true) {
-                        String l_Line = l_ReaderObject.nextLine();
-                        if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
-                            continue;
-                        }
-                        if (l_Line.equals("")) {
-                            break;
-                        } else {
-                            String[] l_ContinentArray = l_Line.split(" ");
-                            l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
-                        }
-                    }
-
-                } else if (l_Data.equals("[borders]")) {
-                    ArrayList<Country> l_Countires = l_Map.getD_Countries();
-                    int l_Index = 0;
-                    while (l_ReaderObject.hasNextLine()) {
-                        String l_Line = l_ReaderObject.nextLine();
-                        if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
-                            continue;
-                        }
-                        if (l_Line.equals("")) {
-                            break;
-                        } else {
-                            String[] l_NeighbourArray = l_Line.split(" ");
-                            ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
-                            for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
-                                for (int l_countryIndex = 0; l_countryIndex < l_Countires.size(); l_countryIndex++) {
-                                    if (l_Countires.get(l_countryIndex).getD_CountryIntID() == Integer
-                                            .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
-                                        l_NeighbourIDArray.add(l_Countires.get(l_countryIndex));
-                                    }
-                                }
+                    ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
+                    if (l_Line.equals("")) {
+                        break;
+                    } else {
+                        String[] l_CountryArray = l_Line.split(" ");
+                        String l_ContinentName = "";
+                        for (Continent l_Conrinent : l_ContinentList) {
+                            if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
+                                l_ContinentName = l_Conrinent.getD_ContinentID();
+                                break;
                             }
-                            l_Countires.get(l_Index).setD_neighbours(l_NeighbourIDArray);
-                            l_Index++;
                         }
+                        l_Map.addCountry(l_CountryArray[1], l_ContinentName);
+                    }
+                }
+            } else if (l_Data.equals("[continents]")) {
+                while (true) {
+                    String l_Line = l_ReaderObject.nextLine();
+                    if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
+                        continue;
+                    }
+                    if (l_Line.equals("")) {
+                        break;
+                    } else {
+                        String[] l_ContinentArray = l_Line.split(" ");
+                        l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
                     }
                 }
 
+            } else if (l_Data.equals("[borders]")) {
+                ArrayList<Country> l_Countires = l_Map.getD_Countries();
+                int l_Index = 0;
+                while (l_ReaderObject.hasNextLine()) {
+                    String l_Line = l_ReaderObject.nextLine();
+                    if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
+                        continue;
+                    }
+                    if (l_Line.equals("")) {
+                        break;
+                    } else {
+                        String[] l_NeighbourArray = l_Line.split(" ");
+                        ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
+                        for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
+                            for (int l_countryIndex = 0; l_countryIndex < l_Countires.size(); l_countryIndex++) {
+                                if (l_Countires.get(l_countryIndex).getD_CountryIntID() == Integer
+                                        .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
+                                    l_NeighbourIDArray.add(l_Countires.get(l_countryIndex));
+                                }
+                            }
+                        }
+                        l_Countires.get(l_Index).setD_neighbours(l_NeighbourIDArray);
+                        l_Index++;
+                    }
+                }
             }
-            l_ReaderObject.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("The map file does not exist");
+
         }
+        l_ReaderObject.close();
+
         this.d_LoadedMap = l_Map;
 
     }
 
     /**
      * This method is used to save a map in a text format
-     * 
+     *
      * @param p_FileName String filename
      */
     public void saveMap(String p_FileName) {
@@ -145,7 +143,8 @@ public class MapEditor {
             l_Writer.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
-            System.out.println("Saving the map file was unsuccessful.");
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
 
     }
@@ -154,11 +153,10 @@ public class MapEditor {
      * checking if the map is connected, all countries belong to at least one
      * continent, all continents have at least one country, sub-graphs are connected
      * which means the countries inside a continent are connected.
-     * 
-     * @author tanzia
-     * 
+     *
      * @param p_Map Map object
      * @return checking validity
+     * @author tanzia
      */
     public boolean validateMap(Map p_Map) {
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
@@ -200,9 +198,9 @@ public class MapEditor {
         // checking if map is connected
         if (l_StackNodes.size() == l_Countries.size())
             l_ConnectedGraph = true;
-            else{
-                System.out.println("The map is not connected.");
-            }
+        else {
+            System.out.println("The map is not connected.");
+        }
 
         // checking if all continent has at least one country
         if (l_StackContinents.size() != l_Continents.size()) {
@@ -224,7 +222,7 @@ public class MapEditor {
                     if (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_neighbours()
                             .get(l_NeighbourIndex).getD_CountryIntID()))
                             && l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
-                                    .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
+                            .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
                         l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
                                 .getD_CountryIntID());
 
@@ -252,7 +250,7 @@ public class MapEditor {
 
     /**
      * Get a loaded map
-     * 
+     *
      * @return a loaded map file
      */
     public Map getD_LoadedMap() {

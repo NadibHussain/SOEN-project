@@ -4,7 +4,7 @@ import team14.warzone.Console.Command;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Class implements the player model
@@ -13,9 +13,21 @@ import java.util.Arrays;
  * @version 1.0
  */
 public class Player {
+    /**
+     * name of player
+     */
     private String d_Name;
+    /**
+     * number of armies in players possession
+     */
     private int d_TotalNumberOfArmies;
+    /**
+     * list of countries owned by player
+     */
     private ArrayList<Country> d_CountriesOwned;
+    /**
+     * list of orders issued by player that has not been executed
+     */
     private ArrayList<Command> d_OrderList;
 
     /**
@@ -46,7 +58,8 @@ public class Player {
      * @param p_Name name of the player
      */
     public Player(String p_Name) {
-        this(p_Name, 20, new ArrayList<Country>(Arrays.asList()), new ArrayList<Command>(Arrays.asList()));
+        this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
+                new ArrayList<Command>(Collections.emptyList()));
     }
 
     /**
@@ -68,8 +81,9 @@ public class Player {
      * </ul>
      */
     public void nextOrder() {
-        if(!d_OrderList.isEmpty()){
-            d_OrderList.get(0).execute();//execute first order from the order list
+        if (!d_OrderList.isEmpty()) {
+            if (!d_OrderList.get(0).getD_Keyword().equals("pass"))
+                d_OrderList.get(0).execute();//execute first order from the order list
             // remove the command after execution
             d_OrderList.remove(0);// remove first order from the order list
         }

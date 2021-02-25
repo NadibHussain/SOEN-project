@@ -35,6 +35,12 @@ public class InputValidator {
      */
     public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
 
+    public static ArrayList<String> VALID_GAMEPLAY_COMMANDS = new ArrayList<>(
+            Arrays.asList(
+                    "deploy"
+            )
+    );
+
     /**
      * static variable VALID_MAPEDITOR_OPTIONS of type String
      */
@@ -266,10 +272,6 @@ public class InputValidator {
         if (p_Arguments.size() != 1)
             throw new Exception("Invalid arguments");
 
-        // Validate if filename is alphanumeric
-        if (!isAlphaNumeric(p_Arguments.get(0)))
-            throw new Exception("Invalid filename: should be alphanumberic");
-
         return true;
     }
 
@@ -453,7 +455,7 @@ public class InputValidator {
      * @return true if the string contains only alphanumeric characters; else retur false
      */
     private static boolean isAlphaNumeric(String p_Str) {
-        return p_Str != null && p_Str.matches("^[a-zA-Z0-9]*$");
+        return p_Str != null && p_Str.matches("^[a-zA-Z0-9.]*$");
     }
 
     /**
