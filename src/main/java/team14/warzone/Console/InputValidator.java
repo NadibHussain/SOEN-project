@@ -11,7 +11,6 @@ import java.util.List;
  * @version 1.0
  */
 public class InputValidator {
-
     /**
      * Phase enum consists of MAPEDITOR, STARTUP, GAMEPLAY
      */

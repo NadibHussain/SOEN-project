@@ -21,12 +21,26 @@ import java.util.Collections;
  * @version 1.0
  */
 public class GameEngine {
-
+    /**
+     * field stores the current player who's turn is ongoing
+     */
     private Player d_CurrentPlayer;
+    /**
+     * the loaded map
+     */
     private Map d_LoadedMap;
+    /**
+     * list of players active in the game
+     */
     private ArrayList<Player> d_PlayerList;
 
+    /**
+     * intance of console
+     */
     private Console d_Console;
+    /**
+     * instance of map editor
+     */
     private MapEditor d_MapEditor;
 
     /**
@@ -219,7 +233,7 @@ public class GameEngine {
      * @param p_CountryName    name of the country where armies are to be deployed
      * @param p_NumberOfArmies number of armies to deploy
      * @throws Exception when deploy fails. Either country is not owned by player or player does not have enough
-     * armies to deploy
+     *                   armies to deploy
      */
     public void deploy(String p_CountryName, int p_NumberOfArmies) throws Exception {
         // check if numberOfArmies is more than what he has
