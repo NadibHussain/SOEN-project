@@ -25,6 +25,21 @@ public class MapEditor {
     public MapEditor() {
     }
 
+    
+    /** 
+     * This method loads an existing file. If file is not found, it creates a file and map from scratch.
+     * @param p_FileName
+     */
+    public void editMap(String p_FileName){
+        try {
+            loadMap(p_FileName);
+        } catch (FileNotFoundException l_FileException) {
+            System.out.println("Unable to find map file.Creating a new map file.");
+            d_LoadedMap = new Map();
+            saveMap(p_FileName);
+        }
+    }
+
     /**
      * Loadmap from file
      *
@@ -86,14 +101,14 @@ public class MapEditor {
                         String[] l_NeighbourArray = l_Line.split(" ");
                         ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
                         for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
-                            for (int l_countryIndex = 0; l_countryIndex < l_Countires.size(); l_countryIndex++) {
-                                if (l_Countires.get(l_countryIndex).getD_CountryIntID() == Integer
+                            for (int l_CountryIndex = 0; l_CountryIndex < l_Countires.size(); l_CountryIndex++) {
+                                if (l_Countires.get(l_CountryIndex).getD_CountryIntID() == Integer
                                         .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
-                                    l_NeighbourIDArray.add(l_Countires.get(l_countryIndex));
+                                    l_NeighbourIDArray.add(l_Countires.get(l_CountryIndex));
                                 }
                             }
                         }
-                        l_Countires.get(l_Index).setD_neighbours(l_NeighbourIDArray);
+                        l_Countires.get(l_Index).setD_Neighbours(l_NeighbourIDArray);
                         l_Index++;
                     }
                 }
@@ -113,26 +128,30 @@ public class MapEditor {
      */
     public void saveMap(String p_FileName) {
         String l_Content = "This map was created from a SOEN-6441 Project \n \n";
+        // writing all the continents
         l_Content += "[continents]\n";
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
             l_Content += l_Continent.getD_ContinentID() + " " + l_Continent.getD_ControlValue() + "\n";
         }
+
+        // writing all the countries
         l_Content += "\n[countries]\n";
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
             int l_ContinentIntId = -1;
-            for (Continent l_continent : d_LoadedMap.getD_Continents()) {
-                if (l_continent.getD_ContinentID().equals(l_Country.getD_CountryContinentID())) {
-                    l_ContinentIntId = l_continent.getD_ContinentIntID();
+            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
+                if (l_Continent.getD_ContinentID().equals(l_Country.getD_CountryContinentID())) {
+                    l_ContinentIntId = l_Continent.getD_ContinentIntID();
                 }
             }
             l_Content += l_Country.getD_CountryIntID() + " " + "-" + " " + l_ContinentIntId + "\n";
         }
 
+        // writing all the borders
         l_Content += "\n[borders]\n";
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
             l_Content += l_Country.getD_CountryIntID() + " ";
-            for (Country l_neighbour : l_Country.getD_neighbours()) {
-                l_Content += l_neighbour.getD_CountryIntID() + " ";
+            for (Country l_Neighbour : l_Country.getD_Neighbours()) {
+                l_Content += l_Neighbour.getD_CountryIntID() + " ";
             }
             l_Content += "\n";
         }
@@ -142,9 +161,9 @@ public class MapEditor {
             l_Writer.write(l_Content);
             l_Writer.close();
             System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
+        } catch (IOException l_IOException) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            l_IOException.printStackTrace();
         }
 
     }
@@ -171,11 +190,11 @@ public class MapEditor {
         // executing bfs on countries list and stacking connected nodes/country;
 
         for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
-            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_neighbours()
+            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_Neighbours()
                     .size() > l_NeighbourIndex; l_NeighbourIndex++) {
                 if (!(l_StackNodes.contains(
-                        l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
-                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
+                        l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
+                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
                             .getD_CountryIntID());
 
             }
@@ -217,13 +236,13 @@ public class MapEditor {
             Stack<Integer> l_StackNodes2 = new Stack<Integer>();
 
             for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size(); l_CountryIndex++) {
-                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_neighbours()
+                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_Neighbours()
                         .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-                    if (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_neighbours()
+                    if (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours()
                             .get(l_NeighbourIndex).getD_CountryIntID()))
-                            && l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
+                            && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
                             .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
-                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_neighbours().get(l_NeighbourIndex)
+                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
                                 .getD_CountryIntID());
 
                 }
