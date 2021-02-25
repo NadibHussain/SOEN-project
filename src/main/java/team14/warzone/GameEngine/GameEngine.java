@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -146,23 +147,7 @@ public class GameEngine {
      */
     public void gameLoop() {
         // reinforcement
-        for (Player l_Player : d_PlayerList) {
-            //1. # of territories owned divided by 3
-            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
-            //2. if the player owns all the territories of an entire continent the player is given
-            // a control bonus value
-            int l_ControlValueEnforcement = 0;
-            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-                //check if all countries belong to the l_Continent are owned by l_Player
-                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
-                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
-            }
-            //3.the minimal number of reinforcement armies for any player is 3 + control values
-            // of continents he owns
-            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
-            //give reinforcement to the player
-            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
-        }
+        reInforcement();
 
         // take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
@@ -202,6 +187,26 @@ public class GameEngine {
                 if (d_PlayerList.get(i).getD_OrderList().isEmpty())
                     l_Flag.set(i, Boolean.TRUE);
             }
+        }
+    }
+
+    public void reInforcement(){
+        for (Player l_Player : d_PlayerList) {
+            //1. # of territories owned divided by 3
+            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+            //2. if the player owns all the territories of an entire continent the player is given
+            // a control bonus value
+            int l_ControlValueEnforcement = 0;
+            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
+                //check if all countries belong to the l_Continent are owned by l_Player
+                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
+                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+            }
+            //3.the minimal number of reinforcement armies for any player is 3 + control values
+            // of continents he owns
+            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+            //give reinforcement to the player
+            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
     }
 
@@ -267,5 +272,14 @@ public class GameEngine {
      */
     public Map getD_LoadedMap() {
         return d_LoadedMap;
+    }
+
+    /**
+     * Get player list
+     *
+     * @return player list
+     */
+    public List<Player> getD_PlayerList(){
+        return d_PlayerList;
     }
 }
