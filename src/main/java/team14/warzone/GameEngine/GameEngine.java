@@ -268,4 +268,21 @@ public class GameEngine {
     public Map getD_LoadedMap() {
         return d_LoadedMap;
     }
+
+    public ArrayList<Player> getD_PlayerList() {
+        return d_PlayerList;
+    }
+
+    public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
+        d_PlayerList = p_PlayerList;
+    }
+
+    /**
+     * Setter for d_CurrentPlayer
+     *
+     * @param p_CurrentPlayer player object
+     */
+    public void setD_CurrentPlayer(Player p_CurrentPlayer) {
+        d_CurrentPlayer = p_CurrentPlayer;
+    }
 }

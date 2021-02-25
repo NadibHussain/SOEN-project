@@ -7,7 +7,6 @@ import team14.warzone.MapModule.MapEditor;
 /**
  * This is a driver class for the game engine
  */
-
 public class Driver {
     /**
      * Main class to run driver
