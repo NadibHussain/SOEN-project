@@ -93,11 +93,11 @@ public class GameEngine {
                 }
             }
             Console.displayMsg("Success: countries assigned");
+            // change phase to game play
+            InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
         } else {
             Console.displayMsg("Failed: 2-5 players required");
         }
-        // change phase to game play
-        InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
     }
 
     /**
