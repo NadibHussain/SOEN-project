@@ -28,7 +28,7 @@ public class MapEditor {
     public void editMap(String p_FileName){
         try {
             loadMap(p_FileName);
-        } catch (FileNotFoundException l_fileException) {
+        } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
             saveMap(p_FileName);
