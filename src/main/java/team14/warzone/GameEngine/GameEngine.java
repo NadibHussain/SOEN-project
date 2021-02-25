@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -63,6 +62,9 @@ public class GameEngine {
         try {
             d_MapEditor.loadMap(p_FileName);
             this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
+            // validate map right after loading
+            d_MapEditor.validateMap(d_LoadedMap);
+            System.out.println("Map loaded and validated");
             InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
         } catch (FileNotFoundException e) {
             System.out.println("Error: invalid filename");
@@ -193,7 +195,7 @@ public class GameEngine {
     /**
      * This method calculates and assign the reinforcement at the beginning of each turn
      */
-    public void reInforcement(){
+    public void reInforcement() {
         for (Player l_Player : d_PlayerList) {
             //1. # of territories owned divided by 3
             int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
