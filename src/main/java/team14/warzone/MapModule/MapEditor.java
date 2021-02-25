@@ -25,12 +25,13 @@ public class MapEditor {
     public MapEditor() {
     }
 
-    
-    /** 
-     * This method loads an existing file. If file is not found, it creates a file and map from scratch.
-     * @param p_FileName
+    /**
+     * This method loads an existing file. If file is not found, it creates a file
+     * and map from scratch.
+     * 
+     * @param p_FileName filename param
      */
-    public void editMap(String p_FileName){
+    public void editMap(String p_FileName) {
         try {
             loadMap(p_FileName);
         } catch (FileNotFoundException l_FileException) {
@@ -143,7 +144,8 @@ public class MapEditor {
                     l_ContinentIntId = l_Continent.getD_ContinentIntID();
                 }
             }
-            l_Content += l_Country.getD_CountryIntID() + " " + "-" + " " + l_ContinentIntId + "\n";
+            l_Content += l_Country.getD_CountryIntID() + " " + l_Country.getD_CountryID() + " " + l_ContinentIntId
+                    + "\n";
         }
 
         // writing all the borders
@@ -241,7 +243,7 @@ public class MapEditor {
                     if (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours()
                             .get(l_NeighbourIndex).getD_CountryIntID()))
                             && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-                            .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
+                                    .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
                         l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
                                 .getD_CountryIntID());
 
@@ -251,16 +253,13 @@ public class MapEditor {
             // checking if subgraph is connected
             if (l_StackNodes2.size() == l_Countries2.size())
                 l_ConnectedSubGraph = true;
-            else {
-                System.out.println("Sub-graph is not connected.");
-                return false;
-            }
 
         }
 
-        if (l_ConnectedGraph && l_HasContinent && l_ConnectedSubGraph)
+        if (l_ConnectedGraph && l_HasContinent) {
+            System.out.println("The map is valid.");
             return true;
-        else {
+        } else {
             System.out.println("The map is not valid.");
             return false;
         }

@@ -11,7 +11,6 @@ import java.util.List;
  * @version 1.0
  */
 public class InputValidator {
-
     /**
      * Phase enum consists of MAPEDITOR, STARTUP, GAMEPLAY
      */
@@ -34,7 +33,10 @@ public class InputValidator {
      * static variable CURRENT_PHASE of type Phase
      */
     public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
-
+    /**
+     * valid gameplay commands arraylist
+     *
+     */
     public static ArrayList<String> VALID_GAMEPLAY_COMMANDS = new ArrayList<>(
             Arrays.asList(
                     "deploy"

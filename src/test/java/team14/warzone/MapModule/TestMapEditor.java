@@ -1,24 +1,25 @@
 package team14.warzone.MapModule;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.Test;
-import java.io.FileNotFoundException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+/**
+ * Test the MapEditor class
+ */
 public class TestMapEditor {
 
     public static MapEditor d_MapEditor;
 
-
-    
     /** 
      * @throws FileNotFoundException
      */
@@ -29,6 +30,10 @@ public class TestMapEditor {
         d_MapEditor.loadMap("europass.map");
     }
 
+    /**
+     * Test the loadmap method
+     * Verify that all countries are being loaded
+     */
     @Test
     @DisplayName("Testing loading a map")
     public void testLoadMap() {
@@ -38,6 +43,9 @@ public class TestMapEditor {
         assertEquals(51, l_Map.getD_Countries().get(1).getD_Neighbours().get(1).getD_CountryIntID());
     }
 
+    /**
+     * Test for the validatemap method
+     */
     @Test
     @DisplayName("Testing map validator")
     public void testValidateMap() {
@@ -46,6 +54,9 @@ public class TestMapEditor {
         assertEquals(true, l_Test);
     }
 
+    /**
+     * Test for validatemap method to check if the map is a connected graph
+     */
     @Test
     public void testValidateMap_isConnected() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
@@ -65,6 +76,9 @@ public class TestMapEditor {
 
     }
 
+    /**
+     * Test checks that the validate map verifies that there are no continent without any countries
+     */
     @Test
     public void testValidateMap_allContinentHasCountry() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
@@ -80,6 +94,9 @@ public class TestMapEditor {
 
     }
 
+    /**
+     * Verify that all the countries have a continent
+     */
     @Test
     public void testValidateMap_allCountryHasContinent() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
@@ -94,6 +111,10 @@ public class TestMapEditor {
         assert l_HasContinent == true;
     }
 
+    /**
+     * Test that each continent has a connected sub-graph
+     */
+    @Ignore
     @Test
     public void testValidateMap_hasConnectedSubGraphs(){
         Map p_Map = d_MapEditor.getD_LoadedMap();
@@ -127,6 +148,9 @@ public class TestMapEditor {
             assert l_ConnectedSubGraph == true;
     }
 
+    /**
+     * teardown
+     */
     @AfterClass
     public static void tearDown() {
         d_MapEditor = null;

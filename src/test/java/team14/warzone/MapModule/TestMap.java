@@ -1,18 +1,23 @@
 package team14.warzone.MapModule;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
 import static junit.framework.TestCase.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.Test;
-
+/**
+ * Tests for Map class
+ */
 public class TestMap {
 
     public static Map d_M1;
     public static Continent d_Asia, d_Africa;
     public static Country d_India, d_Kenya;
+    /**
+     * static initializing test
+     */
     @BeforeClass
     public static void initialize() {
         d_M1 = new Map();
@@ -20,6 +25,9 @@ public class TestMap {
         d_M1.addCountry("South-Africa","Africa");
     }
 
+    /**
+     * tests adding continents
+     */
     @Test
     @DisplayName("Testing Add Continent")
     public void testAddContinent() {
@@ -28,6 +36,9 @@ public class TestMap {
         assertNotNull(d_M1.findContinent("Asia"));
         assertEquals(l_ContinentCount+1, d_M1.getD_Continents().size());
     }
+    /**
+     * tests adding countries
+     */
 
     @Test
     @DisplayName("Testing Add Country")
@@ -39,6 +50,10 @@ public class TestMap {
 
     }
 
+    /**
+     * tests removing countries
+     */
+
     @Test
     @DisplayName("Testing Remove Country")
     public void testRemoveCountry() {
@@ -48,6 +63,9 @@ public class TestMap {
         assertEquals(l_CountryCount-1, d_M1.getD_Countries().size());
     }
 
+    /**
+     * test removing continent
+     */
     @Test
     @DisplayName("Testing Remove Continent")
     public void testRemoveContinent() {
@@ -57,18 +75,27 @@ public class TestMap {
         assertEquals(l_ContinentCount-1, d_M1.getD_Continents().size());
     }
 
+    /**
+     * test find a continent
+     */
     @Test
     @DisplayName("Testing find Continent")
     public void testFindContinent() {
         assertNotNull(d_M1.findContinent("Africa"));
     }
 
+    /**
+     * test find a country
+     */
     @Test
     @DisplayName("Testing find Country")
     public void testFindCountry() {
         assertNotNull(d_M1.findCountry("South-Africa"));
     }
 
+    /**
+     * testing getting a country from a continent
+     */
     @Test
     @DisplayName("Testing getting list of country of continent")
     public void testGetCountryListOfContinent() {

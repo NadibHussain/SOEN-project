@@ -21,12 +21,26 @@ import java.util.Collections;
  * @version 1.0
  */
 public class GameEngine {
-
+    /**
+     * field stores the current player who's turn is ongoing
+     */
     private Player d_CurrentPlayer;
+    /**
+     * the loaded map
+     */
     private Map d_LoadedMap;
+    /**
+     * list of players active in the game
+     */
     private ArrayList<Player> d_PlayerList;
 
+    /**
+     * intance of console
+     */
     private Console d_Console;
+    /**
+     * instance of map editor
+     */
     private MapEditor d_MapEditor;
 
     /**
@@ -219,7 +233,7 @@ public class GameEngine {
      * @param p_CountryName    name of the country where armies are to be deployed
      * @param p_NumberOfArmies number of armies to deploy
      * @throws Exception when deploy fails. Either country is not owned by player or player does not have enough
-     * armies to deploy
+     *                   armies to deploy
      */
     public void deploy(String p_CountryName, int p_NumberOfArmies) throws Exception {
         // check if numberOfArmies is more than what he has
@@ -261,15 +275,16 @@ public class GameEngine {
     /**
      * Get loaded map
      *
-     * @return returns a loaded map
+     * @return d_LoadedMap loaded map is returned
      */
     public Map getD_LoadedMap() {
         return d_LoadedMap;
     }
 
-    
-    /** 
-     * @return ArrayList<Player>
+
+    /**
+     * Get player list
+     * @return d_PlayerList Player list is returned
      */
     public ArrayList<Player> getD_PlayerList() {
         return d_PlayerList;
@@ -277,16 +292,15 @@ public class GameEngine {
 
     
     /** 
-     * @param p_PlayerList
+     * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
         d_PlayerList = p_PlayerList;
     }
 
     /**
-     * Setter for d_CurrentPlayer
-     *
-     * @param p_CurrentPlayer player object
+     * Setter for current player
+     * @param p_CurrentPlayer current player parameter
      */
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
         d_CurrentPlayer = p_CurrentPlayer;

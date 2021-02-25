@@ -199,11 +199,11 @@ public class Map {
         Country l_Neighbour = findCountry(p_NeighbourID);
         for (Country l_CountryIndex : d_Countries) {
             if (l_CountryIndex.getD_CountryID().equals(l_Country.getD_CountryID())) {
-                l_CountryIndex.addNeighbour(l_Country);
+                l_CountryIndex.addNeighbour(l_Neighbour);
                 l_Invalid1 = false;
             }
             if (l_CountryIndex.getD_CountryID().equals(l_Neighbour.getD_CountryID())) {
-                l_CountryIndex.addNeighbour(l_Neighbour);
+                l_CountryIndex.addNeighbour(l_Country);
                 l_Invalid2 = false;
             }
         }
