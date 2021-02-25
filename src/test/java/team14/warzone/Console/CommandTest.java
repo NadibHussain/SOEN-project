@@ -1,24 +1,39 @@
 package team14.warzone.Console;
 
 import org.junit.Ignore;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests for the Command class
+ */
 public class CommandTest {
+    /**
+     * list to store options
+     */
     List<Option> options = new ArrayList<>();
+    /**
+     * field to instantiate a command
+     */
     Command command = new Command("editContenent", (Option) options);
 
+    /**
+     * Test the getter for keyword
+     */
     @Ignore
     @Test
     public void getD_Keyword() {
         assertEquals("editContenent", command.getD_Keyword());
     }
 
+    /**
+     * Test setter for keyword
+     */
     @Ignore
     @Test
     public void setD_Keyword() {
@@ -26,6 +41,9 @@ public class CommandTest {
         assertEquals("editCountry", command.getD_Keyword());
     }
 
+    /**
+     * Test getter for options
+     */
     @Ignore
     @Test
     public void getD_Options() {
@@ -37,6 +55,9 @@ public class CommandTest {
         assertEquals(options, command.getD_Options());
     }
 
+    /**
+     * Test setter for options
+     */
     @Ignore
     @Test
     public void setD_Options() {
