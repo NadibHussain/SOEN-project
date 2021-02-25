@@ -28,7 +28,7 @@ public class MapEditor {
     
     /** 
      * This method loads an existing file. If file is not found, it creates a file and map from scratch.
-     * @param p_FileName
+     * @param p_FileName filename param
      */
     public void editMap(String p_FileName){
         try {
