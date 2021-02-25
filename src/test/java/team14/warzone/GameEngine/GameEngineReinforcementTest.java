@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GameEngineTest {
+public class GameEngineReinforcementTest {
     public static GameEngine d_GE;
     public static List<Player> d_PlayerList;
     public static Console d_Console;
