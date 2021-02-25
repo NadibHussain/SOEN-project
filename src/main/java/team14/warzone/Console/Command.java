@@ -3,6 +3,7 @@ package team14.warzone.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -72,7 +73,11 @@ public class Command {
                 break;
 
             case "editmap":
-                d_MapEditor.loadMap(l_CommandArgs.get(0));
+                try {
+                    d_MapEditor.loadMap(l_CommandArgs.get(0));
+                } catch (FileNotFoundException e) {
+                    System.out.println("Error: invalid filename");
+                }
                 break;
 
             case "validatemap":

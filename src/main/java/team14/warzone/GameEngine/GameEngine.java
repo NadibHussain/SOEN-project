@@ -8,6 +8,7 @@ import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -58,9 +59,13 @@ public class GameEngine {
      * @param p_FileName String FileName as parameter
      */
     public void loadMap(String p_FileName) {
-        d_MapEditor.loadMap(p_FileName);
-        this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
-        InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+        try {
+            d_MapEditor.loadMap(p_FileName);
+            this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
+            InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: invalid filename");
+        }
     }
 
     /**

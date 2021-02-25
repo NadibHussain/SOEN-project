@@ -272,10 +272,6 @@ public class InputValidator {
         if (p_Arguments.size() != 1)
             throw new Exception("Invalid arguments");
 
-        // Validate if filename is alphanumeric
-        if (!isAlphaNumeric(p_Arguments.get(0)))
-            throw new Exception("Invalid filename: should be alphanumberic");
-
         return true;
     }
 

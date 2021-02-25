@@ -1,21 +1,22 @@
 package team14.warzone.MapModule;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.ArrayList;
-import java.util.Stack;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Stack;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestMapEditor {
 
     public static MapEditor d_MapEditor;
 
     @BeforeAll
-    public static void init() {
+    public static void init() throws FileNotFoundException {
         d_MapEditor = new MapEditor();
         d_MapEditor.loadMap("europass.map");
     }
