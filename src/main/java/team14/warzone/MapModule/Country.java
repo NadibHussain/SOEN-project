@@ -154,7 +154,7 @@ public class Country {
      * Get neighbours method
      * @return returns an array with all neighbours
      */
-    public ArrayList<Country> getD_neighbours() {
+    public ArrayList<Country> getD_Neighbours() {
         return d_Neighbours;
     }
 
@@ -162,7 +162,7 @@ public class Country {
      * set neighbour list
      * @param p_Neighbours array list of the country object of the neighbour
      */
-    public void setD_neighbours(ArrayList<Country> p_Neighbours) {
+    public void setD_Neighbours(ArrayList<Country> p_Neighbours) {
         this.d_Neighbours = p_Neighbours;
     }
 
