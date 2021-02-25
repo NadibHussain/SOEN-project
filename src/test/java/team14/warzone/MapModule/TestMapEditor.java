@@ -1,9 +1,18 @@
 package team14.warzone.MapModule;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -15,8 +24,10 @@ public class TestMapEditor {
 
     public static MapEditor d_MapEditor;
 
+
     @BeforeAll
     public static void init() throws FileNotFoundException {
+
         d_MapEditor = new MapEditor();
         d_MapEditor.loadMap("europass.map");
     }
@@ -39,7 +50,7 @@ public class TestMapEditor {
     }
 
     @Test
-    void testValidateMap_isConnected() {
+    public void testValidateMap_isConnected() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         Stack<Integer> l_StackNodes = new Stack<Integer>();
@@ -58,7 +69,7 @@ public class TestMapEditor {
     }
 
     @Test
-    void testValidateMap_allContinentHasCountry() {
+    public void testValidateMap_allContinentHasCountry() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Continent> l_Continents = p_Map.getD_Continents();
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
@@ -73,7 +84,7 @@ public class TestMapEditor {
     }
 
     @Test
-    void testValidateMap_allCountryHasContinent() {
+    public void testValidateMap_allCountryHasContinent() {
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         boolean l_HasContinent = true;
@@ -86,7 +97,8 @@ public class TestMapEditor {
         assert l_HasContinent == true;
     }
 
-    @Test void testValidateMap_hasConnectedSubGraphs(){
+    @Test
+    public void testValidateMap_hasConnectedSubGraphs(){
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Continent> l_Continents = p_Map.getD_Continents();
         boolean l_ConnectedSubGraph = false;
@@ -119,7 +131,7 @@ public class TestMapEditor {
             assert l_ConnectedSubGraph == true;
     }
 
-    @AfterAll
+    @AfterClass
     public static void tearDown() {
         d_MapEditor = null;
     }
