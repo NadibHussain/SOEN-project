@@ -30,22 +30,8 @@ public class GameEngine {
     private MapEditor d_MapEditor;
 
     /**
-     * public method of GameEngine
-     */
-    public GameEngine() {
-    }
-
-    /**
-     * @param p_Console Console parameter
-     */
-    public GameEngine(Console p_Console) {
-        d_Console = p_Console;
-        d_PlayerList = new ArrayList<Player>();
-    }
-
-    /**
-     * @param p_Console   Console parameter
-     * @param p_MapEditor MapEditor parameter
+     * @param p_Console   console object
+     * @param p_MapEditor map editor object
      */
     public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
@@ -54,9 +40,9 @@ public class GameEngine {
     }
 
     /**
-     * LoadMap method
+     * Method loads a map from a dominion map file
      *
-     * @param p_FileName String FileName as parameter
+     * @param p_FileName file name to be loaded
      */
     public void loadMap(String p_FileName) {
         try {
@@ -104,9 +90,9 @@ public class GameEngine {
     }
 
     /**
-     * Add player method
+     * Method adds players to the player list
      *
-     * @param p_PlayerName String PlayerName as parameter
+     * @param p_PlayerName String name of the player
      */
     public void addPlayer(String p_PlayerName) {
         if (d_PlayerList.size() == 5)
@@ -121,9 +107,9 @@ public class GameEngine {
     }
 
     /**
-     * Remove Player
+     * Method remove a player from the player list
      *
-     * @param p_PlayerName String PlayerName as parameter
+     * @param p_PlayerName String name of the player
      */
     public void removePlayer(String p_PlayerName) {
         if (d_PlayerList.isEmpty())

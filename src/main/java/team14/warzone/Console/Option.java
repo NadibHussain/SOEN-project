@@ -7,7 +7,13 @@ import java.util.List;
  * This class is used to create objects representing the options entered by user in the command line
  */
 public class Option {
+    /**
+     * name of the option (-add or -remove)
+     */
     private String d_Name;
+    /**
+     * list of arguments
+     */
     private List<String> d_Arguments = new ArrayList<String>();
 
     /**
@@ -75,10 +81,9 @@ public class Option {
     /**
      * A method to add argument to the option
      *
-     * @param arg : argument to be added
+     * @param p_Arg : argument to be added
      */
-    public void addArgument(String arg) {
-        this.d_Arguments.add(arg);
+    public void addArgument(String p_Arg) {
+        this.d_Arguments.add(p_Arg);
     }
-
 }
