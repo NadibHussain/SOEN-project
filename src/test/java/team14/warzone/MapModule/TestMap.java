@@ -1,13 +1,15 @@
 package team14.warzone.MapModule;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
 import static junit.framework.TestCase.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.Test;
-
+/**
+ * Tests for Map class
+ */
 public class TestMap {
 
     public static Map d_M1;
