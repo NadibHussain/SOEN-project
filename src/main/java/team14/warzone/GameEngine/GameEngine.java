@@ -250,6 +250,9 @@ public class GameEngine {
             throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " has " + d_CurrentPlayer.getD_TotalNumberOfArmies() + " < " + p_NumberOfArmies);
         // check if country is owned by the player
         Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        if (l_CountryToDeployIn == null) {
+            throw new Exception("Deploy failed: country does not exist");
+        }
         if (!d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
             throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
         }
