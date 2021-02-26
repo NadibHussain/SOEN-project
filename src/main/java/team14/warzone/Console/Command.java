@@ -3,7 +3,6 @@ package team14.warzone.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -97,10 +96,12 @@ public class Command {
                 break;
 
             case "showmap":
-                if (d_GameEngine.getD_LoadedMap() == null)
+                if (d_GameEngine.getD_LoadedMap() == null && d_MapEditor.getD_LoadedMap() == null)
                     System.out.println("Please load a map first!");
-                else
+                else if (d_GameEngine.getD_LoadedMap() != null)
                     d_GameEngine.getD_LoadedMap().showMap();
+                else
+                    d_MapEditor.getD_LoadedMap().showMap();
                 break;
 
             case "gameplayer":
@@ -178,8 +179,8 @@ public class Command {
         this.d_Option = p_Option;
     }
 
-    
-    /** 
+
+    /**
      * @return String
      */
     @Override
