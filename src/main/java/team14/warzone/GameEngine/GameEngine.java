@@ -63,9 +63,12 @@ public class GameEngine {
             d_MapEditor.loadMap(p_FileName);
             this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
             // validate map right after loading
-            d_MapEditor.validateMap(d_LoadedMap);
-            System.out.println("Map loaded and validated");
-            InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+            if (!d_MapEditor.validateMap(d_LoadedMap))
+                System.out.println("Error: map validation failed, not loaded");
+            else {
+                System.out.println("Success: map loaded and validated");
+                InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Error: invalid filename");
         }
@@ -284,14 +287,15 @@ public class GameEngine {
 
     /**
      * Get player list
+     *
      * @return d_PlayerList Player list is returned
      */
     public ArrayList<Player> getD_PlayerList() {
         return d_PlayerList;
     }
 
-    
-    /** 
+
+    /**
      * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
@@ -300,6 +304,7 @@ public class GameEngine {
 
     /**
      * Setter for current player
+     *
      * @param p_CurrentPlayer current player parameter
      */
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
