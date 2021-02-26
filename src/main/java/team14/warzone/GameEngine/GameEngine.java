@@ -154,6 +154,12 @@ public class GameEngine {
         // reinforcement
         reInforcement();
 
+        // display armies remaining in possession for each player
+        for (Player l_Player : d_PlayerList) {
+            System.out.println("Status: " + l_Player.getD_Name() + " has " + l_Player.getD_TotalNumberOfArmies() + " " +
+                    "armies");
+        }
+
         // take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);
