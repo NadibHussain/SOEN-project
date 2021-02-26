@@ -63,9 +63,12 @@ public class GameEngine {
             d_MapEditor.loadMap(p_FileName);
             this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
             // validate map right after loading
-            d_MapEditor.validateMap(d_LoadedMap);
-            System.out.println("Map loaded and validated");
-            InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+            if (!d_MapEditor.validateMap(d_LoadedMap))
+                System.out.println("Error: map validation failed, not loaded");
+            else {
+                System.out.println("Success: map loaded and validated");
+                InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Error: invalid filename");
         }
@@ -150,6 +153,12 @@ public class GameEngine {
     public void gameLoop() {
         // reinforcement
         reInforcement();
+
+        // display armies remaining in possession for each player
+        for (Player l_Player : d_PlayerList) {
+            System.out.println("Status: " + l_Player.getD_Name() + " has " + l_Player.getD_TotalNumberOfArmies() + " " +
+                    "armies");
+        }
 
         // take and queue orders
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
@@ -241,6 +250,9 @@ public class GameEngine {
             throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " has " + d_CurrentPlayer.getD_TotalNumberOfArmies() + " < " + p_NumberOfArmies);
         // check if country is owned by the player
         Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
+        if (l_CountryToDeployIn == null) {
+            throw new Exception("Deploy failed: country does not exist");
+        }
         if (!d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
             throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
         }
@@ -284,14 +296,15 @@ public class GameEngine {
 
     /**
      * Get player list
+     *
      * @return d_PlayerList Player list is returned
      */
     public ArrayList<Player> getD_PlayerList() {
         return d_PlayerList;
     }
 
-    
-    /** 
+
+    /**
      * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
@@ -300,6 +313,7 @@ public class GameEngine {
 
     /**
      * Setter for current player
+     *
      * @param p_CurrentPlayer current player parameter
      */
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
