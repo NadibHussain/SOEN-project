@@ -1,6 +1,6 @@
 package team14.warzone.GameEngine;
 
-import team14.warzone.Console.Command;
+import team14.warzone.GameEngine.Commands.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.Continent;
