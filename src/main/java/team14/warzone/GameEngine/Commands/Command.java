@@ -1,5 +1,6 @@
-package team14.warzone.Console;
+package team14.warzone.GameEngine.Commands;
 
+import team14.warzone.Console.Option;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
