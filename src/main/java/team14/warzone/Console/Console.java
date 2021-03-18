@@ -1,11 +1,9 @@
 package team14.warzone.Console;
 
 import team14.warzone.GameEngine.Commands.Command;
-import team14.warzone.GameEngine.Commands.Option;
-import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -32,7 +30,7 @@ public class Console {
     /**
      * A method to read input from user console
      */
-    public void readInput() {
+    public List<List<String>> readInput() {
         String[] l_UserInput = d_Scanner.nextLine().split(" ");
         //if user wants to exit the game
         if (l_UserInput[0].equals("exit"))
@@ -42,14 +40,19 @@ public class Console {
         String l_OptName = ""; //to store command option
         List<String> l_Arguments = new ArrayList<>();
         boolean l_ValidCommand = true;// to store the command validity
+        List<List<String>> l_Commands_list = new ArrayList<>();// array list to store commands information
         //check one word command : a keyword only, no options or arguments
         if (l_UserInput.length == 1) {
             if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
-                //Create Command object, passing keyword and option
-                Option l_opt = new Option();
-                Command l_UserCommand = new Command(l_Keyword, l_opt);
-                setD_CommandBuffer(l_UserCommand);
                 System.out.println("valid command");
+//                Option l_opt = new Option();
+//                Command l_UserCommand = new Command(l_Keyword, l_opt);
+//                setD_CommandBuffer(l_UserCommand);
+                List<String> l_Command = new ArrayList<>(); // to store command information
+                l_Command.add(l_Keyword);
+                l_Command.add("");
+                l_Command.add("");
+                l_Commands_list.add(l_Command);//add command to command list
             }
         }
         //check two words command : : a keyword with an argument, no options
@@ -57,11 +60,16 @@ public class Console {
             l_Arguments.add(l_UserInput[1]);
             if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
                 System.out.println("valid command");
-                //Create Command object, passing keyword and option
-                Option l_opt = new Option();
-                l_opt.addArgument(l_Arguments.get(0));
-                Command l_UserCommand = new Command(l_Keyword, l_opt);
-                setD_CommandBuffer(l_UserCommand);
+//                //Create Command object, passing keyword and option
+//                Option l_opt = new Option();
+//                l_opt.addArgument(l_Arguments.get(0));
+//                Command l_UserCommand = new Command(l_Keyword, l_opt);
+//                setD_CommandBuffer(l_UserCommand);
+                List<String> l_Command = new ArrayList<>(); // to store command information
+                l_Command.add(l_Keyword);
+                l_Command.add("");
+                l_Command.add(l_Arguments.get(0));
+                l_Commands_list.add(l_Command);//add command to command list
             }
         } else { //check three words or more command
             for (int i = 1; i < l_UserInput.length; i++) {
@@ -88,13 +96,20 @@ public class Console {
                     //Set options for the user command
                     ArrayList<String> l_TempArgs = new ArrayList<>();
                     l_TempArgs.addAll(l_Arguments);
-                    Option l_opt = new Option(l_OptName, l_TempArgs);
-                    //Create Command object, passing keyword and option
-                    Command l_UserCommand = new Command(l_Keyword, l_opt);
-                    setD_CommandBuffer(l_UserCommand);
+//                    Option l_opt = new Option(l_OptName, l_TempArgs);
+//                    //Create Command object, passing keyword and option
+//                    Command l_UserCommand = new Command(l_Keyword, l_opt);
+//                    setD_CommandBuffer(l_UserCommand);
+                    List<String> l_Command = new ArrayList<>(); // to store command information
+                    l_Command.add(l_Keyword);
+                    l_Command.add(l_OptName);
+                    l_Command.add(String.join(",", l_TempArgs));
+                    l_Commands_list.add(l_Command);
                 }
             }
         }
+        System.out.println(Arrays.deepToString(l_Commands_list.toArray()));
+        return l_Commands_list;
     }
 
     /**
@@ -103,29 +118,29 @@ public class Console {
      * @param p_GameEngine GameEngine param
      * @param p_MapEditor  MapEditor param
      */
-    public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
-        if (!d_CommandBuffer.isEmpty()) {
-            for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
-                d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
-                d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
-                if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
-                    d_CommandBuffer.get(l_I).execute();
-                } else {
-                    switch (InputValidator.CURRENT_PHASE) {
-                        case MAPEDITOR:
-                        case STARTUP:
-                            d_CommandBuffer.get(l_I).execute();
-                            break;
-
-                        case GAMEPLAY:
-                            p_GameEngine.receiveCommand(d_CommandBuffer.get(l_I));
-                            break;
-                    }
-                }
-            }
-            clearCommandBuffer();
-        }
-    }
+//    public void filterCommand(GameEngine p_GameEngine, MapEditor p_MapEditor) {
+//        if (!d_CommandBuffer.isEmpty()) {
+//            for (int l_I = 0; l_I < d_CommandBuffer.size(); l_I++) {
+//                d_CommandBuffer.get(l_I).setD_GameEngine(p_GameEngine);
+//                d_CommandBuffer.get(l_I).setD_MapEditor(p_MapEditor);
+//                if (d_CommandBuffer.get(l_I).getD_Keyword().equals("showmap")) {
+//                    d_CommandBuffer.get(l_I).execute();
+//                } else {
+//                    switch (InputValidator.CURRENT_PHASE) {
+//                        case MAPEDITOR:
+//                        case STARTUP:
+//                            d_CommandBuffer.get(l_I).execute();
+//                            break;
+//
+//                        case GAMEPLAY:
+//                            p_GameEngine.receiveCommand(d_CommandBuffer.get(l_I));
+//                            break;
+//                    }
+//                }
+//            }
+//            clearCommandBuffer();
+//        }
+//    }
 
     /**
      * Method clears the command buffer
