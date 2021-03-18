@@ -1,8 +1,9 @@
 package team14.warzone.GameEngine;
 
-import team14.warzone.GameEngine.Commands.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -43,6 +44,14 @@ public class GameEngine {
      */
     private MapEditor d_MapEditor;
 
+    // State pattern attributes
+    private Phase d_CurrentPhase;
+
+    private Phase d_MapEditorPhase;
+    private Phase d_StartupPhase;
+    private Phase d_IssueCommandsPhase;
+    private Phase d_ExecuteCommandsPhase;
+
     /**
      * @param p_Console   console object
      * @param p_MapEditor map editor object
@@ -51,6 +60,12 @@ public class GameEngine {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
+
+        d_MapEditorPhase = new MapEditorPhase(this);
+        d_StartupPhase = new StartupPhase(this);
+        d_IssueCommandsPhase = new IssueCommandsPhase(this);
+        d_ExecuteCommandsPhase = new ExecuteCommandsPhase(this);
+        d_CurrentPhase = d_MapEditorPhase;
     }
 
     /**
@@ -151,6 +166,7 @@ public class GameEngine {
      * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
+//        d_CurrentPhase.run();
         // reinforcement
         reInforcement();
 
@@ -318,5 +334,29 @@ public class GameEngine {
      */
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
         d_CurrentPlayer = p_CurrentPlayer;
+    }
+
+    public Phase getD_CurrentPhase() {
+        return d_CurrentPhase;
+    }
+
+    public void setD_CurrentPhase(Phase p_CurrentPhase) {
+        d_CurrentPhase = p_CurrentPhase;
+    }
+
+    public Phase getD_MapEditorPhase() {
+        return d_MapEditorPhase;
+    }
+
+    public Phase getD_StartupPhase() {
+        return d_StartupPhase;
+    }
+
+    public Phase getD_IssueCommandsPhase() {
+        return d_IssueCommandsPhase;
+    }
+
+    public Phase getD_ExecuteCommandsPhase() {
+        return d_ExecuteCommandsPhase;
     }
 }
