@@ -14,6 +14,7 @@ public class MapEditorPhase extends Phase {
         while (true) {
             issueCommands();
             executeCommands();
+            // break out of loop when "loadmap" is typed GameEngine.currentPhase = startupPhase
         }
     }
 
@@ -90,10 +91,18 @@ public class MapEditorPhase extends Phase {
     @Override
     public void issueCommands() {
         // use console to prompt user to enter command
-        // console.readMapInput(); return { { editcountry, -add, canada, northamerica }, { editcountry, -remove usa } }
-        // return {{ deploy, canada, 5 }}
+        // console.readMapInput();
+        /*
+        by the way, this is how I return commands list: editcountry -add canada,5 -remove usa 6 keyword option arguments
+        for 1 word commands: {{"keyword", "", ""}}
+        for 2 words commands: {{"keyword", "", "argument"}}
+        for longer commands: {{"keyword", "optionName1", "arguments1_separated_by_comma"}, {"keyword", "optionName2", "arguments2_separated_by_comma"}}
+        so you may use "argumentList".split(",") => to convert the arguments into a list
+         */
 
         // create command object
+
+        // store command in buffer d_CommandBuffer
     }
 
     @Override
