@@ -12,7 +12,7 @@ import java.util.Collections;
  * @author Anagh
  * @version 1.0
  */
-public class Player {
+public class Player implements Subject {
     /**
      * name of player
      */
@@ -29,11 +29,14 @@ public class Player {
      * list of orders issued by player that has not been executed
      */
     private ArrayList<Command> d_OrderList;
+    private ArrayList<Card> d_CardList;
+    private ArrayList<Observer> d_ObserverList;
 
     /**
      * Default constructor that takes no params
      */
     public Player() {
+        this.d_ObserverList = new ArrayList<Observer>();
     }
 
     /**
@@ -46,10 +49,12 @@ public class Player {
      */
     public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
                   ArrayList<Command> d_OrderList) {
+        this();
         this.d_Name = d_Name;
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
         this.d_CountriesOwned = d_CountriesOwned;
         this.d_OrderList = d_OrderList;
+        d_CardList = new ArrayList<>();
     }
 
     /**
@@ -96,6 +101,11 @@ public class Player {
      */
     public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
+    }
+
+    public void countryConquered (Country p_Country) {
+        addCountryOwned(p_Country);
+        notifyObserver();
     }
 
     /**
@@ -168,5 +178,40 @@ public class Player {
      */
     public void setD_Name(String d_Name) {
         this.d_Name = d_Name;
+    }
+
+
+
+    public ArrayList<Observer> getObservers() {
+        return d_ObserverList;
+    }
+
+    @Override
+    public void register(Observer observingplayer) {
+        d_ObserverList.add(observingplayer);
+    }
+
+    @Override
+    public void unregister(Observer observingplayer) {
+        d_ObserverList.remove(observingplayer);
+    }
+
+    public ArrayList<Card> getD_CardList() {
+        return d_CardList;
+    }
+    public void setD_CardList(ArrayList<Card> d_CardList) {
+        this.d_CardList = d_CardList;
+    }
+
+    public void addCard(Card card) {
+        d_CardList.add(card);
+    }
+
+    @Override
+    public void notifyObserver() {
+        System.out.println("A player has conquered a new country");
+        for (Observer observer: getObservers()) {
+            observer.update(d_CountriesOwned);
+        }
     }
 }

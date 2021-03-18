@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -20,7 +21,7 @@ import java.util.Collections;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine {
+public class GameEngine implements Observer{
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -42,6 +43,8 @@ public class GameEngine {
      * instance of map editor
      */
     private MapEditor d_MapEditor;
+
+    Random randomNumber = new Random();
 
     /**
      * @param p_Console   console object
@@ -119,6 +122,7 @@ public class GameEngine {
         else {
             Player l_LocalPlayer = new Player(p_PlayerName);
             d_PlayerList.add(l_LocalPlayer);
+            l_LocalPlayer.register(this);
             Console.displayMsg("Player added: " + p_PlayerName);
         }
     }
@@ -318,5 +322,13 @@ public class GameEngine {
      */
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
         d_CurrentPlayer = p_CurrentPlayer;
+    }
+
+    @Override
+    public void update (ArrayList d_CountriesOwned) {
+        Card card = new Card();
+        card.setCardType(card.TYPES[randomNumber.nextInt(card.TYPES.length)]);
+
+        this.d_CurrentPlayer.addCard(card);
     }
 }
