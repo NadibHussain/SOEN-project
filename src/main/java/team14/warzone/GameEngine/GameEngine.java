@@ -319,4 +319,13 @@ public class GameEngine {
     public void setD_CurrentPlayer(Player p_CurrentPlayer) {
         d_CurrentPlayer = p_CurrentPlayer;
     }
+
+    /**
+     * Get current player
+     *
+     * @return d_CurrentPlayer is returned
+     */
+    public Player getD_CurrentPlayer() {
+        return d_CurrentPlayer;
+    }
 }

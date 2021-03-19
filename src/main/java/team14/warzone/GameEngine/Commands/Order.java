@@ -3,7 +3,7 @@ package team14.warzone.GameEngine.Commands;
 import team14.warzone.Console.Option;
 import team14.warzone.GameEngine.GameEngine;
 
-public interface IOrder {
+public class Order {
     /**
      * field stores option object
      */
@@ -17,5 +17,5 @@ public interface IOrder {
     /**
      * Method to execute the command
      */
-    void execute();
+    void execute() throws Exception{}
 }
