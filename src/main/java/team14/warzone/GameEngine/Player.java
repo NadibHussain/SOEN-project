@@ -29,7 +29,13 @@ public class Player implements Subject {
      * list of orders issued by player that has not been executed
      */
     private ArrayList<Command> d_OrderList;
+    /**
+     * list of cards the player is holding
+     */
     private ArrayList<Card> d_CardList;
+    /**
+     * list of observers
+     */
     private ArrayList<Observer> d_ObserverList;
 
     /**
@@ -103,6 +109,10 @@ public class Player implements Subject {
         this.d_CountriesOwned.add(p_Country);
     }
 
+    /**
+     * This method implements the functionality of conquering countries (required to assign cards)
+     * @param p_Country country which has been captured
+     */
     public void countryConquered (Country p_Country) {
         addCountryOwned(p_Country);
         notifyObserver();
@@ -181,32 +191,59 @@ public class Player implements Subject {
     }
 
 
-
+    /**
+     * Getter method for list of observers
+     * @return list of observers
+     */
     public ArrayList<Observer> getObservers() {
         return d_ObserverList;
     }
 
+    /**
+     * Method for registering a observer
+     * @param observingplayer observer name
+     */
     @Override
     public void register(Observer observingplayer) {
         d_ObserverList.add(observingplayer);
     }
 
+    /**
+     * Method for unregistering a observer
+     * @param observingplayer observer name
+     */
     @Override
     public void unregister(Observer observingplayer) {
         d_ObserverList.remove(observingplayer);
     }
 
+    /**
+     * Getter method for Card List
+     * @return list of cards available to the player
+     */
     public ArrayList<Card> getD_CardList() {
         return d_CardList;
     }
+
+    /**
+     * Setter method of Card List
+     * @param d_CardList list of cards available to the player
+     */
     public void setD_CardList(ArrayList<Card> d_CardList) {
         this.d_CardList = d_CardList;
     }
 
+    /**
+     * The method to add card to players' card list
+     * @param card card to be added
+     */
     public void addCard(Card card) {
         d_CardList.add(card);
     }
 
+    /**
+     * Notifying the observer about a change in the subject
+     */
     @Override
     public void notifyObserver() {
         System.out.println("A player has conquered a new country");
