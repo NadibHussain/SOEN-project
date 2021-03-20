@@ -44,6 +44,9 @@ public class GameEngine implements Observer{
      */
     private MapEditor d_MapEditor;
 
+    /**
+     * random number for issuing a card upon conquering territories
+     */
     Random randomNumber = new Random();
 
     /**
@@ -324,6 +327,10 @@ public class GameEngine implements Observer{
         d_CurrentPlayer = p_CurrentPlayer;
     }
 
+    /**
+     * Method to update the observer about change in the subject and add a card to the card list of player randomly
+     * @param d_CountriesOwned The countries owned by a player
+     */
     @Override
     public void update (ArrayList d_CountriesOwned) {
         Card card = new Card();
