@@ -3,125 +3,58 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
-public class StartupPhase extends GamePlayPhase {
+public class PreMapLoadPhase extends MapEditorPhase {
 
-    public StartupPhase(GameEngine p_GameEngine) {
+    public PreMapLoadPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 
-    @Override
-    public void run() {
-
+    public void errorLoadMapFirst() {
+        System.out.println("Error: load a map first by using <editmap> <filename>");
     }
 
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void removeCountry(String p_CountryId) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void removeContinent(String p_ContinentId) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
-
-    }
-
-    @Override
-    public void loadMap(String p_FileName) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void saveMap(String p_FileName) {
-
+        errorLoadMapFirst();
     }
 
     @Override
     public void editMap(String p_FileName) {
-
+        d_GameEngine.getD_MapEditor().editMap(p_FileName);
     }
 
     @Override
     public void validateMap(Map p_Map) {
-
+        errorLoadMapFirst();
     }
-
-    @Override
-    public void addPlayer(String p_Name) {
-
-    }
-
-    @Override
-    public void removePlayer(String p_Name) {
-
-    }
-
-    @Override
-    public void assignCountries() {
-
-    }
-
-    @Override
-    public void reinforce() {
-
-    }
-
-    @Override
-    public void issueCommands() {
-
-    }
-
-    @Override
-    public void executeCommands() {
-
-    }
-
-    @Override
-    public void deploy() {
-
-    }
-
-    @Override
-    public void advance() {
-
-    }
-
-    @Override
-    public void bomb() {
-
-    }
-
-    @Override
-    public void blockade() {
-
-    }
-
-    @Override
-    public void airlift() {
-
-    }
-
-    @Override
-    public void diplomacy() {
-
-    }
-
 }

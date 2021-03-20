@@ -3,9 +3,9 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
-public class StartupPhase extends GamePlayPhase {
+public class IssueOrdersPhase extends GamePlayPhase {
 
-    public StartupPhase(GameEngine p_GameEngine) {
+    public IssueOrdersPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 

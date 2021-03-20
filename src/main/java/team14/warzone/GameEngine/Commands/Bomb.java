@@ -1,9 +1,8 @@
 package team14.warzone.GameEngine.Commands;
 
-import java.util.ArrayList;
-
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.Console.Option;
+
+import java.util.ArrayList;
 
 public class Bomb {
 
@@ -12,10 +11,11 @@ public class Bomb {
 
     /**
      * Constructor of Bomb
-     * @author tanzia-ahmed
+     *
      * @param p_OptionList
+     * @author tanzia-ahmed
      */
-    public Bomb (ArrayList<Option> p_OptionList) {
+    public Bomb(ArrayList<Option> p_OptionList) {
         d_OptionList = new ArrayList<>();
         d_OptionList = p_OptionList;
 
@@ -24,8 +24,8 @@ public class Bomb {
     /**
      * Executes bomb command
      */
-    public void execute(){
+    public void execute() {
 
     }
-    
+
 }

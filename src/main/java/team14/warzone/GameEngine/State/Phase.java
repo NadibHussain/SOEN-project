@@ -5,7 +5,7 @@ import team14.warzone.MapModule.Map;
 
 public abstract class Phase {
 
-    private GameEngine d_GameEngine;
+    GameEngine d_GameEngine;
 
     public Phase(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
@@ -13,11 +13,29 @@ public abstract class Phase {
 
     // all phases
     abstract public void run();
-    public void showMap() {}
+    public void showMap() {
+        if (d_GameEngine.getD_LoadedMap() == null && d_GameEngine.getD_MapEditor().getD_LoadedMap() == null)
+            System.out.println("Please load a map first!");
+        else if (d_GameEngine.getD_LoadedMap() != null)
+            d_GameEngine.getD_LoadedMap().showMap();
+        else
+            d_GameEngine.getD_MapEditor().getD_LoadedMap().showMap();
+    }
+
     public void invalidCommandMessage() {
         System.out.println("Error: command invalid for " + this.getClass().getSimpleName() + " phase");
     }
-    public void next() {}
+
+    public void next() {
+        if (d_GameEngine.getD_CurrentPhase() instanceof MapEditorPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
+        else if (d_GameEngine.getD_CurrentPhase() instanceof StartupPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
+        else if (d_GameEngine.getD_CurrentPhase() instanceof IssueOrdersPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_ExecuteOrdersPhase());
+        else if (d_GameEngine.getD_CurrentPhase() instanceof ExecuteOrdersPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
+    }
     public void endGame() {}
 
     // mapeditor phase
@@ -34,8 +52,8 @@ public abstract class Phase {
 
     // gameplay phase: startup, reinforce, issue, execute
     // startup state
-    abstract public void addPlayer();
-    abstract public void removePlayer();
+    abstract public void addPlayer(String p_Name);
+    abstract public void removePlayer(String p_Name);
     abstract public void assignCountries();
 
     // reinforce phase

@@ -3,9 +3,9 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
-public class ExecuteCommandsPhase extends GamePlayPhase {
+public class ExecuteOrdersPhase extends GamePlayPhase {
 
-    public ExecuteCommandsPhase(GameEngine p_GameEngine) {
+    public ExecuteOrdersPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 
@@ -65,12 +65,12 @@ public class ExecuteCommandsPhase extends GamePlayPhase {
     }
 
     @Override
-    public void addPlayer() {
+    public void addPlayer(String p_Name) {
 
     }
 
     @Override
-    public void removePlayer() {
+    public void removePlayer(String p_Name) {
 
     }
 

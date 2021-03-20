@@ -3,7 +3,6 @@ package team14.warzone.Console;
 import team14.warzone.GameEngine.Commands.Command;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,7 +29,7 @@ public class Console {
     /**
      * A method to read input from user console
      */
-    public List<List<String>> readInput() {
+    public static List<List<String>> readInput() {
         String[] l_UserInput = d_Scanner.nextLine().split(" ");
         //if user wants to exit the game
         if (l_UserInput[0].equals("exit"))
@@ -44,7 +43,7 @@ public class Console {
         //check one word command : a keyword only, no options or arguments
         if (l_UserInput.length == 1) {
             if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
-                System.out.println("valid command");
+//                System.out.println("valid command");
 //                Option l_opt = new Option();
 //                Command l_UserCommand = new Command(l_Keyword, l_opt);
 //                setD_CommandBuffer(l_UserCommand);
@@ -59,7 +58,7 @@ public class Console {
         else if (l_UserInput.length == 2) {
             l_Arguments.add(l_UserInput[1]);
             if (InputValidator.validateInput(l_Keyword, "noOption", l_Arguments)) {
-                System.out.println("valid command");
+//                System.out.println("valid command");
 //                //Create Command object, passing keyword and option
 //                Option l_opt = new Option();
 //                l_opt.addArgument(l_Arguments.get(0));
@@ -92,7 +91,7 @@ public class Console {
                 //check command validity
                 l_ValidCommand = InputValidator.validateInput(l_Keyword, l_OptName, l_Arguments);
                 if (l_ValidCommand) {
-                    System.out.println("valid command");
+//                    System.out.println("valid command");
                     //Set options for the user command
                     ArrayList<String> l_TempArgs = new ArrayList<>();
                     l_TempArgs.addAll(l_Arguments);
@@ -108,7 +107,7 @@ public class Console {
                 }
             }
         }
-        System.out.println(Arrays.deepToString(l_Commands_list.toArray()));
+//        System.out.println(Arrays.deepToString(l_Commands_list.toArray()));
         return l_Commands_list;
     }
 

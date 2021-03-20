@@ -1,9 +1,16 @@
 package team14.warzone.GameEngine.State;
 
+import team14.warzone.Console.Console;
+import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.Option;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.Map;
 
-public class MapEditorPhase extends Phase {
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
+
+public abstract class MapEditorPhase extends Phase {
 
     public MapEditorPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
@@ -11,76 +18,8 @@ public class MapEditorPhase extends Phase {
 
     @Override
     public void run() {
-        while (true) {
-            issueCommands();
-            executeCommands();
-            // break out of loop when "loadmap" is typed GameEngine.currentPhase = startupPhase
-        }
-    }
-
-    @Override
-    public void addCountry(String p_CountryId, String p_ContinentId) {
-
-    }
-
-    @Override
-    public void removeCountry(String p_CountryId) {
-
-    }
-
-    @Override
-    public void addContinent(String p_ContinentId, int p_ControlValue) {
-
-    }
-
-    @Override
-    public void removeContinent(String p_ContinentId) {
-
-    }
-
-    @Override
-    public void addNeighbor(String p_CountryId, String p_NeighborId) {
-
-    }
-
-    @Override
-    public void removeNeighbor(String p_CountryId, String p_NeighborId) {
-
-    }
-
-    @Override
-    public void loadMap(String p_FileName) {
-
-    }
-
-    @Override
-    public void saveMap(String p_FileName) {
-
-    }
-
-    @Override
-    public void editMap(String p_FileName) {
-
-    }
-
-    @Override
-    public void validateMap(Map p_Map) {
-
-    }
-
-    @Override
-    public void addPlayer() {
-
-    }
-
-    @Override
-    public void removePlayer() {
-
-    }
-
-    @Override
-    public void assignCountries() {
-
+        issueCommands();
+        executeCommands();
     }
 
     @Override
@@ -91,23 +30,77 @@ public class MapEditorPhase extends Phase {
     @Override
     public void issueCommands() {
         // use console to prompt user to enter command
-        // console.readMapInput();
+//        System.out.println("Current phase is: " + this.getClass().getSimpleName());
+        System.out.println("Enter command:");
+        List<List<String>> l_CommandStrList = Console.readInput();
         /*
-        by the way, this is how I return commands list: editcountry -add canada,5 -remove usa 6 keyword option arguments
+        loadmap
+        showmap
+        editmap filename
+        savemap filename
+        editcontinent -add continentName controlValue -remove continentName
+        editcountry -add countryName continentName -remove countryName
+        editneighbor -add countryName neighborCountryName -remove countryName neighborCountryName
+         */
+        for (List<String> l_CommandStr : l_CommandStrList) {
+            Option l_Option = new Option(l_CommandStr.get(1),
+                    Arrays.asList(l_CommandStr.get(2).replaceAll(" ", "").split(
+                            ",")));
+            Command l_Command = new Command(l_CommandStr.get(0), l_Option, d_GameEngine);
+            d_GameEngine.appendToCommandBuffer(l_Command);
+        }
+
+        /*
         for 1 word commands: {{"keyword", "", ""}}
         for 2 words commands: {{"keyword", "", "argument"}}
-        for longer commands: {{"keyword", "optionName1", "arguments1_separated_by_comma"}, {"keyword", "optionName2", "arguments2_separated_by_comma"}}
+        for longer commands: {{"keyword", "optionName1", "arguments1_separated_by_comma"}, {"keyword", "optionName2",
+         "arguments2_separated_by_comma"}}
         so you may use "argumentList".split(",") => to convert the arguments into a list
          */
-
-        // create command object
-
-        // store command in buffer d_CommandBuffer
     }
 
     @Override
     public void executeCommands() {
         // execute the appropriate map editor command
+        for (Command l_Command : d_GameEngine.getD_CommandBuffer()) {
+            l_Command.execute();
+        }
+        d_GameEngine.clearCommandBuffer();
+
+    }
+
+    @Override
+    public void loadMap(String p_FileName) {
+        try {
+            d_GameEngine.getD_MapEditor().loadMap(p_FileName);
+            d_GameEngine.setD_LoadedMap(d_GameEngine.getD_MapEditor().getD_LoadedMap());
+            // validate map right after loading
+            if (!d_GameEngine.getD_MapEditor().validateMap(d_GameEngine.getD_LoadedMap()))
+                System.out.println("Error: map validation failed, not loaded");
+            else {
+                System.out.println("Success: map loaded and validated");
+                // move to the startup phase
+                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
+                InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: invalid filename");
+        }
+    }
+
+    @Override
+    public void addPlayer(String p_Name) {
+        invalidCommandMessage();
+    }
+
+    @Override
+    public void removePlayer(String p_Name) {
+        invalidCommandMessage();
+    }
+
+    @Override
+    public void assignCountries() {
+        invalidCommandMessage();
     }
 
     @Override
@@ -117,26 +110,26 @@ public class MapEditorPhase extends Phase {
 
     @Override
     public void advance() {
-
+        invalidCommandMessage();
     }
 
     @Override
     public void bomb() {
-
+        invalidCommandMessage();
     }
 
     @Override
     public void blockade() {
-
+        invalidCommandMessage();
     }
 
     @Override
     public void airlift() {
-
+        invalidCommandMessage();
     }
 
     @Override
     public void diplomacy() {
-
+        invalidCommandMessage();
     }
 }

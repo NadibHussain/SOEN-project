@@ -1,6 +1,5 @@
 package team14.warzone.GameEngine.Commands;
 
-import team14.warzone.Console.Option;
 import team14.warzone.GameEngine.GameEngine;
 
 public class Order {
@@ -17,5 +16,6 @@ public class Order {
     /**
      * Method to execute the command
      */
-    void execute() throws Exception{}
+    void execute() throws Exception {
+    }
 }
