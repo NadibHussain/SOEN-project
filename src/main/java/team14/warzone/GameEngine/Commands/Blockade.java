@@ -37,7 +37,7 @@ public class Blockade {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        if (!l_CurrentPlayer.hasCard(new Card("Blockade"))) {// check if player has the Bomb card
+        if (!l_CurrentPlayer.hasCard(new Card("Blockade"))) {// check if player has the Blockade card
             throw new Exception("Player does not have this card.");
         }
         
