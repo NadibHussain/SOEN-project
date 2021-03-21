@@ -1,8 +1,9 @@
 package team14.warzone.GameEngine.Commands;
 
+import team14.warzone.Console.Option;
 import team14.warzone.GameEngine.GameEngine;
 
-public class Order {
+public abstract class Order implements ICommand{
     /**
      * field stores option object
      */
@@ -16,6 +17,5 @@ public class Order {
     /**
      * Method to execute the command
      */
-    void execute() throws Exception {
-    }
+    abstract void execute() throws Exception;
 }
