@@ -27,7 +27,9 @@ public abstract class Phase {
     }
 
     public void next() {
-        if (d_GameEngine.getD_CurrentPhase() instanceof MapEditorPhase)
+        if (d_GameEngine.getD_CurrentPhase() instanceof PreMapLoadPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_PostMapEditLoadPhase());
+        else if (d_GameEngine.getD_CurrentPhase() instanceof PostMapEditLoadPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
         else if (d_GameEngine.getD_CurrentPhase() instanceof StartupPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());

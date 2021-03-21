@@ -20,6 +20,7 @@ public class StartupPhase extends GamePlayPhase {
         if (d_GameEngine.getD_LoadedMap() == null)
         {
             System.out.println("Please load map first before starting Startup phase");
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_PreMapLoadPhase());
         }
         issueCommands();
         executeCommands();
