@@ -33,6 +33,8 @@ public class GameEngine {
      */
     private ArrayList<Player> d_PlayerList;
 
+    private NeutralPlayer d_NeutralPlayer;
+
     /**
      * intance of console
      */
@@ -61,6 +63,7 @@ public class GameEngine {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
+        d_NeutralPlayer = new NeutralPlayer();
         d_CommandBuffer = new ArrayList<>();
 
         d_PreMapLoadPhase = new PreMapLoadPhase(this);
