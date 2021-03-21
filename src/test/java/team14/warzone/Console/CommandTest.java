@@ -3,6 +3,7 @@ package team14.warzone.Console;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.Option;
 
 import java.util.Arrays;
 

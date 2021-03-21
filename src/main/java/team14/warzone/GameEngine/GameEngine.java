@@ -1,8 +1,9 @@
 package team14.warzone.GameEngine;
 
-import team14.warzone.GameEngine.Commands.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -10,8 +11,6 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -34,6 +33,8 @@ public class GameEngine {
      */
     private ArrayList<Player> d_PlayerList;
 
+    private NeutralPlayer d_NeutralPlayer;
+
     /**
      * intance of console
      */
@@ -43,6 +44,17 @@ public class GameEngine {
      */
     private MapEditor d_MapEditor;
 
+    private ArrayList<Command> d_CommandBuffer;
+
+    // State pattern attributes
+    private Phase d_CurrentPhase;
+
+    private Phase d_PreMapLoadPhase;
+    private Phase d_PostMapEditLoadPhase;
+    private Phase d_StartupPhase;
+    private Phase d_IssueOrdersPhase;
+    private Phase d_ExecuteOrdersPhase;
+
     /**
      * @param p_Console   console object
      * @param p_MapEditor map editor object
@@ -51,6 +63,15 @@ public class GameEngine {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
+        d_NeutralPlayer = new NeutralPlayer();
+        d_CommandBuffer = new ArrayList<>();
+
+        d_PreMapLoadPhase = new PreMapLoadPhase(this);
+        d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
+        d_StartupPhase = new StartupPhase(this);
+        d_IssueOrdersPhase = new IssueOrdersPhase(this);
+        d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
+        d_CurrentPhase = d_PreMapLoadPhase;
     }
 
     /**
@@ -151,7 +172,11 @@ public class GameEngine {
      * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
+        while (true) {
+            d_CurrentPhase.run();
+        }
         // reinforcement
+        /*
         reInforcement();
 
         // display armies remaining in possession for each player
@@ -171,7 +196,8 @@ public class GameEngine {
                     d_CurrentPlayer = d_PlayerList.get(l_Counter);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
-                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")) {
+                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword()
+                    .equals("pass")) {
                         l_Flag.set(l_Counter, Boolean.TRUE);
                         l_Counter++;
                         d_Console.clearCommandBuffer();
@@ -179,7 +205,7 @@ public class GameEngine {
                         // check if valid gameplay command and change player turn
                         if (isGamePhaseCommand(d_Console.getD_CommandBuffer()))
                             l_Counter++;
-                        d_Console.filterCommand(this, d_MapEditor);
+//                        d_Console.filterCommand(this, d_MapEditor);
                     }
                 } else {
                     // if player has already passed just skip turn
@@ -199,6 +225,7 @@ public class GameEngine {
                     l_Flag.set(i, Boolean.TRUE);
             }
         }
+         */
     }
 
     /**
@@ -275,6 +302,18 @@ public class GameEngine {
         return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_Command.getD_Keyword());
     }
 
+    public void appendToCommandBuffer(Command p_Command) {
+        d_CommandBuffer.add(p_Command);
+    }
+
+    public Command retrieveFromCommandBuffer() {
+        return d_CommandBuffer.remove(0);
+    }
+
+    public void clearCommandBuffer() {
+        d_CommandBuffer.clear();
+    }
+
     /**
      * Set console
      *
@@ -293,6 +332,9 @@ public class GameEngine {
         return d_LoadedMap;
     }
 
+    public MapEditor getD_MapEditor() {
+        return d_MapEditor;
+    }
 
     /**
      * Get player list
@@ -320,12 +362,47 @@ public class GameEngine {
         d_CurrentPlayer = p_CurrentPlayer;
     }
 
-    /**
-     * Get current player
-     *
-     * @return d_CurrentPlayer is returned
-     */
+    public Phase getD_CurrentPhase() {
+        return d_CurrentPhase;
+    }
+
+    public Phase getD_PreMapLoadPhase() {
+        return d_PreMapLoadPhase;
+    }
+
+    public Phase getD_PostMapEditLoadPhase() {
+        return d_PostMapEditLoadPhase;
+    }
+
+    public void setD_CurrentPhase(Phase p_CurrentPhase) {
+        d_CurrentPhase = p_CurrentPhase;
+    }
+
+    public Phase getD_StartupPhase() {
+        return d_StartupPhase;
+    }
+
+    public Phase getD_IssueOrdersPhase() {
+        return d_IssueOrdersPhase;
+    }
+
+    public Phase getD_ExecuteOrdersPhase() {
+        return d_ExecuteOrdersPhase;
+    }
+
+    public ArrayList<Command> getD_CommandBuffer() {
+        return d_CommandBuffer;
+    }
+
+    public void setD_CommandBuffer(ArrayList<Command> p_CommandBuffer) {
+        d_CommandBuffer = p_CommandBuffer;
+    }
+
     public Player getD_CurrentPlayer() {
         return d_CurrentPlayer;
+    }
+
+    public void setD_LoadedMap(Map d_LoadedMap) {
+        this.d_LoadedMap = d_LoadedMap;
     }
 }
