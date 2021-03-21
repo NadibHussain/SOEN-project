@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
-import team14.warzone.Console.Option;
+import team14.warzone.GameEngine.Commands.Option;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
@@ -33,7 +33,7 @@ public class Blockade {
     /**
      * Executes Blockade command
      */
-    public void execute() {
+    public void execute() throws Exception {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
@@ -55,7 +55,10 @@ public class Blockade {
             l_CountryTo.setD_CurrentOwner("Neutral");
 
             //change back the country owner once the turn is finished.
+            // append to GameEngines d_CommandBuffer
         }
     }
+
+    // create a method to reset the changes of blockade
 
 }

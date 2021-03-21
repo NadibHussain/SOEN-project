@@ -1,4 +1,4 @@
-package team14.warzone.Console;
+package team14.warzone.GameEngine.Commands;
 
 import java.util.ArrayList;
 import java.util.List;

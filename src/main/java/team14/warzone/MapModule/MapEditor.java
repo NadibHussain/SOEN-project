@@ -257,10 +257,10 @@ public class MapEditor {
         }
 
         if (l_ConnectedGraph && l_HasContinent) {
-            System.out.println("The map is valid.");
+//            System.out.println("The map is valid.");
             return true;
         } else {
-            System.out.println("The map is not valid.");
+//            System.out.println("The map is not valid.");
             return false;
         }
 

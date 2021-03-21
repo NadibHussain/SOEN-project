@@ -30,7 +30,7 @@ public class Diplomacy {
     /**
      * Executes Diplomacy command
      */
-    public void execute() {
+    public void execute() throws Exception {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
