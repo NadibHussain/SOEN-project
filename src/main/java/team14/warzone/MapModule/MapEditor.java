@@ -253,10 +253,15 @@ public class MapEditor {
             // checking if subgraph is connected
             if (l_StackNodes2.size() == l_Countries2.size())
                 l_ConnectedSubGraph = true;
+            else {
+                System.out.println("The sub-graph is not connected.");
+                l_ConnectedSubGraph = false;
+                break;
+            }
 
         }
 
-        if (l_ConnectedGraph && l_HasContinent) {
+        if (l_ConnectedGraph && l_HasContinent && l_ConnectedSubGraph) {
             System.out.println("The map is valid.");
             return true;
         } else {
@@ -274,5 +279,43 @@ public class MapEditor {
     public Map getD_LoadedMap() {
         return d_LoadedMap;
     }
+
+    public void dfs(ArrayList<Country> p_CountryList) {
+        ArrayList<Country> l_Countries = p_CountryList;
+
+        int l_Visited[] = new int[l_Countries.size()];
+        for (int l_Index = 0; l_Index < l_Visited.length; l_Index++) {
+            l_Visited[l_Index] = 0;
+        }
+
+        Stack l_Stack = new Stack();
+
+        for (int l_Index = 0; allVisited(l_Visited) == false; l_Index++) {
+            
+                l_Stack.push(l_Countries.get(l_Index).getD_CountryID());
+                ArrayList<Country> l_Neighbours = l_Countries.get(l_Index).getD_Neighbours();
+                for(int i = 0; i<l_Neighbours.size(); i++){
+
+                
+            }
+
+        }
+    }
+
+    private boolean allVisited(int[] l_Visited) {
+        for (int l_Index = 0; l_Index < l_Visited.length; l_Index++) {
+           if( l_Visited[l_Index] == 1){
+
+           }
+           else{
+               return false;
+           }
+        }
+        return true;
+    }
+
+    
+
+    
 
 }

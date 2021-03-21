@@ -13,6 +13,8 @@ public class Blockade {
     private String d_CountryNameTo;
     private int d_NumberOfArmies;
     private GameEngine d_GameEngine;
+    private Player d_PreviousOwner;
+    private Country d_CountryTo;
 
     /**
      * Constructor of Blockade
@@ -47,15 +49,21 @@ public class Blockade {
             throw new Exception("Blockade failed: destination country does not exist");
         }
         // check if destination country is owned by enemy player
-        if (l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo) | l_CountryTo.getD_CurrentOwner() == "Neutral") {
+        if (!l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo) | l_CountryTo.getD_CurrentOwner() == "Neutral") {
             throw new Exception(
                     "Blockade failed: " + l_CurrentPlayer.getD_Name() + " owns " + l_CountryTo.getD_CountryID() + " or it belongs to a neutral player.");
         } else {
-            l_CountryTo.setD_NumberOfArmies(3*d_NumberOfArmies);
-            l_CountryTo.setD_CurrentOwner("Neutral");
+            //execution
+            d_PreviousOwner = l_CurrentPlayer;
+            d_CountryTo = l_CountryTo;
+            d_CountryTo.setD_NumberOfArmies(3*d_NumberOfArmies);
+            d_CountryTo.setD_CurrentOwner("Neutral");
 
-            //change back the country owner once the turn is finished.
+            //d_GameEngine.appendToCommandBuffer(this);
         }
+    }
+    public void resetOwner(){
+        d_CountryTo.setD_CurrentOwner(d_PreviousOwner.getD_Name());
     }
 
 }

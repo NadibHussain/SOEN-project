@@ -1,0 +1,16 @@
+[continents]
+Scandinavia 5 
+
+[countries]
+1 s1 1
+2 s2 1
+3 s3 1
+4 s4 1 
+5 s5 1 
+
+[borders]
+1 2
+2 1
+3 4 5
+4 5 3
+5 3 4
