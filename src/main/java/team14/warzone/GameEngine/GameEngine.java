@@ -2,7 +2,7 @@ package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -46,7 +46,7 @@ public class GameEngine {
     /**
      * Stores admin commands that are yet to be executed
      */
-    private ArrayList<Command> d_CommandBuffer;
+    private ArrayList<AdminCommands> d_AdminCommandsBuffer;
     /**
      * Stores user inputs needed to create orders
      */
@@ -70,7 +70,7 @@ public class GameEngine {
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
         d_NeutralPlayer = new NeutralPlayer();
-        d_CommandBuffer = new ArrayList<>();
+        d_AdminCommandsBuffer = new ArrayList<>();
 
         d_PreMapLoadPhase = new PreMapLoadPhase(this);
         d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
@@ -292,23 +292,23 @@ public class GameEngine {
     /**
      * Method checks if the passed command is a valid gamephase command
      *
-     * @param p_Command command to be checked
+     * @param p_AdminCommands command to be checked
      * @return true if valid; else return false
      */
-    public boolean isGamePhaseCommand(Command p_Command) {
-        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_Command.getD_Keyword());
+    public boolean isGamePhaseCommand(AdminCommands p_AdminCommands) {
+        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_AdminCommands.getD_Keyword());
     }
 
-    public void appendToCommandBuffer(Command p_Command) {
-        d_CommandBuffer.add(p_Command);
+    public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
+        d_AdminCommandsBuffer.add(p_AdminCommands);
     }
 
-    public Command retrieveFromCommandBuffer() {
-        return d_CommandBuffer.remove(0);
+    public AdminCommands retrieveFromCommandBuffer() {
+        return d_AdminCommandsBuffer.remove(0);
     }
 
     public void clearCommandBuffer() {
-        d_CommandBuffer.clear();
+        d_AdminCommandsBuffer.clear();
     }
 
     /**
@@ -387,12 +387,12 @@ public class GameEngine {
         return d_ExecuteOrdersPhase;
     }
 
-    public ArrayList<Command> getD_CommandBuffer() {
-        return d_CommandBuffer;
+    public ArrayList<AdminCommands> getD_CommandBuffer() {
+        return d_AdminCommandsBuffer;
     }
 
-    public void setD_CommandBuffer(ArrayList<Command> p_CommandBuffer) {
-        d_CommandBuffer = p_CommandBuffer;
+    public void setD_CommandBuffer(ArrayList<AdminCommands> p_AdminCommandsBuffer) {
+        d_AdminCommandsBuffer = p_AdminCommandsBuffer;
     }
 
     public Player getD_CurrentPlayer() {

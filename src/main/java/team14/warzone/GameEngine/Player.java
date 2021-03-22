@@ -90,8 +90,12 @@ public class Player {
                 String[] l_Temp = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Deploy l_DeployOrder = new Deploy(l_Temp[0], Integer.parseInt(l_Temp[1]), d_GE);
                 d_OrderList.add(l_DeployOrder);
-                d_GE.clearOrderBuffer();
+                break;
+
+            case "advance":
+                break;
         }
+        d_GE.clearOrderBuffer();
     }
 
     /**

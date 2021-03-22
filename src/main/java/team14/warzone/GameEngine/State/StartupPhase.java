@@ -1,7 +1,7 @@
 package team14.warzone.GameEngine.State;
 
 import team14.warzone.Console.Console;
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
@@ -104,8 +104,8 @@ public class StartupPhase extends GamePlayPhase {
 
     @Override
     public void executeCommands() {
-        for (Command l_Command : d_GameEngine.getD_CommandBuffer()) {
-            l_Command.execute();
+        for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
+            l_AdminCommands.execute();
         }
         d_GameEngine.clearCommandBuffer();
     }

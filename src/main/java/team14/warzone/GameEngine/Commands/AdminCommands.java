@@ -1,14 +1,13 @@
 package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class is used to create objects representing the admin commands entered by user in the command line
+ * This class is used to create objects representing the commands entered by user in the command line
  *
  * @author zeina
  * @author Anagh
@@ -22,19 +21,13 @@ public class AdminCommands implements ICommand {
     /**
      * field stores option object
      */
-    private Option d_Option = new Option();
-
+    private Option d_Option;
     /**
      * field stores instance of the game engine
      */
     private GameEngine d_GameEngine;
     /**
-     * field stores instance of the map editor
-     */
-    private MapEditor d_MapEditor;
-    /**
      * valid admin commands arraylist
-     *
      */
     public static ArrayList<String> VALID_ADMIN_COMMANDS = new ArrayList<>(
             Arrays.asList(
@@ -54,12 +47,6 @@ public class AdminCommands implements ICommand {
     );
 
     /**
-     * Class default constructor
-     */
-    public AdminCommands() {
-    }
-
-    /**
      * Class constructor, specifying keyword and options
      *
      * @param p_Keyword : keyword of the command
@@ -68,6 +55,12 @@ public class AdminCommands implements ICommand {
     public AdminCommands(String p_Keyword, Option p_Options) {
         this.d_Keyword = p_Keyword;
         this.d_Option = p_Options;
+    }
+
+    public AdminCommands(String p_Keyword, Option p_Options, GameEngine p_GE) {
+        this.d_Keyword = p_Keyword;
+        this.d_Option = p_Options;
+        d_GameEngine = p_GE;
     }
 
     /**
@@ -81,60 +74,58 @@ public class AdminCommands implements ICommand {
         switch (this.getD_Keyword()) {
             case "editcontinent":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_LoadedMap().addContinent(l_CommandArgs.get(0),
+                    d_GameEngine.getD_CurrentPhase().addContinent(l_CommandArgs.get(0),
                             Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
-                    d_MapEditor.getD_LoadedMap().removeContinent(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().removeContinent(l_CommandArgs.get(0));
                 break;
 
             case "editcountry":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_LoadedMap().addCountry(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().addCountry(l_CommandArgs.get(0),
+                            l_CommandArgs.get(1));
                 else //-remove option
-                    d_MapEditor.getD_LoadedMap().removeCountry(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().removeCountry(l_CommandArgs.get(0));
                 break;
 
             case "editneighbor":
                 if (l_OptionName.equals("-add"))
-                    d_MapEditor.getD_LoadedMap().addNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().addNeighbor(l_CommandArgs.get(0),
+                            l_CommandArgs.get(1));
                 else //-remove option
-                    d_MapEditor.getD_LoadedMap().removeNeighbour(l_CommandArgs.get(0), l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().removeNeighbor(l_CommandArgs.get(0),
+                            l_CommandArgs.get(1));
                 break;
 
             case "savemap":
-                d_MapEditor.saveMap(l_CommandArgs.get(0));
+                d_GameEngine.getD_CurrentPhase().saveMap(l_CommandArgs.get(0));
                 break;
 
             case "editmap":
-                d_MapEditor.editMap(l_CommandArgs.get(0));
+                d_GameEngine.getD_CurrentPhase().editMap(l_CommandArgs.get(0));
                 break;
 
             case "validatemap":
-                d_MapEditor.validateMap(d_MapEditor.getD_LoadedMap());
+                d_GameEngine.getD_CurrentPhase().validateMap(d_GameEngine.getD_MapEditor().getD_LoadedMap());
                 break;
 
             case "loadmap":
-                d_GameEngine.loadMap(l_CommandArgs.get(0));
+                d_GameEngine.getD_CurrentPhase().loadMap(l_CommandArgs.get(0));
                 break;
 
             case "showmap":
-                if (d_GameEngine.getD_LoadedMap() == null && d_MapEditor.getD_LoadedMap() == null)
-                    System.out.println("Please load a map first!");
-                else if (d_GameEngine.getD_LoadedMap() != null)
-                    d_GameEngine.getD_LoadedMap().showMap();
-                else
-                    d_MapEditor.getD_LoadedMap().showMap();
+                d_GameEngine.getD_CurrentPhase().showMap();
                 break;
 
             case "gameplayer":
                 if (l_OptionName.equals("-add"))
-                    d_GameEngine.addPlayer(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().addPlayer(l_CommandArgs.get(0));
                 else //-remove option
-                    d_GameEngine.removePlayer(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().removePlayer(l_CommandArgs.get(0));
                 break;
 
             case "assigncountries":
-                d_GameEngine.assignCountries();
+                d_GameEngine.getD_CurrentPhase().assignCountries();
                 break;
         }
     }
@@ -164,15 +155,6 @@ public class AdminCommands implements ICommand {
      */
     public void setD_GameEngine(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
-    }
-
-    /**
-     * A method to set the MapEditor
-     *
-     * @param p_MapEditor MapEditor param
-     */
-    public void setD_MapEditor(MapEditor p_MapEditor) {
-        d_MapEditor = p_MapEditor;
     }
 
     /**

@@ -1,6 +1,6 @@
 package team14.warzone.GameEngine.State;
 
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.Commands.Option;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
@@ -49,8 +49,8 @@ public abstract class Phase {
             Option l_Option = new Option(l_CommandStr.get(1),
                     Arrays.asList(l_CommandStr.get(2).replaceAll(" ", "").split(
                             ",")));
-            Command l_Command = new Command(l_CommandStr.get(0), l_Option, d_GameEngine);
-            d_GameEngine.appendToCommandBuffer(l_Command);
+            AdminCommands l_AdminCommands = new AdminCommands(l_CommandStr.get(0), l_Option, d_GameEngine);
+            d_GameEngine.appendToCommandBuffer(l_AdminCommands);
         }
     }
     public void endGame() {}
