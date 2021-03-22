@@ -1,6 +1,5 @@
 package team14.warzone.GameEngine.Commands;
 
-import team14.warzone.Console.Option;
 import team14.warzone.GameEngine.GameEngine;
 
 public abstract class Order implements ICommand{

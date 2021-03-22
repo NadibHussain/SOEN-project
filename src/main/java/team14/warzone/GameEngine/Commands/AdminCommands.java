@@ -3,6 +3,8 @@ package team14.warzone.GameEngine.Commands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,6 +32,26 @@ public class AdminCommands implements ICommand {
      * field stores instance of the map editor
      */
     private MapEditor d_MapEditor;
+    /**
+     * valid admin commands arraylist
+     *
+     */
+    public static ArrayList<String> VALID_ADMIN_COMMANDS = new ArrayList<>(
+            Arrays.asList(
+                    "showmap",
+                    "exit",
+                    "editcontinent",
+                    "editcountry",
+                    "editneighbor",
+                    "savemap",
+                    "editmap",
+                    "validatemap",
+                    "loadmap",
+                    "showmap",
+                    "gameplayer",
+                    "assigncountries"
+            )
+    );
 
     /**
      * Class default constructor

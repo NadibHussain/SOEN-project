@@ -5,6 +5,7 @@ import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Class implements the player model
@@ -22,6 +23,10 @@ public class Player {
      */
     private int d_TotalNumberOfArmies;
     /**
+     * track how many armies have been ordered to be deployed
+     */
+    private int d_ArmiesOrderedToBeDeployed;
+    /**
      * list of countries owned by player
      */
     private ArrayList<Country> d_CountriesOwned;
@@ -29,6 +34,10 @@ public class Player {
      * list of orders issued by player that has not been executed
      */
     private ArrayList<Command> d_OrderList;
+    /**
+     * list of cards the player is holding
+     */
+    private ArrayList<Card> d_CardList;
 
     /**
      * Default constructor that takes no params
@@ -50,6 +59,7 @@ public class Player {
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
         this.d_CountriesOwned = d_CountriesOwned;
         this.d_OrderList = d_OrderList;
+        d_ArmiesOrderedToBeDeployed = 0;
     }
 
     /**
@@ -69,6 +79,10 @@ public class Player {
      */
     public void issueOrder(Command p_Command) {
         d_OrderList.add(p_Command);
+    }
+
+    public void issueOrderV2(List<List<String>> p_CommandStrList) {
+
     }
 
     /**
@@ -96,6 +110,10 @@ public class Player {
      */
     public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
+    }
+
+    public boolean hasCard(Card p_Card) {
+        return d_CardList.contains(p_Card);
     }
 
     /**
@@ -168,5 +186,29 @@ public class Player {
      */
     public void setD_Name(String d_Name) {
         this.d_Name = d_Name;
+    }
+
+    /**
+     * Getter for the number of armies ordered to be deployed field
+     * @return
+     */
+    public int getD_ArmiesOrderedToBeDeployed() {
+        return d_ArmiesOrderedToBeDeployed;
+    }
+
+    /**
+     * Increase the number of armies ordered to be deployed field
+     * @param p_ArmiesOrderedToBeDeploy
+     */
+    public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
+        d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
+    }
+
+    /**
+     * Decrease the number of armies ordered to be deployed field
+     * @param p_ArmiesOrderedToBeDeploy
+     */
+    public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
+        d_ArmiesOrderedToBeDeployed -= p_ArmiesOrderedToBeDeploy;
     }
 }

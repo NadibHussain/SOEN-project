@@ -4,7 +4,6 @@ import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.Command;
 import team14.warzone.GameEngine.State.*;
-import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
@@ -231,25 +230,25 @@ public class GameEngine {
     /**
      * This method calculates and assign the reinforcement at the beginning of each turn
      */
-    public void reInforcement() {
-        for (Player l_Player : d_PlayerList) {
-            //1. # of territories owned divided by 3
-            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
-            //2. if the player owns all the territories of an entire continent the player is given
-            // a control bonus value
-            int l_ControlValueEnforcement = 0;
-            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-                //check if all countries belong to the l_Continent are owned by l_Player
-                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
-                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
-            }
-            //3.the minimal number of reinforcement armies for any player is 3 + control values
-            // of continents he owns
-            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
-            //give reinforcement to the player
-            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
-        }
-    }
+//    public void reInforcement() {
+//        for (Player l_Player : d_PlayerList) {
+//            //1. # of territories owned divided by 3
+//            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+//            //2. if the player owns all the territories of an entire continent the player is given
+//            // a control bonus value
+//            int l_ControlValueEnforcement = 0;
+//            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
+//                //check if all countries belong to the l_Continent are owned by l_Player
+//                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
+//                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+//            }
+//            //3.the minimal number of reinforcement armies for any player is 3 + control values
+//            // of continents he owns
+//            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+//            //give reinforcement to the player
+//            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
+//        }
+//    }
 
     /**
      * Receive Command method
