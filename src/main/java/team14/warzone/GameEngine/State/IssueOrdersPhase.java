@@ -68,7 +68,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     // passing the turn
                     if (l_CommandStrList.get(0).get(0).equals("pass")) {
                         // check if all armies are issued to be deployed
-                        if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() == 0) {
+                        if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() == l_CurrentPlayer.getD_TotalNumberOfArmies()) {
                             // set flag to true
                             l_Flag.set(l_Counter, Boolean.TRUE);
                             l_Counter++;
@@ -83,12 +83,14 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     }
                     // for game orders use player to instantiate order
                     else {
-                        l_PlayerList.get(l_Counter).issueOrderV2(l_CommandStrList);
+                        d_GameEngine.setD_OrderStrBuffer(l_CommandStrList);
+                        l_CurrentPlayer.issueOrder();
                         l_Counter++;
                     }
                 }
             }
         }
+        next();
     }
 
     @Override

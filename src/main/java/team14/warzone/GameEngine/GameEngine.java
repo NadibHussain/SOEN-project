@@ -10,6 +10,7 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -42,8 +43,14 @@ public class GameEngine {
      * instance of map editor
      */
     private MapEditor d_MapEditor;
-
+    /**
+     * Stores admin commands that are yet to be executed
+     */
     private ArrayList<Command> d_CommandBuffer;
+    /**
+     * Stores user inputs needed to create orders
+     */
+    private List<List<String>> d_OrderStrBuffer;
 
     // State pattern attributes
     private Phase d_CurrentPhase;
@@ -137,7 +144,7 @@ public class GameEngine {
         else if (d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
             Console.displayMsg("Player already exists!");
         else {
-            Player l_LocalPlayer = new Player(p_PlayerName);
+            Player l_LocalPlayer = new Player(p_PlayerName, this);
             d_PlayerList.add(l_LocalPlayer);
             Console.displayMsg("Player added: " + p_PlayerName);
         }
@@ -239,7 +246,8 @@ public class GameEngine {
 //            int l_ControlValueEnforcement = 0;
 //            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
 //                //check if all countries belong to the l_Continent are owned by l_Player
-//                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
+//                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent
+//                .getD_ContinentID())))
 //                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
 //            }
 //            //3.the minimal number of reinforcement armies for any player is 3 + control values
@@ -249,16 +257,6 @@ public class GameEngine {
 //            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
 //        }
 //    }
-
-    /**
-     * Receive Command method
-     *
-     * @param p_Command command type as parameter
-     */
-    public void receiveCommand(Command p_Command) {
-        // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command); // store order in current player orders list
-    }
 
     /**
      * This method implements the deploy command
@@ -403,5 +401,17 @@ public class GameEngine {
 
     public void setD_LoadedMap(Map d_LoadedMap) {
         this.d_LoadedMap = d_LoadedMap;
+    }
+
+    public List<List<String>> getD_OrderStrBuffer() {
+        return d_OrderStrBuffer;
+    }
+
+    public void setD_OrderStrBuffer(List<List<String>> p_OrderStrBuffer) {
+        d_OrderStrBuffer = p_OrderStrBuffer;
+    }
+
+    public void clearOrderBuffer() {
+        d_OrderStrBuffer.clear();
     }
 }

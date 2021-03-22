@@ -1,6 +1,8 @@
 package team14.warzone.GameEngine;
 
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.Console.Console;
+import team14.warzone.GameEngine.Commands.Deploy;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
@@ -33,11 +35,15 @@ public class Player {
     /**
      * list of orders issued by player that has not been executed
      */
-    private ArrayList<Command> d_OrderList;
+    private ArrayList<Order> d_OrderList;
     /**
      * list of cards the player is holding
      */
     private ArrayList<Card> d_CardList;
+    /**
+     * Reference to the GameEngine object
+     */
+    private GameEngine d_GE;
 
     /**
      * Default constructor that takes no params
@@ -54,11 +60,12 @@ public class Player {
      * @param d_OrderList           list of orders the player has issued but has not executed yet
      */
     public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
-                  ArrayList<Command> d_OrderList) {
+                  ArrayList<Order> d_OrderList, GameEngine p_GE) {
         this.d_Name = d_Name;
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
         this.d_CountriesOwned = d_CountriesOwned;
         this.d_OrderList = d_OrderList;
+        d_GE = p_GE;
         d_ArmiesOrderedToBeDeployed = 0;
     }
 
@@ -67,22 +74,24 @@ public class Player {
      *
      * @param p_Name name of the player
      */
-    public Player(String p_Name) {
+    public Player(String p_Name, GameEngine p_GE) {
         this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
-                new ArrayList<Command>(Collections.emptyList()));
+                new ArrayList<Order>(Collections.emptyList()), p_GE);
     }
 
     /**
      * This method adds order to the list of orders
-     *
-     * @param p_Command command object to be stored
      */
-    public void issueOrder(Command p_Command) {
-        d_OrderList.add(p_Command);
-    }
-
-    public void issueOrderV2(List<List<String>> p_CommandStrList) {
-
+    public void issueOrder() {
+        List<String> l_OrderStr = d_GE.getD_OrderStrBuffer().get(0);
+        // { "deploy", "", "canada,5" }
+        switch (l_OrderStr.get(0)) {
+            case "deploy":
+                String[] l_Temp = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Deploy l_DeployOrder = new Deploy(l_Temp[0], Integer.parseInt(l_Temp[1]), d_GE);
+                d_OrderList.add(l_DeployOrder);
+                d_GE.clearOrderBuffer();
+        }
     }
 
     /**
@@ -96,8 +105,11 @@ public class Player {
      */
     public void nextOrder() {
         if (!d_OrderList.isEmpty()) {
-            if (!d_OrderList.get(0).getD_Keyword().equals("pass"))
+            try {
                 d_OrderList.get(0).execute();//execute first order from the order list
+            } catch (Exception e) {
+                Console.displayMsg(e.getMessage());
+            }
             // remove the command after execution
             d_OrderList.remove(0);// remove first order from the order list
         }
@@ -148,7 +160,7 @@ public class Player {
      *
      * @return list of orders issued and not yet executed
      */
-    public ArrayList<Command> getD_OrderList() {
+    public ArrayList<Order> getD_OrderList() {
         return d_OrderList;
     }
 
@@ -157,7 +169,7 @@ public class Player {
      *
      * @param d_OrderList list or orders
      */
-    public void setD_OrderList(ArrayList<Command> d_OrderList) {
+    public void setD_OrderList(ArrayList<Order> d_OrderList) {
         this.d_OrderList = d_OrderList;
     }
 
@@ -190,6 +202,7 @@ public class Player {
 
     /**
      * Getter for the number of armies ordered to be deployed field
+     *
      * @return
      */
     public int getD_ArmiesOrderedToBeDeployed() {
@@ -198,6 +211,7 @@ public class Player {
 
     /**
      * Increase the number of armies ordered to be deployed field
+     *
      * @param p_ArmiesOrderedToBeDeploy
      */
     public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
@@ -206,6 +220,7 @@ public class Player {
 
     /**
      * Decrease the number of armies ordered to be deployed field
+     *
      * @param p_ArmiesOrderedToBeDeploy
      */
     public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {

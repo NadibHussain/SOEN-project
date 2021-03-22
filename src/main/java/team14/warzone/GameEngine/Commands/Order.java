@@ -2,7 +2,7 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
-public abstract class Order implements ICommand{
+public abstract class Order implements ICommand {
     /**
      * field stores option object
      */
@@ -16,5 +16,5 @@ public abstract class Order implements ICommand{
     /**
      * Method to execute the command
      */
-    abstract void execute() throws Exception;
+    abstract public void execute() throws Exception;
 }
