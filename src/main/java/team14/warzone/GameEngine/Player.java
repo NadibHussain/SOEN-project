@@ -162,6 +162,16 @@ public class Player {
         this.d_CountriesOwned.add(p_Country);
     }
 
+    /**
+     * This method removes a country from the list of countries owned by the player
+     *
+     * @param p_Country country that is to be removed
+     */
+    public void removeCountryOwned(Country p_Country) {
+        if(!this.d_CountriesOwned.isEmpty() && this.d_CountriesOwned.contains(p_Country))
+            this.d_CountriesOwned.remove(p_Country);
+    }
+
     public boolean hasCard(Card p_Card) {
         return d_CardList.contains(p_Card);
     }
