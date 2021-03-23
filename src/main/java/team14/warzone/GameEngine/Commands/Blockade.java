@@ -10,7 +10,6 @@ import team14.warzone.MapModule.Map;
 public class Blockade extends Order{
 
     private String d_CountryNameTo;
-    private int d_NumberOfArmies;
     private GameEngine d_GameEngine;
     private Country d_CountryTo;
 
@@ -19,13 +18,11 @@ public class Blockade extends Order{
      * 
      * @author tanzia-ahmed
      * @param p_CountryNameTo
-     * @param p_NumberOfArmies
      * @param p_GameEngine
      */
-    public Blockade(String p_CountryNameTo, int p_NumberOfArmies, GameEngine p_GameEngine) {
+    public Blockade(String p_CountryNameTo, GameEngine p_GameEngine) {
         
         this.d_CountryNameTo = p_CountryNameTo;
-        this.d_NumberOfArmies = p_NumberOfArmies;
         this.d_GameEngine = p_GameEngine;
 
     }
@@ -53,12 +50,12 @@ public class Blockade extends Order{
         } else {
             //execution
             d_CountryTo = l_CountryTo;
-            d_CountryTo.setD_NumberOfArmies(3*d_NumberOfArmies);
+            d_CountryTo.setD_NumberOfArmies(3*d_CountryTo.getD_NumberOfArmies());
             d_CountryTo.setD_CurrentOwner("Neutral");
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
             l_Neutral.addCountryOwned(l_CountryTo);
-            l_Neutral.setD_TotalNumberOfArmies(l_Neutral.getD_TotalNumberOfArmies()+(3*d_NumberOfArmies));
+            l_Neutral.setD_TotalNumberOfArmies(l_Neutral.getD_TotalNumberOfArmies()+(3*d_CountryTo.getD_NumberOfArmies()));
         }
     }
     
