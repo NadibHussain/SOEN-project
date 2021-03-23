@@ -3,7 +3,6 @@ package team14.warzone.GameEngine.Commands;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
-import team14.warzone.MapModule.Map;
 
 public class Diplomacy extends Order{
 
@@ -29,8 +28,6 @@ public class Diplomacy extends Order{
      * Executes Diplomacy command
      */
     public void execute() throws Exception {
-        Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
-
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
         if (!l_CurrentPlayer.hasCard(new Card("Diplomacy"))) {// check if player has the Diplomacy card
             throw new Exception("Player does not have this card.");
