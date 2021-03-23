@@ -105,6 +105,7 @@ public class Advance extends Order {
                     l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
                     Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
                             + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                    //change the owner of the dest country, add country to player country list
                 } else {
                     l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
                     l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
