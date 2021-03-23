@@ -3,6 +3,7 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Commands.ICommand;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -299,8 +300,8 @@ public class GameEngine {
         return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_AdminCommands.getD_Keyword());
     }
 
-    public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
-        d_AdminCommandsBuffer.add(p_AdminCommands);
+    public void appendToCommandBuffer(ICommand p_AdminCommands) {
+        d_AdminCommandsBuffer.add((AdminCommands) p_AdminCommands);
     }
 
     public AdminCommands retrieveFromCommandBuffer() {
