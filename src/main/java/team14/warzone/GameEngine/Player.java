@@ -108,19 +108,19 @@ public class Player {
             // { "blockade", "", "countryFrom, numOfArmies" }
             case "blockade":
                 String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
+                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], d_GE);
                 d_OrderList.add(l_BlockadeOrder);
                 break;
 
             // { "bomb", "", "countryFrom, numOfArmies" }
             case "bomb":
                 String[] l_ArgsBomb = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], Integer.parseInt(l_ArgsBomb[1]), d_GE);
+                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], d_GE);
                 d_OrderList.add(l_BombOrder);
                 break;
 
             // { "diplomacy", "", "playerId" }
-            case "diplomacy":
+            case "negotiate":
                 String[] l_ArgsDiplomacy = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Diplomacy l_DiplomacyOrder = new Diplomacy(l_ArgsDiplomacy[0], d_GE);
                 d_OrderList.add(l_DiplomacyOrder);
