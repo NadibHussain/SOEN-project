@@ -55,7 +55,6 @@ public class Blockade extends Order{
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
             l_Neutral.addCountryOwned(l_CountryTo);
-            l_Neutral.setD_TotalNumberOfArmies(l_Neutral.getD_TotalNumberOfArmies()+(3*d_CountryTo.getD_NumberOfArmies()));
         }
     }
     
