@@ -1,18 +1,16 @@
 package team14.warzone.GameEngine;
 
-import team14.warzone.GameEngine.Commands.Command;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
-import team14.warzone.MapModule.Continent;
+import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.List;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -35,6 +33,8 @@ public class GameEngine implements Observer{
      */
     private ArrayList<Player> d_PlayerList;
 
+    private NeutralPlayer d_NeutralPlayer;
+
     /**
      * intance of console
      */
@@ -43,6 +43,23 @@ public class GameEngine implements Observer{
      * instance of map editor
      */
     private MapEditor d_MapEditor;
+    /**
+     * Stores admin commands that are yet to be executed
+     */
+    private ArrayList<AdminCommands> d_AdminCommandsBuffer;
+    /**
+     * Stores user inputs needed to create orders
+     */
+    private List<List<String>> d_OrderStrBuffer;
+
+    // State pattern attributes
+    private Phase d_CurrentPhase;
+
+    private Phase d_PreMapLoadPhase;
+    private Phase d_PostMapEditLoadPhase;
+    private Phase d_StartupPhase;
+    private Phase d_IssueOrdersPhase;
+    private Phase d_ExecuteOrdersPhase;
 
     /**
      * random number for issuing a card upon conquering territories
@@ -57,6 +74,15 @@ public class GameEngine implements Observer{
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
+        d_NeutralPlayer = new NeutralPlayer();
+        d_AdminCommandsBuffer = new ArrayList<>();
+
+        d_PreMapLoadPhase = new PreMapLoadPhase(this);
+        d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
+        d_StartupPhase = new StartupPhase(this);
+        d_IssueOrdersPhase = new IssueOrdersPhase(this);
+        d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
+        d_CurrentPhase = d_PreMapLoadPhase;
     }
 
     /**
@@ -123,7 +149,7 @@ public class GameEngine implements Observer{
         else if (d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
             Console.displayMsg("Player already exists!");
         else {
-            Player l_LocalPlayer = new Player(p_PlayerName);
+            Player l_LocalPlayer = new Player(p_PlayerName, this);
             d_PlayerList.add(l_LocalPlayer);
             l_LocalPlayer.register(this);
             Console.displayMsg("Player added: " + p_PlayerName);
@@ -158,7 +184,11 @@ public class GameEngine implements Observer{
      * 2. Loops through the order list of each player and execute their orders
      */
     public void gameLoop() {
+        while (true) {
+            d_CurrentPhase.run();
+        }
         // reinforcement
+        /*
         reInforcement();
 
         // display armies remaining in possession for each player
@@ -178,7 +208,8 @@ public class GameEngine implements Observer{
                     d_CurrentPlayer = d_PlayerList.get(l_Counter);
                     Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
                     d_Console.readInput();
-                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword().equals("pass")) {
+                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword()
+                    .equals("pass")) {
                         l_Flag.set(l_Counter, Boolean.TRUE);
                         l_Counter++;
                         d_Console.clearCommandBuffer();
@@ -186,7 +217,7 @@ public class GameEngine implements Observer{
                         // check if valid gameplay command and change player turn
                         if (isGamePhaseCommand(d_Console.getD_CommandBuffer()))
                             l_Counter++;
-                        d_Console.filterCommand(this, d_MapEditor);
+//                        d_Console.filterCommand(this, d_MapEditor);
                     }
                 } else {
                     // if player has already passed just skip turn
@@ -206,40 +237,32 @@ public class GameEngine implements Observer{
                     l_Flag.set(i, Boolean.TRUE);
             }
         }
+         */
     }
 
     /**
      * This method calculates and assign the reinforcement at the beginning of each turn
      */
-    public void reInforcement() {
-        for (Player l_Player : d_PlayerList) {
-            //1. # of territories owned divided by 3
-            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
-            //2. if the player owns all the territories of an entire continent the player is given
-            // a control bonus value
-            int l_ControlValueEnforcement = 0;
-            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-                //check if all countries belong to the l_Continent are owned by l_Player
-                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent.getD_ContinentID())))
-                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
-            }
-            //3.the minimal number of reinforcement armies for any player is 3 + control values
-            // of continents he owns
-            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
-            //give reinforcement to the player
-            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
-        }
-    }
-
-    /**
-     * Receive Command method
-     *
-     * @param p_Command command type as parameter
-     */
-    public void receiveCommand(Command p_Command) {
-        // store received command in the current players order list
-        d_CurrentPlayer.issueOrder(p_Command); // store order in current player orders list
-    }
+//    public void reInforcement() {
+//        for (Player l_Player : d_PlayerList) {
+//            //1. # of territories owned divided by 3
+//            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+//            //2. if the player owns all the territories of an entire continent the player is given
+//            // a control bonus value
+//            int l_ControlValueEnforcement = 0;
+//            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
+//                //check if all countries belong to the l_Continent are owned by l_Player
+//                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent
+//                .getD_ContinentID())))
+//                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+//            }
+//            //3.the minimal number of reinforcement armies for any player is 3 + control values
+//            // of continents he owns
+//            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+//            //give reinforcement to the player
+//            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
+//        }
+//    }
 
     /**
      * This method implements the deploy command
@@ -275,11 +298,23 @@ public class GameEngine implements Observer{
     /**
      * Method checks if the passed command is a valid gamephase command
      *
-     * @param p_Command command to be checked
+     * @param p_AdminCommands command to be checked
      * @return true if valid; else return false
      */
-    public boolean isGamePhaseCommand(Command p_Command) {
-        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_Command.getD_Keyword());
+    public boolean isGamePhaseCommand(AdminCommands p_AdminCommands) {
+        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_AdminCommands.getD_Keyword());
+    }
+
+    public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
+        d_AdminCommandsBuffer.add(p_AdminCommands);
+    }
+
+    public AdminCommands retrieveFromCommandBuffer() {
+        return d_AdminCommandsBuffer.remove(0);
+    }
+
+    public void clearCommandBuffer() {
+        d_AdminCommandsBuffer.clear();
     }
 
     /**
@@ -300,6 +335,9 @@ public class GameEngine implements Observer{
         return d_LoadedMap;
     }
 
+    public MapEditor getD_MapEditor() {
+        return d_MapEditor;
+    }
 
     /**
      * Get player list
@@ -327,15 +365,59 @@ public class GameEngine implements Observer{
         d_CurrentPlayer = p_CurrentPlayer;
     }
 
-    /**
-     * Method to update the observer about change in the subject and add a card to the card list of player randomly
-     * @param d_CountriesOwned The countries owned by a player
-     */
-    @Override
-    public void update (ArrayList d_CountriesOwned) {
-        Card card = new Card();
-        card.setCardType(card.TYPES[randomNumber.nextInt(card.TYPES.length)]);
+    public Phase getD_CurrentPhase() {
+        return d_CurrentPhase;
+    }
 
-        this.d_CurrentPlayer.addCard(card);
+    public Phase getD_PreMapLoadPhase() {
+        return d_PreMapLoadPhase;
+    }
+
+    public Phase getD_PostMapEditLoadPhase() {
+        return d_PostMapEditLoadPhase;
+    }
+
+    public void setD_CurrentPhase(Phase p_CurrentPhase) {
+        d_CurrentPhase = p_CurrentPhase;
+    }
+
+    public Phase getD_StartupPhase() {
+        return d_StartupPhase;
+    }
+
+    public Phase getD_IssueOrdersPhase() {
+        return d_IssueOrdersPhase;
+    }
+
+    public Phase getD_ExecuteOrdersPhase() {
+        return d_ExecuteOrdersPhase;
+    }
+
+    public ArrayList<AdminCommands> getD_CommandBuffer() {
+        return d_AdminCommandsBuffer;
+    }
+
+    public void setD_CommandBuffer(ArrayList<AdminCommands> p_AdminCommandsBuffer) {
+        d_AdminCommandsBuffer = p_AdminCommandsBuffer;
+    }
+
+    public Player getD_CurrentPlayer() {
+        return d_CurrentPlayer;
+    }
+
+    public void setD_LoadedMap(Map d_LoadedMap) {
+        this.d_LoadedMap = d_LoadedMap;
+    }
+
+    public List<List<String>> getD_OrderStrBuffer() {
+        return d_OrderStrBuffer;
+    }
+
+    public void setD_OrderStrBuffer(List<List<String>> p_OrderStrBuffer) {
+        d_OrderStrBuffer = p_OrderStrBuffer;
+    }
+
+    public void clearOrderBuffer() {
+        d_OrderStrBuffer.clear();
     }
 }

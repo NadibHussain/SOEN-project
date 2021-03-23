@@ -1,17 +1,15 @@
-package team14.warzone.GameEngine;
+package team14.warzone.GameEngine.Commands;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
-/**
- * Test the deploy command
- * Verify that a player cannot deploy more armies than what they have in their pool
- */
-public class GameEngineTest {
+public class AdvanceTest {
+
     /**
      * console field
      */
@@ -44,35 +42,30 @@ public class GameEngineTest {
         d_GE.assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
+        d_GE.getD_LoadedMap().findCountry("b6").setD_NumberOfArmies(15);
+        d_GE.getD_LoadedMap().findCountry("b7").setD_NumberOfArmies(6);
     }
 
-//    /**
-//     * Check "reinforcement" number of armies given to each player at the beginning of each turn
-//     */
-//    @Test
-//    @DisplayName("Testing Armies Reinforcement")
-//    public void testReinforcement() {
-//        //check if the player is given 20 armies after initialization
-//        assertEquals(20, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-//        d_GE.reInforcement();
-//        //check if the reinforcement of the player equals to the expected value
-//        assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-//    }
-
-    /**
+     /**
      * Tries to deploy more armies than currently in possession of p1
      * p1 has 20 armies, but tries to deploy 100
      * Deploy should fail and the country should contain 0 armies
      */
     @Test
-    @DisplayName("Testing Armies deployment")
-    public void deployTest() {
+    @DisplayName("Testing advance Armies")
+    public void executeTest() {
+        int l_ArmiesSrcCountryBefore = 0;
+        int l_ArmiesDestCountryBefore = 0;
         try {
-            d_GE.deploy("s1", 100);
+            l_ArmiesSrcCountryBefore = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
+            l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
+            Advance l_Adv = new Advance("b6","b7",10,d_GE);
+            l_Adv.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        int l_ArmiesInCountry = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
-        org.junit.Assert.assertEquals("Armies deployed - deployed > possession", 0, l_ArmiesInCountry);
+        int l_ArmiesSrcCountryAfter = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
+        int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
+        org.junit.Assert.assertEquals("Armies in source countries ", l_ArmiesSrcCountryBefore - 10, l_ArmiesSrcCountryAfter);
     }
 }

@@ -2,7 +2,8 @@ package team14.warzone.Console;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Commands.Option;
 
 import java.util.Arrays;
 
@@ -12,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Tests for the Command class
  */
-public class CommandTest {
+public class AdminCommandsTest {
     public static Option d_Options;
-    public static Command d_Command;
+    public static AdminCommands d_AdminCommands;
 
     /**
      * A method to initialize a command with options and arguments
@@ -22,7 +23,7 @@ public class CommandTest {
     @BeforeClass
     public static void setup() {
         d_Options = new Option("-add", Arrays.asList("Africa", "9"));
-        d_Command = new Command("editContenent", d_Options);
+        d_AdminCommands = new AdminCommands("editContenent", d_Options);
     }
 
     /**
@@ -30,7 +31,7 @@ public class CommandTest {
      */
     @Test
     public void getD_Keyword() {
-        assertEquals("editContenent", d_Command.getD_Keyword());
+        assertEquals("editContenent", d_AdminCommands.getD_Keyword());
     }
 
     /**
@@ -39,7 +40,7 @@ public class CommandTest {
     @Test
     public void getD_Options() {
         Option l_Option = new Option("-add", Arrays.asList("Africa", "9"));
-        assertTrue(l_Option.getD_Name().equals(d_Command.getD_Options().getD_Name()));
-        assertEquals(l_Option.getD_Arguments(), d_Command.getD_Options().getD_Arguments());
+        assertTrue(l_Option.getD_Name().equals(d_AdminCommands.getD_Options().getD_Name()));
+        assertEquals(l_Option.getD_Arguments(), d_AdminCommands.getD_Options().getD_Arguments());
     }
 }
