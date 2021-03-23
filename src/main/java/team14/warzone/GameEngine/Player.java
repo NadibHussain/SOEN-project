@@ -239,6 +239,13 @@ public class Player {
     }
 
     /**
+     * The method to add card to players' card list
+     * @param card card to be added
+     */
+    public void addCard(Card card) {
+        d_CardList.add(card);
+    }
+    /**
      * Getter for the number of armies ordered to be deployed field
      *
      * @return
