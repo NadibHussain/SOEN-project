@@ -14,7 +14,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class Player implements Subject {
+public class Player {
     /**
      * name of player
      */
@@ -48,7 +48,6 @@ public class Player implements Subject {
      * Default constructor that takes no params
      */
     public Player() {
-        this.d_ObserverList = new ArrayList<Observer>();
     }
 
     /**
@@ -166,16 +165,7 @@ public class Player implements Subject {
     public boolean hasCard(Card p_Card) {
         return d_CardList.contains(p_Card);
     }
-
-    /**
-     * This method implements the functionality of conquering countries (required to assign cards)
-     * @param p_Country country which has been captured
-     */
-    public void countryConquered (Country p_Country) {
-        addCountryOwned(p_Country);
-        notifyObserver();
-    }
-
+    
     /**
      * Getter method for name of the player
      *

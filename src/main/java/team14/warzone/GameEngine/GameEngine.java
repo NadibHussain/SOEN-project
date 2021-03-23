@@ -19,7 +19,7 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine implements Observer{
+public class GameEngine{
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -60,11 +60,6 @@ public class GameEngine implements Observer{
     private Phase d_StartupPhase;
     private Phase d_IssueOrdersPhase;
     private Phase d_ExecuteOrdersPhase;
-
-    /**
-     * random number for issuing a card upon conquering territories
-     */
-    Random randomNumber = new Random();
 
     /**
      * @param p_Console   console object
@@ -151,7 +146,6 @@ public class GameEngine implements Observer{
         else {
             Player l_LocalPlayer = new Player(p_PlayerName, this);
             d_PlayerList.add(l_LocalPlayer);
-            l_LocalPlayer.register(this);
             Console.displayMsg("Player added: " + p_PlayerName);
         }
     }
