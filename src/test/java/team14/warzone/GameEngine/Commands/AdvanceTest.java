@@ -46,10 +46,9 @@ public class AdvanceTest {
         d_GE.getD_LoadedMap().findCountry("b7").setD_NumberOfArmies(6);
     }
 
-     /**
-     * Tries to deploy more armies than currently in possession of p1
-     * p1 has 20 armies, but tries to deploy 100
-     * Deploy should fail and the country should contain 0 armies
+    /**
+     * Tries to attack another country that p1 doesn't own, after battle the number of armies of at least one
+     * of the two countries should be changed
      */
     @Test
     @DisplayName("Testing advance Armies")
@@ -59,13 +58,14 @@ public class AdvanceTest {
         try {
             l_ArmiesSrcCountryBefore = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
             l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-            Advance l_Adv = new Advance("b6","b7",10,d_GE);
+            Advance l_Adv = new Advance("b6", "b7", 10, d_GE);
             l_Adv.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         int l_ArmiesSrcCountryAfter = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
         int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-        org.junit.Assert.assertEquals("Armies in source countries ", l_ArmiesSrcCountryBefore - 10, l_ArmiesSrcCountryAfter);
+        org.junit.Assert.assertTrue(l_ArmiesSrcCountryAfter <= l_ArmiesSrcCountryBefore
+                || l_ArmiesDestCountryAfter <= l_ArmiesDestCountryBefore);
     }
 }

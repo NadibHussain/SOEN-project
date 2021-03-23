@@ -105,7 +105,8 @@ public class Advance extends Order {
                 if (l_DefenderArmiesSurvived == 0 && l_AttackerArmiesSurvived != 0) {
                     l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
                     Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
-                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo +
+                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
                     //change the owner of the destination country, add the destination country to current player country list
                     // and remove it from the old owner list
                     l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
@@ -114,8 +115,8 @@ public class Advance extends Order {
                 } else {
                     l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
                     l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
-                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle, " +
-                            l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
+                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle" +
+                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
                 }
             }
         }

@@ -107,9 +107,9 @@ public class Player {
 
             // { "blockade", "", "countryFrom, numOfArmies" }
             case "blockade":
-                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], d_GE);
-                d_OrderList.add(l_BlockadeOrder);
+//                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+//                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], d_GE);
+//                d_OrderList.add(l_BlockadeOrder);
                 break;
 
             // { "bomb", "", "countryFrom, numOfArmies" }
