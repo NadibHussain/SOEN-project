@@ -42,7 +42,7 @@ public class Diplomacy extends Order{
          else {
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
             d_PreviousOwner = l_CurrentPlayer;
-            d_GameEngine.appendToCommandBuffer();
+            d_GameEngine.appendToCommandBuffer(this);
         }
     }
     public void resetDiplomacy(){
