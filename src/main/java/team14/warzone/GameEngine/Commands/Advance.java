@@ -79,6 +79,7 @@ public class Advance extends Order {
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
             }
+            //check allies list for the current player, if country's owner is an ally then don't attack the country
             // perform battle
             else {
                 l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
@@ -105,7 +106,11 @@ public class Advance extends Order {
                     l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
                     Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
                             + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
-                    //change the owner of the dest country, add country to player country list
+                    //change the owner of the destination country, add the destination country to current player country list
+                    // and remove it from the old owner list
+                    l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
+                    d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
+                    l_CurrentPlayer.addCountryOwned(l_CountryTo);
                 } else {
                     l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
                     l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);

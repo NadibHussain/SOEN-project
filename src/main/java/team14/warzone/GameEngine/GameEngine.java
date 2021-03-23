@@ -342,6 +342,19 @@ public class GameEngine {
         return d_PlayerList;
     }
 
+    /**
+     * Get a player by name
+     *
+     * @param p_PlayerName player list parameter
+     * @return Player object that has a match name
+     */
+    public Player findPlayer(String p_PlayerName) {
+        for(Player l_Player : d_PlayerList){
+            if(l_Player.getD_Name().equals(p_PlayerName))
+                return l_Player;
+        }
+        return null;
+    }
 
     /**
      * @param p_PlayerList player list parameter
