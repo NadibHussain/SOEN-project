@@ -350,10 +350,12 @@ public class GameEngine {
      * @return Player object that has a match name
      */
     public Player findPlayer(String p_PlayerName) {
-        for(Player l_Player : d_PlayerList){
-            if(l_Player.getD_Name().equals(p_PlayerName))
+        for (Player l_Player : d_PlayerList) {
+            if (l_Player.getD_Name().equals(p_PlayerName))
                 return l_Player;
         }
+        if (d_NeutralPlayer.getD_Name().equals(p_PlayerName))
+            return d_NeutralPlayer;
         return null;
     }
 
@@ -427,5 +429,9 @@ public class GameEngine {
 
     public void clearOrderBuffer() {
         d_OrderStrBuffer.clear();
+    }
+
+    public NeutralPlayer getD_NeutralPlayer() {
+        return d_NeutralPlayer;
     }
 }
