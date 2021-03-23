@@ -26,8 +26,10 @@ public class LogerOberver implements Observer{
 
     @Override
     public void update(Observable p_observable) {
+
         GameEngine l_GameEngine = (GameEngine)p_observable;
-//        add every check method here
+
+        //        add every check method here
 //        checkPlayerList(d_CurrentGameEngine.getD_PlayerList(),l_GameEngine.getD_PlayerList());
 //        checkGameState(d_CurrentGameEngine.getD_CurrentPhase(),l_GameEngine.getD_CurrentPhase());
         checkCountryList(d_CurrentGameEngine.getD_LoadedMap().d_Countries, l_GameEngine.getD_LoadedMap().d_Countries);
@@ -35,11 +37,7 @@ public class LogerOberver implements Observer{
 //        checkNeighbourList(d_CurrentGameEngine.getD_LoadedMap().d_Countries, l_GameEngine.getD_LoadedMap().d_Countries);
 
 //
-        try {
-            d_CurrentGameEngine = (GameEngine) l_GameEngine.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        d_CurrentGameEngine = new GameEngine(l_GameEngine);
 
     }
 
@@ -95,6 +93,7 @@ public class LogerOberver implements Observer{
      * @param p_NewCountryList list of countries inside new loaded map
      */
     private void checkCountryList(ArrayList<Country> p_CurrentCountryList, ArrayList<Country> p_NewCountryList){
+
         System.out.println(p_CurrentCountryList.size());
         System.out.println(p_NewCountryList.size());
         if(p_NewCountryList.size()-p_CurrentCountryList.size()>10)
