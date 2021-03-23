@@ -21,7 +21,7 @@ import java.util.Random;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine extends Observable {
+public class GameEngine extends Observable implements Cloneable {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -99,6 +99,12 @@ public class GameEngine extends Observable {
      */
     public void showMap() {
         d_LoadedMap.showMap();
+    }
+
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 
     /**

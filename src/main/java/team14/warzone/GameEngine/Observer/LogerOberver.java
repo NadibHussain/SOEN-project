@@ -19,7 +19,7 @@ public class LogerOberver implements Observer{
 
     GameEngine d_CurrentGameEngine;
 
-    LogerOberver(){
+    public LogerOberver(){
         d_CurrentGameEngine = new GameEngine(new Console(),new MapEditor());
         d_CurrentGameEngine.setD_LoadedMap(new Map());
     }
@@ -35,7 +35,11 @@ public class LogerOberver implements Observer{
 //        checkNeighbourList(d_CurrentGameEngine.getD_LoadedMap().d_Countries, l_GameEngine.getD_LoadedMap().d_Countries);
 
 //
-        d_CurrentGameEngine = l_GameEngine;
+        try {
+            d_CurrentGameEngine = (GameEngine) l_GameEngine.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -56,7 +60,7 @@ public class LogerOberver implements Observer{
             l_ExistingLogs = new String(data, "UTF-8");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("new logs file created");
         }
 
         try {
@@ -91,7 +95,56 @@ public class LogerOberver implements Observer{
      * @param p_NewCountryList list of countries inside new loaded map
      */
     private void checkCountryList(ArrayList<Country> p_CurrentCountryList, ArrayList<Country> p_NewCountryList){
+        System.out.println(p_CurrentCountryList.size());
+        System.out.println(p_NewCountryList.size());
+        if(p_NewCountryList.size()-p_CurrentCountryList.size()>10)
+        {
+            writeLogs("A new Map has been loaded");
+            return;
+        }
+       if (p_CurrentCountryList.size()>p_NewCountryList.size()||p_CurrentCountryList.size()<p_NewCountryList.size())
+       {
+           String l_Operation = "";
+           ArrayList<Country> l_ChangedCountry = new ArrayList<>();
+           if (p_CurrentCountryList.size()>p_NewCountryList.size())
+           {
+               l_Operation="removed";
+               for (Country l_CurrentCountry:p_CurrentCountryList) {
+                   boolean l_matched = false;
+                   for (Country l_NewCountry:p_NewCountryList) {
+                       if (l_CurrentCountry.getD_CountryID().equals(l_NewCountry.getD_CountryID()))
+                       {
+                           l_matched=true;
+                           break;
+                       }
+                   }
+                   if (!l_matched)
+                   {
+                       l_ChangedCountry.add(l_CurrentCountry);
+                   }
+               }
+           }else {
+               l_Operation="added";
+               for (Country l_NewCountry:p_NewCountryList) {
+                   boolean l_matched = false;
+                   for (Country l_CurrentCountry:p_CurrentCountryList) {
+                       if (l_CurrentCountry.getD_CountryID().equals(l_NewCountry.getD_CountryID()))
+                       {
+                           l_matched=true;
+                           break;
+                       }
+                   }
+                   if (!l_matched)
+                   {
+                       l_ChangedCountry.add(l_NewCountry);
+                   }
+               }
+           }
+           for (Country l_Country:l_ChangedCountry) {
+               writeLogs(l_Country.getD_CountryID()+" has been "+l_Operation);
+           }
 
+       }
 
     }
     /**
