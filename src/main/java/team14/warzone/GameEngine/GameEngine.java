@@ -3,6 +3,7 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -10,6 +11,7 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine {
+public class GameEngine extends Observable implements Cloneable {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -106,6 +108,12 @@ public class GameEngine {
      */
     public void showMap() {
         d_LoadedMap.showMap();
+    }
+
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        return super.clone();
     }
 
     /**
@@ -416,6 +424,12 @@ public class GameEngine {
         this.d_LoadedMap = d_LoadedMap;
     }
 
+    public void allotCard(Player p_player) {
+        Card l_Card = new Card();
+        Random l_RandomNumber = new Random();
+        l_Card.setCardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
+        p_player.addCard(l_Card);
+    }
     public List<List<String>> getD_OrderStrBuffer() {
         return d_OrderStrBuffer;
     }
