@@ -1,8 +1,7 @@
 package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
-import team14.warzone.GameEngine.Commands.Deploy;
-import team14.warzone.GameEngine.Commands.Order;
+import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
@@ -84,16 +83,51 @@ public class Player {
      */
     public void issueOrder() {
         List<String> l_OrderStr = d_GE.getD_OrderStrBuffer().get(0);
-        // { "deploy", "", "canada,5" }
         switch (l_OrderStr.get(0)) {
+            // { "deploy", "", "countryFrom, numOfArmies" }
             case "deploy":
                 String[] l_Temp = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Deploy l_DeployOrder = new Deploy(l_Temp[0], Integer.parseInt(l_Temp[1]), d_GE);
                 d_OrderList.add(l_DeployOrder);
                 break;
 
+            // { "advance", "", "countryFrom, countryTo, numOfArmies" }
             case "advance":
+                String[] l_ArgsAdvance = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Advance l_AdvanceOrder = new Advance(l_ArgsAdvance[0], l_ArgsAdvance[1], Integer.parseInt(l_ArgsAdvance[2]), d_GE);
+                d_OrderList.add(l_AdvanceOrder);
                 break;
+
+            // { "airlift", "", "countryFrom, countryTo, numOfArmies" }
+            case "airlift":
+                String[] l_ArgsAirlift = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Airlift l_AirliftOrder = new Airlift(l_ArgsAirlift[0], l_ArgsAirlift[1], Integer.parseInt(l_ArgsAirlift[2]), d_GE);
+                d_OrderList.add(l_AirliftOrder);
+                break;
+
+            // { "blockade", "", "countryFrom, numOfArmies" }
+            case "blockade":
+                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
+                d_OrderList.add(l_BlockadeOrder);
+                break;
+
+            // { "bomb", "", "countryFrom, numOfArmies" }
+            case "bomb":
+                String[] l_ArgsBomb = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], Integer.parseInt(l_ArgsBomb[1]), d_GE);
+                d_OrderList.add(l_BombOrder);
+                break;
+
+            // { "diplomacy", "", "playerId" }
+            case "diplomacy":
+                String[] l_ArgsDiplomacy = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Diplomacy l_DiplomacyOrder = new Diplomacy(l_ArgsDiplomacy[0], d_GE);
+                d_OrderList.add(l_DiplomacyOrder);
+                break;
+
+            default:
+                Console.displayMsg("Error in issue order!");
         }
         d_GE.clearOrderBuffer();
     }

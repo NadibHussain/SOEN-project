@@ -6,7 +6,7 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
-public class Bomb {
+public class Bomb extends Order{
 
     private String d_CountryNameTo;
     private int d_NumberOfArmies;
