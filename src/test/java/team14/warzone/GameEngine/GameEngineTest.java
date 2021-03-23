@@ -7,8 +7,6 @@ import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.MapEditor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * Test the deploy command
  * Verify that a player cannot deploy more armies than what they have in their pool
@@ -48,18 +46,18 @@ public class GameEngineTest {
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
     }
 
-    /**
-     * Check "reinforcement" number of armies given to each player at the beginning of each turn
-     */
-    @Test
-    @DisplayName("Testing Armies Reinforcement")
-    public void testReinforcement() {
-        //check if the player is given 20 armies after initialization
-        assertEquals(20, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-        d_GE.reInforcement();
-        //check if the reinforcement of the player equals to the expected value
-        assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-    }
+//    /**
+//     * Check "reinforcement" number of armies given to each player at the beginning of each turn
+//     */
+//    @Test
+//    @DisplayName("Testing Armies Reinforcement")
+//    public void testReinforcement() {
+//        //check if the player is given 20 armies after initialization
+//        assertEquals(20, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
+//        d_GE.reInforcement();
+//        //check if the reinforcement of the player equals to the expected value
+//        assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
+//    }
 
     /**
      * Tries to deploy more armies than currently in possession of p1

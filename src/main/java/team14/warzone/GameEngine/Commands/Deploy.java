@@ -14,6 +14,7 @@ public class Deploy extends Order {
         this.d_TargetCountry = p_TargetCountry;
         this.d_NumberOfArmies = p_NumberOfArmies;
         this.d_GameEngine = p_GameEngine;
+        p_GameEngine.getD_CurrentPlayer().increaseArmiesOrderedToBeDeployed(p_NumberOfArmies);
     }
 
     /**
@@ -43,5 +44,7 @@ public class Deploy extends Order {
         l_CurrentPlayer.setD_TotalNumberOfArmies(l_CurrentPlayer.getD_TotalNumberOfArmies() - d_NumberOfArmies);
         Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " deployed " + d_NumberOfArmies + " armies" +
                 " in " + d_TargetCountry);
+        // decrease armies ordered to be deployed count in player
+        l_CurrentPlayer.decreaseArmiesOrderedToBeDeployed(d_NumberOfArmies);
     }
 }
