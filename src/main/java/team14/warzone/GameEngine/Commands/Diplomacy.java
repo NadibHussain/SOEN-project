@@ -9,6 +9,7 @@ public class Diplomacy extends Order{
 
     private String d_PlayerId;
     private GameEngine d_GameEngine;
+    private Player d_PreviousOwner;
 
     /**
      * Constructor of Diplomacy
@@ -35,13 +36,17 @@ public class Diplomacy extends Order{
             throw new Exception("Player does not have this card.");
         }
         // check if player exists
-        if (!d_GameEngine.getD_PlayerList().contains(d_PlayerId)) {
+        if (!d_GameEngine.getD_PlayerList().contains(d_GameEngine.findPlayer((d_PlayerId)))) {
             throw new Exception("Diplomacy failed: playerID does not exist");
         }
          else {
-            
-            //wait till the turn is finished.
+            l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
+            d_PreviousOwner = l_CurrentPlayer;
+            d_GameEngine.appendToCommandBuffer();
         }
+    }
+    public void resetDiplomacy(){
+        d_PreviousOwner.removeDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
     }
 
 }

@@ -46,7 +46,7 @@ public class Bomb extends Order{
                     l_CountryTo.getD_CountryID());
         }
         //check if the enemy is a diplomatic ally or not
-        if(l_CurrentPlayer.getD_DiplomaticPlayerList().contains(d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
+        if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
             throw new Exception("Cannot bomb on diplomatic ally's country");
         }
         else{

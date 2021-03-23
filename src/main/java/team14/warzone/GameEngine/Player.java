@@ -304,4 +304,11 @@ public class Player {
     public ArrayList<Player> getD_DiplomaticPlayerList(){
         return this.d_DiplomaticPlayers;
     }
+    public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer){
+        if(p_CurrentPlayer.getD_DiplomaticPlayerList().contains(p_TargetPlayer) | p_TargetPlayer.getD_DiplomaticPlayerList().contains(p_CurrentPlayer))
+        {
+            return true;
+        }
+        return false;
+    }
 }
