@@ -31,6 +31,11 @@ public class Player {
     private ArrayList<Command> d_OrderList;
 
     /**
+     * list of cards the player is holding
+     */
+    private ArrayList<Card> d_CardList;
+
+    /**
      * Default constructor that takes no params
      */
     public Player() {
@@ -168,5 +173,13 @@ public class Player {
      */
     public void setD_Name(String d_Name) {
         this.d_Name = d_Name;
+    }
+
+    /**
+     * The method to add card to players' card list
+     * @param card card to be added
+     */
+    public void addCard(Card card) {
+        d_CardList.add(card);
     }
 }
