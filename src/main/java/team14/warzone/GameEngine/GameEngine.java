@@ -21,7 +21,7 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine extends Observable implements Cloneable {
+public class GameEngine extends Observable {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -83,6 +83,27 @@ public class GameEngine extends Observable implements Cloneable {
     }
 
     /**
+     * Copy Constructor
+     * @param p_GameEngine
+     */
+    public GameEngine(GameEngine p_GameEngine) {
+        d_Console = p_GameEngine.d_Console;
+        d_MapEditor = p_GameEngine.d_MapEditor;
+        d_PlayerList = p_GameEngine.d_PlayerList;
+        d_NeutralPlayer = p_GameEngine.d_NeutralPlayer;
+        d_AdminCommandsBuffer = p_GameEngine.d_AdminCommandsBuffer;
+
+        d_PreMapLoadPhase = p_GameEngine.d_PreMapLoadPhase;
+        d_PostMapEditLoadPhase = p_GameEngine.d_PostMapEditLoadPhase;
+        d_StartupPhase = p_GameEngine.d_StartupPhase;
+        d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
+        d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
+        d_CurrentPhase = p_GameEngine.d_CurrentPhase;
+        d_LoadedMap = p_GameEngine.d_LoadedMap;
+    }
+
+
+    /**
      * Method loads a map from a dominion map file
      *
      * @param p_FileName file name to be loaded
@@ -111,10 +132,7 @@ public class GameEngine extends Observable implements Cloneable {
     }
 
 
-    @Override
-    public Object clone() throws CloneNotSupportedException{
-        return super.clone();
-    }
+
 
     /**
      * Assign Countries method
