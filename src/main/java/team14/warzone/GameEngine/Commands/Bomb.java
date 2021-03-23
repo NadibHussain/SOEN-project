@@ -49,7 +49,10 @@ public class Bomb extends Order{
                     l_CountryTo.getD_CountryID());
         }
         else{
-            l_CountryTo.setD_NumberOfArmies(d_NumberOfArmies / 2);
+            int l_TotalNumOfArmies = l_CurrentPlayer.getD_TotalNumberOfArmies();
+            int l_RemainingArmies = d_NumberOfArmies / 2;
+            l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
+            l_CurrentPlayer.setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
         }
 
     }
