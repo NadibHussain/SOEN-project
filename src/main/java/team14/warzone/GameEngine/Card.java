@@ -1,7 +1,6 @@
 package team14.warzone.GameEngine;
 import team14.warzone.MapModule.Country;
 
-
 /**
  * This class implements the Card model
  *

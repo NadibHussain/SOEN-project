@@ -1,17 +1,14 @@
-package team14.warzone.GameEngine;
+package team14.warzone.GameEngine.Commands;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
-/**
- * Test the deploy command
- * Verify that a player cannot deploy more armies than what they have in their pool
- */
-public class GameEngineTest {
+public class DeployTest {
     /**
      * console field
      */
@@ -46,33 +43,33 @@ public class GameEngineTest {
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
     }
 
-//    /**
-//     * Check "reinforcement" number of armies given to each player at the beginning of each turn
-//     */
-//    @Test
-//    @DisplayName("Testing Armies Reinforcement")
-//    public void testReinforcement() {
-//        //check if the player is given 20 armies after initialization
-//        assertEquals(20, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-//        d_GE.reInforcement();
-//        //check if the reinforcement of the player equals to the expected value
-//        assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
-//    }
-
-    /**
+     /**
      * Tries to deploy more armies than currently in possession of p1
      * p1 has 20 armies, but tries to deploy 100
      * Deploy should fail and the country should contain 0 armies
+     * Then try to deploy 20 armies in a country
+     *  Deploy should succeed, because p1 has enough armies
      */
     @Test
     @DisplayName("Testing Armies deployment")
     public void deployTest() {
         try {
-            d_GE.deploy("s1", 100);
+            Deploy l_Dep = new Deploy("s1", 100, d_GE);
+            l_Dep.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         int l_ArmiesInCountry = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
         org.junit.Assert.assertEquals("Armies deployed - deployed > possession", 0, l_ArmiesInCountry);
+
+        try {
+            Deploy l_Dep2 = new Deploy("s3", 20, d_GE);
+            l_Dep2.execute();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        int l_ArmiesInCountry2 = d_GE.getD_LoadedMap().findCountry("s3").getD_NumberOfArmies();
+        org.junit.Assert.assertEquals("Armies deployed - deployed > possession", 20, l_ArmiesInCountry2);
     }
+
 }

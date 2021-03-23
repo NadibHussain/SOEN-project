@@ -2,20 +2,19 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
-public class Order {
+public abstract class Order implements ICommand {
     /**
      * field stores option object
      */
-    Option d_Option = new Option();
+    Option d_Option;
 
     /**
      * field stores instance of the game engine
      */
-    GameEngine d_GameEngine = null;
+    GameEngine d_GameEngine;
 
     /**
      * Method to execute the command
      */
-    void execute() throws Exception {
-    }
+    abstract public void execute() throws Exception;
 }

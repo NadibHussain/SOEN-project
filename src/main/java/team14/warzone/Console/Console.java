@@ -1,6 +1,6 @@
 package team14.warzone.Console;
 
-import team14.warzone.GameEngine.Commands.Command;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +17,13 @@ public class Console {
     /**
      * temporarily store user commands
      */
-    private List<Command> d_CommandBuffer;
+    private List<AdminCommands> d_AdminCommandsBuffer;
 
     /**
      * Default constructor
      */
     public Console() {
-        d_CommandBuffer = new ArrayList<>();
+        d_AdminCommandsBuffer = new ArrayList<>();
     }
 
     /**
@@ -145,16 +145,16 @@ public class Console {
      * Method clears the command buffer
      */
     public void clearCommandBuffer() {
-        d_CommandBuffer.clear();
+        d_AdminCommandsBuffer.clear();
     }
 
     /**
      * A method to store user Command object
      *
-     * @param p_Command user Command object
+     * @param p_AdminCommands user Command object
      */
-    public void setD_CommandBuffer(Command p_Command) {
-        this.d_CommandBuffer.add(p_Command);
+    public void setD_CommandBuffer(AdminCommands p_AdminCommands) {
+        this.d_AdminCommandsBuffer.add(p_AdminCommands);
     }
 
     /**
@@ -162,8 +162,8 @@ public class Console {
      *
      * @return command object stored in buffer
      */
-    public Command getD_CommandBuffer() {
-        return d_CommandBuffer.get(0);
+    public AdminCommands getD_CommandBuffer() {
+        return d_AdminCommandsBuffer.get(0);
     }
 
     /**
@@ -171,8 +171,8 @@ public class Console {
      *
      * @return list of command objects
      */
-    public List<Command> get_BufferCommands() {
-        return d_CommandBuffer;
+    public List<AdminCommands> get_BufferCommands() {
+        return d_AdminCommandsBuffer;
     }
 
     /**

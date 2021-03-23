@@ -1,7 +1,12 @@
 package team14.warzone.GameEngine.State;
 
+import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Commands.Option;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
+
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class Phase {
 
@@ -27,7 +32,9 @@ public abstract class Phase {
     }
 
     public void next() {
-        if (d_GameEngine.getD_CurrentPhase() instanceof MapEditorPhase)
+        if (d_GameEngine.getD_CurrentPhase() instanceof PreMapLoadPhase)
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_PostMapEditLoadPhase());
+        else if (d_GameEngine.getD_CurrentPhase() instanceof PostMapEditLoadPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
         else if (d_GameEngine.getD_CurrentPhase() instanceof StartupPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
@@ -35,6 +42,16 @@ public abstract class Phase {
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_ExecuteOrdersPhase());
         else if (d_GameEngine.getD_CurrentPhase() instanceof ExecuteOrdersPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
+    }
+
+    public void createAdminCommand(List<List<String>> p_CommandStrList) {
+        for (List<String> l_CommandStr : p_CommandStrList) {
+            Option l_Option = new Option(l_CommandStr.get(1),
+                    Arrays.asList(l_CommandStr.get(2).replaceAll(" ", "").split(
+                            ",")));
+            AdminCommands l_AdminCommands = new AdminCommands(l_CommandStr.get(0), l_Option, d_GameEngine);
+            d_GameEngine.appendToCommandBuffer(l_AdminCommands);
+        }
     }
     public void endGame() {}
 

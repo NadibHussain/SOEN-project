@@ -2,6 +2,8 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class Command {
+public class AdminCommands implements ICommand {
     /**
      * field stores keyword for the command
      */
@@ -20,17 +22,29 @@ public class Command {
      * field stores option object
      */
     private Option d_Option;
-
     /**
      * field stores instance of the game engine
      */
     private GameEngine d_GameEngine;
-
     /**
-     * Class default constructor
+     * valid admin commands arraylist
      */
-    public Command() {
-    }
+    public static ArrayList<String> VALID_ADMIN_COMMANDS = new ArrayList<>(
+            Arrays.asList(
+                    "showmap",
+                    "exit",
+                    "editcontinent",
+                    "editcountry",
+                    "editneighbor",
+                    "savemap",
+                    "editmap",
+                    "validatemap",
+                    "loadmap",
+                    "showmap",
+                    "gameplayer",
+                    "assigncountries"
+            )
+    );
 
     /**
      * Class constructor, specifying keyword and options
@@ -38,12 +52,12 @@ public class Command {
      * @param p_Keyword : keyword of the command
      * @param p_Options : options of the command, if any
      */
-    public Command(String p_Keyword, Option p_Options) {
+    public AdminCommands(String p_Keyword, Option p_Options) {
         this.d_Keyword = p_Keyword;
         this.d_Option = p_Options;
     }
 
-    public Command(String p_Keyword, Option p_Options, GameEngine p_GE) {
+    public AdminCommands(String p_Keyword, Option p_Options, GameEngine p_GE) {
         this.d_Keyword = p_Keyword;
         this.d_Option = p_Options;
         d_GameEngine = p_GE;
@@ -113,14 +127,6 @@ public class Command {
             case "assigncountries":
                 d_GameEngine.getD_CurrentPhase().assignCountries();
                 break;
-
-//            case "deploy":
-//                try {
-//                    d_GameEngine.deploy(l_CommandArgs.get(0), Integer.parseInt(l_CommandArgs.get(1)));
-//                } catch (Exception e) {
-//                    System.out.println(e.getMessage());
-//                }
-//                break;
         }
     }
 

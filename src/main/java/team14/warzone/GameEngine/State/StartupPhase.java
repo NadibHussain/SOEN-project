@@ -1,12 +1,10 @@
 package team14.warzone.GameEngine.State;
 
 import team14.warzone.Console.Console;
-import team14.warzone.GameEngine.Commands.Command;
-import team14.warzone.GameEngine.Commands.Option;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class StartupPhase extends GamePlayPhase {
@@ -17,43 +15,63 @@ public class StartupPhase extends GamePlayPhase {
 
     @Override
     public void run() {
-        if (d_GameEngine.getD_LoadedMap() == null)
-        {
+        if (d_GameEngine.getD_LoadedMap() == null) {
             System.out.println("Please load map first before starting Startup phase");
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_PreMapLoadPhase());
         }
         issueCommands();
         executeCommands();
     }
 
     @Override
-    public void addCountry(String p_CountryId, String p_ContinentId) { invalidCommandMessage(); }
+    public void addCountry(String p_CountryId, String p_ContinentId) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void removeCountry(String p_CountryId) { invalidCommandMessage();}
+    public void removeCountry(String p_CountryId) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void addContinent(String p_ContinentId, int p_ControlValue) { invalidCommandMessage();}
+    public void addContinent(String p_ContinentId, int p_ControlValue) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void removeContinent(String p_ContinentId) { invalidCommandMessage();}
+    public void removeContinent(String p_ContinentId) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void addNeighbor(String p_CountryId, String p_NeighborId) { invalidCommandMessage();}
+    public void addNeighbor(String p_CountryId, String p_NeighborId) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void removeNeighbor(String p_CountryId, String p_NeighborId) { invalidCommandMessage();}
+    public void removeNeighbor(String p_CountryId, String p_NeighborId) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void loadMap(String p_FileName) {invalidCommandMessage(); }
+    public void loadMap(String p_FileName) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void saveMap(String p_FileName) { invalidCommandMessage();}
+    public void saveMap(String p_FileName) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void editMap(String p_FileName) { invalidCommandMessage();}
+    public void editMap(String p_FileName) {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void validateMap(Map p_Map) { invalidCommandMessage();}
+    public void validateMap(Map p_Map) {
+        invalidCommandMessage();
+    }
 
     @Override
     public void addPlayer(String p_Name) {
@@ -81,31 +99,31 @@ public class StartupPhase extends GamePlayPhase {
 
         System.out.println("Enter command:");
         List<List<String>> l_CommandStrList = Console.readInput();
-        for (List<String> l_CommandStr : l_CommandStrList) {
-            Option l_Option = new Option(l_CommandStr.get(1),
-                    Arrays.asList(l_CommandStr.get(2).replaceAll(" ", "").split(
-                            ",")));
-            Command l_Command = new Command(l_CommandStr.get(0), l_Option, d_GameEngine);
-            d_GameEngine.appendToCommandBuffer(l_Command);
-        }
+        createAdminCommand(l_CommandStrList);
     }
 
     @Override
     public void executeCommands() {
-        for (Command l_Command : d_GameEngine.getD_CommandBuffer()) {
-            l_Command.execute();
+        for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
+            l_AdminCommands.execute();
         }
         d_GameEngine.clearCommandBuffer();
     }
 
     @Override
-    public void deploy() { invalidCommandMessage();}
+    public void deploy() {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void advance() { invalidCommandMessage();}
+    public void advance() {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void bomb() { invalidCommandMessage();}
+    public void bomb() {
+        invalidCommandMessage();
+    }
 
     @Override
     public void blockade() {
@@ -113,9 +131,13 @@ public class StartupPhase extends GamePlayPhase {
     }
 
     @Override
-    public void airlift() { invalidCommandMessage();}
+    public void airlift() {
+        invalidCommandMessage();
+    }
 
     @Override
-    public void diplomacy() { invalidCommandMessage();}
+    public void diplomacy() {
+        invalidCommandMessage();
+    }
 
 }

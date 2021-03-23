@@ -2,12 +2,10 @@ package team14.warzone.GameEngine.State;
 
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
-import team14.warzone.GameEngine.Commands.Command;
-import team14.warzone.GameEngine.Commands.Option;
+import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class MapEditorPhase extends Phase {
@@ -42,13 +40,7 @@ public abstract class MapEditorPhase extends Phase {
         editcountry -add countryName continentName -remove countryName
         editneighbor -add countryName neighborCountryName -remove countryName neighborCountryName
          */
-        for (List<String> l_CommandStr : l_CommandStrList) {
-            Option l_Option = new Option(l_CommandStr.get(1),
-                    Arrays.asList(l_CommandStr.get(2).replaceAll(" ", "").split(
-                            ",")));
-            Command l_Command = new Command(l_CommandStr.get(0), l_Option, d_GameEngine);
-            d_GameEngine.appendToCommandBuffer(l_Command);
-        }
+        createAdminCommand(l_CommandStrList);
 
         /*
         for 1 word commands: {{"keyword", "", ""}}
@@ -62,8 +54,8 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public void executeCommands() {
         // execute the appropriate map editor command
-        for (Command l_Command : d_GameEngine.getD_CommandBuffer()) {
-            l_Command.execute();
+        for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
+            l_AdminCommands.execute();
         }
         d_GameEngine.clearCommandBuffer();
 
