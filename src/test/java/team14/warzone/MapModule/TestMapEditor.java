@@ -8,7 +8,6 @@ import java.util.Stack;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.Test;
 import java.io.FileNotFoundException;
@@ -27,7 +26,7 @@ public class TestMapEditor {
     public static void init() throws FileNotFoundException {
 
         d_MapEditor = new MapEditor();
-        d_MapEditor.loadMap("testmap.map");
+        d_MapEditor.loadMap("europass.map");
     }
 
     @Test
@@ -63,13 +62,17 @@ public class TestMapEditor {
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Continent> l_Continents = p_Map.getD_Continents();
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
-        Stack<String> l_StackContinents = new Stack<String>();
-        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
-            if (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID()))) {
-                l_StackContinents.push(l_Countries.get(l_CountryIndex).getD_CountryContinentID());
-            }
+        ArrayList<String> l_CountryContinent = new ArrayList<>();
+        for (int l_Index = 0; l_Index < l_Countries.size(); l_Index++) {
+            if (!l_Countries.get(l_Index).getD_CountryContinentID().equals("")) {
+                
+                if (!l_CountryContinent.contains(l_Countries.get(l_Index).getD_CountryContinentID())) {
+                    l_CountryContinent.add(l_Countries.get(l_Index).getD_CountryContinentID());
+                }
+            } 
         }
-        assert l_StackContinents.size() == l_Continents.size();
+        // checking if all continent has a country
+        assert l_CountryContinent.size() == l_Continents.size();
 
     }
 
@@ -78,8 +81,15 @@ public class TestMapEditor {
         Map p_Map = d_MapEditor.getD_LoadedMap();
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         boolean l_HasContinent = true;
-        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
-            if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
+        ArrayList<String> l_CountryContinent = new ArrayList<>();
+        for (int l_Index = 0; l_Index < l_Countries.size(); l_Index++) {
+            if (!l_Countries.get(l_Index).getD_CountryContinentID().equals("")) {
+                l_HasContinent = true;
+                if (!l_CountryContinent.contains(l_Countries.get(l_Index).getD_CountryContinentID())) {
+                    l_CountryContinent.add(l_Countries.get(l_Index).getD_CountryContinentID());
+                }
+            } else {
+                System.out.println("" + l_Countries.get(l_Index).getD_CountryID() + " does not have a continent");
                 l_HasContinent = false;
                 break;
             }

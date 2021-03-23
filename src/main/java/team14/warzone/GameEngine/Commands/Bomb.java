@@ -9,7 +9,6 @@ import team14.warzone.MapModule.Map;
 public class Bomb extends Order{
 
     private String d_CountryNameTo;
-    private int d_NumberOfArmies;
     private GameEngine d_GameEngine;
 
     /**
@@ -17,12 +16,10 @@ public class Bomb extends Order{
      * 
      * @author tanzia-ahmed
      * @param p_CountryNameTo
-     * @param p_NumberOfArmies
      * @param p_GameEngine
      */
-    public Bomb(String p_CountryNameTo, int p_NumberOfArmies, GameEngine p_GameEngine) {
+    public Bomb(String p_CountryNameTo, GameEngine p_GameEngine) {
         this.d_CountryNameTo = p_CountryNameTo;
-        this.d_NumberOfArmies = p_NumberOfArmies;
         this.d_GameEngine = p_GameEngine;
 
     }
@@ -44,12 +41,15 @@ public class Bomb extends Order{
             throw new Exception("Bomb failed: destination country does not exist");
         }
         //check if destination country is owned by enemy player
-        if(l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo) | l_CountryTo.getD_CurrentOwner() == "Neutral") {
+        if(l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
             throw new Exception("Bomb failed: " + l_CurrentPlayer.getD_Name() + " owns " +
                     l_CountryTo.getD_CountryID());
         }
         else{
-            l_CountryTo.setD_NumberOfArmies(d_NumberOfArmies / 2);
+            int l_TotalNumOfArmies = l_CurrentPlayer.getD_TotalNumberOfArmies();
+            int l_RemainingArmies = l_CountryTo.getD_NumberOfArmies() / 2;
+            l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
+            l_CurrentPlayer.setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
         }
 
     }

@@ -56,14 +56,9 @@ public class Blockade extends Order{
             d_CountryTo = l_CountryTo;
             d_CountryTo.setD_NumberOfArmies(3*d_NumberOfArmies);
             d_CountryTo.setD_CurrentOwner("Neutral");
-
-            //d_GameEngine.appendToCommandBuffer(this);
+            //remove ownership from Player object
         }
     }
-    public void resetOwner(){
-        d_CountryTo.setD_CurrentOwner(d_PreviousOwner.getD_Name());
-    }
-
-    // create a method to reset the changes of blockade
+    
 
 }
