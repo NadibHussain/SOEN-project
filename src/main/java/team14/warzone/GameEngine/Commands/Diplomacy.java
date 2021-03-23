@@ -1,13 +1,11 @@
 package team14.warzone.GameEngine.Commands;
 
-import java.util.ArrayList;
-
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
-import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
-public class Diplomacy {
+public class Diplomacy extends Order{
 
     private String d_PlayerId;
     private GameEngine d_GameEngine;

@@ -1,6 +1,7 @@
 package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.Console.Console;
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
