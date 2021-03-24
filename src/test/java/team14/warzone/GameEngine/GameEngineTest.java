@@ -1,8 +1,6 @@
 package team14.warzone.GameEngine;
 
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.MapEditor;
@@ -59,20 +57,4 @@ public class GameEngineTest {
 //        assertEquals(50, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
 //    }
 
-    /**
-     * Tries to deploy more armies than currently in possession of p1
-     * p1 has 20 armies, but tries to deploy 100
-     * Deploy should fail and the country should contain 0 armies
-     */
-    @Test
-    @DisplayName("Testing Armies deployment")
-    public void deployTest() {
-        try {
-            d_GE.deploy("s1", 100);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        int l_ArmiesInCountry = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
-        org.junit.Assert.assertEquals("Armies deployed - deployed > possession", 0, l_ArmiesInCountry);
-    }
 }

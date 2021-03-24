@@ -183,7 +183,8 @@ public class Player {
      */
     public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
-        d_GE.allotCard(this);
+        if (d_GE.getD_CurrentPhase().equals(d_GE.getD_ExecuteOrdersPhase()))
+            d_GE.allotCard(this);
     }
 
     /**
