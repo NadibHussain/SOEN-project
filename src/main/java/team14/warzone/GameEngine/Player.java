@@ -43,6 +43,10 @@ public class Player {
      * Reference to the GameEngine object
      */
     private GameEngine d_GE;
+    /**
+     * list of diplomatic players
+     */
+    private ArrayList<Player> d_DiplomaticPlayers;
 
     /**
      * Default constructor that takes no params
@@ -292,5 +296,38 @@ public class Player {
      */
     public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
         d_ArmiesOrderedToBeDeployed -= p_ArmiesOrderedToBeDeploy;
+    }
+
+    /**
+     * Add diplomatic player in list
+     * @param p_Player player to add in the list
+     * 
+     */
+    public void addDiplomaticPlayer(Player p_Player){
+        this.d_DiplomaticPlayers.add(p_Player);
+
+    }
+
+    /**
+     * Remove diplomatic player from list
+     * @param p_Player
+     */
+    public void removeDiplomaticPlayer(Player p_Player){
+        this.d_DiplomaticPlayers.remove(p_Player);
+    }
+
+    /**
+     * Get the list of diplomatic players list
+     * @return
+     */
+    public ArrayList<Player> getD_DiplomaticPlayerList(){
+        return this.d_DiplomaticPlayers;
+    }
+    public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer){
+        if(p_CurrentPlayer.getD_DiplomaticPlayerList().contains(p_TargetPlayer) | p_TargetPlayer.getD_DiplomaticPlayerList().contains(p_CurrentPlayer))
+        {
+            return true;
+        }
+        return false;
     }
 }

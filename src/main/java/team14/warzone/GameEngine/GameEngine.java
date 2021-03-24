@@ -4,6 +4,7 @@ import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.Observer.Observable;
+import team14.warzone.GameEngine.Commands.ICommand;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -108,12 +109,6 @@ public class GameEngine extends Observable implements Cloneable {
      */
     public void showMap() {
         d_LoadedMap.showMap();
-    }
-
-
-    @Override
-    public Object clone() throws CloneNotSupportedException{
-        return super.clone();
     }
 
     /**
@@ -307,8 +302,8 @@ public class GameEngine extends Observable implements Cloneable {
         return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_AdminCommands.getD_Keyword());
     }
 
-    public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
-        d_AdminCommandsBuffer.add(p_AdminCommands);
+    public void appendToCommandBuffer(ICommand p_AdminCommands) {
+        d_AdminCommandsBuffer.add((AdminCommands) p_AdminCommands);
     }
 
     public AdminCommands retrieveFromCommandBuffer() {
@@ -357,10 +352,12 @@ public class GameEngine extends Observable implements Cloneable {
      * @return Player object that has a match name
      */
     public Player findPlayer(String p_PlayerName) {
-        for(Player l_Player : d_PlayerList){
-            if(l_Player.getD_Name().equals(p_PlayerName))
+        for (Player l_Player : d_PlayerList) {
+            if (l_Player.getD_Name().equals(p_PlayerName))
                 return l_Player;
         }
+        if (d_NeutralPlayer.getD_Name().equals(p_PlayerName))
+            return d_NeutralPlayer;
         return null;
     }
 
@@ -440,5 +437,9 @@ public class GameEngine extends Observable implements Cloneable {
 
     public void clearOrderBuffer() {
         d_OrderStrBuffer.clear();
+    }
+
+    public NeutralPlayer getD_NeutralPlayer() {
+        return d_NeutralPlayer;
     }
 }

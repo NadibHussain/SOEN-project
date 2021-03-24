@@ -46,11 +46,15 @@ public class Bomb extends Order{
             throw new Exception("Bomb failed: " + l_CurrentPlayer.getD_Name() + " owns " +
                     l_CountryTo.getD_CountryID());
         }
+        //check if the enemy is a diplomatic ally or not
+        if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
+            throw new Exception("Cannot bomb on diplomatic ally's country");
+        }
         else{
-            int l_TotalNumOfArmies = l_CurrentPlayer.getD_TotalNumberOfArmies();
+            int l_TotalNumOfArmies = d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).getD_TotalNumberOfArmies();
             int l_RemainingArmies = l_CountryTo.getD_NumberOfArmies() / 2;
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
-            l_CurrentPlayer.setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
+            d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
         }
 
     }

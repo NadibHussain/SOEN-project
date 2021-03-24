@@ -2,6 +2,7 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.GameEngine.NeutralPlayer;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -9,9 +10,7 @@ import team14.warzone.MapModule.Map;
 public class Blockade extends Order{
 
     private String d_CountryNameTo;
-    private int d_NumberOfArmies;
     private GameEngine d_GameEngine;
-    private Player d_PreviousOwner;
     private Country d_CountryTo;
 
     /**
@@ -19,13 +18,11 @@ public class Blockade extends Order{
      * 
      * @author tanzia-ahmed
      * @param p_CountryNameTo
-     * @param p_NumberOfArmies
      * @param p_GameEngine
      */
-    public Blockade(String p_CountryNameTo, int p_NumberOfArmies, GameEngine p_GameEngine) {
+    public Blockade(String p_CountryNameTo, GameEngine p_GameEngine) {
         
         this.d_CountryNameTo = p_CountryNameTo;
-        this.d_NumberOfArmies = p_NumberOfArmies;
         this.d_GameEngine = p_GameEngine;
 
     }
@@ -49,16 +46,17 @@ public class Blockade extends Order{
             throw new Exception("Blockade failed: destination country does not exist");
         }
         // check if destination country is owned by enemy player
-        if (!l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo) | l_CountryTo.getD_CurrentOwner() == "Neutral") {
+        if (!l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
             throw new Exception(
-                    "Blockade failed: " + l_CurrentPlayer.getD_Name() + " owns " + l_CountryTo.getD_CountryID() + " or it belongs to a neutral player.");
+                    "Blockade failed: " + l_CurrentPlayer.getD_Name() + " owns " + l_CountryTo.getD_CountryID());
         } else {
             //execution
-            d_PreviousOwner = l_CurrentPlayer;
             d_CountryTo = l_CountryTo;
-            d_CountryTo.setD_NumberOfArmies(3*d_NumberOfArmies);
+            d_CountryTo.setD_NumberOfArmies(3*d_CountryTo.getD_NumberOfArmies());
             d_CountryTo.setD_CurrentOwner("Neutral");
-            //remove ownership from Player object
+            l_CurrentPlayer.removeCountryOwned(l_CountryTo);
+            NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
+            l_Neutral.addCountryOwned(l_CountryTo);
         }
     }
     
