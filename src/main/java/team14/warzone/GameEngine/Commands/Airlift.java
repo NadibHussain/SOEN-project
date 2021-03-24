@@ -42,7 +42,9 @@ public class Airlift extends Order {
     public void execute() throws Exception {
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
         //check if player has the Airlift card
-        if (l_CurrentPlayer.hasCard(new Card("Airlift"))) {
+        Card l_CardAirlift = new Card();
+        l_CardAirlift.setCardType("airlift");
+        if (l_CurrentPlayer.hasCard(l_CardAirlift)) {
             Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
             // check if source country exists
@@ -67,10 +69,10 @@ public class Airlift extends Order {
             }
             // check if destination country is owned by the player, then move armies to the destination country
             else {
-                // decrease armies in source country
-                l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() - d_NumberOfArmies);
                 // increase armies in destination country
-                l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + d_NumberOfArmies);
+                l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() + d_NumberOfArmies);
+                // decrease armies in source country
+                l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " airlifted " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
             }

@@ -29,9 +29,10 @@ public class Bomb extends Order{
      */
     public void execute() throws Exception {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
-
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        if (!l_CurrentPlayer.hasCard(new Card("Bomb"))) {// check if player has the Bomb card
+        Card l_CardBomb = new Card();
+        l_CardBomb.setCardType("bomb");
+        if (!l_CurrentPlayer.hasCard(l_CardBomb)) {// check if player has the Bomb card
             throw new Exception("Player does not have this card.");
         }
         

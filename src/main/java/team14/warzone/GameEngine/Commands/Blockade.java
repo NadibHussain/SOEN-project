@@ -37,7 +37,9 @@ public class Blockade extends Order{
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        if (!l_CurrentPlayer.hasCard(new Card("Blockade"))) {// check if player has the Blockade card
+        Card l_CardBlockade = new Card();
+        l_CardBlockade.setCardType("blockade");
+        if (!l_CurrentPlayer.hasCard(l_CardBlockade)) {// check if player has the Blockade card
             throw new Exception("Player does not have this card.");
         }
         

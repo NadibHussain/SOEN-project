@@ -29,9 +29,10 @@ public class Diplomacy extends Order{
      */
     public void execute() throws Exception {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
-
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        if (!l_CurrentPlayer.hasCard(new Card("Diplomacy"))) {// check if player has the Diplomacy card
+        Card l_CardDiplomacy = new Card();
+        l_CardDiplomacy.setCardType("diplomacy");
+        if (!l_CurrentPlayer.hasCard(l_CardDiplomacy)) {// check if player has the Diplomacy card
             throw new Exception("Player does not have this card.");
         }
         // check if player exists

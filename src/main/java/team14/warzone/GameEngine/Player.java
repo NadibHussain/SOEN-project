@@ -38,7 +38,7 @@ public class Player {
     /**
      * list of cards the player is holding
      */
-    private ArrayList<Card> d_CardList;
+    private ArrayList<Card> d_CardList = new ArrayList<>();
     /**
      * Reference to the GameEngine object
      */
@@ -173,7 +173,11 @@ public class Player {
     }
 
     public boolean hasCard(Card p_Card) {
-        return d_CardList.contains(p_Card);
+        for(Card l_Card : d_CardList){
+            if(l_Card.getCardType().equals(p_Card.getCardType()))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -254,6 +258,14 @@ public class Player {
      */
     public void addCard(Card card) {
         d_CardList.add(card);
+    }
+
+    /**
+     * The method to get cards list of this player
+     * @return cards list owned by this player
+     */
+    public List<Card> getCardList() {
+        return d_CardList;
     }
     /**
      * Getter for the number of armies ordered to be deployed field
