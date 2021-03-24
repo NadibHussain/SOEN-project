@@ -51,6 +51,7 @@ public class Bomb extends Order{
             throw new Exception("Cannot bomb on diplomatic ally's country");
         }
         else{
+            //execution
             int l_TotalNumOfArmies = d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).getD_TotalNumberOfArmies();
             int l_RemainingArmies = l_CountryTo.getD_NumberOfArmies() / 2;
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed

@@ -318,11 +318,17 @@ public class Player {
 
     /**
      * Get the list of diplomatic players list
-     * @return
+     * @return ArrayList of diplomatic allies 
      */
     public ArrayList<Player> getD_DiplomaticPlayerList(){
         return this.d_DiplomaticPlayers;
     }
+    /**
+     * Checks if the players are in diplomatic relation
+     * @param p_CurrentPlayer
+     * @param p_TargetPlayer
+     * @return true if either of them have used diplomacy card on each other
+     */
     public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer){
         if(p_CurrentPlayer.getD_DiplomaticPlayerList().contains(p_TargetPlayer) | p_TargetPlayer.getD_DiplomaticPlayerList().contains(p_CurrentPlayer))
         {

@@ -44,6 +44,10 @@ public class Diplomacy extends Order{
             d_GameEngine.appendToCommandBuffer(this);
         }
     }
+    /**
+     * resets the diplomatic relationship with playerID 
+     * once the turn is finished.
+     */
     public void resetDiplomacy(){
         d_PreviousOwner.removeDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
     }
