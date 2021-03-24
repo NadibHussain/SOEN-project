@@ -118,11 +118,11 @@ public class Player {
 
             // { "blockade", "", "countryFrom, numOfArmies" }
             case "blockade":
-//                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-//                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
-//                d_OrderList.add(l_BlockadeOrder);
-//                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued blockade command");
-//                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
+                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], d_GE);
+                d_OrderList.add(l_BlockadeOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued blockade command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "bomb", "", "countryFrom, numOfArmies" }
