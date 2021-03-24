@@ -1,0 +1,4 @@
+Warzone game has started
+
+Warzone game has started
+Success: map loaded and validated map:europass.map

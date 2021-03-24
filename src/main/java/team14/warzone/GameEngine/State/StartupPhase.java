@@ -76,17 +76,25 @@ public class StartupPhase extends GamePlayPhase {
     @Override
     public void addPlayer(String p_Name) {
         d_GameEngine.addPlayer(p_Name);
+        d_GameEngine.getD_LogEntryBuffer().setD_log("Added player:"+ p_Name);
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
     @Override
     public void removePlayer(String p_Name) {
         d_GameEngine.removePlayer(p_Name);
+        d_GameEngine.getD_LogEntryBuffer().setD_log("Removed player:"+ p_Name);
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
     @Override
     public void assignCountries() {
+        d_GameEngine.getD_LogEntryBuffer().setD_log("Assigned Countries to players");
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
         d_GameEngine.assignCountries();
         next();
+        d_GameEngine.getD_LogEntryBuffer().setD_log("Changing Phase from Startup Phase to IssueOrder Phase");
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
     @Override

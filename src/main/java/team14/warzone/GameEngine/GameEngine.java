@@ -3,6 +3,9 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Observer.LogEntryBuffer;
+import team14.warzone.GameEngine.Observer.LogerOberver;
+import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -10,6 +13,7 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.List;
 
 /**
@@ -19,7 +23,11 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
+<<<<<<< HEAD
 public class GameEngine{
+=======
+public class GameEngine  {
+>>>>>>> f50cb1ae0dbc8baf47248c7c3add28a1fe58b245
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -52,6 +60,11 @@ public class GameEngine{
      */
     private List<List<String>> d_OrderStrBuffer;
 
+    /**
+     * This is used to send logs to the observer
+     */
+    private LogEntryBuffer d_LogEntryBuffer= new LogEntryBuffer();
+
     // State pattern attributes
     private Phase d_CurrentPhase;
 
@@ -78,7 +91,29 @@ public class GameEngine{
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_CurrentPhase = d_PreMapLoadPhase;
+        d_LogEntryBuffer.attach(new LogerOberver());
     }
+
+    /**
+     * Copy Constructor
+     * @param p_GameEngine
+     */
+    public GameEngine(GameEngine p_GameEngine) {
+        d_Console = p_GameEngine.d_Console;
+        d_MapEditor = p_GameEngine.d_MapEditor;
+        d_PlayerList = p_GameEngine.d_PlayerList;
+        d_NeutralPlayer = p_GameEngine.d_NeutralPlayer;
+        d_AdminCommandsBuffer = p_GameEngine.d_AdminCommandsBuffer;
+
+        d_PreMapLoadPhase = p_GameEngine.d_PreMapLoadPhase;
+        d_PostMapEditLoadPhase = p_GameEngine.d_PostMapEditLoadPhase;
+        d_StartupPhase = p_GameEngine.d_StartupPhase;
+        d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
+        d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
+        d_CurrentPhase = p_GameEngine.d_CurrentPhase;
+        d_LoadedMap = p_GameEngine.d_LoadedMap;
+    }
+
 
     /**
      * Method loads a map from a dominion map file
@@ -92,6 +127,7 @@ public class GameEngine{
             // validate map right after loading
             if (!d_MapEditor.validateMap(d_LoadedMap))
                 System.out.println("Error: map validation failed, not loaded");
+
             else {
                 System.out.println("Success: map loaded and validated");
                 InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
@@ -107,6 +143,9 @@ public class GameEngine{
     public void showMap() {
         d_LoadedMap.showMap();
     }
+
+
+
 
     /**
      * Assign Countries method
@@ -170,7 +209,13 @@ public class GameEngine{
             Console.displayMsg("Player removed: " + p_PlayerName);
         }
     }
-
+    /**
+     * Getter for LogEntryBuffer
+     * @return  the current log entry buffer for this engine
+     */
+    public LogEntryBuffer getD_LogEntryBuffer() {
+        return d_LogEntryBuffer;
+    }
     /**
      * A method to loop the players list in a RR fashion, to give their order
      * Has two stages:
@@ -403,6 +448,12 @@ public class GameEngine{
         this.d_LoadedMap = d_LoadedMap;
     }
 
+    public void allotCard(Player p_player) {
+        Card l_Card = new Card();
+        Random l_RandomNumber = new Random();
+        l_Card.setCardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
+        p_player.addCard(l_Card);
+    }
     public List<List<String>> getD_OrderStrBuffer() {
         return d_OrderStrBuffer;
     }

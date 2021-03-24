@@ -89,6 +89,8 @@ public class Player {
                 String[] l_Temp = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Deploy l_DeployOrder = new Deploy(l_Temp[0], Integer.parseInt(l_Temp[1]), d_GE);
                 d_OrderList.add(l_DeployOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued deploy command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "advance", "", "countryFrom, countryTo, numOfArmies" }
@@ -96,6 +98,8 @@ public class Player {
                 String[] l_ArgsAdvance = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Advance l_AdvanceOrder = new Advance(l_ArgsAdvance[0], l_ArgsAdvance[1], Integer.parseInt(l_ArgsAdvance[2]), d_GE);
                 d_OrderList.add(l_AdvanceOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued advance command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "airlift", "", "countryFrom, countryTo, numOfArmies" }
@@ -103,6 +107,8 @@ public class Player {
                 String[] l_ArgsAirlift = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Airlift l_AirliftOrder = new Airlift(l_ArgsAirlift[0], l_ArgsAirlift[1], Integer.parseInt(l_ArgsAirlift[2]), d_GE);
                 d_OrderList.add(l_AirliftOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued airlift command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "blockade", "", "countryFrom, numOfArmies" }
@@ -110,6 +116,8 @@ public class Player {
                 String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
                 d_OrderList.add(l_BlockadeOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued blockade command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "bomb", "", "countryFrom, numOfArmies" }
@@ -117,6 +125,8 @@ public class Player {
                 String[] l_ArgsBomb = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], Integer.parseInt(l_ArgsBomb[1]), d_GE);
                 d_OrderList.add(l_BombOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued bomb command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "diplomacy", "", "playerId" }
@@ -124,10 +134,15 @@ public class Player {
                 String[] l_ArgsDiplomacy = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Diplomacy l_DiplomacyOrder = new Diplomacy(l_ArgsDiplomacy[0], d_GE);
                 d_OrderList.add(l_DiplomacyOrder);
+                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued diplomacy command");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             default:
                 Console.displayMsg("Error in issue order!");
+                d_GE.getD_LogEntryBuffer().setD_log("Error in issue order!");
+                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
+
         }
         d_GE.clearOrderBuffer();
     }
@@ -238,6 +253,13 @@ public class Player {
         this.d_Name = d_Name;
     }
 
+    /**
+     * The method to add card to players' card list
+     * @param card card to be added
+     */
+    public void addCard(Card card) {
+        d_CardList.add(card);
+    }
     /**
      * Getter for the number of armies ordered to be deployed field
      *
