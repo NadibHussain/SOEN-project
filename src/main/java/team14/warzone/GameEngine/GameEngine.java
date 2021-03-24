@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class implements the functionalities of the game-play phase
+ * This class implements the functionalities related to gameplay
  *
  * @author Anagh
  * @author Zeina

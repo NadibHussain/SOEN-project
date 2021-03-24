@@ -8,6 +8,9 @@ import team14.warzone.MapModule.Map;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * This class
+ */
 public abstract class Phase {
 
     GameEngine d_GameEngine;
