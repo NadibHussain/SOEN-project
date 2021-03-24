@@ -23,11 +23,9 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-<<<<<<< HEAD
-public class GameEngine{
-=======
+
 public class GameEngine  {
->>>>>>> f50cb1ae0dbc8baf47248c7c3add28a1fe58b245
+
     /**
      * field stores the current player who's turn is ongoing
      */
