@@ -33,9 +33,9 @@ public class Diplomacy extends Order{
         if (!l_CurrentPlayer.hasCard(new Card("diplomacy"))) {// check if player has the Diplomacy card
             throw new Exception("Player does not have this card.");
         }
-        // check if player exists
-        if (!d_GameEngine.getD_PlayerList().contains(d_GameEngine.findPlayer((d_PlayerId)))) {
-            throw new Exception("Diplomacy failed: playerID does not exist");
+        // check if player exists and diplomat is not the current player itself
+        if (!d_GameEngine.getD_PlayerList().contains(d_GameEngine.findPlayer((d_PlayerId))) & !l_CurrentPlayer.getD_Name().equals(d_PlayerId)) {
+            throw new Exception("Diplomacy failed: playerID does not exist or player is trying to be his own diplomatic ally");
         }
          else {
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
