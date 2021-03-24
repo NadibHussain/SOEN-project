@@ -124,4 +124,10 @@ public class Advance extends Order {
             }
         }
     }
+
+    @Override
+    public void reset() {
+
+    }
+
 }

@@ -3,8 +3,9 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
-import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.Commands.ICommand;
+import team14.warzone.GameEngine.Commands.Order;
+import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -12,8 +13,8 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -50,6 +51,7 @@ public class GameEngine extends Observable {
      * Stores admin commands that are yet to be executed
      */
     private ArrayList<AdminCommands> d_AdminCommandsBuffer;
+    private ArrayList<Order> d_OrderBuffer;
     /**
      * Stores user inputs needed to create orders
      */
@@ -459,11 +461,23 @@ public class GameEngine extends Observable {
         d_OrderStrBuffer = p_OrderStrBuffer;
     }
 
-    public void clearOrderBuffer() {
+    public void clearOrderStrBuffer() {
         d_OrderStrBuffer.clear();
     }
 
     public NeutralPlayer getD_NeutralPlayer() {
         return d_NeutralPlayer;
+    }
+
+    public ArrayList<Order> getD_OrderBuffer() {
+        return d_OrderBuffer;
+    }
+
+    public void appendToOrderBuffer(Order p_Order) {
+        d_OrderBuffer.add(p_Order);
+    }
+
+    public void clearOrderBuffer() {
+        d_OrderBuffer.clear();
     }
 }

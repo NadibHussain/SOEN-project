@@ -80,4 +80,9 @@ public class Airlift extends Order {
                     "since he does not own an Airlift card");
         }
     }
+
+    @Override
+    public void reset() {
+
+    }
 }

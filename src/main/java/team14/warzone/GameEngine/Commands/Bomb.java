@@ -61,4 +61,9 @@ public class Bomb extends Order{
 
     }
 
+    @Override
+    public void reset() {
+
+    }
+
 }

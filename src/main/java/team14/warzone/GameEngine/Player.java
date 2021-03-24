@@ -133,7 +133,7 @@ public class Player {
             default:
                 Console.displayMsg("Error in issue order!");
         }
-        d_GE.clearOrderBuffer();
+        d_GE.clearOrderStrBuffer();
     }
 
     /**

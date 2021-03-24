@@ -3,7 +3,6 @@ package team14.warzone.GameEngine.Commands;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.GameEngine.NeutralPlayer;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -59,5 +58,10 @@ public class Blockade extends Order {
             d_GameEngine.findPlayer("Neutral").addCountryOwned(l_CountryTo);
             
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }
