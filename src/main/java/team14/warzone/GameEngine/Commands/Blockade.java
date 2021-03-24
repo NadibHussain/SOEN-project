@@ -56,8 +56,8 @@ public class Blockade extends Order {
             d_CountryTo.setD_CurrentOwner("Neutral");
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             Console.displayMsg("Success: Blockade country " + d_CountryNameTo);
-            NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
-            l_Neutral.addCountryOwned(l_CountryTo);
+            d_GameEngine.findPlayer("Neutral").addCountryOwned(l_CountryTo);
+            
         }
     }
 }
