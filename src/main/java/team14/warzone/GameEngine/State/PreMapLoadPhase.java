@@ -51,6 +51,9 @@ public class PreMapLoadPhase extends MapEditorPhase {
     @Override
     public void editMap(String p_FileName) {
         d_GameEngine.getD_MapEditor().editMap(p_FileName);
+        next();
+        d_GameEngine.getD_LogEntryBuffer().setD_log("Opened map editor for: " + p_FileName);
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
     @Override

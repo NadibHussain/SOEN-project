@@ -74,10 +74,19 @@ public class Airlift extends Order {
                 l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " airlifted " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
+                d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " airlifted " + d_NumberOfArmies + " armies" +
+                        " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             }
         } else {
             Console.displayMsg("Player " + l_CurrentPlayer.getD_Name() + " can not perform airlifting, " +
                     "since he does not own an Airlift card");
+
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

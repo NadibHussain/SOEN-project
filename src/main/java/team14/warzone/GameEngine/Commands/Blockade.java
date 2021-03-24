@@ -3,7 +3,6 @@ package team14.warzone.GameEngine.Commands;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.GameEngine.NeutralPlayer;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -57,7 +56,14 @@ public class Blockade extends Order {
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             Console.displayMsg("Success: Blockade country " + d_CountryNameTo);
             d_GameEngine.findPlayer("Neutral").addCountryOwned(l_CountryTo);
-            
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() +" has used blockade in "+d_CountryNameTo);
+            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+            //remove ownership from Player object
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

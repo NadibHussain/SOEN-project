@@ -78,6 +78,9 @@ public class Advance extends Order {
                 l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + d_NumberOfArmies);
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
+                d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
+                        " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             }
             //check if the enemy is a diplomatic ally then current player can not attack his ally
             if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
@@ -115,13 +118,27 @@ public class Advance extends Order {
                     l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
                     d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
                     l_CurrentPlayer.addCountryOwned(l_CountryTo);
+                    // log
+                    d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
+                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                    d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
                 } else {
                     l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
                     l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
                     Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle" +
                             "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
+                    // log
+                    d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle, " +
+                            l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
+                    d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
                 }
             }
         }
     }
+
+    @Override
+    public void reset() {
+
+    }
+
 }

@@ -17,15 +17,9 @@ public class Driver {
         MapEditor l_ME = new MapEditor();
         GameEngine l_GE = new GameEngine(l_Console, l_ME);
 
-        System.out.println("Welcome to warzone game, please enter your command : ");
+        System.out.println("Welcome to warzone game!");
+        l_GE.getD_LogEntryBuffer().setD_log("Warzone game has started");
+        l_GE.getD_LogEntryBuffer().notifyObservers(l_GE.getD_LogEntryBuffer());
         l_GE.gameLoop();
-
-//        while (InputValidator.CURRENT_PHASE != InputValidator.Phase.GAMEPLAY) {
-//            l_Console.readInput();
-//            l_Console.filterCommand(l_GE, l_ME);
-//        }
-//        while (true) {
-//            l_GE.gameLoop();
-//        }
     }
 }

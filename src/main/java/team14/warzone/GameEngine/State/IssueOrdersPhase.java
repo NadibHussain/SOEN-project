@@ -44,6 +44,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
             // of continents he owns
             l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
             //give reinforcement to the player
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_Player.getD_Name() + " gets " + l_PlayerEnforcement +
+                    "armies as reinforcement");
+            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
     }
@@ -65,15 +68,15 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     Console.displayMsg("Enter command, " + d_GameEngine.getD_CurrentPlayer().getD_Name());
                     List<List<String>> l_CommandStrList = Console.readInput();
                     // passing the turn
-                    if(!l_CommandStrList.isEmpty()){
+                    if (!l_CommandStrList.isEmpty()) {
                         if (l_CommandStrList.get(0).get(0).equals("pass")) {
                             // check if all armies are issued to be deployed
-                            if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() == l_CurrentPlayer.getD_TotalNumberOfArmies()) {
+                            if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() >= l_CurrentPlayer.getD_TotalNumberOfArmies()) {
                                 // set flag to true
                                 l_Flag.set(l_Counter, Boolean.TRUE);
                                 l_Counter++;
                             } else {
-                                Console.displayMsg("Error: cannot pass, still " + l_CurrentPlayer.getD_TotalNumberOfArmies() + " armies are undeployed");
+                                Console.displayMsg("Error: cannot pass, still " + (l_CurrentPlayer.getD_TotalNumberOfArmies() - l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed()) + " armies are undeployed");
                             }
                         }
                         // check if command is admin command
@@ -88,6 +91,8 @@ public class IssueOrdersPhase extends GamePlayPhase {
                             l_Counter++;
                         }
                     }
+                } else {
+                    l_Counter++;
                 }
             }
         }

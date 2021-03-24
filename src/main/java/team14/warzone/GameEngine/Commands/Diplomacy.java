@@ -41,14 +41,14 @@ public class Diplomacy extends Order{
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
             d_PreviousOwner = l_CurrentPlayer;
             Console.displayMsg("Success : " + l_CurrentPlayer.getD_Name() + " and " + d_PlayerId + " are allies for this turn");
-            d_GameEngine.appendToCommandBuffer(this);
+            d_GameEngine.appendToOrderBuffer(this);
         }
     }
     /**
      * resets the diplomatic relationship with playerID 
      * once the turn is finished.
      */
-    public void resetDiplomacy(){
+    public void reset(){
         d_PreviousOwner.removeDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
     }
 
