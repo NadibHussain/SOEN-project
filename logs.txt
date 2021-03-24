@@ -2,3 +2,6 @@ Warzone game has started
 
 Warzone game has started
 Success: map loaded and validated map:europass.map
+Success: p1 has conquered b7, moving 6 to b7, 6 : 4
+Warzone game has started
+Warzone game has started

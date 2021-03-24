@@ -3,11 +3,9 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
-import team14.warzone.GameEngine.Commands.ICommand;
-import team14.warzone.GameEngine.Commands.Order;
-import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -25,7 +23,7 @@ import java.util.Random;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine  {
+public class GameEngine {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -62,7 +60,7 @@ public class GameEngine  {
     /**
      * This is used to send logs to the observer
      */
-    private LogEntryBuffer d_LogEntryBuffer= new LogEntryBuffer();
+    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
     // State pattern attributes
     private Phase d_CurrentPhase;
@@ -95,6 +93,7 @@ public class GameEngine  {
 
     /**
      * Copy Constructor
+     *
      * @param p_GameEngine
      */
     public GameEngine(GameEngine p_GameEngine) {
@@ -141,8 +140,6 @@ public class GameEngine  {
     public void showMap() {
         d_LoadedMap.showMap();
     }
-
-
 
 
     /**
@@ -207,13 +204,16 @@ public class GameEngine  {
             Console.displayMsg("Player removed: " + p_PlayerName);
         }
     }
+
     /**
      * Getter for LogEntryBuffer
-     * @return  the current log entry buffer for this engine
+     *
+     * @return the current log entry buffer for this engine
      */
     public LogEntryBuffer getD_LogEntryBuffer() {
         return d_LogEntryBuffer;
     }
+
     /**
      * A method to loop the players list in a RR fashion, to give their order
      * Has two stages:
@@ -467,6 +467,7 @@ public class GameEngine  {
         l_Card.setD_CardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
         p_player.addCard(l_Card);
     }
+
     public List<List<String>> getD_OrderStrBuffer() {
         return d_OrderStrBuffer;
     }
@@ -491,7 +492,10 @@ public class GameEngine  {
         d_OrderBuffer.add(p_Order);
     }
 
-    public void clearOrderBuffer() {
+    public void resetOrderBuffer() {
+        for (Order l_Order : d_OrderBuffer) {
+            l_Order.reset();
+        }
         d_OrderBuffer.clear();
     }
 }

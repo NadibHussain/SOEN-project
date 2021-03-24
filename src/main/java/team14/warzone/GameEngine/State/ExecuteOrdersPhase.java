@@ -33,8 +33,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
                     l_Flag.set(i, Boolean.TRUE);
             }
         }
-
-        d_GameEngine.getD_OrderBuffer().get(0).reset();
+        // reset all the 2 step orders
+        d_GameEngine.resetOrderBuffer();
         next();
     }
 
