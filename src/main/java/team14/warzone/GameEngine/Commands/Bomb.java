@@ -1,5 +1,6 @@
 package team14.warzone.GameEngine.Commands;
 
+import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -13,7 +14,7 @@ public class Bomb extends Order{
 
     /**
      * Constructor of Bomb
-     * 
+     *
      * @author tanzia-ahmed
      * @param p_CountryNameTo
      * @param p_GameEngine
@@ -30,12 +31,11 @@ public class Bomb extends Order{
     public void execute() throws Exception {
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        Card l_CardBomb = new Card();
-        l_CardBomb.setCardType("bomb");
+        Card l_CardBomb = new Card("bomb");
         if (!l_CurrentPlayer.hasCard(l_CardBomb)) {// check if player has the Bomb card
             throw new Exception("Player does not have this card.");
         }
-        
+
         // check if destination country exists
         Country l_CountryTo = l_LoadedMap.findCountry(d_CountryNameTo);
         if (l_CountryTo == null) {
@@ -55,6 +55,7 @@ public class Bomb extends Order{
             int l_RemainingArmies = l_CountryTo.getD_NumberOfArmies() / 2;
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
             d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
+            Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " bombed country " + d_CountryNameTo);
         }
 
     }

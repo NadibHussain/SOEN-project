@@ -7,7 +7,7 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
-public class Blockade extends Order{
+public class Blockade extends Order {
 
     private String d_CountryNameTo;
     private GameEngine d_GameEngine;
@@ -15,13 +15,13 @@ public class Blockade extends Order{
 
     /**
      * Constructor of Blockade
-     * 
-     * @author tanzia-ahmed
+     *
      * @param p_CountryNameTo
      * @param p_GameEngine
+     * @author tanzia-ahmed
      */
     public Blockade(String p_CountryNameTo, GameEngine p_GameEngine) {
-        
+
         this.d_CountryNameTo = p_CountryNameTo;
         this.d_GameEngine = p_GameEngine;
 
@@ -34,12 +34,11 @@ public class Blockade extends Order{
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
-        Card l_CardBlockade = new Card();
-        l_CardBlockade.setCardType("blockade");
+        Card l_CardBlockade = new Card("blockade");
         if (!l_CurrentPlayer.hasCard(l_CardBlockade)) {// check if player has the Blockade card
             throw new Exception("Player does not have this card.");
         }
-        
+
         // check if destination country exists
         Country l_CountryTo = l_LoadedMap.findCountry(d_CountryNameTo);
         if (l_CountryTo == null) {
@@ -52,13 +51,13 @@ public class Blockade extends Order{
         } else {
             //execution
             d_CountryTo = l_CountryTo;
-            d_CountryTo.setD_NumberOfArmies(3*d_CountryTo.getD_NumberOfArmies());
+            d_CountryTo.setD_NumberOfArmies(3 * d_CountryTo.getD_NumberOfArmies());
             d_CountryTo.setD_CurrentOwner("Neutral");
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
             l_Neutral.addCountryOwned(l_CountryTo);
         }
     }
-    
+
 
 }

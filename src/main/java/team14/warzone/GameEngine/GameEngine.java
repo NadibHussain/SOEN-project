@@ -448,7 +448,7 @@ public class GameEngine extends Observable {
     public void allotCard(Player p_player) {
         Card l_Card = new Card();
         Random l_RandomNumber = new Random();
-        l_Card.setCardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
+        l_Card.setD_CardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
         p_player.addCard(l_Card);
     }
     public List<List<String>> getD_OrderStrBuffer() {

@@ -42,8 +42,7 @@ public class Airlift extends Order {
     public void execute() throws Exception {
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
         //check if player has the Airlift card
-        Card l_CardAirlift = new Card();
-        l_CardAirlift.setCardType("airlift");
+        Card l_CardAirlift = new Card("airlift");
         if (l_CurrentPlayer.hasCard(l_CardAirlift)) {
             Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
 

@@ -1,5 +1,4 @@
 package team14.warzone.GameEngine;
-import team14.warzone.MapModule.Country;
 
 /**
  * This class implements the Card model
@@ -11,7 +10,7 @@ public class Card {
     /**
      * Type of the Card
      */
-    private String cardType;
+    private String d_CardType;
     /**
      * BOMB type card
      */
@@ -39,8 +38,8 @@ public class Card {
      * Getter method for Card type
      * @return card type
      */
-    public String getCardType() {
-        return cardType;
+    public String getD_CardType() {
+        return d_CardType;
     }
 
     /**
@@ -61,10 +60,10 @@ public class Card {
 
     /**
      * Setter method for allotting a card type
-     * @param cardType type of the card
+     * @param d_CardType type of the card
      */
-    public void setCardType(String cardType) {
-        this.cardType = cardType;
+    public void setD_CardType(String d_CardType) {
+        this.d_CardType = d_CardType;
     }
 
 
@@ -76,7 +75,7 @@ public class Card {
 
     }
 
-    public Card(String p_type) {
-
+    public Card(String p_CardType) {
+        this.d_CardType = p_CardType;
     }
 }

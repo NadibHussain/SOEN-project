@@ -46,7 +46,7 @@ public class Player {
     /**
      * list of diplomatic players
      */
-    private ArrayList<Player> d_DiplomaticPlayers;
+    private ArrayList<Player> d_DiplomaticPlayers = new ArrayList<>();
 
     /**
      * Default constructor that takes no params
@@ -178,7 +178,7 @@ public class Player {
 
     public boolean hasCard(Card p_Card) {
         for(Card l_Card : d_CardList){
-            if(l_Card.getCardType().equals(p_Card.getCardType()))
+            if(l_Card.getD_CardType().equals(p_Card.getD_CardType()))
                 return true;
         }
         return false;
