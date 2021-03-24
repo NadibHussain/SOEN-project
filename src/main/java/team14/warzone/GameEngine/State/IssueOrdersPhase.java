@@ -67,26 +67,28 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     Console.displayMsg("Enter command, " + d_GameEngine.getD_CurrentPlayer().getD_Name());
                     List<List<String>> l_CommandStrList = Console.readInput();
                     // passing the turn
-                    if (l_CommandStrList.get(0).get(0).equals("pass")) {
-                        // check if all armies are issued to be deployed
-                        if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() == l_CurrentPlayer.getD_TotalNumberOfArmies()) {
-                            // set flag to true
-                            l_Flag.set(l_Counter, Boolean.TRUE);
-                            l_Counter++;
-                        } else {
-                            Console.displayMsg("Error: cannot pass, still " + l_CurrentPlayer.getD_TotalNumberOfArmies() + " armies are undeployed");
+                    if(!l_CommandStrList.isEmpty()){
+                        if (l_CommandStrList.get(0).get(0).equals("pass")) {
+                            // check if all armies are issued to be deployed
+                            if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() == l_CurrentPlayer.getD_TotalNumberOfArmies()) {
+                                // set flag to true
+                                l_Flag.set(l_Counter, Boolean.TRUE);
+                                l_Counter++;
+                            } else {
+                                Console.displayMsg("Error: cannot pass, still " + l_CurrentPlayer.getD_TotalNumberOfArmies() + " armies are undeployed");
+                            }
                         }
-                    }
-                    // check if command is admin command
-                    else if (AdminCommands.VALID_ADMIN_COMMANDS.contains(l_CommandStrList.get(0).get(0))) {
-                        createAdminCommand(l_CommandStrList);
-                        executeAdminCommands();
-                    }
-                    // for game orders use player to instantiate order
-                    else {
-                        d_GameEngine.setD_OrderStrBuffer(l_CommandStrList);
-                        l_CurrentPlayer.issueOrder();
-                        l_Counter++;
+                        // check if command is admin command
+                        else if (AdminCommands.VALID_ADMIN_COMMANDS.contains(l_CommandStrList.get(0).get(0))) {
+                            createAdminCommand(l_CommandStrList);
+                            executeAdminCommands();
+                        }
+                        // for game orders use player to instantiate order
+                        else {
+                            d_GameEngine.setD_OrderStrBuffer(l_CommandStrList);
+                            l_CurrentPlayer.issueOrder();
+                            l_Counter++;
+                        }
                     }
                 }
             }

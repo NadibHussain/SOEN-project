@@ -35,7 +35,6 @@ public class InputValidator {
     public static Phase CURRENT_PHASE = Phase.MAPEDITOR;
     /**
      * valid gameplay commands arraylist
-     *
      */
     public static ArrayList<String> VALID_GAMEPLAY_COMMANDS = new ArrayList<>(
             Arrays.asList(
@@ -151,6 +150,25 @@ public class InputValidator {
             case "deploy":
                 try {
                     return validateDeploy(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
+            case "advance":
+            case "airlift":
+                try {
+                    return validateAdvanceAirlift(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
+            case "bomb":
+            case "blockade":
+            case "negotiate":
+                try {
+                    return validateBombBlockadeNegotiate(p_OptionName, p_Arguments);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     return false;
@@ -402,6 +420,58 @@ public class InputValidator {
 
         // Validate arguments
         if (p_Arguments.size() != 2 || !isAlphaNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    /**
+     * Method checks the validity of the following commands:
+     * "advance"
+     * "airlift"
+     *
+     * @param p_OptionName Name of the option ("noOption")
+     * @param p_Arguments  number of armies to deploy
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
+    private static boolean validateAdvanceAirlift(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.GAMEPLAY);
+
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate arguments
+        if (p_Arguments.size() != 3 || !isAlphaNumeric(p_Arguments.get(0)) || !isAlphaNumeric(p_Arguments.get(1))
+                || !isNumeric(p_Arguments.get(2)))
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    /**
+     * Method checks the validity of the following commands:
+     * "bomb"
+     * "blockade"
+     * "negotiate"
+     *
+     * @param p_OptionName Name of the option ("noOption")
+     * @param p_Arguments  number of armies to deploy
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
+    private static boolean validateBombBlockadeNegotiate(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.GAMEPLAY);
+
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate arguments
+        if (p_Arguments.size() != 1 || !isAlphaNumeric(p_Arguments.get(0)))
             throw new Exception("Invalid arguments");
 
         return true;

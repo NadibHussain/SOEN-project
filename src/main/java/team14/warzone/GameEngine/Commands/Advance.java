@@ -70,7 +70,7 @@ public class Advance extends Order {
         if (!l_CountryFrom.getD_Neighbours().contains(l_CountryTo))
             throw new Exception("Advance failed: source and destination countries are not adjacent!");
         else {
-            // check if destination country is owned by the player, then move armies to the destination country
+            // check if destination country is owned by the current player, then move armies to the destination country
             if (l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
                 // increase armies in source country
                 l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() - d_NumberOfArmies);
@@ -81,6 +81,10 @@ public class Advance extends Order {
                 d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
                 d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+            }
+            //check if the enemy is a diplomatic ally then current player can not attack his ally
+            if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
+                throw new Exception("Cannot attack a diplomatic ally's country");
             }
             // perform battle
             else {
@@ -107,16 +111,23 @@ public class Advance extends Order {
                 if (l_DefenderArmiesSurvived == 0 && l_AttackerArmiesSurvived != 0) {
                     l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
                     Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
-                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo +
+                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
+                    //change the owner of the destination country, add the destination country to current player country list
+                    // and remove it from the old owner list
+                    l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
+                    d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
+                    l_CurrentPlayer.addCountryOwned(l_CountryTo);
+                    // log
                     d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
                             + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
                     d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-                    //change the owner of the dest country, add country to player country list
                 } else {
                     l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
                     l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
-                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle, " +
-                            l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
+                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle" +
+                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
+                    // log
                     d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle, " +
                             l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
                     d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
@@ -124,4 +135,10 @@ public class Advance extends Order {
             }
         }
     }
+
+    @Override
+    public void reset() {
+
+    }
+
 }

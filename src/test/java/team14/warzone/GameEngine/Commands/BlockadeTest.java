@@ -5,11 +5,14 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.MapEditor;
 
-public class AdvanceTest {
+import static org.junit.Assert.*;
 
+public class BlockadeTest {
     /**
      * console field
      */
@@ -41,31 +44,30 @@ public class AdvanceTest {
         d_GE.addPlayer("p2");
         d_GE.assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
-        d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
-        d_GE.getD_LoadedMap().findCountry("b6").setD_NumberOfArmies(15);
-        d_GE.getD_LoadedMap().findCountry("b7").setD_NumberOfArmies(6);
+        Player l_P1 = d_GE.getD_PlayerList().get(0);
+        d_GE.setD_CurrentPlayer(l_P1); // p1 turn
+        //assign airlift card to p1
+        l_P1.addCard(new Card("blockade"));
+        //add armies to some countries in the map
+        d_GE.getD_LoadedMap().findCountry("s1").setD_NumberOfArmies(15);
     }
 
     /**
-     * Tries to attack another country that p1 doesn't own, after battle the number of armies of at least one
-     * of the two countries should be changed
+     * Tries to blockade a country that Player p1 own, as a result the number of armies will be tripled
+     * and the ownership of destination country will ne changed to neutral player
      */
     @Test
-    @DisplayName("Testing advance Armies")
+    @DisplayName("Testing blockade order")
     public void executeTest() {
-        int l_ArmiesSrcCountryBefore = 0;
-        int l_ArmiesDestCountryBefore = 0;
+        int l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
         try {
-            l_ArmiesSrcCountryBefore = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
-            l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-            Advance l_Adv = new Advance("b6", "b7", 10, d_GE);
-            l_Adv.execute();
+            Blockade l_Blockade = new Blockade("s1", d_GE);
+            l_Blockade.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        int l_ArmiesSrcCountryAfter = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
-        int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-        org.junit.Assert.assertTrue(l_ArmiesSrcCountryAfter <= l_ArmiesSrcCountryBefore
-                || l_ArmiesDestCountryAfter <= l_ArmiesDestCountryBefore);
+        int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
+        org.junit.Assert.assertEquals((l_ArmiesDestCountryBefore * 3), l_ArmiesDestCountryAfter);
+        org.junit.Assert.assertTrue(d_GE.getD_LoadedMap().findCountry("s1").getD_CurrentOwner().equals("Neutral"));
     }
 }

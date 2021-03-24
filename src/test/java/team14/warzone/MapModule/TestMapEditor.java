@@ -1,6 +1,10 @@
 package team14.warzone.MapModule;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +25,7 @@ public class TestMapEditor {
     public static MapEditor d_MapEditor;
 
     /** 
+     * Initialize before tests run
      * @throws FileNotFoundException
      */
     @BeforeClass
@@ -31,8 +36,7 @@ public class TestMapEditor {
     }
 
     /**
-     * Test the loadmap method
-     * Verify that all countries are being loaded
+     * tests load map
      */
     @Test
     @DisplayName("Testing loading a map")
@@ -44,7 +48,7 @@ public class TestMapEditor {
     }
 
     /**
-     * Test for the validatemap method
+     * test validation of a map
      */
     @Test
     @DisplayName("Testing map validator")
@@ -55,7 +59,7 @@ public class TestMapEditor {
     }
 
     /**
-     * Test for validatemap method to check if the map is a connected graph
+     * test if map is connected graph
      */
     @Test
     public void testValidateMap_isConnected() {
@@ -69,7 +73,7 @@ public class TestMapEditor {
     }
 
     /**
-     * Test checks that the validate map verifies that there are no continent without any countries
+     * test if all continents have a country each
      */
     @Test
     public void testValidateMap_allContinentHasCountry() {
@@ -91,7 +95,7 @@ public class TestMapEditor {
     }
 
     /**
-     * Verify that all the countries have a continent
+     * test if all countries have a continent
      */
     @Test
     public void testValidateMap_allCountryHasContinent() {
@@ -114,7 +118,9 @@ public class TestMapEditor {
         assert l_HasContinent == true;
     }
 
-    
+    /**
+     * test if map has connected sub-graph
+     */
     @Test
     public void testValidateMap_hasConnectedSubGraphs(){
         Map l_Map = d_MapEditor.getD_LoadedMap();
@@ -134,7 +140,23 @@ public class TestMapEditor {
     }
 
     /**
-     * teardown
+     * test if map is invalid
+     */
+    @Test
+    @DisplayName("Testing invalid map")
+    public void testInvalidMap() {
+        try {
+            d_MapEditor.loadMap("invalidmap.map");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Map l_Map = d_MapEditor.getD_LoadedMap();
+        boolean l_Test = d_MapEditor.validateMap(l_Map);
+        assertEquals(false, l_Test);
+    }
+
+    /**
+     * tear down after all test run
      */
     @AfterClass
     public static void tearDown() {
