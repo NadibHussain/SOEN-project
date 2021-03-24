@@ -50,4 +50,9 @@ public class Deploy extends Order {
         // decrease armies ordered to be deployed count in player
         l_CurrentPlayer.decreaseArmiesOrderedToBeDeployed(d_NumberOfArmies);
     }
+
+    @Override
+    public void reset() {
+
+    }
 }

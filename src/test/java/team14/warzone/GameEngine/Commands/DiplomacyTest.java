@@ -5,11 +5,12 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.MapEditor;
 
-public class AdvanceTest {
-
+public class DiplomacyTest {
     /**
      * console field
      */
@@ -41,31 +42,25 @@ public class AdvanceTest {
         d_GE.addPlayer("p2");
         d_GE.assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
-        d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
-        d_GE.getD_LoadedMap().findCountry("b6").setD_NumberOfArmies(15);
-        d_GE.getD_LoadedMap().findCountry("b7").setD_NumberOfArmies(6);
+        Player l_P1 = d_GE.getD_PlayerList().get(0);
+        d_GE.setD_CurrentPlayer(l_P1); // p1 turn
+        //assign airlift card to p1
+        l_P1.addCard(new Card("diplomacy"));
     }
 
     /**
-     * Tries to attack another country that p1 doesn't own, after battle the number of armies of at least one
-     * of the two countries should be changed
+     * Tries to bomb a country that Player p1 doesn't own (enemy country), as a result the number of armies
+     * will be decreased by half
      */
     @Test
-    @DisplayName("Testing advance Armies")
+    @DisplayName("Testing negotiate order")
     public void executeTest() {
-        int l_ArmiesSrcCountryBefore = 0;
-        int l_ArmiesDestCountryBefore = 0;
         try {
-            l_ArmiesSrcCountryBefore = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
-            l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-            Advance l_Adv = new Advance("b6", "b7", 10, d_GE);
-            l_Adv.execute();
+            Diplomacy l_Diplomacy = new Diplomacy("p2", d_GE);
+            l_Diplomacy.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        int l_ArmiesSrcCountryAfter = d_GE.getD_LoadedMap().findCountry("b6").getD_NumberOfArmies();
-        int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
-        org.junit.Assert.assertTrue(l_ArmiesSrcCountryAfter <= l_ArmiesSrcCountryBefore
-                || l_ArmiesDestCountryAfter <= l_ArmiesDestCountryBefore);
+        org.junit.Assert.assertTrue(d_GE.getD_CurrentPlayer().isDiplomaticPlayer(d_GE.getD_CurrentPlayer(), d_GE.findPlayer("p2")));
     }
 }

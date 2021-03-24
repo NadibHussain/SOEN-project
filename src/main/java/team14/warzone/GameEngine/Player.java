@@ -43,6 +43,10 @@ public class Player {
      * Reference to the GameEngine object
      */
     private GameEngine d_GE;
+    /**
+     * list of diplomatic players
+     */
+    private ArrayList<Player> d_DiplomaticPlayers = new ArrayList<>();
 
     /**
      * Default constructor that takes no params
@@ -66,6 +70,7 @@ public class Player {
         this.d_OrderList = d_OrderList;
         d_GE = p_GE;
         d_ArmiesOrderedToBeDeployed = 0;
+        d_CardList = new ArrayList<>();
     }
 
     /**
@@ -113,17 +118,17 @@ public class Player {
 
             // { "blockade", "", "countryFrom, numOfArmies" }
             case "blockade":
-                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
-                d_OrderList.add(l_BlockadeOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued blockade command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
+//                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
+//                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], Integer.parseInt(l_ArgsBlockade[1]), d_GE);
+//                d_OrderList.add(l_BlockadeOrder);
+//                d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued blockade command");
+//                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
                 break;
 
             // { "bomb", "", "countryFrom, numOfArmies" }
             case "bomb":
                 String[] l_ArgsBomb = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], Integer.parseInt(l_ArgsBomb[1]), d_GE);
+                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], d_GE);
                 d_OrderList.add(l_BombOrder);
                 d_GE.getD_LogEntryBuffer().setD_log(getD_Name()+" issued bomb command");
                 d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
@@ -131,6 +136,7 @@ public class Player {
 
             // { "diplomacy", "", "playerId" }
             case "diplomacy":
+            case "negotiate":
                 String[] l_ArgsDiplomacy = l_OrderStr.get(2).replaceAll(" ", "").split(",");
                 Diplomacy l_DiplomacyOrder = new Diplomacy(l_ArgsDiplomacy[0], d_GE);
                 d_OrderList.add(l_DiplomacyOrder);
@@ -144,7 +150,7 @@ public class Player {
                 d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
 
         }
-        d_GE.clearOrderBuffer();
+        d_GE.clearOrderStrBuffer();
     }
 
     /**
@@ -177,8 +183,22 @@ public class Player {
         this.d_CountriesOwned.add(p_Country);
     }
 
+    /**
+     * This method removes a country from the list of countries owned by the player
+     *
+     * @param p_Country country that is to be removed
+     */
+    public void removeCountryOwned(Country p_Country) {
+        if(!this.d_CountriesOwned.isEmpty() && this.d_CountriesOwned.contains(p_Country))
+            this.d_CountriesOwned.remove(p_Country);
+    }
+
     public boolean hasCard(Card p_Card) {
-        return d_CardList.contains(p_Card);
+        for(Card l_Card : d_CardList){
+            if(l_Card.getD_CardType().equals(p_Card.getD_CardType()))
+                return true;
+        }
+        return false;
     }
 
     /**
@@ -260,6 +280,14 @@ public class Player {
     public void addCard(Card card) {
         d_CardList.add(card);
     }
+
+    /**
+     * The method to get cards list of this player
+     * @return cards list owned by this player
+     */
+    public List<Card> getCardList() {
+        return d_CardList;
+    }
     /**
      * Getter for the number of armies ordered to be deployed field
      *
@@ -285,5 +313,44 @@ public class Player {
      */
     public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
         d_ArmiesOrderedToBeDeployed -= p_ArmiesOrderedToBeDeploy;
+    }
+
+    /**
+     * Add diplomatic player in list
+     * @param p_Player player to add in the list
+     *
+     */
+    public void addDiplomaticPlayer(Player p_Player){
+        this.d_DiplomaticPlayers.add(p_Player);
+
+    }
+
+    /**
+     * Remove diplomatic player from list
+     * @param p_Player
+     */
+    public void removeDiplomaticPlayer(Player p_Player){
+        this.d_DiplomaticPlayers.remove(p_Player);
+    }
+
+    /**
+     * Get the list of diplomatic players list
+     * @return ArrayList of diplomatic allies
+     */
+    public ArrayList<Player> getD_DiplomaticPlayerList(){
+        return this.d_DiplomaticPlayers;
+    }
+    /**
+     * Checks if the players are in diplomatic relation
+     * @param p_CurrentPlayer
+     * @param p_TargetPlayer
+     * @return true if either of them have used diplomacy card on each other
+     */
+    public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer){
+        if(p_CurrentPlayer.getD_DiplomaticPlayerList().contains(p_TargetPlayer) | p_TargetPlayer.getD_DiplomaticPlayerList().contains(p_CurrentPlayer))
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -5,6 +5,8 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
+import team14.warzone.GameEngine.Commands.ICommand;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
@@ -13,8 +15,8 @@ import team14.warzone.MapModule.MapEditor;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class implements the functionalities of the game-play phase
@@ -51,6 +53,7 @@ public class GameEngine  {
      * Stores admin commands that are yet to be executed
      */
     private ArrayList<AdminCommands> d_AdminCommandsBuffer;
+    private ArrayList<Order> d_OrderBuffer;
     /**
      * Stores user inputs needed to create orders
      */
@@ -123,7 +126,6 @@ public class GameEngine  {
             // validate map right after loading
             if (!d_MapEditor.validateMap(d_LoadedMap))
                 System.out.println("Error: map validation failed, not loaded");
-
             else {
                 System.out.println("Success: map loaded and validated");
                 InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
@@ -383,6 +385,21 @@ public class GameEngine  {
         return d_PlayerList;
     }
 
+    /**
+     * Get a player by name
+     *
+     * @param p_PlayerName player list parameter
+     * @return Player object that has a match name
+     */
+    public Player findPlayer(String p_PlayerName) {
+        for (Player l_Player : d_PlayerList) {
+            if (l_Player.getD_Name().equals(p_PlayerName))
+                return l_Player;
+        }
+        if (d_NeutralPlayer.getD_Name().equals(p_PlayerName))
+            return d_NeutralPlayer;
+        return null;
+    }
 
     /**
      * @param p_PlayerList player list parameter
@@ -447,7 +464,7 @@ public class GameEngine  {
     public void allotCard(Player p_player) {
         Card l_Card = new Card();
         Random l_RandomNumber = new Random();
-        l_Card.setCardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
+        l_Card.setD_CardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
         p_player.addCard(l_Card);
     }
     public List<List<String>> getD_OrderStrBuffer() {
@@ -458,7 +475,23 @@ public class GameEngine  {
         d_OrderStrBuffer = p_OrderStrBuffer;
     }
 
-    public void clearOrderBuffer() {
+    public void clearOrderStrBuffer() {
         d_OrderStrBuffer.clear();
+    }
+
+    public NeutralPlayer getD_NeutralPlayer() {
+        return d_NeutralPlayer;
+    }
+
+    public ArrayList<Order> getD_OrderBuffer() {
+        return d_OrderBuffer;
+    }
+
+    public void appendToOrderBuffer(Order p_Order) {
+        d_OrderBuffer.add(p_Order);
+    }
+
+    public void clearOrderBuffer() {
+        d_OrderBuffer.clear();
     }
 }
