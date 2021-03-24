@@ -116,6 +116,19 @@ public class TestMapEditor {
             assert l_ConnectedSubGraph == true;
     }
 
+    @Test
+    @DisplayName("Testing invalid map")
+    public void testInvalidMap() {
+        try {
+            d_MapEditor.loadMap("invalidmap.map");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Map l_Map = d_MapEditor.getD_LoadedMap();
+        boolean l_Test = d_MapEditor.validateMap(l_Map);
+        assertEquals(false, l_Test);
+    }
+
     @AfterClass
     public static void tearDown() {
         d_MapEditor = null;
