@@ -1,5 +1,6 @@
 package team14.warzone.GameEngine.Commands;
 
+import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -39,6 +40,7 @@ public class Diplomacy extends Order{
          else {
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
             d_PreviousOwner = l_CurrentPlayer;
+            Console.displayMsg("Success : " + l_CurrentPlayer.getD_Name() + " and " + d_PlayerId + " are allies for this turn");
             d_GameEngine.appendToCommandBuffer(this);
         }
     }
