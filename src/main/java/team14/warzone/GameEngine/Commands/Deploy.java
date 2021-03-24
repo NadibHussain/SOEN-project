@@ -25,6 +25,8 @@ public class Deploy extends Order {
         // check if numberOfArmies is more than what he has
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
         Map l_LoadedMap = d_GameEngine.getD_LoadedMap();
+        // decrease armies ordered to be deployed count in player
+        l_CurrentPlayer.decreaseArmiesOrderedToBeDeployed(d_NumberOfArmies);
         if (l_CurrentPlayer.getD_TotalNumberOfArmies() < d_NumberOfArmies)
             throw new Exception("Deploy failed: " + l_CurrentPlayer.getD_Name() + " has " +
                     l_CurrentPlayer.getD_TotalNumberOfArmies() + " < " + d_NumberOfArmies);
@@ -47,8 +49,6 @@ public class Deploy extends Order {
         d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() + " deployed " + d_NumberOfArmies + " armies" +
                 " in " + d_TargetCountry);
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-        // decrease armies ordered to be deployed count in player
-        l_CurrentPlayer.decreaseArmiesOrderedToBeDeployed(d_NumberOfArmies);
     }
 
     @Override
