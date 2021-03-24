@@ -9,17 +9,9 @@ import team14.warzone.MapModule.Country;
  */
 public class Card {
     /**
-     * Player holding the card
-     */
-    private Player player;
-    /**
      * Type of the Card
      */
     private String cardType;
-    /**
-     * Country associated with the card
-     */
-    private Country country;
     /**
      * BOMB type card
      */
@@ -42,21 +34,6 @@ public class Card {
      */
     public String TYPES[] = {BOMB, BLOCKADE, AIRLIFT, DIPLOMACY};
 
-    /**
-     * Getter method for player
-     * @return player holding the card
-     */
-    public Player getPlayer() {
-        return player;
-    }
-
-    /**
-     * Setter method for player
-     * @param player player holding the card
-     */
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 
     /**
      * Getter method for Card type
@@ -90,25 +67,16 @@ public class Card {
         this.cardType = cardType;
     }
 
-    /**
-     * Get country method
-     * @return country
-     */
-    public Country getCountry() {
-        return country;
-    }
 
-    /**
-     * Set country method
-     */
-    public void setCountry() {
-        this.country = country;
-    }
 
     /**
      * Default constructor for the card
      */
     public Card() {
+
+    }
+
+    public Card(String p_type) {
 
     }
 }
