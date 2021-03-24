@@ -76,7 +76,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
                                 l_Flag.set(l_Counter, Boolean.TRUE);
                                 l_Counter++;
                             } else {
-                                Console.displayMsg("Error: cannot pass, still " + l_CurrentPlayer.getD_TotalNumberOfArmies() + " armies are undeployed");
+                                Console.displayMsg("Error: cannot pass, still " + (l_CurrentPlayer.getD_TotalNumberOfArmies() - l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed()) + " armies are undeployed");
                             }
                         }
                         // check if command is admin command
@@ -91,6 +91,8 @@ public class IssueOrdersPhase extends GamePlayPhase {
                             l_Counter++;
                         }
                     }
+                } else {
+                    l_Counter++;
                 }
             }
         }

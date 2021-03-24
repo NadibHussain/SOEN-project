@@ -20,3 +20,56 @@ p2 issued deploy command
 p1 deployed 50 armies in s1
 p1 gets 30armies as reinforcement
 p2 gets 30armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p2 deployed 30 armies in s2
+p2 deployed 20 armies in s2
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
