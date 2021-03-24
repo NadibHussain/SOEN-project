@@ -18,6 +18,8 @@ public class Driver {
         GameEngine l_GE = new GameEngine(l_Console, l_ME);
 
         System.out.println("Welcome to warzone game, please enter your command : ");
+        l_GE.getD_LogEntryBuffer().setD_log("Warzone game has started");
+        l_GE.getD_LogEntryBuffer().notifyObservers(l_GE.getD_LogEntryBuffer());
         l_GE.gameLoop();
 
 //        while (InputValidator.CURRENT_PHASE != InputValidator.Phase.GAMEPLAY) {
