@@ -1,5 +1,6 @@
 package team14.warzone.GameEngine.Commands;
 
+import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.NeutralPlayer;
@@ -36,7 +37,7 @@ public class Blockade extends Order {
         Player l_CurrentPlayer = d_GameEngine.getD_CurrentPlayer();
         Card l_CardBlockade = new Card("blockade");
         if (!l_CurrentPlayer.hasCard(l_CardBlockade)) {// check if player has the Blockade card
-            throw new Exception("Player does not have this card.");
+            throw new Exception("Player does not have blockade card.");
         }
 
         // check if destination country exists
@@ -54,10 +55,9 @@ public class Blockade extends Order {
             d_CountryTo.setD_NumberOfArmies(3 * d_CountryTo.getD_NumberOfArmies());
             d_CountryTo.setD_CurrentOwner("Neutral");
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
+            Console.displayMsg("Success: Blockade country " + d_CountryNameTo);
             NeutralPlayer l_Neutral = (NeutralPlayer) d_GameEngine.findPlayer("Neutral");
             l_Neutral.addCountryOwned(l_CountryTo);
         }
     }
-
-
 }
