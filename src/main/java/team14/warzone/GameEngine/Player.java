@@ -286,6 +286,15 @@ public class Player {
         d_CardList.add(card);
     }
 
+    public void removeCard(Card p_Card) {
+        for(Card l_Card : getCardList() ){
+            if(l_Card == p_Card){
+                getCardList().remove(p_Card);
+                break;
+            }
+        }
+    }
+
     /**
      * The method to get cards list of this player
      *
