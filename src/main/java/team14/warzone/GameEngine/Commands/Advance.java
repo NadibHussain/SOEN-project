@@ -70,7 +70,7 @@ public class Advance extends Order {
         if (!l_CountryFrom.getD_Neighbours().contains(l_CountryTo))
             throw new Exception("Advance failed: source and destination countries are not adjacent!");
         else {
-            // check if destination country is owned by the player, then move armies to the destination country
+            // check if destination country is owned by the current player, then move armies to the destination country
             if (l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
                 // increase armies in source country
                 l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() - d_NumberOfArmies);
@@ -79,7 +79,10 @@ public class Advance extends Order {
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
             }
-            //check allies list for the current player, if country's owner is an ally then don't attack the country
+            //check if the enemy is a diplomatic ally then current player can not attack his ally
+            if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
+                throw new Exception("Cannot attack a diplomatic ally's country");
+            }
             // perform battle
             else {
                 l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
