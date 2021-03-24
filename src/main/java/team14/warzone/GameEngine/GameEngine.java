@@ -3,6 +3,8 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Observer.LogEntryBuffer;
+import team14.warzone.GameEngine.Observer.LogerOberver;
 import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
@@ -21,7 +23,7 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine extends Observable {
+public class GameEngine  {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -54,6 +56,11 @@ public class GameEngine extends Observable {
      */
     private List<List<String>> d_OrderStrBuffer;
 
+    /**
+     * This is used to send logs to the observer
+     */
+    private LogEntryBuffer d_LogEntryBuffer= new LogEntryBuffer();
+
     // State pattern attributes
     private Phase d_CurrentPhase;
 
@@ -80,6 +87,7 @@ public class GameEngine extends Observable {
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_CurrentPhase = d_PreMapLoadPhase;
+        d_LogEntryBuffer.attach(new LogerOberver());
     }
 
     /**
@@ -115,6 +123,7 @@ public class GameEngine extends Observable {
             // validate map right after loading
             if (!d_MapEditor.validateMap(d_LoadedMap))
                 System.out.println("Error: map validation failed, not loaded");
+
             else {
                 System.out.println("Success: map loaded and validated");
                 InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
@@ -196,7 +205,13 @@ public class GameEngine extends Observable {
             Console.displayMsg("Player removed: " + p_PlayerName);
         }
     }
-
+    /**
+     * Getter for LogEntryBuffer
+     * @return  the current log entry buffer for this engine
+     */
+    public LogEntryBuffer getD_LogEntryBuffer() {
+        return d_LogEntryBuffer;
+    }
     /**
      * A method to loop the players list in a RR fashion, to give their order
      * Has two stages:

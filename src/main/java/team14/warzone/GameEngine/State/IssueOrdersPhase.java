@@ -44,6 +44,8 @@ public class IssueOrdersPhase extends GamePlayPhase {
             // of continents he owns
             l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
             //give reinforcement to the player
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_Player.getD_Name()+ " gets "+l_PlayerEnforcement+ "armies as reinforcement");
+            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
     }

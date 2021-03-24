@@ -68,12 +68,21 @@ public abstract class MapEditorPhase extends Phase {
             d_GameEngine.setD_LoadedMap(d_GameEngine.getD_MapEditor().getD_LoadedMap());
             // validate map right after loading
             if (!d_GameEngine.getD_MapEditor().validateMap(d_GameEngine.getD_LoadedMap()))
+            {
                 System.out.println("Error: map validation failed, not loaded");
+                d_GameEngine.getD_LogEntryBuffer().setD_log("Error: map validation failed, not loaded");
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+            }
             else {
                 System.out.println("Success: map loaded and validated");
+                d_GameEngine.getD_LogEntryBuffer().setD_log("Success: map loaded and validated map:"+p_FileName);
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
                 // move to the startup phase
                 d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
                 InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
+                d_GameEngine.getD_LogEntryBuffer().setD_log("Changing Phase from MapEditor Phase to Startup Phase");
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error: invalid filename");

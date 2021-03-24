@@ -51,6 +51,8 @@ public class Bomb extends Order{
         else{
             int l_TotalNumOfArmies = l_CurrentPlayer.getD_TotalNumberOfArmies();
             int l_RemainingArmies = d_NumberOfArmies / 2;
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name()+ " has bombed"+d_CountryNameTo);
+            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
             l_CurrentPlayer.setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
         }

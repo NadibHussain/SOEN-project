@@ -44,6 +44,9 @@ public class Deploy extends Order {
         l_CurrentPlayer.setD_TotalNumberOfArmies(l_CurrentPlayer.getD_TotalNumberOfArmies() - d_NumberOfArmies);
         Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " deployed " + d_NumberOfArmies + " armies" +
                 " in " + d_TargetCountry);
+        d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() + " deployed " + d_NumberOfArmies + " armies" +
+                " in " + d_TargetCountry);
+        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
         // decrease armies ordered to be deployed count in player
         l_CurrentPlayer.decreaseArmiesOrderedToBeDeployed(d_NumberOfArmies);
     }
