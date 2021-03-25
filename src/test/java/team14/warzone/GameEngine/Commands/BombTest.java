@@ -8,8 +8,15 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+/**
+ * This class tests the bomb order
+ */
 public class BombTest {
     /**
      * console field
@@ -57,14 +64,23 @@ public class BombTest {
     @Test
     @DisplayName("Testing bomb order")
     public void executeTest() {
-        int l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("s2").getD_NumberOfArmies();;
+        Map l_Map = d_GE.getD_LoadedMap();
+        int l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("s2").getD_NumberOfArmies();
+        ;
         try {
             Bomb l_Bomb = new Bomb("s2", d_GE);
+            d_GE.allotCard(d_GE.getD_CurrentPlayer());
+            boolean l_HasCard = d_GE.getD_CurrentPlayer().hasCard(new Card("bomb"));
+            assert l_HasCard == true;
+            System.out.println(d_GE.getD_CurrentPlayer().getCardList().get(0).getD_CardType());
+            assertEquals("s2", l_Map.findCountry("s2").getD_CountryID());
+            System.out.println(l_Map.getD_Countries().get(1).getD_CountryID());
+            assertNotEquals(l_Map.findCountry("s2").getD_CurrentOwner(), d_GE.getD_CurrentPlayer().getD_Name());
             l_Bomb.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("s2").getD_NumberOfArmies();
-        org.junit.Assert.assertEquals((l_ArmiesDestCountryBefore / 2),l_ArmiesDestCountryAfter);
+        org.junit.Assert.assertEquals((l_ArmiesDestCountryBefore / 2), l_ArmiesDestCountryAfter);
     }
 }

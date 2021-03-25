@@ -5,21 +5,33 @@ import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 
-public class Diplomacy extends Order{
-
+/**
+ * This class is used to create diplomacy/negotiate order
+ *
+ * @author tanzia-ahmed
+ */
+public class Diplomacy extends Order {
+    /**
+     * Player ID field
+     */
     private String d_PlayerId;
+    /**
+     * Game engine field
+     */
     private GameEngine d_GameEngine;
+    /**
+     * Previous owner of a country
+     */
     private Player d_PreviousOwner;
 
     /**
      * Constructor of Diplomacy
-     * 
-     * @author tanzia-ahmed
+     *
      * @param p_PlayerId
      * @param p_GameEngine
      */
     public Diplomacy(String p_PlayerId, GameEngine p_GameEngine) {
-        
+
         this.d_PlayerId = p_PlayerId;
         this.d_GameEngine = p_GameEngine;
 
@@ -36,8 +48,7 @@ public class Diplomacy extends Order{
         // check if player exists and diplomat is not the current player itself
         if (!d_GameEngine.getD_PlayerList().contains(d_GameEngine.findPlayer((d_PlayerId))) & !l_CurrentPlayer.getD_Name().equals(d_PlayerId)) {
             throw new Exception("Diplomacy failed: playerID does not exist or player is trying to be his own diplomatic ally");
-        }
-         else {
+        } else {
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
             l_CurrentPlayer.removeCard(new Card("diplomacy"));
             d_PreviousOwner = l_CurrentPlayer;
@@ -45,11 +56,12 @@ public class Diplomacy extends Order{
             d_GameEngine.appendToOrderBuffer(this);
         }
     }
+
     /**
-     * resets the diplomatic relationship with playerID 
+     * resets the diplomatic relationship with playerID
      * once the turn is finished.
      */
-    public void reset(){
+    public void reset() {
         d_PreviousOwner.removeDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
     }
 

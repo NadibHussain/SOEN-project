@@ -400,6 +400,7 @@ public class GameEngine {
         Random l_RandomNumber = new Random();
         l_Card.setD_CardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
         p_player.addCard(l_Card);
+        Console.displayMsg("Player " + p_player.getD_Name() + " has received " + l_Card.getD_CardType() + " card!");
     }
 
     public List<List<String>> getD_OrderStrBuffer() {
