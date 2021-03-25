@@ -68,7 +68,7 @@ public class InputValidatorTest {
      * Method tests the validateInput method.
      * Tests are done for all the parameterized set of params
      */
-    @Ignore
+    
     @Test
     public void validateInput() {
         boolean l_IsValid = InputValidator.validateInput(d_CommandName, d_OptionName, d_Arguments);
