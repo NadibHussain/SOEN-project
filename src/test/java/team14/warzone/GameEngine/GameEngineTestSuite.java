@@ -8,7 +8,7 @@ import team14.warzone.GameEngine.State.IssueOrdersPhaseTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class, DiplomacyTest.class,
-        IssueOrdersPhaseTest.class
+        IssueOrdersPhaseTest.class, CardTest.class
 })
 
 /**
