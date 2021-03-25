@@ -197,7 +197,7 @@ public class InputValidator {
 
         // Validate -add arguments and -remove arguments
         if (p_OptionName.equals("-add")) {
-            if (p_Arguments.size() != 2 || !isAlphaNumeric(p_Arguments.get(0)))
+            if (p_Arguments.size() != 2 || !isAlphaNumeric(p_Arguments.get(0)) || !isNumeric(p_Arguments.get(1)))
                 throw new Exception("Invalid arguments");
         } else if (p_OptionName.equals("-remove")) {
             if (p_Arguments.size() != 1 || !isAlphaNumeric(p_Arguments.get(0)))
