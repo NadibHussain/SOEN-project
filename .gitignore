@@ -33,3 +33,6 @@ target/
 # IDE files and folders
 *.iml
 .idea/
+
+# Log files
+logs.txt

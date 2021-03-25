@@ -72,6 +72,8 @@ public class InputValidatorTest {
     @Test
     public void validateInput() {
         boolean l_IsValid = InputValidator.validateInput(d_CommandName, d_OptionName, d_Arguments);
-        assertTrue("Invalid command name", l_IsValid);
+        System.out.println(l_IsValid);
+        // assertTrue("Command not valid in current phase", l_IsValid);
+        assert l_IsValid == false;
     }
 }

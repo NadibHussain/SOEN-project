@@ -27,8 +27,8 @@ public class Diplomacy extends Order {
     /**
      * Constructor of Diplomacy
      *
-     * @param p_PlayerId
-     * @param p_GameEngine
+     * @param p_PlayerId player id who wants to use diplomacy card
+     * @param p_GameEngine gameengine parameter
      */
     public Diplomacy(String p_PlayerId, GameEngine p_GameEngine) {
 
@@ -54,6 +54,8 @@ public class Diplomacy extends Order {
             d_PreviousOwner = l_CurrentPlayer;
             Console.displayMsg("Success : " + l_CurrentPlayer.getD_Name() + " and " + d_PlayerId + " are allies for this turn");
             d_GameEngine.appendToOrderBuffer(this);
+            d_GameEngine.getD_LogEntryBuffer().setD_log("Success : " + l_CurrentPlayer.getD_Name() + " and " + d_PlayerId + " are allies for this turn");
+            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
         }
     }
 
