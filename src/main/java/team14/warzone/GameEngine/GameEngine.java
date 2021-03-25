@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class implements the functionalities of the game-play phase
+ * This class implements the functionalities related to gameplay
  *
  * @author Anagh
  * @author Zeina
@@ -70,6 +70,7 @@ public class GameEngine {
     private Phase d_StartupPhase;
     private Phase d_IssueOrdersPhase;
     private Phase d_ExecuteOrdersPhase;
+    private Phase d_GameOverPhase;
 
     /**
      * @param p_Console   console object
@@ -88,6 +89,8 @@ public class GameEngine {
         d_StartupPhase = new StartupPhase(this);
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
+        d_GameOverPhase = new GameOverPhase(this);
+
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
     }
@@ -211,9 +214,9 @@ public class GameEngine {
      * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
-        while (true) {
+        do {
             d_CurrentPhase.run();
-        }
+        } while (!d_CurrentPhase.equals(d_GameOverPhase));
     }
 
     public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
@@ -367,5 +370,9 @@ public class GameEngine {
             l_Order.reset();
         }
         d_OrderBuffer.clear();
+    }
+
+    public Phase getD_GameOverPhase() {
+        return d_GameOverPhase;
     }
 }

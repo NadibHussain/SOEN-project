@@ -39,6 +39,7 @@ public class Diplomacy extends Order{
         }
          else {
             l_CurrentPlayer.addDiplomaticPlayer(d_GameEngine.findPlayer((d_PlayerId)));
+            l_CurrentPlayer.removeCard(new Card("diplomacy"));
             d_PreviousOwner = l_CurrentPlayer;
             Console.displayMsg("Success : " + l_CurrentPlayer.getD_Name() + " and " + d_PlayerId + " are allies for this turn");
             d_GameEngine.appendToOrderBuffer(this);
