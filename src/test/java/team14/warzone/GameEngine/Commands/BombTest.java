@@ -65,6 +65,10 @@ public class BombTest {
         int l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("s2").getD_NumberOfArmies();;
         try {
             Bomb l_Bomb = new Bomb("s2", d_GE);
+            d_GE.allotCard(d_GE.getD_CurrentPlayer());
+            boolean l_HasCard = d_GE.getD_CurrentPlayer().hasCard(new Card("bomb"));
+            assert l_HasCard == true;
+            System.out.println(d_GE.getD_CurrentPlayer().getCardList().get(0).getD_CardType());
             assertEquals("s2", l_Map.findCountry("s2").getD_CountryID());
             System.out.println(l_Map.getD_Countries().get(1).getD_CountryID());
             assertNotEquals(l_Map.findCountry("s2").getD_CurrentOwner(), d_GE.getD_CurrentPlayer().getD_Name());

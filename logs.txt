@@ -85,3 +85,6 @@ p1 has bombeds2
 p1 has bombeds2
 p1 has bombeds2
 p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+Success: p1 airlifted 10 armies from s1 to s3
