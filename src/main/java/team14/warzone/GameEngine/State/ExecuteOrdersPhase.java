@@ -35,6 +35,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         }
         // reset all the 2 step orders
         d_GameEngine.resetOrderBuffer();
+        // reset players card received flags
+        for (Player l_Player : l_PlayerList) {
+            l_Player.resetCardReceivedFlag();
+        }
         // check if all countries owned by 1 player
         if (!gameOverCheck(l_PlayerList))
             next();
