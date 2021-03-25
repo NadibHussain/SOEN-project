@@ -13,6 +13,9 @@ import team14.warzone.MapModule.MapEditor;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class tests the blockade order
+ */
 public class BlockadeTest {
     /**
      * console field

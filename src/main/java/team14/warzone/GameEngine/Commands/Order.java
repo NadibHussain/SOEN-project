@@ -2,6 +2,9 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
+/**
+ * This class represents orders issued by players during game issue order phase
+ */
 public abstract class Order implements ICommand {
     /**
      * field stores option object

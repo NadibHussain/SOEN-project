@@ -8,6 +8,9 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * This class tests the deploy order
+ */
 public class DeployTest {
     /**
      * console field

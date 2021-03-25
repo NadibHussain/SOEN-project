@@ -6,6 +6,11 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create advance order
+ *
+ * @author zeina
+ */
 public class Advance extends Order {
     /**
      * A field to store source country name

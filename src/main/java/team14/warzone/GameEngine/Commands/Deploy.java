@@ -6,10 +6,27 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create diplomacy/negotiate order
+ *
+ * @author zeina
+ */
 public class Deploy extends Order {
+    /**
+     * Destination country name
+     */
     private String d_TargetCountry;
+    /**
+     * Number of armies to be deployed
+     */
     private int d_NumberOfArmies;
 
+    /**
+     * Class constructor
+     * @param p_TargetCountry destination country
+     * @param p_NumberOfArmies number of armies to be deployed
+     * @param p_GameEngine an instance of game engine class
+     */
     public Deploy(String p_TargetCountry, int p_NumberOfArmies, GameEngine p_GameEngine) {
         this.d_TargetCountry = p_TargetCountry;
         this.d_NumberOfArmies = p_NumberOfArmies;
@@ -18,7 +35,7 @@ public class Deploy extends Order {
     }
 
     /**
-     * Method to execute the command
+     * Method to execute the deploy command
      */
     @Override
     public void execute() throws Exception {

@@ -10,6 +10,9 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * This class tests the negotiate order
+ */
 public class DiplomacyTest {
     /**
      * console field

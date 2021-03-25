@@ -7,17 +7,27 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create bomb order
+ *
+ * @author tanzia-ahmed
+ */
 public class Bomb extends Order{
 
+    /**
+     * Destination country
+     */
     private String d_CountryNameTo;
+    /**
+     * GameEngine instance
+     */
     private GameEngine d_GameEngine;
 
     /**
-     * Constructor of Bomb
+     * Constructor of Bomb class
      *
-     * @author tanzia-ahmed
-     * @param p_CountryNameTo
-     * @param p_GameEngine
+     * @param p_CountryNameTo destination country
+     * @param p_GameEngine instance of Game Engine class
      */
     public Bomb(String p_CountryNameTo, GameEngine p_GameEngine) {
         this.d_CountryNameTo = p_CountryNameTo;

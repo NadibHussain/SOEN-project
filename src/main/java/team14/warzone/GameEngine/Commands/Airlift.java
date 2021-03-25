@@ -7,6 +7,11 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create airlift order
+ *
+ * @author zeina
+ */
 public class Airlift extends Order {
     /**
      * A field to store source country name
