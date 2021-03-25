@@ -1,11 +1,14 @@
 package team14.warzone.GameEngine.Commands;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
 public class AdvanceTest {
@@ -53,6 +56,7 @@ public class AdvanceTest {
     @Test
     @DisplayName("Testing advance Armies")
     public void executeTest() {
+        Map l_Map = d_GE.getD_LoadedMap();
         int l_ArmiesSrcCountryBefore = 0;
         int l_ArmiesDestCountryBefore = 0;
         try {
@@ -67,5 +71,7 @@ public class AdvanceTest {
         int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("b7").getD_NumberOfArmies();
         org.junit.Assert.assertTrue(l_ArmiesSrcCountryAfter <= l_ArmiesSrcCountryBefore
                 || l_ArmiesDestCountryAfter <= l_ArmiesDestCountryBefore);
+        assertEquals("b6", l_Map.findCountry("b6").getD_CountryID());
+        assertEquals("b7", l_Map.findCountry("b7").getD_CountryID());
     }
 }
