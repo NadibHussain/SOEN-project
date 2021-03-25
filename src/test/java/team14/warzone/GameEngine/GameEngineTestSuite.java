@@ -11,6 +11,9 @@ import team14.warzone.GameEngine.State.IssueOrdersPhaseTest;
         IssueOrdersPhaseTest.class
 })
 
+/**
+ * Test Suite for GameEngine
+ */
 public class GameEngineTestSuite {
 //place holder
 }

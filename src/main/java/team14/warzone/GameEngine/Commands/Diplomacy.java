@@ -27,8 +27,8 @@ public class Diplomacy extends Order {
     /**
      * Constructor of Diplomacy
      *
-     * @param p_PlayerId
-     * @param p_GameEngine
+     * @param p_PlayerId player id who wants to use diplomacy card
+     * @param p_GameEngine gameengine parameter
      */
     public Diplomacy(String p_PlayerId, GameEngine p_GameEngine) {
 

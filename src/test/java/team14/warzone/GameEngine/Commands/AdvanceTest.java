@@ -11,6 +11,9 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * Test for Advance
+ */
 public class AdvanceTest {
 
     /**

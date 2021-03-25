@@ -10,6 +10,9 @@ import team14.warzone.MapModule.MapEditor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test for Observer
+ */
 public class ObserverTest {
 
     GameEngine d_GE;

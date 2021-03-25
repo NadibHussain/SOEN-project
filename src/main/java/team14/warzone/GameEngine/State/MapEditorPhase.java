@@ -8,8 +8,14 @@ import team14.warzone.GameEngine.GameEngine;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+/**
+ * This is a class for MapEditorPhase
+ */
 public abstract class MapEditorPhase extends Phase {
-
+    /**
+     * MapEditorPhase
+     * @param p_GameEngine GE
+     */
     public MapEditorPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }

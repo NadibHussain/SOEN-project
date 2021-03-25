@@ -57,6 +57,12 @@ public class AdminCommands implements ICommand {
         this.d_Option = p_Options;
     }
 
+    /**
+     * AdminCommands constructor
+     * @param p_Keyword Keyword param
+     * @param p_Options Options param
+     * @param p_GE GameEngine param
+     */
     public AdminCommands(String p_Keyword, Option p_Options, GameEngine p_GE) {
         this.d_Keyword = p_Keyword;
         this.d_Option = p_Options;

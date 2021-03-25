@@ -8,8 +8,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * This is a class for ExecuteOrdersPhase
+ */
 public class ExecuteOrdersPhase extends GamePlayPhase {
-
+    /**
+     * ExecuteOrdersPhase
+     * @param p_GameEngine GE
+     */
     public ExecuteOrdersPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
