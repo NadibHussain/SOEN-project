@@ -22,11 +22,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TestMapEditor {
 
+    /**
+     * static mapeditor
+     */
     public static MapEditor d_MapEditor;
 
     /** 
      * Initialize before tests run
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws a filenotfoundexception
      */
     @BeforeClass
     public static void init() throws FileNotFoundException {

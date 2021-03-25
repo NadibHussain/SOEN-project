@@ -16,7 +16,10 @@ import java.util.List;
  * Is started when a valid map is loaded
  */
 public class StartupPhase extends GamePlayPhase {
-
+    /**
+     * StartupPhase
+     * @param p_GameEngine GE
+     */
     public StartupPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }

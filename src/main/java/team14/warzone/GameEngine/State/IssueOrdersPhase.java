@@ -12,8 +12,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * This is a class for IssueOrdersPhase
+ */
 public class IssueOrdersPhase extends GamePlayPhase {
-
+    /**
+     * IssueOrdersPhase
+     * @param p_GameEngine GE
+     */
     public IssueOrdersPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }

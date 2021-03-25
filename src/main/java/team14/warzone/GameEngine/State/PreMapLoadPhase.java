@@ -3,12 +3,21 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This is a class for PreMapLoad phase
+ */
 public class PreMapLoadPhase extends MapEditorPhase {
-
+    /**
+     * PreMapLoadPhase
+     * @param p_GameEngine GE
+     */
     public PreMapLoadPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 
+    /**
+     * Error loadmap first
+     */
     public void errorLoadMapFirst() {
         System.out.println("Error: load a map first by using <editmap> <filename>");
     }

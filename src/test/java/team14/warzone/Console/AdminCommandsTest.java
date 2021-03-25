@@ -14,7 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Tests for the Command class
  */
 public class AdminCommandsTest {
+    /**
+     * Static Options
+     */
     public static Option d_Options;
+    /**
+     * Static Admin Commands
+     */
     public static AdminCommands d_AdminCommands;
 
     /**

@@ -320,7 +320,8 @@ public class MapEditor {
     /**
      * Depth-first-search (dfs)
      * 
-     * @param p_CountryList
+     * @param p_CountryList list of countries
+     * @param p_typeOfGraph type of graph
      * @return true if dfs was successful
      */
     public boolean dfs(ArrayList<Country> p_CountryList, String p_typeOfGraph) {
@@ -371,7 +372,7 @@ public class MapEditor {
     /**
      * counts how many nodes were visited
      * 
-     * @param l_Visited
+     * @param l_Visited list of visited nodes
      * @return total nodes visited
      */
     private int visitedNodes(int[] l_Visited) {

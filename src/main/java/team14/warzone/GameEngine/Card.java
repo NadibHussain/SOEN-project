@@ -75,6 +75,10 @@ public class Card {
 
     }
 
+    /**
+     * Card constructor
+     * @param p_CardType type of card
+     */
     public Card(String p_CardType) {
         this.d_CardType = p_CardType;
     }

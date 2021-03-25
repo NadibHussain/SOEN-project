@@ -9,6 +9,9 @@ import org.junit.runners.Suite;
         InputValidatorTest.class
 })
 
+/**
+ * Test Suite for Console
+ */
 public class ConsoleTestSuite {
 //place holder
 

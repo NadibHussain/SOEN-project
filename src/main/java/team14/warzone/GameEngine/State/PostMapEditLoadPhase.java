@@ -3,8 +3,14 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This is a class for PostMapEditLoadPhase
+ */
 public class PostMapEditLoadPhase extends MapEditorPhase{
-
+    /**
+     * PostMapEditLoadPhase
+     * @param p_GameEngine GE
+     */
     public PostMapEditLoadPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }

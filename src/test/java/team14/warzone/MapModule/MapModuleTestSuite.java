@@ -9,6 +9,7 @@ import org.junit.runners.Suite;
         TestMap.class,
         TestMapEditor.class
 })
+
 public class MapModuleTestSuite {
 // place holder
 }

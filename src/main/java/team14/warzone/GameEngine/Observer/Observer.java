@@ -1,5 +1,8 @@
 package team14.warzone.GameEngine.Observer;
 
+/**
+ * Observer Interface
+ */
 public interface Observer {
 
     /**

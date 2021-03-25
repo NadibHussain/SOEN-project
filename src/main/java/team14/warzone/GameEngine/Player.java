@@ -59,12 +59,14 @@ public class Player {
     }
 
     /**
+     *
      * Constructor that takes all attributes as params
      *
      * @param d_Name                name of the player
      * @param d_TotalNumberOfArmies total number of armies
      * @param d_CountriesOwned      list of countries (Country objects) owned by the player
      * @param d_OrderList           list of orders the player has issued but has not executed yet
+     * @param p_GE                  game engine
      */
     public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
                   ArrayList<Order> d_OrderList, GameEngine p_GE) {
@@ -82,6 +84,7 @@ public class Player {
      * Constructor that accepts playername and sets the other attributes with default values
      *
      * @param p_Name name of the player
+     * @param p_GE gameengine
      */
     public Player(String p_Name, GameEngine p_GE) {
         this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
@@ -204,6 +207,11 @@ public class Player {
             this.d_CountriesOwned.remove(p_Country);
     }
 
+    /**
+     * Method to check player cards
+     * @param p_Card card
+     * @return true or false
+     */
     public boolean hasCard(Card p_Card) {
         for (Card l_Card : d_CardList) {
             if (l_Card.getD_CardType().equals(p_Card.getD_CardType()))
@@ -293,6 +301,10 @@ public class Player {
         d_CardList.add(card);
     }
 
+    /**
+     * Remove card method
+     * @param p_Card card
+     */
     public void removeCard(Card p_Card) {
         for (Card l_Card : getCardList()) {
             if (l_Card == p_Card) {
@@ -314,7 +326,7 @@ public class Player {
     /**
      * Getter for the number of armies ordered to be deployed field
      *
-     * @return
+     * @return returns ArmiesOrderedToBeDeployed
      */
     public int getD_ArmiesOrderedToBeDeployed() {
         return d_ArmiesOrderedToBeDeployed;
@@ -323,7 +335,7 @@ public class Player {
     /**
      * Increase the number of armies ordered to be deployed field
      *
-     * @param p_ArmiesOrderedToBeDeploy
+     * @param p_ArmiesOrderedToBeDeploy parameter ArmiesOrderedToBeDeployed
      */
     public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
         if (d_ArmiesOrderedToBeDeployed + p_ArmiesOrderedToBeDeploy > d_TotalNumberOfArmies)
@@ -335,7 +347,7 @@ public class Player {
     /**
      * Decrease the number of armies ordered to be deployed field
      *
-     * @param p_ArmiesOrderedToBeDeploy
+     * @param p_ArmiesOrderedToBeDeploy parameter ArmiesOrderedToBeDeployed
      */
     public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
         d_ArmiesOrderedToBeDeployed -= p_ArmiesOrderedToBeDeploy;
@@ -354,7 +366,7 @@ public class Player {
     /**
      * Remove diplomatic player from list
      *
-     * @param p_Player
+     * @param p_Player player which has to be removed
      */
     public void removeDiplomaticPlayer(Player p_Player) {
         this.d_DiplomaticPlayers.remove(p_Player);
@@ -372,8 +384,8 @@ public class Player {
     /**
      * Checks if the players are in diplomatic relation
      *
-     * @param p_CurrentPlayer
-     * @param p_TargetPlayer
+     * @param p_CurrentPlayer the current player
+     * @param p_TargetPlayer the target player
      * @return true if either of them have used diplomacy card on each other
      */
     public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer) {
