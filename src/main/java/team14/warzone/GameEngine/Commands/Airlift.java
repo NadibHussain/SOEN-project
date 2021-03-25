@@ -7,6 +7,11 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create airlift order
+ *
+ * @author zeina
+ */
 public class Airlift extends Order {
     /**
      * A field to store source country name
@@ -72,6 +77,7 @@ public class Airlift extends Order {
                 l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() + d_NumberOfArmies);
                 // decrease armies in source country
                 l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
+                l_CurrentPlayer.removeCard(new Card("airlift"));
                 Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " airlifted " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
                 d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " airlifted " + d_NumberOfArmies + " armies" +

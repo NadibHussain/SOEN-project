@@ -10,6 +10,9 @@ import team14.warzone.MapModule.MapEditor;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests reinforcement in IssueOrderPhase class
+ */
 public class IssueOrdersPhaseTest {
     /**
      * console field

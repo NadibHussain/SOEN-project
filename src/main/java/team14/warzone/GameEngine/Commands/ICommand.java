@@ -7,5 +7,5 @@ public interface ICommand {
     /**
      * Method to execute the command
      */
-    public void execute() throws Exception;
+    void execute() throws Exception;
 }

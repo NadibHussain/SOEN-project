@@ -8,10 +8,14 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class tests the blockade order
+ */
 public class BlockadeTest {
     /**
      * console field
@@ -59,13 +63,18 @@ public class BlockadeTest {
     @Test
     @DisplayName("Testing blockade order")
     public void executeTest() {
+        Map l_Map = d_GE.getD_LoadedMap();
         int l_ArmiesDestCountryBefore = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
+        Player l_PrevOwner = d_GE.findPlayer(d_GE.getD_LoadedMap().findCountry("s1").getD_CurrentOwner());
         try {
             Blockade l_Blockade = new Blockade("s1", d_GE);
             l_Blockade.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        assertEquals("s2", l_Map.findCountry("s2").getD_CountryID());
+        Player l_CurrOwner = d_GE.findPlayer(d_GE.getD_LoadedMap().findCountry("s1").getD_CurrentOwner());
+        assertNotEquals(l_CurrOwner, l_PrevOwner);
         int l_ArmiesDestCountryAfter = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
         org.junit.Assert.assertEquals((l_ArmiesDestCountryBefore * 3), l_ArmiesDestCountryAfter);
         org.junit.Assert.assertTrue(d_GE.getD_LoadedMap().findCountry("s1").getD_CurrentOwner().equals("Neutral"));

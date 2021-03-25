@@ -10,6 +10,9 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * This class tests the negotiate order
+ */
 public class DiplomacyTest {
     /**
      * console field
@@ -58,8 +61,9 @@ public class DiplomacyTest {
         try {
             Diplomacy l_Diplomacy = new Diplomacy("p2", d_GE);
             d_GE.allotCard(d_GE.getD_CurrentPlayer());
+            boolean l_HasCard = d_GE.getD_CurrentPlayer().hasCard(new Card("diplomacy"));
+            assert l_HasCard == true;
             System.out.println(d_GE.getD_CurrentPlayer().getCardList().get(0).getD_CardType());
-            org.junit.Assert.assertTrue( d_GE.findPlayer(d_GE.getD_CurrentPlayer().getD_Name()).getCardList().get(0).getD_CardType() == "diplomacy");
             l_Diplomacy.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
