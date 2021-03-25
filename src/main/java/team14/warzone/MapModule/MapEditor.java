@@ -53,66 +53,16 @@ public class MapEditor {
         Scanner l_ReaderObject = new Scanner(l_FileObject);
         while (l_ReaderObject.hasNextLine()) {
             String l_Data = l_ReaderObject.nextLine();
-            if (l_Data.equals("[countries]")) {
-                while (true) {
-                    String l_Line = l_ReaderObject.nextLine();
-                    if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
-                        continue;
-                    }
-                    ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
-                    if (l_Line.equals("")) {
-                        break;
-                    } else {
-                        String[] l_CountryArray = l_Line.split(" ");
-                        String l_ContinentName = "";
-                        for (Continent l_Conrinent : l_ContinentList) {
-                            if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
-                                l_ContinentName = l_Conrinent.getD_ContinentID();
-                                break;
-                            }
-                        }
-                        l_Map.addCountry(l_CountryArray[1], l_ContinentName);
-                    }
-                }
-            } else if (l_Data.equals("[continents]")) {
-                while (true) {
-                    String l_Line = l_ReaderObject.nextLine();
-                    if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
-                        continue;
-                    }
-                    if (l_Line.equals("")) {
-                        break;
-                    } else {
-                        String[] l_ContinentArray = l_Line.split(" ");
-                        l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
-                    }
-                }
-
-            } else if (l_Data.equals("[borders]")) {
-                ArrayList<Country> l_Countires = l_Map.getD_Countries();
-                int l_Index = 0;
-                while (l_ReaderObject.hasNextLine()) {
-                    String l_Line = l_ReaderObject.nextLine();
-                    if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
-                        continue;
-                    }
-                    if (l_Line.equals("")) {
-                        break;
-                    } else {
-                        String[] l_NeighbourArray = l_Line.split(" ");
-                        ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
-                        for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
-                            for (int l_CountryIndex = 0; l_CountryIndex < l_Countires.size(); l_CountryIndex++) {
-                                if (l_Countires.get(l_CountryIndex).getD_CountryIntID() == Integer
-                                        .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
-                                    l_NeighbourIDArray.add(l_Countires.get(l_CountryIndex));
-                                }
-                            }
-                        }
-                        l_Countires.get(l_Index).setD_Neighbours(l_NeighbourIDArray);
-                        l_Index++;
-                    }
-                }
+            switch (l_Data) {
+                case "[countries]":
+                    handleCountries(l_ReaderObject, l_Map);
+                    break;
+                case "[continents]":
+                    handleContinents(l_ReaderObject,l_Map);
+                    break;
+                case "[borders]":
+                    handleNeighbour(l_ReaderObject,l_Map);
+                    break;
             }
 
         }
@@ -120,6 +70,78 @@ public class MapEditor {
 
         this.d_LoadedMap = l_Map;
 
+    }
+    /**
+     * sub section of load map to hanlde countries
+     */
+    private void handleCountries(Scanner l_ReaderObject,Map l_Map){
+        while (true) {
+            String l_Line = l_ReaderObject.nextLine();
+            if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
+                continue;
+            }
+            ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
+            if (l_Line.equals("")) {
+                break;
+            } else {
+                String[] l_CountryArray = l_Line.split(" ");
+                String l_ContinentName = "";
+                for (Continent l_Conrinent : l_ContinentList) {
+                    if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
+                        l_ContinentName = l_Conrinent.getD_ContinentID();
+                        break;
+                    }
+                }
+                l_Map.addCountry(l_CountryArray[1], l_ContinentName);
+            }
+        }
+    }
+
+    /**
+     * sub section of load map to hanlde Continents
+     */
+    private void handleContinents(Scanner l_ReaderObject,Map l_Map){
+        while (true) {
+            String l_Line = l_ReaderObject.nextLine();
+            if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
+                continue;
+            }
+            if (l_Line.equals("")) {
+                break;
+            } else {
+                String[] l_ContinentArray = l_Line.split(" ");
+                l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
+            }
+        }
+    }
+    /**
+     * sub section of load map to hanlde Neighbour
+     */
+    private void handleNeighbour(Scanner l_ReaderObject,Map l_Map){
+        ArrayList<Country> l_Countires = l_Map.getD_Countries();
+        int l_Index = 0;
+        while (l_ReaderObject.hasNextLine()) {
+            String l_Line = l_ReaderObject.nextLine();
+            if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
+                continue;
+            }
+            if (l_Line.equals("")) {
+                break;
+            } else {
+                String[] l_NeighbourArray = l_Line.split(" ");
+                ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
+                for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
+                    for (int l_CountryIndex = 0; l_CountryIndex < l_Countires.size(); l_CountryIndex++) {
+                        if (l_Countires.get(l_CountryIndex).getD_CountryIntID() == Integer
+                                .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
+                            l_NeighbourIDArray.add(l_Countires.get(l_CountryIndex));
+                        }
+                    }
+                }
+                l_Countires.get(l_Index).setD_Neighbours(l_NeighbourIDArray);
+                l_Index++;
+            }
+        }
     }
 
     /**
