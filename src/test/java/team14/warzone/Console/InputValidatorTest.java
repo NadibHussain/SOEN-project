@@ -69,6 +69,7 @@ public class InputValidatorTest {
      */
     @Test
     public void validateInput() {
+        InputValidator.CURRENT_PHASE = InputValidator.Phase.MAPEDITOR;
         boolean l_IsValid = InputValidator.validateInput(d_CommandName, d_OptionName, d_Arguments);
         assertTrue(l_IsValid);
     }
