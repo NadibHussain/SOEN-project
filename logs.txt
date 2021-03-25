@@ -81,3 +81,7 @@ Opened map editor for: tm2.map
 Added Country:canada
 Added Country:sc23
 Saved map:tm2.map
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
