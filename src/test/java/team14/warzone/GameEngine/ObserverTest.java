@@ -31,9 +31,9 @@ public class ObserverTest {
     public void observerAttachTest() {
         LogerOberver l_LogerObserver = new LogerOberver();
         LogEntryBuffer l_LogBufferEnrty = new LogEntryBuffer();
-        int l_PreviousCount = l_LogBufferEnrty.getD_observers().size();
+        int l_PreviousCount = l_LogBufferEnrty.getD_ObserverList().size();
         l_LogBufferEnrty.attach(l_LogerObserver);
-        int l_NewCount = l_LogBufferEnrty.getD_observers().size();
+        int l_NewCount = l_LogBufferEnrty.getD_ObserverList().size();
         assertEquals(l_NewCount,l_PreviousCount+1);
 
 
@@ -47,9 +47,9 @@ public class ObserverTest {
         LogerOberver l_LogerObserver = new LogerOberver();
         LogEntryBuffer l_LogBufferEnrty = new LogEntryBuffer();
         l_LogBufferEnrty.attach(l_LogerObserver);
-        int l_PreviousCount = l_LogBufferEnrty.getD_observers().size();
+        int l_PreviousCount = l_LogBufferEnrty.getD_ObserverList().size();
         l_LogBufferEnrty.detach(l_LogerObserver);
-        int l_NewCount = l_LogBufferEnrty.getD_observers().size();
+        int l_NewCount = l_LogBufferEnrty.getD_ObserverList().size();
         assertEquals(l_NewCount,l_PreviousCount-1);
 
 
