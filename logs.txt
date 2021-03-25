@@ -1,0 +1,306 @@
+Warzone game has started
+
+Warzone game has started
+Success: map loaded and validated map:europass.map
+Success: p1 has conquered b7, moving 6 to b7, 6 : 4
+Warzone game has started
+Warzone game has started
+Warzone game has started
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p2 deployed 30 armies in s2
+p2 deployed 20 armies in s2
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+Warzone game has started
+Warzone game has started
+Opened map editor for:tm2.map
+Warzone game has started
+Opened map editor for: tm2.map
+Added Country:canada
+Added Country:sc23
+Saved map:tm2.map
+Success: p1 has conquered b7, moving 6 to b7, 10 : 4
+Warzone game has started
+Opened map editor for: tm2.map
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p2 deployed 30 armies in s2
+p2 deployed 20 armies in s2
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+Warzone game has started
+Opened map editor for: testmap.map
+Warzone game has started
+Opened map editor for: tstmap.map
+Warzone game has started
+Opened map editor for: tstmap.map
+Added Continent:na
+Added Continent:sa
+Added Country:canada
+Added Country:usa
+Added Country:mexico
+Added Country:columbia
+Madecanadaand usa neighbours
+Madeusaand mexico neighbours
+Mademexicoand columbia neighbours
+Validate map:team14.warzone.MapModule.Map@5ce65a89
+Saved map:tstmap.map
+Edit map:tstmap.map
+Madeusaand canada neighbours
+Madecolumbiaand mexico neighbours
+Mademexicoand usa neighbours
+Saved map:tstmap.map
+Madecanadaand mexico neighbours
+Madecolumbiaand usa neighbours
+Validate map:team14.warzone.MapModule.Map@2328c243
+Saved map:tstmap.map
+Success: map loaded and validated map:tstmap.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 1 armies in canada
+p2 deployed 1 armies in usa
+p1 deployed 22 armies in mexico
+p2 deployed 22 armies in columbia
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 6 armies in mexico
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p2 issued deploy command
+p1 issued advance command
+p1 deployed 3 armies in mexico
+Success: p1 has conquered usa, moving 7 to usa, 5 : 1
+Success: p1 has lost the battle, 0 : 14
+p1 gets 8armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p2 issued deploy command
+p1 issued advance command
+p1 issued deploy command
+p1 deployed 3 armies in mexico
+Success: p1 advanced 6 armies from usa to mexico
+Success: p1 has lost the battle, 0 : 6
+p1 deployed 5 armies in mexico
+p1 gets 8armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 8 armies in mexico
+p1 gets 8armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p2 issued deploy command
+p1 deployed 8 armies in mexico
+p1 gets 8armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p1 deployed 8 armies in mexico
+Success: p1 has conquered columbia, moving 22 to columbia, 18 : 10
+Warzone game has started
+Warzone game has started
+Opened map editor for: tstmap.map
+Added Continent:na
+Added Continent:sa
+Added Country:canada
+Added Country:usa
+Added Country:mexico
+Added Country:columbia
+Madecanadaand usa neighbours
+Madeusaand mexico neighbours
+Mademexicoand columbia neighbours
+Validate map:team14.warzone.MapModule.Map@32709393
+Saved map:tstmap.map
+Madecanadaand columbia neighbours
+Validate map:team14.warzone.MapModule.Map@32709393
+Saved map:tstmap.map
+Edit map:tstmap.map
+Validate map:team14.warzone.MapModule.Map@7d0587f1
+Warzone game has started
+Opened map editor for: tstmap.map
+Warzone game has started
+Opened map editor for: tstmap.map
+Added Continent:na
+Added Continent:sa
+Added Country:canada
+Added Country:usa
+Added Country:mexico
+Added Country:columbia
+Madecanadaand usa neighbours
+Madeusaand mexico neighbours
+Mademexicoand columbia neighbours
+Madecanadaand mexico neighbours
+Madecolumbiaand usa neighbours
+Validate map:team14.warzone.MapModule.Map@25f38edc
+Saved map:tstmap.map
+Edit map:tstmap.map
+Validate map:team14.warzone.MapModule.Map@45ff54e6
+Success: map loaded and validated map:tstmap.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued deploy command
+p1 deployed 20 armies in canada
+p2 deployed 23 armies in columbia
+p1 deployed 3 armies in mexico
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p1 deployed 3 armies in mexico
+p2 deployed 3 armies in columbia
+Success: p1 advanced 10 armies from canada to mexico
+Success: p1 has conquered mexico, moving 10 to mexico, 5 : 0
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+Warzone game has started
+Warzone game has started
+Success: map loaded and validated map:tstmap.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued deploy command
+p1 deployed 20 armies in canada
+p2 deployed 23 armies in columbia
+p1 deployed 3 armies in mexico
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p1 deployed 3 armies in mexico
+p2 deployed 3 armies in columbia
+Warzone game has started
+Success: map loaded and validated map:tstmap.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued deploy command
+p1 deployed 20 armies in canada
+p2 deployed 23 armies in columbia
+p1 deployed 3 armies in mexico
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p1 deployed 3 armies in mexico
+p2 deployed 3 armies in columbia
+Success: p1 advanced 10 armies from canada to mexico
+p1 gets 3armies as reinforcement
+p2 gets 3armies as reinforcement

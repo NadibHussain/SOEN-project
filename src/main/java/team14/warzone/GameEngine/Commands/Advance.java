@@ -73,64 +73,73 @@ public class Advance extends Order {
             // check if destination country is owned by the current player, then move armies to the destination country
             if (l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
                 // increase armies in source country
-                l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() - d_NumberOfArmies);
+                l_CountryTo.setD_NumberOfArmies(l_CountryTo.getD_NumberOfArmies() + d_NumberOfArmies);
                 // decrease armies in destination country
-                l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + d_NumberOfArmies);
-                Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
+                l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
+                Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " " +
+                        "armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
                 d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " advanced " + d_NumberOfArmies + " armies" +
                         " from " + d_CountryNameFrom + " to " + d_CountryNameTo);
                 d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-            }
-            //check if the enemy is a diplomatic ally then current player can not attack his ally
-            if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
-                throw new Exception("Cannot attack a diplomatic ally's country");
-            }
-            // perform battle
-            else {
-                l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
-                int l_SuccessAttack = 0;
-                int l_SuccessDefend = 0;
-                //calculate number of attacks succeeded
-                for (int l_Index = 0; l_Index < d_NumberOfArmies; l_Index++) {
-                    int l_Random = (int) (Math.random() * 100);
-                    if (l_Random <= 60)
-                        l_SuccessAttack++;
+            } else {
+                //check if the enemy is a diplomatic ally then current player can not attack his ally
+                if (l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer,
+                        d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))) {
+                    throw new Exception("Cannot attack a diplomatic ally's country");
                 }
-                //calculate number of defends succeeded
-                for (int l_Index = 0; l_Index < l_CountryTo.getD_NumberOfArmies(); l_Index++) {
-                    int l_Random = (int) (Math.random() * 100);
-                    if (l_Random <= 70)
-                        l_SuccessDefend++;
-                }
-                int l_DefenderArmiesSurvived = l_SuccessAttack >= l_CountryTo.getD_NumberOfArmies() ? 0 : l_CountryTo.getD_NumberOfArmies() - l_SuccessAttack;
-                int l_AttackerArmiesSurvived = l_SuccessDefend >= d_NumberOfArmies ? 0 : d_NumberOfArmies - l_SuccessDefend;
+                // perform battle
+                else {
+                    l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() - d_NumberOfArmies);
+                    int l_SuccessAttack = 0;
+                    int l_SuccessDefend = 0;
+                    //calculate number of attacks succeeded
+                    for (int l_Index = 0; l_Index < d_NumberOfArmies; l_Index++) {
+                        int l_Random = (int) (Math.random() * 100);
+                        if (l_Random <= 60)
+                            l_SuccessAttack++;
+                    }
+                    //calculate number of defends succeeded
+                    for (int l_Index = 0; l_Index < l_CountryTo.getD_NumberOfArmies(); l_Index++) {
+                        int l_Random = (int) (Math.random() * 100);
+                        if (l_Random <= 70)
+                            l_SuccessDefend++;
+                    }
+                    int l_DefenderArmiesSurvived = l_SuccessAttack >= l_CountryTo.getD_NumberOfArmies() ? 0 :
+                            l_CountryTo.getD_NumberOfArmies() - l_SuccessAttack;
+                    int l_AttackerArmiesSurvived = l_SuccessDefend >= d_NumberOfArmies ? 0 :
+                            d_NumberOfArmies - l_SuccessDefend;
 
-                //check if attacker was able to kill all armies in destination country and that he has armies survived
-                // the battle
-                if (l_DefenderArmiesSurvived == 0 && l_AttackerArmiesSurvived != 0) {
-                    l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
-                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
-                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo +
-                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
-                    //change the owner of the destination country, add the destination country to current player country list
-                    // and remove it from the old owner list
-                    l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
-                    d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
-                    l_CurrentPlayer.addCountryOwned(l_CountryTo);
-                    // log
-                    d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
-                            + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
-                    d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-                } else {
-                    l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
-                    l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
-                    Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle" +
-                            "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
-                    // log
-                    d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle, " +
-                            l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
-                    d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+                    //check if attacker was able to kill all armies in destination country and that he has armies
+                    // survived
+                    // the battle
+                    if (l_DefenderArmiesSurvived == 0 && l_AttackerArmiesSurvived != 0) {
+                        l_CountryTo.setD_NumberOfArmies(l_AttackerArmiesSurvived);
+                        Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
+                                + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo +
+                                "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
+                        //change the owner of the destination country, add the destination country to current player
+                        // country list
+                        // and remove it from the old owner list
+                        l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
+                        d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
+                        l_CurrentPlayer.addCountryOwned(l_CountryTo);
+                        // log
+                        d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has" +
+                                " conquered " + d_CountryNameTo
+                                + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+                    } else {
+                        l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);
+                        l_CountryFrom.setD_NumberOfArmies(l_CountryFrom.getD_NumberOfArmies() + l_AttackerArmiesSurvived);
+                        Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " has lost the battle" +
+                                "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
+                        // log
+                        d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has" +
+                                " lost the battle, " +
+                                l_AttackerArmiesSurvived + " : " + l_DefenderArmiesSurvived);
+                        d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+                    }
                 }
             }
         }
