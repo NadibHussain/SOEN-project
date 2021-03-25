@@ -14,24 +14,24 @@ public class Card {
     /**
      * BOMB type card
      */
-    private String BOMB = "bomb";
+    private String d_Bomb = "bomb";
     /**
      * BLOCKADE type card
      */
-    private String BLOCKADE = "blockade";
+    private String d_Blockade = "blockade";
     /**
      * AIRLIFT type card
      */
-    private String AIRLIFT = "airlift";
+    private String d_Airlift = "airlift";
     /**
      * DIPLOMACY type card
      */
-    private String DIPLOMACY = "diplomacy";
+    private String d_Diplomacy = "diplomacy";
 
     /**
      * String type array storing types of cards
      */
-    public String TYPES[] = {BOMB, BLOCKADE, AIRLIFT, DIPLOMACY};
+    public String TYPES[] = {d_Bomb, d_Blockade, d_Airlift, d_Diplomacy};
 
 
     /**

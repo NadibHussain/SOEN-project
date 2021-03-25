@@ -47,6 +47,10 @@ public class Player {
      * list of diplomatic players
      */
     private ArrayList<Player> d_DiplomaticPlayers = new ArrayList<>();
+    /**
+     * Flag to keep track whether player has received card during turn
+     */
+    private boolean d_CardReceived;
 
     /**
      * Default constructor that takes no params
@@ -71,6 +75,7 @@ public class Player {
         d_GE = p_GE;
         d_ArmiesOrderedToBeDeployed = 0;
         d_CardList = new ArrayList<>();
+        d_CardReceived = false;
     }
 
     /**
@@ -183,8 +188,10 @@ public class Player {
      */
     public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
-        if (d_GE.getD_CurrentPhase().equals(d_GE.getD_ExecuteOrdersPhase()))
+        if (d_GE.getD_CurrentPhase().equals(d_GE.getD_ExecuteOrdersPhase()) && !d_CardReceived) {
             d_GE.allotCard(this);
+            d_CardReceived = true;
+        }
     }
 
     /**
@@ -287,8 +294,8 @@ public class Player {
     }
 
     public void removeCard(Card p_Card) {
-        for(Card l_Card : getCardList() ){
-            if(l_Card == p_Card){
+        for (Card l_Card : getCardList()) {
+            if (l_Card == p_Card) {
                 getCardList().remove(p_Card);
                 break;
             }
@@ -319,7 +326,10 @@ public class Player {
      * @param p_ArmiesOrderedToBeDeploy
      */
     public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
-        d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
+        if (d_ArmiesOrderedToBeDeployed + p_ArmiesOrderedToBeDeploy > d_TotalNumberOfArmies)
+            d_ArmiesOrderedToBeDeployed = d_TotalNumberOfArmies;
+        else
+            d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
     }
 
     /**
@@ -371,5 +381,12 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Method resets the card received flag to false at end of turn
+     */
+    public void resetCardReceivedFlag() {
+        d_CardReceived = false;
     }
 }

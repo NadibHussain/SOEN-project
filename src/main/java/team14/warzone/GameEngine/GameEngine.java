@@ -11,7 +11,6 @@ import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -147,28 +146,6 @@ public class GameEngine {
         d_CurrentPhase = p_GameEngine.d_CurrentPhase;
 
         d_LoadedMap = p_GameEngine.d_LoadedMap;
-    }
-
-
-    /**
-     * Method loads a map from a dominion map file
-     *
-     * @param p_FileName file name to be loaded
-     */
-    public void loadMap(String p_FileName) {
-        try {
-            d_MapEditor.loadMap(p_FileName);
-            this.d_LoadedMap = d_MapEditor.getD_LoadedMap();
-            // validate map right after loading
-            if (!d_MapEditor.validateMap(d_LoadedMap))
-                System.out.println("Error: map validation failed, not loaded");
-            else {
-                System.out.println("Success: map loaded and validated");
-                InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: invalid filename");
-        }
     }
 
     /**
