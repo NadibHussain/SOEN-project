@@ -1,13 +1,11 @@
 package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
-import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
 import team14.warzone.GameEngine.State.*;
-import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
@@ -149,69 +147,6 @@ public class GameEngine {
     }
 
     /**
-     * Assign Countries method
-     */
-    public void assignCountries() {
-        ArrayList<Country> l_Countries = d_LoadedMap.getD_Countries();
-        //if number of players between 2 and 5, assign countries to players randomly
-        if (d_PlayerList.size() >= 2 && d_PlayerList.size() <= 5) {
-            int l_CountryCounter = 0;
-            while (l_CountryCounter < l_Countries.size()) {
-                for (int l_PlayerIterator = 0; l_PlayerIterator < d_PlayerList.size() && l_CountryCounter < l_Countries.size(); l_PlayerIterator++) {
-                    // add country to player's country-list
-                    d_PlayerList.get(l_PlayerIterator).addCountryOwned(l_Countries.get(l_CountryCounter));
-                    // set country's current owner to player
-                    l_Countries.get(l_CountryCounter).setD_CurrentOwner(d_PlayerList.get(l_PlayerIterator).getD_Name());
-                    l_CountryCounter++;
-                }
-            }
-            Console.displayMsg("Success: countries assigned");
-            // change phase to game play
-            InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
-        } else {
-            Console.displayMsg("Failed: 2-5 players required");
-        }
-    }
-
-    /**
-     * Method adds players to the player list
-     *
-     * @param p_PlayerName String name of the player
-     */
-    public void addPlayer(String p_PlayerName) {
-        if (d_PlayerList.size() == 5)
-            Console.displayMsg("You can not addd more than 5 players");
-        else if (d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName)))
-            Console.displayMsg("Player already exists!");
-        else {
-            Player l_LocalPlayer = new Player(p_PlayerName, this);
-            d_PlayerList.add(l_LocalPlayer);
-            Console.displayMsg("Player added: " + p_PlayerName);
-        }
-    }
-
-    /**
-     * Method remove a player from the player list
-     *
-     * @param p_PlayerName String name of the player
-     */
-    public void removePlayer(String p_PlayerName) {
-        if (d_PlayerList.isEmpty())
-            Console.displayMsg("You can not remove a player, player list is empty!");
-        else if (!d_PlayerList.stream().anyMatch(o -> o.getD_Name().equals(p_PlayerName))) {
-            Console.displayMsg("Player " + p_PlayerName + " does not exist!");
-        } else {
-            Player l_PlayerToRemove = new Player();
-            for (Player l_Player : d_PlayerList) {
-                if (l_Player.getD_Name().equals(p_PlayerName))
-                    l_PlayerToRemove = l_Player;
-            }
-            d_PlayerList.remove(l_PlayerToRemove);
-            Console.displayMsg("Player removed: " + p_PlayerName);
-        }
-    }
-
-    /**
      * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
@@ -248,6 +183,7 @@ public class GameEngine {
 
     /**
      * Getter for Map editor field
+     *
      * @return Object of type Map Editor
      */
     public MapEditor getD_MapEditor() {
@@ -281,6 +217,7 @@ public class GameEngine {
 
     /**
      * Setter for player list
+     *
      * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
@@ -298,6 +235,7 @@ public class GameEngine {
 
     /**
      * Getter for current phase
+     *
      * @return current phase object
      */
     public Phase getD_CurrentPhase() {
@@ -306,6 +244,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return phase
      */
     public Phase getD_PreMapLoadPhase() {
@@ -314,6 +253,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return phase object
      */
     public Phase getD_PostMapEditLoadPhase() {
@@ -322,6 +262,7 @@ public class GameEngine {
 
     /**
      * Setter
+     *
      * @param p_CurrentPhase phase object
      */
     public void setD_CurrentPhase(Phase p_CurrentPhase) {
@@ -330,6 +271,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return phase object
      */
     public Phase getD_StartupPhase() {
@@ -338,6 +280,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return phase object
      */
     public Phase getD_IssueOrdersPhase() {
@@ -345,7 +288,6 @@ public class GameEngine {
     }
 
     /**
-     *
      * @return
      */
     public Phase getD_ExecuteOrdersPhase() {
@@ -354,6 +296,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return returns unexecuted commands stored in buffer
      */
     public ArrayList<AdminCommands> getD_CommandBuffer() {

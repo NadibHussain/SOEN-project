@@ -133,3 +133,12 @@ p1 issued deploy command
 p2 issued deploy command
 p1 gets 30 armies as reinforcement
 p2 gets 30 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
