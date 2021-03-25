@@ -73,6 +73,8 @@ public class MapEditor {
     }
     /**
      * sub section of load map to hanlde countries
+     * @param  l_ReaderObject to read the text from the file
+     * @param l_Map the map which needs to be edited
      */
     private void handleCountries(Scanner l_ReaderObject,Map l_Map){
         while (true) {
@@ -99,6 +101,8 @@ public class MapEditor {
 
     /**
      * sub section of load map to hanlde Continents
+     * @param  l_ReaderObject to read the text from the file
+     * @param l_Map the map which needs to be edited
      */
     private void handleContinents(Scanner l_ReaderObject,Map l_Map){
         while (true) {
@@ -116,6 +120,8 @@ public class MapEditor {
     }
     /**
      * sub section of load map to hanlde Neighbour
+     * @param  l_ReaderObject to read the text from the file
+     * @param l_Map the map which needs to be edited
      */
     private void handleNeighbour(Scanner l_ReaderObject,Map l_Map){
         ArrayList<Country> l_Countires = l_Map.getD_Countries();
@@ -150,15 +156,15 @@ public class MapEditor {
      * @param p_FileName String filename
      */
     public void saveMap(String p_FileName) {
-        String l_Content = "This map was created from a SOEN-6441 Project \n \n";
+        StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
         // writing all the continents
-        l_Content += "[continents]\n";
+        l_Content.append("[continents]\n");
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-            l_Content += l_Continent.getD_ContinentID() + " " + l_Continent.getD_ControlValue() + "\n";
+            l_Content.append(l_Continent.getD_ContinentID()).append(" ").append(l_Continent.getD_ControlValue()).append("\n");
         }
 
         // writing all the countries
-        l_Content += "\n[countries]\n";
+        l_Content.append("\n[countries]\n");
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
             int l_ContinentIntId = -1;
             for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
@@ -166,23 +172,22 @@ public class MapEditor {
                     l_ContinentIntId = l_Continent.getD_ContinentIntID();
                 }
             }
-            l_Content += l_Country.getD_CountryIntID() + " " + l_Country.getD_CountryID() + " " + l_ContinentIntId
-                    + "\n";
+            l_Content.append(l_Country.getD_CountryIntID()).append(" ").append(l_Country.getD_CountryID()).append(" ").append(l_ContinentIntId).append("\n");
         }
 
         // writing all the borders
-        l_Content += "\n[borders]\n";
+        l_Content.append("\n[borders]\n");
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
-            l_Content += l_Country.getD_CountryIntID() + " ";
+            l_Content.append(l_Country.getD_CountryIntID()).append(" ");
             for (Country l_Neighbour : l_Country.getD_Neighbours()) {
-                l_Content += l_Neighbour.getD_CountryIntID() + " ";
+                l_Content.append(l_Neighbour.getD_CountryIntID()).append(" ");
             }
-            l_Content += "\n";
+            l_Content.append("\n");
         }
 
         try {
             FileWriter l_Writer = new FileWriter(p_FileName);
-            l_Writer.write(l_Content);
+            l_Writer.write(l_Content.toString());
             l_Writer.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException l_IOException) {
