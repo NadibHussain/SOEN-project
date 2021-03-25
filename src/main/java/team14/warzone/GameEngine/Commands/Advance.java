@@ -130,9 +130,9 @@ public class Advance extends Order {
                         d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
                         l_CurrentPlayer.addCountryOwned(l_CountryTo);
                         // log
-                        d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has" +
-                                " conquered " + d_CountryNameTo
-                                + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo + ", " + l_SuccessAttack + " : " + l_SuccessDefend);
+                        d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
+                                + ", moving " + l_AttackerArmiesSurvived + " to " + d_CountryNameTo +
+                                "\nbattle result: attacker: " + l_AttackerArmiesSurvived + ", defender: " + l_DefenderArmiesSurvived);
                         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
                     } else {
                         l_CountryTo.setD_NumberOfArmies(l_DefenderArmiesSurvived);

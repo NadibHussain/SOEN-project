@@ -23,9 +23,10 @@ public class Deploy extends Order {
 
     /**
      * Class constructor
-     * @param p_TargetCountry destination country
+     *
+     * @param p_TargetCountry  destination country
      * @param p_NumberOfArmies number of armies to be deployed
-     * @param p_GameEngine an instance of game engine class
+     * @param p_GameEngine     an instance of game engine class
      */
     public Deploy(String p_TargetCountry, int p_NumberOfArmies, GameEngine p_GameEngine) {
         this.d_TargetCountry = p_TargetCountry;
