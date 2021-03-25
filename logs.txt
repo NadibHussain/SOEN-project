@@ -1,0 +1,144 @@
+Warzone game has started
+
+Warzone game has started
+Success: map loaded and validated map:europass.map
+Success: p1 has conquered b7, moving 6 to b7, 6 : 4
+Warzone game has started
+Warzone game has started
+Warzone game has started
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s1
+p2 deployed 30 armies in s2
+p2 deployed 20 armies in s2
+p1 gets 30armies as reinforcement
+p2 gets 30armies as reinforcement
+Warzone game has started
+Warzone game has started
+Opened map editor for:tm2.map
+Warzone game has started
+Opened map editor for: tm2.map
+Added Country:canada
+Added Country:sc23
+Saved map:tm2.map
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+p1 has bombeds2
+Success: p1 airlifted 10 armies from s1 to s3
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 50 armies in s3
+p2 deployed 50 armies in s8
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 deployed 30 armies in s1
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 issued advance command
+p1 issued advance command
+p1 deployed 30 armies in s7
+p2 deployed 60 armies in sp1
+Success: p1 has conquered s2, moving 10 to s2
+battle result: attacker: 10, defender: 0
+Success: p1 has conquered s4, moving 20 to s4
+battle result: attacker: 20, defender: 0
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement

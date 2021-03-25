@@ -186,77 +186,119 @@ public class MapEditor {
         boolean l_ConnectedGraph = false;
         boolean l_HasContinent = false;
 
-        Stack<Integer> l_StackNodes = new Stack<Integer>();
-        Stack<String> l_StackContinents = new Stack<String>();
-
-        // executing bfs on countries list and stacking connected nodes/country;
-
-        for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size(); l_CountryIndex++) {
-            for (int l_NeighbourIndex = 0; l_Countries.get(l_CountryIndex).getD_Neighbours()
-                    .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-                if (!(l_StackNodes.contains(
-                        l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
-                    l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-                            .getD_CountryIntID());
-
-            }
-            // stacking continent names for each country; used for later
-            if (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID()))) {
-                l_StackContinents.push(l_Countries.get(l_CountryIndex).getD_CountryContinentID());
-            }
-
-            // checking if current country has continent
-            if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
-                System.out.println(l_Countries.get(l_CountryIndex).getD_CountryID()
-                        + " country does not belong to any continent.");
-                return false;
-            } else {
-                l_HasContinent = true;
-            }
-
-        }
-
+        l_ConnectedGraph = dfs(l_Countries, "graph");
         // checking if map is connected
-        if (l_StackNodes.size() == l_Countries.size())
-            l_ConnectedGraph = true;
+        if (l_ConnectedGraph == true)
+            System.out.println(l_ConnectedGraph+" The map is connected.");
+
         else {
             System.out.println("The map is not connected.");
         }
 
+        // executing bfs on countries list and stacking connected nodes/country;
+
+        // for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size();
+        // l_CountryIndex++) {
+        // for (int l_NeighbourIndex = 0;
+        // l_Countries.get(l_CountryIndex).getD_Neighbours()
+        // .size() > l_NeighbourIndex; l_NeighbourIndex++) {
+        // if (!(l_StackNodes.contains(
+        // l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
+        // l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
+        // .getD_CountryIntID());
+
+        // }
+        // // stacking continent names for each country; used for later
+        // if
+        // (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID())))
+        // {
+        // l_StackContinents.push(l_Countries.get(l_CountryIndex).getD_CountryContinentID());
+        // }
+
+        // // checking if current country has continent
+        // if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
+        // System.out.println(l_Countries.get(l_CountryIndex).getD_CountryID()
+        // + " country does not belong to any continent.");
+        // return false;
+        // } else {
+        // l_HasContinent = true;
+        // }
+
+        // }
+
         // checking if all continent has at least one country
-        if (l_StackContinents.size() != l_Continents.size()) {
+        // ArrayList<Continent> l_ContinentCountry = new ArrayList<>();
+        // for(int l_Index =0; l_Index<l_Countries.size(); l_Index++){
+
+        // }
+        // if (l_StackContinents.size() != l_Continents.size()) {
+        // System.out.println("A continent without a country found.");
+        // return false;
+        // }
+
+        // checking if all country has a continent
+        ArrayList<String> l_CountryContinent = new ArrayList<>();
+        for (int l_Index = 0; l_Index < l_Countries.size(); l_Index++) {
+            if (!l_Countries.get(l_Index).getD_CountryContinentID().equals("")) {
+                l_HasContinent = true;
+                if (!l_CountryContinent.contains(l_Countries.get(l_Index).getD_CountryContinentID())) {
+                    l_CountryContinent.add(l_Countries.get(l_Index).getD_CountryContinentID());
+                }
+            } else {
+                System.out.println("" + l_Countries.get(l_Index).getD_CountryID() + " does not have a continent");
+                l_HasContinent = false;
+                break;
+            }
+        }
+        // checking if all continent has a country
+        if (l_CountryContinent.size() != l_Continents.size()) {
             System.out.println("A continent without a country found.");
             return false;
         }
 
-        // Running bfs on the sub-graph or, countries inside a continent
+        // Running dfs on the sub-graph or, countries inside a continent
         boolean l_ConnectedSubGraph = false;
         for (int l_ContIndex = 0; l_ContIndex < l_Continents.size(); l_ContIndex++) {
 
             ArrayList<Country> l_Countries2 = p_Map
                     .getCountryListOfContinent(l_Continents.get(l_ContIndex).getD_ContinentID());
-            Stack<Integer> l_StackNodes2 = new Stack<Integer>();
-
-            for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size(); l_CountryIndex++) {
-                for (int l_NeighbourIndex = 0; l_Countries2.get(l_CountryIndex).getD_Neighbours()
-                        .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-                    if (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours()
-                            .get(l_NeighbourIndex).getD_CountryIntID()))
-                            && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-                                    .getD_CountryContinentID() == l_Continents.get(l_ContIndex).getD_ContinentID())
-                        l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-                                .getD_CountryIntID());
-
-                }
+            l_ConnectedSubGraph = dfs(l_Countries2, "sub-graph");
+            if (l_ConnectedSubGraph == false){
+                System.out.println("Sub-graph is not connected");
+                break;
             }
 
-            // checking if subgraph is connected
-            if (l_StackNodes2.size() == l_Countries2.size())
-                l_ConnectedSubGraph = true;
+            // Stack<Integer> l_StackNodes2 = new Stack<Integer>();
+
+            // for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size();
+            // l_CountryIndex++) {
+            // for (int l_NeighbourIndex = 0;
+            // l_Countries2.get(l_CountryIndex).getD_Neighbours()
+            // .size() > l_NeighbourIndex; l_NeighbourIndex++) {
+            // if
+            // (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours()
+            // .get(l_NeighbourIndex).getD_CountryIntID()))
+            // && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
+            // .getD_CountryContinentID() ==
+            // l_Continents.get(l_ContIndex).getD_ContinentID())
+            // l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
+            // .getD_CountryIntID());
+
+            // }
+            // }
+
+            // // checking if subgraph is connected
+            // if (l_StackNodes2.size() == l_Countries2.size())
+            // l_ConnectedSubGraph = true;
+            // else {
+            // System.out.println("The sub-graph is not connected.");
+            // l_ConnectedSubGraph = false;
+            // break;
+            // }
 
         }
 
-        if (l_ConnectedGraph && l_HasContinent) {
+        if (l_ConnectedGraph && l_HasContinent && l_ConnectedSubGraph) {
             System.out.println("The map is valid.");
             return true;
         } else {
@@ -273,6 +315,74 @@ public class MapEditor {
      */
     public Map getD_LoadedMap() {
         return d_LoadedMap;
+    }
+
+    /**
+     * Depth-first-search (dfs)
+     * 
+     * @param p_CountryList
+     * @return true if dfs was successful
+     */
+    public boolean dfs(ArrayList<Country> p_CountryList, String p_typeOfGraph) {
+        ArrayList<Country> l_Countries = p_CountryList;
+
+        int l_Visited[] = new int[d_LoadedMap.getD_Countries().size() * 2];
+//        System.out.println(l_Visited.length + " " + d_LoadedMap.getD_Countries().size());
+        for (int l_Index = 0; l_Index < l_Visited.length; l_Index++) {
+            l_Visited[l_Index] = 0;
+        }
+
+        Stack<String> l_Stack = new Stack();
+
+        l_Stack.push(l_Countries.get(0).getD_CountryID());
+
+        for (int l_CountryIndex = 0; !l_Stack.isEmpty(); l_CountryIndex++) {
+
+            Country l_CurrentCountry = d_LoadedMap.findCountry(l_Stack.pop());
+            l_Visited[l_CurrentCountry.getD_CountryIntID()] = 1;
+
+            ArrayList<Country> l_Neighbours = l_CurrentCountry.getD_Neighbours();
+
+            for (int l_NeighbourIndex = 0; l_NeighbourIndex < l_Neighbours.size(); l_NeighbourIndex++) {
+
+                if (!l_Stack.contains(l_Neighbours.get(l_NeighbourIndex).getD_CountryID())
+                        & l_Visited[l_Neighbours.get(l_NeighbourIndex).getD_CountryIntID()] == 0) {
+
+                    if (p_typeOfGraph.equals("sub-graph")) {
+
+                        if (l_Neighbours.get(l_NeighbourIndex).getD_CountryContinentID() == l_CurrentCountry
+                                .getD_CountryContinentID())
+                            l_Stack.push(l_Neighbours.get(l_NeighbourIndex).getD_CountryID());
+                    } else
+                        l_Stack.push(l_Neighbours.get(l_NeighbourIndex).getD_CountryID());
+                }
+            }
+
+        }
+
+        int l_VisitedNodes = visitedNodes(l_Visited); // count of total nodes visited
+        if (l_VisitedNodes == l_Countries.size())
+            return true;
+        else
+            return false;
+
+    }
+
+    /**
+     * counts how many nodes were visited
+     * 
+     * @param l_Visited
+     * @return total nodes visited
+     */
+    private int visitedNodes(int[] l_Visited) {
+        int l_Count = 0;
+        for (int l_Index = 0; l_Index < l_Visited.length; l_Index++) {
+            if (l_Visited[l_Index] == 1) {
+                l_Count++;
+            } else {
+            }
+        }
+        return l_Count;
     }
 
 }

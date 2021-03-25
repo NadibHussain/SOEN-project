@@ -3,6 +3,7 @@
 
 # Log file
 *.log
+logs.txt
 
 # BlueJ files
 *.ctxt
@@ -32,3 +33,6 @@ target/
 # IDE files and folders
 *.iml
 .idea/
+
+# Log files
+logs.txt
