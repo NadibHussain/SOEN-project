@@ -36,7 +36,9 @@ public class GameEngine {
      * list of players active in the game
      */
     private ArrayList<Player> d_PlayerList;
-
+    /**
+     * Neutral player
+     */
     private NeutralPlayer d_NeutralPlayer;
 
     /**
@@ -47,10 +49,15 @@ public class GameEngine {
      * instance of map editor
      */
     private MapEditor d_MapEditor;
+
     /**
      * Stores admin commands that are yet to be executed
      */
     private ArrayList<AdminCommands> d_AdminCommandsBuffer;
+    /**
+     * Stores two-part orders.
+     * Some order have effects that need to be reset at the end of the round. They are temporarily stored here.
+     */
     private ArrayList<Order> d_OrderBuffer;
     /**
      * Stores user inputs needed to create orders
@@ -63,16 +70,39 @@ public class GameEngine {
     private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
     // State pattern attributes
+    /**
+     * Current phase of the game engine
+     */
     private Phase d_CurrentPhase;
 
+    /**
+     * Phase before a map is loaded for editing
+     */
     private Phase d_PreMapLoadPhase;
+    /**
+     * Phase after a map is loaded for editing
+     */
     private Phase d_PostMapEditLoadPhase;
+    /**
+     * Startup phase attribute
+     */
     private Phase d_StartupPhase;
+    /**
+     * Phase for issuing orders
+     */
     private Phase d_IssueOrdersPhase;
+    /**
+     * Phase for executing orders
+     */
     private Phase d_ExecuteOrdersPhase;
+    /**
+     * Phase when game ends
+     */
     private Phase d_GameOverPhase;
 
     /**
+     * Constructor for Game Engine
+     *
      * @param p_Console   console object
      * @param p_MapEditor map editor object
      */
@@ -106,13 +136,16 @@ public class GameEngine {
         d_PlayerList = p_GameEngine.d_PlayerList;
         d_NeutralPlayer = p_GameEngine.d_NeutralPlayer;
         d_AdminCommandsBuffer = p_GameEngine.d_AdminCommandsBuffer;
+        d_OrderBuffer = p_GameEngine.d_OrderBuffer;
 
         d_PreMapLoadPhase = p_GameEngine.d_PreMapLoadPhase;
         d_PostMapEditLoadPhase = p_GameEngine.d_PostMapEditLoadPhase;
         d_StartupPhase = p_GameEngine.d_StartupPhase;
         d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
         d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
+        d_GameOverPhase = p_GameEngine.d_GameOverPhase;
         d_CurrentPhase = p_GameEngine.d_CurrentPhase;
+
         d_LoadedMap = p_GameEngine.d_LoadedMap;
     }
 
@@ -202,15 +235,6 @@ public class GameEngine {
     }
 
     /**
-     * Getter for LogEntryBuffer
-     *
-     * @return the current log entry buffer for this engine
-     */
-    public LogEntryBuffer getD_LogEntryBuffer() {
-        return d_LogEntryBuffer;
-    }
-
-    /**
      * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
@@ -245,6 +269,10 @@ public class GameEngine {
         return d_LoadedMap;
     }
 
+    /**
+     * Getter for Map editor field
+     * @return Object of type Map Editor
+     */
     public MapEditor getD_MapEditor() {
         return d_MapEditor;
     }
@@ -275,6 +303,7 @@ public class GameEngine {
     }
 
     /**
+     * Setter for player list
      * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
@@ -290,34 +319,66 @@ public class GameEngine {
         d_CurrentPlayer = p_CurrentPlayer;
     }
 
+    /**
+     * Getter for current phase
+     * @return current phase object
+     */
     public Phase getD_CurrentPhase() {
         return d_CurrentPhase;
     }
 
+    /**
+     * Getter
+     * @return phase
+     */
     public Phase getD_PreMapLoadPhase() {
         return d_PreMapLoadPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_PostMapEditLoadPhase() {
         return d_PostMapEditLoadPhase;
     }
 
+    /**
+     * Setter
+     * @param p_CurrentPhase phase object
+     */
     public void setD_CurrentPhase(Phase p_CurrentPhase) {
         d_CurrentPhase = p_CurrentPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_StartupPhase() {
         return d_StartupPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_IssueOrdersPhase() {
         return d_IssueOrdersPhase;
     }
 
+    /**
+     *
+     * @return
+     */
     public Phase getD_ExecuteOrdersPhase() {
         return d_ExecuteOrdersPhase;
     }
 
+    /**
+     * Getter
+     * @return returns unexecuted commands stored in buffer
+     */
     public ArrayList<AdminCommands> getD_CommandBuffer() {
         return d_AdminCommandsBuffer;
     }
@@ -374,5 +435,14 @@ public class GameEngine {
 
     public Phase getD_GameOverPhase() {
         return d_GameOverPhase;
+    }
+
+    /**
+     * Getter for LogEntryBuffer
+     *
+     * @return the current log entry buffer for this engine
+     */
+    public LogEntryBuffer getD_LogEntryBuffer() {
+        return d_LogEntryBuffer;
     }
 }
