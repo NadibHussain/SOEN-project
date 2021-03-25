@@ -222,47 +222,6 @@ public class MapEditor {
             System.out.println("The map is not connected.");
         }
 
-        // executing bfs on countries list and stacking connected nodes/country;
-
-        // for (int l_CountryIndex = 0; l_CountryIndex < l_Countries.size();
-        // l_CountryIndex++) {
-        // for (int l_NeighbourIndex = 0;
-        // l_Countries.get(l_CountryIndex).getD_Neighbours()
-        // .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-        // if (!(l_StackNodes.contains(
-        // l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex).getD_CountryIntID())))
-        // l_StackNodes.push(l_Countries.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-        // .getD_CountryIntID());
-
-        // }
-        // // stacking continent names for each country; used for later
-        // if
-        // (!(l_StackContinents.contains(l_Countries.get(l_CountryIndex).getD_CountryContinentID())))
-        // {
-        // l_StackContinents.push(l_Countries.get(l_CountryIndex).getD_CountryContinentID());
-        // }
-
-        // // checking if current country has continent
-        // if (l_Countries.get(l_CountryIndex).getD_CountryContinentID().isEmpty()) {
-        // System.out.println(l_Countries.get(l_CountryIndex).getD_CountryID()
-        // + " country does not belong to any continent.");
-        // return false;
-        // } else {
-        // l_HasContinent = true;
-        // }
-
-        // }
-
-        // checking if all continent has at least one country
-        // ArrayList<Continent> l_ContinentCountry = new ArrayList<>();
-        // for(int l_Index =0; l_Index<l_Countries.size(); l_Index++){
-
-        // }
-        // if (l_StackContinents.size() != l_Continents.size()) {
-        // System.out.println("A continent without a country found.");
-        // return false;
-        // }
-
         // checking if all country has a continent
         ArrayList<String> l_CountryContinent = new ArrayList<>();
         for (int l_Index = 0; l_Index < l_Countries.size(); l_Index++) {
@@ -294,34 +253,6 @@ public class MapEditor {
                 System.out.println("Sub-graph is not connected");
                 break;
             }
-
-            // Stack<Integer> l_StackNodes2 = new Stack<Integer>();
-
-            // for (int l_CountryIndex = 0; l_CountryIndex < l_Countries2.size();
-            // l_CountryIndex++) {
-            // for (int l_NeighbourIndex = 0;
-            // l_Countries2.get(l_CountryIndex).getD_Neighbours()
-            // .size() > l_NeighbourIndex; l_NeighbourIndex++) {
-            // if
-            // (!(l_StackNodes2.contains(l_Countries2.get(l_CountryIndex).getD_Neighbours()
-            // .get(l_NeighbourIndex).getD_CountryIntID()))
-            // && l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-            // .getD_CountryContinentID() ==
-            // l_Continents.get(l_ContIndex).getD_ContinentID())
-            // l_StackNodes2.push(l_Countries2.get(l_CountryIndex).getD_Neighbours().get(l_NeighbourIndex)
-            // .getD_CountryIntID());
-
-            // }
-            // }
-
-            // // checking if subgraph is connected
-            // if (l_StackNodes2.size() == l_Countries2.size())
-            // l_ConnectedSubGraph = true;
-            // else {
-            // System.out.println("The sub-graph is not connected.");
-            // l_ConnectedSubGraph = false;
-            // break;
-            // }
 
         }
 

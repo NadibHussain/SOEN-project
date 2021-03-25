@@ -24,6 +24,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
         super(p_GameEngine);
     }
 
+    /**
+     * runs issue order phase
+     */
     @Override
     public void run() {
         reinforce();
@@ -57,6 +60,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
         }
     }
 
+    /**
+     * issues command
+     */
     @Override
     public void issueCommands() {
         ArrayList<Player> l_PlayerList = d_GameEngine.getD_PlayerList();
@@ -107,6 +113,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
         next();
     }
 
+    /**
+     * execute commands
+     */
     @Override
     public void executeCommands() {
         invalidCommandMessage();
@@ -123,96 +132,153 @@ public class IssueOrdersPhase extends GamePlayPhase {
         d_GameEngine.clearCommandBuffer();
     }
 
+    /**
+     * add country
+     */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
         invalidCommandMessage();
     }
 
+    /**
+     * remove country
+     */
     @Override
     public void removeCountry(String p_CountryId) {
         invalidCommandMessage();
     }
 
+    /**
+     * add continent
+     */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
         invalidCommandMessage();
     }
 
+    /**
+     * remove continent
+     */
     @Override
     public void removeContinent(String p_ContinentId) {
         invalidCommandMessage();
     }
 
+    /**
+     * add neighbor
+     */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    /**
+     * remove neighbor
+     */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    /**
+     * loads map
+     */
     @Override
     public void loadMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /**
+     * saves map
+     */
     @Override
     public void saveMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /**
+     * edits map
+     */
     @Override
     public void editMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /**
+     * validates map
+     */
     @Override
     public void validateMap(Map p_Map) {
         invalidCommandMessage();
     }
 
+    /**
+     * adds player
+     */
     @Override
     public void addPlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+    /**
+     * removes player
+     */
     @Override
     public void removePlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+    /**
+     * assign country
+     */
     @Override
     public void assignCountries() {
         invalidCommandMessage();
     }
 
+    /**
+     * deploy order
+     */
     @Override
     public void deploy() {
         invalidCommandMessage();
     }
 
+    /**
+     * advance order
+     */
     @Override
     public void advance() {
         invalidCommandMessage();
     }
 
+    /**
+     * bomb order
+     */
     @Override
     public void bomb() {
         invalidCommandMessage();
     }
 
+    /**
+     * blockade order
+     */
     @Override
     public void blockade() {
         invalidCommandMessage();
     }
 
+    /**
+     * airlift order
+     */
     @Override
     public void airlift() {
         invalidCommandMessage();
     }
 
+    /**
+     * diplomacy order
+     */
     @Override
     public void diplomacy() {
         invalidCommandMessage();

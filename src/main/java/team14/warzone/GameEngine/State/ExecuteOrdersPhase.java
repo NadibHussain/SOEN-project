@@ -20,11 +20,17 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         super(p_GameEngine);
     }
 
+    /**
+     * Run execute order phase
+     */
     @Override
     public void run() {
         executeCommands();
     }
 
+    /**
+     * execute commands
+     */
     @Override
     public void executeCommands() {
         ArrayList<Player> l_PlayerList = d_GameEngine.getD_PlayerList();
@@ -50,6 +56,11 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
             next();
     }
 
+    /**
+     * checks if game is over; if player conquers all countries
+     * @param p_Players
+     * @return
+     */
     private boolean gameOverCheck(ArrayList<Player> p_Players) {
         for (Player l_Player : p_Players) {
             if (l_Player.getD_CountriesOwned().containsAll(d_GameEngine.getD_LoadedMap().getD_Countries())) {
@@ -63,106 +74,187 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         return false;
     }
 
+    /**
+     * issues commands
+     */
     @Override
     public void issueCommands() {
         issueCommands();
     }
 
+    /** 
+     * Add to country list
+     * @param p_CountryId
+     * @param p_ContinentId
+     */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Remove from country list
+     * @param p_CountryId
+     */
     @Override
     public void removeCountry(String p_CountryId) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Add to continent list
+     * @param p_ContinentId
+     * @param p_ControlValue
+     */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
         invalidCommandMessage();
     }
 
+    /** 
+     * REmove from Continent list
+     * @param p_ContinentId
+     */
     @Override
     public void removeContinent(String p_ContinentId) {
         invalidCommandMessage();
     }
 
+     /** 
+     * Add neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Remove neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Loads map
+     * @param p_FileName
+     */
     @Override
     public void loadMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Saves map
+     * @param p_FileName
+     */
     @Override
     public void saveMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Edit map
+     * @param p_FileName
+     */
     @Override
     public void editMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    /** 
+     * Validates a map
+     * @param p_Map
+     */
     @Override
     public void validateMap(Map p_Map) {
         invalidCommandMessage();
     }
 
+    /**
+     * Methods adds new player to playerlist
+     *
+     * @param p_Name Name of the player
+     */
     @Override
     public void addPlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+    /**
+     * Method remove a player from the player list
+     *
+     * @param p_Name String name of the player
+     */
     @Override
     public void removePlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+     /**
+     * Method assigns all countries randomly between the players
+     */
     @Override
     public void assignCountries() {
         invalidCommandMessage();
     }
 
+    /**
+     * Reinforcement beginning of game play
+     */
     @Override
     public void reinforce() {
         invalidCommandMessage();
     }
 
+    /**
+     * Deploy command
+     */
     @Override
     public void deploy() {
         invalidCommandMessage();
     }
 
+     /**
+     * Advance order
+     */
     @Override
     public void advance() {
         invalidCommandMessage();
     }
 
+     /**
+     * Bomb order
+     */
     @Override
     public void bomb() {
         invalidCommandMessage();
     }
 
+    /**
+     * Blockade order
+     */
     @Override
     public void blockade() {
         invalidCommandMessage();
     }
 
+    /**
+     * Airlift order
+     */
     @Override
     public void airlift() {
         invalidCommandMessage();
     }
 
+    /**
+     * Diplomacy order
+     */
     @Override
     public void diplomacy() {
         invalidCommandMessage();
