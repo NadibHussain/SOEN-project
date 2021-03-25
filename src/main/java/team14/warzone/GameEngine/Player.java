@@ -47,6 +47,10 @@ public class Player {
      * list of diplomatic players
      */
     private ArrayList<Player> d_DiplomaticPlayers = new ArrayList<>();
+    /**
+     * Flag to keep track whether player has received card during turn
+     */
+    private boolean d_CardReceived;
 
     /**
      * Default constructor that takes no params
@@ -55,12 +59,14 @@ public class Player {
     }
 
     /**
+     *
      * Constructor that takes all attributes as params
      *
      * @param d_Name                name of the player
      * @param d_TotalNumberOfArmies total number of armies
      * @param d_CountriesOwned      list of countries (Country objects) owned by the player
      * @param d_OrderList           list of orders the player has issued but has not executed yet
+     * @param p_GE                  game engine
      */
     public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
                   ArrayList<Order> d_OrderList, GameEngine p_GE) {
@@ -71,12 +77,14 @@ public class Player {
         d_GE = p_GE;
         d_ArmiesOrderedToBeDeployed = 0;
         d_CardList = new ArrayList<>();
+        d_CardReceived = false;
     }
 
     /**
      * Constructor that accepts playername and sets the other attributes with default values
      *
      * @param p_Name name of the player
+     * @param p_GE gameengine
      */
     public Player(String p_Name, GameEngine p_GE) {
         this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
@@ -183,8 +191,10 @@ public class Player {
      */
     public void addCountryOwned(Country p_Country) {
         this.d_CountriesOwned.add(p_Country);
-        if (d_GE.getD_CurrentPhase().equals(d_GE.getD_ExecuteOrdersPhase()))
+        if (d_GE.getD_CurrentPhase().equals(d_GE.getD_ExecuteOrdersPhase()) && !d_CardReceived) {
             d_GE.allotCard(this);
+            d_CardReceived = true;
+        }
     }
 
     /**
@@ -197,6 +207,11 @@ public class Player {
             this.d_CountriesOwned.remove(p_Country);
     }
 
+    /**
+     * Method to check player cards
+     * @param p_Card card
+     * @return true or false
+     */
     public boolean hasCard(Card p_Card) {
         for (Card l_Card : d_CardList) {
             if (l_Card.getD_CardType().equals(p_Card.getD_CardType()))
@@ -204,7 +219,7 @@ public class Player {
         }
         return false;
     }
-
+    
     /**
      * Getter method for name of the player
      *
@@ -286,9 +301,13 @@ public class Player {
         d_CardList.add(card);
     }
 
+    /**
+     * Remove card method
+     * @param p_Card card
+     */
     public void removeCard(Card p_Card) {
-        for(Card l_Card : getCardList() ){
-            if(l_Card == p_Card){
+        for (Card l_Card : getCardList()) {
+            if (l_Card == p_Card) {
                 getCardList().remove(p_Card);
                 break;
             }
@@ -307,7 +326,7 @@ public class Player {
     /**
      * Getter for the number of armies ordered to be deployed field
      *
-     * @return
+     * @return returns ArmiesOrderedToBeDeployed
      */
     public int getD_ArmiesOrderedToBeDeployed() {
         return d_ArmiesOrderedToBeDeployed;
@@ -316,16 +335,19 @@ public class Player {
     /**
      * Increase the number of armies ordered to be deployed field
      *
-     * @param p_ArmiesOrderedToBeDeploy
+     * @param p_ArmiesOrderedToBeDeploy parameter ArmiesOrderedToBeDeployed
      */
     public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
-        d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
+        if (d_ArmiesOrderedToBeDeployed + p_ArmiesOrderedToBeDeploy > d_TotalNumberOfArmies)
+            d_ArmiesOrderedToBeDeployed = d_TotalNumberOfArmies;
+        else
+            d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
     }
 
     /**
      * Decrease the number of armies ordered to be deployed field
      *
-     * @param p_ArmiesOrderedToBeDeploy
+     * @param p_ArmiesOrderedToBeDeploy parameter ArmiesOrderedToBeDeployed
      */
     public void decreaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
         d_ArmiesOrderedToBeDeployed -= p_ArmiesOrderedToBeDeploy;
@@ -344,7 +366,7 @@ public class Player {
     /**
      * Remove diplomatic player from list
      *
-     * @param p_Player
+     * @param p_Player player which has to be removed
      */
     public void removeDiplomaticPlayer(Player p_Player) {
         this.d_DiplomaticPlayers.remove(p_Player);
@@ -362,8 +384,8 @@ public class Player {
     /**
      * Checks if the players are in diplomatic relation
      *
-     * @param p_CurrentPlayer
-     * @param p_TargetPlayer
+     * @param p_CurrentPlayer the current player
+     * @param p_TargetPlayer the target player
      * @return true if either of them have used diplomacy card on each other
      */
     public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer) {
@@ -371,5 +393,12 @@ public class Player {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Method resets the card received flag to false at end of turn
+     */
+    public void resetCardReceivedFlag() {
+        d_CardReceived = false;
     }
 }

@@ -15,14 +15,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Observer LoggerObserver
+ */
 public class LogerOberver implements Observer{
 
     LogEntryBuffer d_CurrentLoggerBufferEntry;
 
+    /**
+     * Loggerobserver
+     */
     public LogerOberver(){
         d_CurrentLoggerBufferEntry = new LogEntryBuffer();
     }
 
+    /**
+     * update method
+     * @param p_observable the observable whos state has changed
+     */
     @Override
     public void update(Observable p_observable) {
 

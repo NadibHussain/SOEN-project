@@ -3,12 +3,24 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This is a class for PostMapEditLoadPhase
+ */
 public class PostMapEditLoadPhase extends MapEditorPhase{
-
+    /**
+     * PostMapEditLoadPhase
+     * @param p_GameEngine GE
+     */
     public PostMapEditLoadPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 
+    
+    /** 
+     * add country
+     * @param p_CountryId
+     * @param p_ContinentId
+     */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().addCountry(p_CountryId, p_ContinentId);
@@ -16,6 +28,11 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * remove country
+     * @param p_CountryId
+     */
     @Override
     public void removeCountry(String p_CountryId) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().removeCountry(p_CountryId);
@@ -23,6 +40,12 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * add continent
+     * @param p_ContinentId
+     * @param p_ControlValue
+     */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().addContinent(p_ContinentId, p_ControlValue);
@@ -30,6 +53,11 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * remove continent
+     * @param p_ContinentId
+     */
     @Override
     public void removeContinent(String p_ContinentId) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().removeContinent(p_ContinentId);
@@ -37,6 +65,12 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * add neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().addNeighbour(p_CountryId, p_NeighborId);
@@ -44,6 +78,12 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * remove neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
         d_GameEngine.getD_MapEditor().getD_LoadedMap().removeNeighbour(p_CountryId, p_NeighborId);
@@ -51,6 +91,11 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * saves map
+     * @param p_FileName
+     */
     @Override
     public void saveMap(String p_FileName) {
         d_GameEngine.getD_MapEditor().saveMap(p_FileName);
@@ -58,6 +103,11 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * edits map
+     * @param p_FileName
+     */
     @Override
     public void editMap(String p_FileName) {
         d_GameEngine.getD_MapEditor().editMap(p_FileName);
@@ -65,6 +115,11 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * validates map
+     * @param p_Map
+     */
     @Override
     public void validateMap(Map p_Map) {
         d_GameEngine.getD_MapEditor().validateMap(p_Map);

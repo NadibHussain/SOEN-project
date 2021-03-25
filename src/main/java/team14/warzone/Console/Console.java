@@ -28,6 +28,7 @@ public class Console {
 
     /**
      * A method to read input from user console
+     * @return returns commands list
      */
     public static List<List<String>> readInput() {
         String[] l_UserInput = d_Scanner.nextLine().split(" ");

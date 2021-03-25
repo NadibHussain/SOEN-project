@@ -6,6 +6,7 @@ package team14.warzone.GameEngine.Commands;
 public interface ICommand {
     /**
      * Method to execute the command
+     * @throws Exception throws exception
      */
-    public void execute() throws Exception;
+    void execute() throws Exception;
 }

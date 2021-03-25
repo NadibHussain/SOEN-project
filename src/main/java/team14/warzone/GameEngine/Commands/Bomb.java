@@ -7,17 +7,27 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
-public class Bomb extends Order{
+/**
+ * This class is used to create bomb order
+ *
+ * @author tanzia-ahmed
+ */
+public class Bomb extends Order {
 
+    /**
+     * Destination country
+     */
     private String d_CountryNameTo;
+    /**
+     * GameEngine instance
+     */
     private GameEngine d_GameEngine;
 
     /**
-     * Constructor of Bomb
+     * Constructor of Bomb class
      *
-     * @author tanzia-ahmed
-     * @param p_CountryNameTo
-     * @param p_GameEngine
+     * @param p_CountryNameTo destination country
+     * @param p_GameEngine    instance of Game Engine class
      */
     public Bomb(String p_CountryNameTo, GameEngine p_GameEngine) {
         this.d_CountryNameTo = p_CountryNameTo;
@@ -42,19 +52,18 @@ public class Bomb extends Order{
             throw new Exception("Bomb failed: destination country does not exist");
         }
         //check if destination country is owned by enemy player
-        if(l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
+        if (l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
             throw new Exception("Bomb failed: " + l_CurrentPlayer.getD_Name() + " owns " +
                     l_CountryTo.getD_CountryID());
         }
         //check if the enemy is a diplomatic ally or not
-        if(l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))){
+        if (l_CurrentPlayer.isDiplomaticPlayer(l_CurrentPlayer, d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()))) {
             throw new Exception("Cannot bomb on diplomatic ally's country");
-        }
-        else{
+        } else {
             //execution
             int l_TotalNumOfArmies = d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).getD_TotalNumberOfArmies();
             int l_RemainingArmies = l_CountryTo.getD_NumberOfArmies() / 2;
-            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name()+ " has bombed"+d_CountryNameTo);
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() + " has bombed" + d_CountryNameTo);
             d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
             d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);

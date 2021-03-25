@@ -7,18 +7,31 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This class is used to create blockade order
+ *
+ * @author tanzia-ahmed
+ */
 public class Blockade extends Order {
 
+    /**
+     * Source country name
+     */
     private String d_CountryNameTo;
+    /**
+     * Instance of GameEngine
+     */
     private GameEngine d_GameEngine;
+    /**
+     * Destination country name
+     */
     private Country d_CountryTo;
 
     /**
-     * Constructor of Blockade
+     * Constructor of Blockade class
      *
-     * @param p_CountryNameTo
-     * @param p_GameEngine
-     * @author tanzia-ahmed
+     * @param p_CountryNameTo destination country
+     * @param p_GameEngine    instance of game engine class
      */
     public Blockade(String p_CountryNameTo, GameEngine p_GameEngine) {
 
@@ -57,7 +70,7 @@ public class Blockade extends Order {
             l_CurrentPlayer.removeCard(new Card("blockade"));
             Console.displayMsg("Success: Blockade country " + d_CountryNameTo);
             d_GameEngine.findPlayer("Neutral").addCountryOwned(l_CountryTo);
-            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() +" has used blockade in "+d_CountryNameTo);
+            d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() + " has used blockade in " + d_CountryNameTo);
             d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             //remove ownership from Player object
         }
