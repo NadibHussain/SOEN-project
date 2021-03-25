@@ -16,7 +16,10 @@ import java.util.List;
  * Is started when a valid map is loaded
  */
 public class StartupPhase extends GamePlayPhase {
-
+    /**
+     * StartupPhase
+     * @param p_GameEngine GE
+     */
     public StartupPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
@@ -31,51 +34,105 @@ public class StartupPhase extends GamePlayPhase {
         executeCommands();
     }
 
+    
+    /** 
+     * Add to country list
+     * @param p_CountryId
+     * @param p_ContinentId
+     */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Remove from country list
+     * @param p_CountryId
+     */
     @Override
     public void removeCountry(String p_CountryId) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Add to continent list
+     * @param p_ContinentId
+     * @param p_ControlValue
+     */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * REmove from Continent list
+     * @param p_ContinentId
+     */
     @Override
     public void removeContinent(String p_ContinentId) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Add neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Remove neighbor
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Loads map
+     * @param p_FileName
+     */
     @Override
     public void loadMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Saves map
+     * @param p_FileName
+     */
     @Override
     public void saveMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Edit map
+     * @param p_FileName
+     */
     @Override
     public void editMap(String p_FileName) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * Validates a map
+     * @param p_Map
+     */
     @Override
     public void validateMap(Map p_Map) {
         invalidCommandMessage();
@@ -160,12 +217,16 @@ public class StartupPhase extends GamePlayPhase {
         d_GameEngine.getD_LogEntryBuffer().setD_log("Changing Phase from Startup Phase to IssueOrder Phase");
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
-
+    /**
+     * Reinforcement beginning of game play
+     */
     @Override
     public void reinforce() {
         invalidCommandMessage();
     }
-
+    /**
+     * Issue a command
+     */
     @Override
     public void issueCommands() {
         System.out.println("Enter command:");
@@ -173,6 +234,9 @@ public class StartupPhase extends GamePlayPhase {
         createAdminCommand(l_CommandStrList);
     }
 
+    /**
+     * Executes command
+     */
     @Override
     public void executeCommands() {
         for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
@@ -181,31 +245,49 @@ public class StartupPhase extends GamePlayPhase {
         d_GameEngine.clearCommandBuffer();
     }
 
+    /**
+     * Deploy command
+     */
     @Override
     public void deploy() {
         invalidCommandMessage();
     }
 
+    /**
+     * Advance order
+     */
     @Override
     public void advance() {
         invalidCommandMessage();
     }
 
+    /**
+     * Bomb order
+     */
     @Override
     public void bomb() {
         invalidCommandMessage();
     }
 
+    /**
+     * Blockade order
+     */
     @Override
     public void blockade() {
 
     }
 
+    /**
+     * Airlift order
+     */
     @Override
     public void airlift() {
         invalidCommandMessage();
     }
 
+    /**
+     * Diplomacy order
+     */
     @Override
     public void diplomacy() {
         invalidCommandMessage();

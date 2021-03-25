@@ -125,7 +125,7 @@ public class GameEngine {
     /**
      * Copy Constructor
      *
-     * @param p_GameEngine
+     * @param p_GameEngine gameengine parameter
      */
     public GameEngine(GameEngine p_GameEngine) {
         d_Console = p_GameEngine.d_Console;
@@ -155,10 +155,17 @@ public class GameEngine {
         } while (!d_CurrentPhase.equals(d_GameOverPhase));
     }
 
+    /**
+     * appending to command buffer
+     * @param p_AdminCommands commands
+     */
     public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
         d_AdminCommandsBuffer.add(p_AdminCommands);
     }
 
+    /**
+     * method to clear buffer
+     */
     public void clearCommandBuffer() {
         d_AdminCommandsBuffer.clear();
     }
@@ -288,33 +295,48 @@ public class GameEngine {
     }
 
     /**
-     * @return
+     * @return returns ExecuteOrdersPhase
      */
     public Phase getD_ExecuteOrdersPhase() {
         return d_ExecuteOrdersPhase;
     }
 
     /**
-     * Getter
-     *
+     * Getter method
      * @return returns unexecuted commands stored in buffer
      */
     public ArrayList<AdminCommands> getD_CommandBuffer() {
         return d_AdminCommandsBuffer;
     }
 
+    /**
+     * Setter
+     * @param p_AdminCommandsBuffer command buffer
+     */
     public void setD_CommandBuffer(ArrayList<AdminCommands> p_AdminCommandsBuffer) {
         d_AdminCommandsBuffer = p_AdminCommandsBuffer;
     }
 
+    /**
+     * Getter
+     * @return current player
+     */
     public Player getD_CurrentPlayer() {
         return d_CurrentPlayer;
     }
 
+    /**
+     * setter
+     * @param d_LoadedMap loaded map
+     */
     public void setD_LoadedMap(Map d_LoadedMap) {
         this.d_LoadedMap = d_LoadedMap;
     }
 
+    /**
+     * Allot card method using random
+     * @param p_player current player to be given a card
+     */
     public void allotCard(Player p_player) {
         Card l_Card = new Card();
         Random l_RandomNumber = new Random();
@@ -323,30 +345,56 @@ public class GameEngine {
         Console.displayMsg("Player " + p_player.getD_Name() + " has received " + l_Card.getD_CardType() + " card!");
     }
 
+    /**
+     * getter
+     * @return d_OrderStrBuffer
+     */
     public List<List<String>> getD_OrderStrBuffer() {
         return d_OrderStrBuffer;
     }
 
+    /**
+     * setter
+     * @param p_OrderStrBuffer d_OrderStrBuffer
+     */
     public void setD_OrderStrBuffer(List<List<String>> p_OrderStrBuffer) {
         d_OrderStrBuffer = p_OrderStrBuffer;
     }
 
+    /**
+     * clear buffer
+     */
     public void clearOrderStrBuffer() {
         d_OrderStrBuffer.clear();
     }
 
+    /**
+     * Neutral player
+     * @return neutral player
+     */
     public NeutralPlayer getD_NeutralPlayer() {
         return d_NeutralPlayer;
     }
 
+    /**
+     * getter
+     * @return d_OrderBuffer
+     */
     public ArrayList<Order> getD_OrderBuffer() {
         return d_OrderBuffer;
     }
 
+    /**
+     * appending to buffer
+     * @param p_Order orders
+     */
     public void appendToOrderBuffer(Order p_Order) {
         d_OrderBuffer.add(p_Order);
     }
 
+    /**
+     * reset the buffer
+     */
     public void resetOrderBuffer() {
         for (Order l_Order : d_OrderBuffer) {
             l_Order.reset();
@@ -354,6 +402,10 @@ public class GameEngine {
         d_OrderBuffer.clear();
     }
 
+    /**
+     * getter
+     * @return d_GameOverPhase
+     */
     public Phase getD_GameOverPhase() {
         return d_GameOverPhase;
     }

@@ -9,18 +9,27 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Stack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test the MapEditor class
+ */
 public class TestMapEditor {
 
+    /**
+     * static mapeditor
+     */
     public static MapEditor d_MapEditor;
 
-
-    
     /** 
      * Initialize before tests run
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException throws a filenotfoundexception
      */
     @BeforeClass
     public static void init() throws FileNotFoundException {

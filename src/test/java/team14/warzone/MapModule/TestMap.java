@@ -11,10 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Tests for Map class
  */
 public class TestMap {
-
+    /**
+     * static map
+     */
     public static Map d_M1;
-    public static Continent d_Asia, d_Africa;
-    public static Country d_India, d_Kenya;
+
     /**
      * static initializing test
      */

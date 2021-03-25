@@ -22,5 +22,8 @@ public abstract class Order implements ICommand {
      */
     abstract public void execute() throws Exception;
 
+    /**
+     * Reset method
+     */
     public abstract void reset();
 }
