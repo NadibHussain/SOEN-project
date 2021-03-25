@@ -65,7 +65,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     // print current player's name and ask for command
                     d_GameEngine.setD_CurrentPlayer(l_PlayerList.get(l_Counter));
                     Player l_CurrentPlayer = l_PlayerList.get(l_Counter);
-                    Console.displayMsg("Enter command, " + d_GameEngine.getD_CurrentPlayer().getD_Name());
+                    Console.displayMsg("Enter command, for " + d_GameEngine.getD_CurrentPlayer().getD_Name() +
+                            ", number of undeployed armies : "
+                            + (l_CurrentPlayer.getD_TotalNumberOfArmies() - l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed()));
                     List<List<String>> l_CommandStrList = Console.readInput();
                     // passing the turn
                     if (!l_CommandStrList.isEmpty()) {
