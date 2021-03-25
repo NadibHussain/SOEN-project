@@ -3,6 +3,9 @@ package team14.warzone.GameEngine.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Observable class
+ */
 public class Observable {
     public List<Observer> d_observers = new ArrayList<>();
 

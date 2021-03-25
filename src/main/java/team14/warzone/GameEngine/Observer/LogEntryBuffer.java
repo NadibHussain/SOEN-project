@@ -1,21 +1,26 @@
 package team14.warzone.GameEngine.Observer;
 
 import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Observable LogEntryBuffer
+ */
 public class LogEntryBuffer extends Observable{
 
-
+    /**
+     * String for logs
+     */
     private String d_log = "";
 
     /**
-     * Default Constructor
+     * empty LogEntryBuffer
      */
     public LogEntryBuffer()
     { }
 
     /**
-     * Copy Constructor
+     * constructor for LogEntryBuffer
+     * @param p_LoggerBufferEntry LogEntryBuffer
      */
     public LogEntryBuffer(LogEntryBuffer p_LoggerBufferEntry)
     {
@@ -23,28 +28,18 @@ public class LogEntryBuffer extends Observable{
     }
 
     /**
-     * Gets the corrent d_log
+     * getter
+     * @return log texts
      */
     public String getD_log() {
         return d_log;
     }
 
     /**
-     * Sets the corrent d_log
-     * @param  d_log the string which is to be saved as log
+     * setter
+     * @param d_log log texts
      */
     public void setD_log(String d_log) {
         this.d_log = d_log;
     }
-
-
-    /**
-     * Retruns list of Observers which are attached to this observable
-     */
-    public List<Observer> getD_observers() {
-
-        return d_observers;
-    }
-
-
 }

@@ -3,8 +3,14 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
+/**
+ * This is a class for GameOverPhase
+ */
 public class GameOverPhase extends GamePlayPhase {
-
+    /**
+     * ExecuteOrdersPhase
+     * @param p_GameEngine GE
+     */
     public GameOverPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }

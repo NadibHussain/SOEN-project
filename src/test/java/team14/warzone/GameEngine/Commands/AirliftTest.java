@@ -13,6 +13,9 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+/**
+ * Test for Airlift
+ */
 public class AirliftTest {
     /**
      * console field

@@ -15,12 +15,22 @@ public abstract class Phase {
 
     GameEngine d_GameEngine;
 
+    /**
+     * phase
+     * @param p_GameEngine gameengine
+     */
     public Phase(GameEngine p_GameEngine) {
         d_GameEngine = p_GameEngine;
     }
 
-    // all phases
+    /**
+     * run method
+     */
     abstract public void run();
+
+    /**
+     * showmap method
+     */
     public void showMap() {
         if (d_GameEngine.getD_LoadedMap() == null && d_GameEngine.getD_MapEditor().getD_LoadedMap() == null)
             System.out.println("Please load a map first!");
@@ -30,10 +40,16 @@ public abstract class Phase {
             d_GameEngine.getD_MapEditor().getD_LoadedMap().showMap();
     }
 
+    /**
+     * invalid command message
+     */
     public void invalidCommandMessage() {
         System.out.println("Error: command invalid for " + this.getClass().getSimpleName() + " phase");
     }
 
+    /**
+     * next method
+     */
     public void next() {
         if (d_GameEngine.getD_CurrentPhase() instanceof PreMapLoadPhase)
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_PostMapEditLoadPhase());
@@ -47,6 +63,10 @@ public abstract class Phase {
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
     }
 
+    /**
+     * creating commands
+     * @param p_CommandStrList command list
+     */
     public void createAdminCommand(List<List<String>> p_CommandStrList) {
         for (List<String> l_CommandStr : p_CommandStrList) {
             Option l_Option = new Option(l_CommandStr.get(1),
@@ -56,6 +76,10 @@ public abstract class Phase {
             d_GameEngine.appendToCommandBuffer(l_AdminCommands);
         }
     }
+
+    /**
+     * end game method
+     */
     public void endGame() {}
 
     /**
@@ -160,29 +184,29 @@ public abstract class Phase {
     abstract public void executeCommands(); // instant for map phase and round robin for play phase
 
     /**
-     * place some armies on one of the current player’s territories.
+     * place some armies on one of the current players territories.
      */
     abstract public void deploy();
 
     /**
-     * move some armies from one of the current player’s territories (source) to an adjacent territory
+     * move some armies from one of the current players territories (source) to an adjacent territory
      * (target).
      */
     abstract public void advance();
 
     /**
-     * destroy half of the armies located on an opponent’s territory that is adjacent to one of the current
-     * player’s territories
+     * destroy half of the armies located on an opponents territory that is adjacent to one of the current
+     * players territories
      */
     abstract public void bomb();
 
     /**
-     * triple the number of armies on one of the current player’s territories and make it a neutral territory
+     * triple the number of armies on one of the current players territories and make it a neutral territory
      */
     abstract public void blockade();
 
     /**
-     * advance some armies from one of the current player’s territories to any another territory
+     * advance some armies from one of the current players territories to any another territory
      */
     abstract public void airlift();
 

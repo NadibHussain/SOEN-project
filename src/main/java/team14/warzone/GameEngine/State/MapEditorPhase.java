@@ -8,23 +8,38 @@ import team14.warzone.GameEngine.GameEngine;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+/**
+ * This is a class for MapEditorPhase
+ */
 public abstract class MapEditorPhase extends Phase {
-
+    /**
+     * MapEditorPhase
+     * @param p_GameEngine GE
+     */
     public MapEditorPhase(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
 
+    /**
+     * runs map editor phase
+     */
     @Override
     public void run() {
         issueCommands();
         executeCommands();
     }
 
+    /**
+     * reinforce
+     */
     @Override
     public void reinforce() {
 
     }
 
+    /**
+     * issues commands
+     */
     @Override
     public void issueCommands() {
         // use console to prompt user to enter command
@@ -51,6 +66,9 @@ public abstract class MapEditorPhase extends Phase {
          */
     }
 
+    /**
+     * execute commands
+     */
     @Override
     public void executeCommands() {
         // execute the appropriate map editor command
@@ -61,6 +79,9 @@ public abstract class MapEditorPhase extends Phase {
 
     }
 
+    /**
+     * loads map
+     */
     @Override
     public void loadMap(String p_FileName) {
         try {
@@ -89,46 +110,73 @@ public abstract class MapEditorPhase extends Phase {
         }
     }
 
+    /**
+     * adds player
+     */
     @Override
     public void addPlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+    /**
+     * removes player
+     */
     @Override
     public void removePlayer(String p_Name) {
         invalidCommandMessage();
     }
 
+    /**
+     * assign countries
+     */
     @Override
     public void assignCountries() {
         invalidCommandMessage();
     }
 
+    /**
+     * deploy order
+     */
     @Override
     public void deploy() {
         invalidCommandMessage();
     }
 
+    /**
+     * advance order
+     */
     @Override
     public void advance() {
         invalidCommandMessage();
     }
 
+    /**
+     * bomb order
+     */
     @Override
     public void bomb() {
         invalidCommandMessage();
     }
 
+    /**
+     * blocakde order
+     */
     @Override
     public void blockade() {
         invalidCommandMessage();
     }
 
+    /**
+     * airliftorder
+     */
     @Override
     public void airlift() {
         invalidCommandMessage();
     }
 
+    /**
+     * diplomacy order
+     */
     @Override
     public void diplomacy() {
         invalidCommandMessage();
