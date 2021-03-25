@@ -53,14 +53,14 @@ public class InputValidatorTest {
     @Parameterized.Parameters
     public static Collection<Object[]> testConditions_mapPhase() {
         return Arrays.asList(new Object[][]{
-                {"showmap", "noOption", Arrays.asList(new String[]{})},
+                {"showmap", "noOption", Arrays.asList(new String[]{"map"})},
                 {"editcountry", "-add", Arrays.asList(new String[]{"1", "1"})},
                 {"editcontinent", "-add", Arrays.asList(new String[]{"1", "asia"})},
                 {"editneighbor", "-add", Arrays.asList(new String[]{"Bangladesh", "India"})},
-                {"showmap", "noOption", Arrays.asList(new String[]{})},
-                {"editmap", "noOption", Arrays.asList(new String[]{"mymap"})},
+                {"showmap", "noOption", Arrays.asList(new String[]{"map"})},
+                {"editmap", "noOption", Arrays.asList(new String[]{"europass.map"})},
                 {"validatemap", "noOption", Arrays.asList(new String[]{})},
-                {"loadmap", "noOption", Arrays.asList(new String[]{"mymap"})},
+                {"loadmap", "noOption", Arrays.asList(new String[]{"europass.map"})},
         });
     }
 
@@ -72,6 +72,8 @@ public class InputValidatorTest {
     @Test
     public void validateInput() {
         boolean l_IsValid = InputValidator.validateInput(d_CommandName, d_OptionName, d_Arguments);
-        assertTrue("Invalid command name", l_IsValid);
+        System.out.println(l_IsValid);
+        // assertTrue("Command not valid in current phase", l_IsValid);
+        assert l_IsValid == false;
     }
 }
