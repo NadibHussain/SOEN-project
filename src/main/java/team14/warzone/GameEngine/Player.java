@@ -287,8 +287,8 @@ public class Player {
     }
 
     public void removeCard(Card p_Card) {
-        for(Card l_Card : getCardList() ){
-            if(l_Card == p_Card){
+        for (Card l_Card : getCardList()) {
+            if (l_Card == p_Card) {
                 getCardList().remove(p_Card);
                 break;
             }
@@ -319,7 +319,10 @@ public class Player {
      * @param p_ArmiesOrderedToBeDeploy
      */
     public void increaseArmiesOrderedToBeDeployed(int p_ArmiesOrderedToBeDeploy) {
-        d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
+        if (d_ArmiesOrderedToBeDeployed + p_ArmiesOrderedToBeDeploy > d_TotalNumberOfArmies)
+            d_ArmiesOrderedToBeDeployed = d_TotalNumberOfArmies;
+        else
+            d_ArmiesOrderedToBeDeployed += p_ArmiesOrderedToBeDeploy;
     }
 
     /**
