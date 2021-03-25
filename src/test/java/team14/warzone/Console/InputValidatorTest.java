@@ -1,6 +1,5 @@
 package team14.warzone.Console;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test for InputValidator class
@@ -54,8 +53,8 @@ public class InputValidatorTest {
     public static Collection<Object[]> testConditions_mapPhase() {
         return Arrays.asList(new Object[][]{
                 {"showmap", "noOption", Arrays.asList(new String[]{})},
-                {"editcountry", "-add", Arrays.asList(new String[]{"1", "1"})},
-                {"editcontinent", "-add", Arrays.asList(new String[]{"1", "asia"})},
+                {"editcountry", "-add", Arrays.asList(new String[]{"country1", "country2"})},
+                {"editcontinent", "-add", Arrays.asList(new String[]{"asia", "10"})},
                 {"editneighbor", "-add", Arrays.asList(new String[]{"Bangladesh", "India"})},
                 {"showmap", "noOption", Arrays.asList(new String[]{})},
                 {"editmap", "noOption", Arrays.asList(new String[]{"mymap"})},
@@ -68,10 +67,10 @@ public class InputValidatorTest {
      * Method tests the validateInput method.
      * Tests are done for all the parameterized set of params
      */
-    @Ignore
     @Test
     public void validateInput() {
+        InputValidator.CURRENT_PHASE = InputValidator.Phase.MAPEDITOR;
         boolean l_IsValid = InputValidator.validateInput(d_CommandName, d_OptionName, d_Arguments);
-        assertTrue("Invalid command name", l_IsValid);
+        assertTrue(l_IsValid);
     }
 }
