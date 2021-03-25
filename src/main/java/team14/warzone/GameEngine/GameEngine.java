@@ -3,11 +3,9 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
-import team14.warzone.GameEngine.Commands.ICommand;
-import team14.warzone.GameEngine.Commands.Order;
-import team14.warzone.GameEngine.Observer.Observable;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
@@ -19,15 +17,13 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class implements the functionalities of the game-play phase
+ * This class implements the functionalities related to gameplay
  *
  * @author Anagh
  * @author Zeina
  * @version 1.0
  */
-
-public class GameEngine  {
-
+public class GameEngine {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -40,7 +36,9 @@ public class GameEngine  {
      * list of players active in the game
      */
     private ArrayList<Player> d_PlayerList;
-
+    /**
+     * Neutral player
+     */
     private NeutralPlayer d_NeutralPlayer;
 
     /**
@@ -51,10 +49,15 @@ public class GameEngine  {
      * instance of map editor
      */
     private MapEditor d_MapEditor;
+
     /**
      * Stores admin commands that are yet to be executed
      */
     private ArrayList<AdminCommands> d_AdminCommandsBuffer;
+    /**
+     * Stores two-part orders.
+     * Some order have effects that need to be reset at the end of the round. They are temporarily stored here.
+     */
     private ArrayList<Order> d_OrderBuffer;
     /**
      * Stores user inputs needed to create orders
@@ -64,18 +67,42 @@ public class GameEngine  {
     /**
      * This is used to send logs to the observer
      */
-    private LogEntryBuffer d_LogEntryBuffer= new LogEntryBuffer();
+    private LogEntryBuffer d_LogEntryBuffer = new LogEntryBuffer();
 
     // State pattern attributes
+    /**
+     * Current phase of the game engine
+     */
     private Phase d_CurrentPhase;
 
+    /**
+     * Phase before a map is loaded for editing
+     */
     private Phase d_PreMapLoadPhase;
+    /**
+     * Phase after a map is loaded for editing
+     */
     private Phase d_PostMapEditLoadPhase;
+    /**
+     * Startup phase attribute
+     */
     private Phase d_StartupPhase;
+    /**
+     * Phase for issuing orders
+     */
     private Phase d_IssueOrdersPhase;
+    /**
+     * Phase for executing orders
+     */
     private Phase d_ExecuteOrdersPhase;
+    /**
+     * Phase when game ends
+     */
+    private Phase d_GameOverPhase;
 
     /**
+     * Constructor for Game Engine
+     *
      * @param p_Console   console object
      * @param p_MapEditor map editor object
      */
@@ -85,18 +112,22 @@ public class GameEngine  {
         d_PlayerList = new ArrayList<Player>();
         d_NeutralPlayer = new NeutralPlayer();
         d_AdminCommandsBuffer = new ArrayList<>();
+        d_OrderBuffer = new ArrayList<>();
 
         d_PreMapLoadPhase = new PreMapLoadPhase(this);
         d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
         d_StartupPhase = new StartupPhase(this);
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
+        d_GameOverPhase = new GameOverPhase(this);
+
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
     }
 
     /**
      * Copy Constructor
+     *
      * @param p_GameEngine
      */
     public GameEngine(GameEngine p_GameEngine) {
@@ -105,13 +136,16 @@ public class GameEngine  {
         d_PlayerList = p_GameEngine.d_PlayerList;
         d_NeutralPlayer = p_GameEngine.d_NeutralPlayer;
         d_AdminCommandsBuffer = p_GameEngine.d_AdminCommandsBuffer;
+        d_OrderBuffer = p_GameEngine.d_OrderBuffer;
 
         d_PreMapLoadPhase = p_GameEngine.d_PreMapLoadPhase;
         d_PostMapEditLoadPhase = p_GameEngine.d_PostMapEditLoadPhase;
         d_StartupPhase = p_GameEngine.d_StartupPhase;
         d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
         d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
+        d_GameOverPhase = p_GameEngine.d_GameOverPhase;
         d_CurrentPhase = p_GameEngine.d_CurrentPhase;
+
         d_LoadedMap = p_GameEngine.d_LoadedMap;
     }
 
@@ -136,16 +170,6 @@ public class GameEngine  {
             System.out.println("Error: invalid filename");
         }
     }
-
-    /**
-     * Showmap method
-     */
-    public void showMap() {
-        d_LoadedMap.showMap();
-    }
-
-
-
 
     /**
      * Assign Countries method
@@ -209,147 +233,18 @@ public class GameEngine  {
             Console.displayMsg("Player removed: " + p_PlayerName);
         }
     }
+
     /**
-     * Getter for LogEntryBuffer
-     * @return  the current log entry buffer for this engine
-     */
-    public LogEntryBuffer getD_LogEntryBuffer() {
-        return d_LogEntryBuffer;
-    }
-    /**
-     * A method to loop the players list in a RR fashion, to give their order
-     * Has two stages:
-     * 1. Loop through all the players until everyone is done giving orders
-     * 2. Loops through the order list of each player and execute their orders
+     * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
-        while (true) {
+        do {
             d_CurrentPhase.run();
-        }
-        // reinforcement
-        /*
-        reInforcement();
-
-        // display armies remaining in possession for each player
-        for (Player l_Player : d_PlayerList) {
-            System.out.println("Status: " + l_Player.getD_Name() + " has " + l_Player.getD_TotalNumberOfArmies() + " " +
-                    "armies");
-        }
-
-        // take and queue orders
-        ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[d_PlayerList.size()]));
-        Collections.fill(l_Flag, Boolean.FALSE);
-        //keep looping through the players list until all of them finished issuing their orders
-        while (l_Flag.contains(Boolean.FALSE)) {
-            int l_Counter = 0;
-            while (l_Counter < d_PlayerList.size()) {
-                if (!l_Flag.get(l_Counter)) { // if player has not already passed
-                    d_CurrentPlayer = d_PlayerList.get(l_Counter);
-                    Console.displayMsg("Enter Command for player " + d_PlayerList.get(l_Counter).getD_Name());
-                    d_Console.readInput();
-                    if (!d_Console.get_BufferCommands().isEmpty() && d_Console.getD_CommandBuffer().getD_Keyword()
-                    .equals("pass")) {
-                        l_Flag.set(l_Counter, Boolean.TRUE);
-                        l_Counter++;
-                        d_Console.clearCommandBuffer();
-                    } else {
-                        // check if valid gameplay command and change player turn
-                        if (isGamePhaseCommand(d_Console.getD_CommandBuffer()))
-                            l_Counter++;
-//                        d_Console.filterCommand(this, d_MapEditor);
-                    }
-                } else {
-                    // if player has already passed just skip turn
-                    l_Counter++;
-                }
-                if (!l_Flag.contains(Boolean.FALSE)) break; // break out of infinite loop
-            }
-        }
-
-        //execute all the commands until all players orders lists are empty
-        Collections.fill(l_Flag, Boolean.FALSE);
-        while (l_Flag.contains(false)) {
-            for (int i = 0; i < d_PlayerList.size(); i++) {
-                d_CurrentPlayer = d_PlayerList.get(i);
-                d_PlayerList.get(i).nextOrder();
-                if (d_PlayerList.get(i).getD_OrderList().isEmpty())
-                    l_Flag.set(i, Boolean.TRUE);
-            }
-        }
-         */
-    }
-
-    /**
-     * This method calculates and assign the reinforcement at the beginning of each turn
-     */
-//    public void reInforcement() {
-//        for (Player l_Player : d_PlayerList) {
-//            //1. # of territories owned divided by 3
-//            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
-//            //2. if the player owns all the territories of an entire continent the player is given
-//            // a control bonus value
-//            int l_ControlValueEnforcement = 0;
-//            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-//                //check if all countries belong to the l_Continent are owned by l_Player
-//                if (l_Player.getD_CountriesOwned().containsAll(d_LoadedMap.getCountryListOfContinent(l_Continent
-//                .getD_ContinentID())))
-//                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
-//            }
-//            //3.the minimal number of reinforcement armies for any player is 3 + control values
-//            // of continents he owns
-//            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
-//            //give reinforcement to the player
-//            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
-//        }
-//    }
-
-    /**
-     * This method implements the deploy command
-     * Increases the number of armies in the country to be deployed to
-     * Decreases total number of armies of the player that issued this command
-     *
-     * @param p_CountryName    name of the country where armies are to be deployed
-     * @param p_NumberOfArmies number of armies to deploy
-     * @throws Exception when deploy fails. Either country is not owned by player or player does not have enough
-     *                   armies to deploy
-     */
-    public void deploy(String p_CountryName, int p_NumberOfArmies) throws Exception {
-        // check if numberOfArmies is more than what he has
-        if (d_CurrentPlayer.getD_TotalNumberOfArmies() < p_NumberOfArmies)
-            throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " has " + d_CurrentPlayer.getD_TotalNumberOfArmies() + " < " + p_NumberOfArmies);
-        // check if country is owned by the player
-        Country l_CountryToDeployIn = d_LoadedMap.findCountry(p_CountryName);
-        if (l_CountryToDeployIn == null) {
-            throw new Exception("Deploy failed: country does not exist");
-        }
-        if (!d_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
-            throw new Exception("Deploy failed: " + d_CurrentPlayer.getD_Name() + " does not own " + l_CountryToDeployIn.getD_CountryID());
-        }
-
-        // increase armies in country
-        l_CountryToDeployIn.setD_NumberOfArmies(l_CountryToDeployIn.getD_NumberOfArmies() + p_NumberOfArmies);
-        // decrease army from player
-        d_CurrentPlayer.setD_TotalNumberOfArmies(d_CurrentPlayer.getD_TotalNumberOfArmies() - p_NumberOfArmies);
-        Console.displayMsg("Success: " + d_CurrentPlayer.getD_Name() + " deployed " + p_NumberOfArmies + " armies" +
-                " in " + p_CountryName);
-    }
-
-    /**
-     * Method checks if the passed command is a valid gamephase command
-     *
-     * @param p_AdminCommands command to be checked
-     * @return true if valid; else return false
-     */
-    public boolean isGamePhaseCommand(AdminCommands p_AdminCommands) {
-        return InputValidator.VALID_GAMEPLAY_COMMANDS.contains(p_AdminCommands.getD_Keyword());
+        } while (!d_CurrentPhase.equals(d_GameOverPhase));
     }
 
     public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
         d_AdminCommandsBuffer.add(p_AdminCommands);
-    }
-
-    public AdminCommands retrieveFromCommandBuffer() {
-        return d_AdminCommandsBuffer.remove(0);
     }
 
     public void clearCommandBuffer() {
@@ -374,6 +269,10 @@ public class GameEngine  {
         return d_LoadedMap;
     }
 
+    /**
+     * Getter for Map editor field
+     * @return Object of type Map Editor
+     */
     public MapEditor getD_MapEditor() {
         return d_MapEditor;
     }
@@ -404,6 +303,7 @@ public class GameEngine  {
     }
 
     /**
+     * Setter for player list
      * @param p_PlayerList player list parameter
      */
     public void setD_PlayerList(ArrayList<Player> p_PlayerList) {
@@ -419,34 +319,66 @@ public class GameEngine  {
         d_CurrentPlayer = p_CurrentPlayer;
     }
 
+    /**
+     * Getter for current phase
+     * @return current phase object
+     */
     public Phase getD_CurrentPhase() {
         return d_CurrentPhase;
     }
 
+    /**
+     * Getter
+     * @return phase
+     */
     public Phase getD_PreMapLoadPhase() {
         return d_PreMapLoadPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_PostMapEditLoadPhase() {
         return d_PostMapEditLoadPhase;
     }
 
+    /**
+     * Setter
+     * @param p_CurrentPhase phase object
+     */
     public void setD_CurrentPhase(Phase p_CurrentPhase) {
         d_CurrentPhase = p_CurrentPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_StartupPhase() {
         return d_StartupPhase;
     }
 
+    /**
+     * Getter
+     * @return phase object
+     */
     public Phase getD_IssueOrdersPhase() {
         return d_IssueOrdersPhase;
     }
 
+    /**
+     *
+     * @return
+     */
     public Phase getD_ExecuteOrdersPhase() {
         return d_ExecuteOrdersPhase;
     }
 
+    /**
+     * Getter
+     * @return returns unexecuted commands stored in buffer
+     */
     public ArrayList<AdminCommands> getD_CommandBuffer() {
         return d_AdminCommandsBuffer;
     }
@@ -469,6 +401,7 @@ public class GameEngine  {
         l_Card.setD_CardType(l_Card.TYPES[l_RandomNumber.nextInt(l_Card.TYPES.length)]);
         p_player.addCard(l_Card);
     }
+
     public List<List<String>> getD_OrderStrBuffer() {
         return d_OrderStrBuffer;
     }
@@ -493,7 +426,23 @@ public class GameEngine  {
         d_OrderBuffer.add(p_Order);
     }
 
-    public void clearOrderBuffer() {
+    public void resetOrderBuffer() {
+        for (Order l_Order : d_OrderBuffer) {
+            l_Order.reset();
+        }
         d_OrderBuffer.clear();
+    }
+
+    public Phase getD_GameOverPhase() {
+        return d_GameOverPhase;
+    }
+
+    /**
+     * Getter for LogEntryBuffer
+     *
+     * @return the current log entry buffer for this engine
+     */
+    public LogEntryBuffer getD_LogEntryBuffer() {
+        return d_LogEntryBuffer;
     }
 }

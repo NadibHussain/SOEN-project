@@ -327,7 +327,7 @@ public class MapEditor {
         ArrayList<Country> l_Countries = p_CountryList;
 
         int l_Visited[] = new int[d_LoadedMap.getD_Countries().size() * 2];
-        System.out.println(l_Visited.length + " " + d_LoadedMap.getD_Countries().size());
+//        System.out.println(l_Visited.length + " " + d_LoadedMap.getD_Countries().size());
         for (int l_Index = 0; l_Index < l_Visited.length; l_Index++) {
             l_Visited[l_Index] = 0;
         }

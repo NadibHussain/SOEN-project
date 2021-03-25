@@ -33,9 +33,24 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
                     l_Flag.set(i, Boolean.TRUE);
             }
         }
+        // reset all the 2 step orders
+        d_GameEngine.resetOrderBuffer();
+        // check if all countries owned by 1 player
+        if (!gameOverCheck(l_PlayerList))
+            next();
+    }
 
-        d_GameEngine.getD_OrderBuffer().get(0).reset();
-        next();
+    private boolean gameOverCheck(ArrayList<Player> p_Players) {
+        for (Player l_Player : p_Players) {
+            if (l_Player.getD_CountriesOwned().containsAll(d_GameEngine.getD_LoadedMap().getD_Countries())) {
+                // set GE to game over phase
+                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_GameOverPhase());
+                // set current player to winning player
+                d_GameEngine.setD_CurrentPlayer(l_Player);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
