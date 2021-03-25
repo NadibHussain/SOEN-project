@@ -1,5 +1,7 @@
 package team14.warzone.GameEngine.Commands;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +10,7 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
 public class AirliftTest {
@@ -59,6 +62,7 @@ public class AirliftTest {
     @Test
     @DisplayName("Testing airlift Armies")
     public void executeTest() {
+        Map l_Map = d_GE.getD_LoadedMap();
         int l_ArmiesSrcCountryBefore = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
         ;
         try {
@@ -67,7 +71,8 @@ public class AirliftTest {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
+        assertEquals("s1", l_Map.findCountry("s1").getD_CountryID());
+        assertEquals("s2", l_Map.findCountry("s2").getD_CountryID());
         int l_ArmiesSrcCountryAfter = d_GE.getD_LoadedMap().findCountry("s1").getD_NumberOfArmies();
         org.junit.Assert.assertTrue(l_ArmiesSrcCountryAfter == l_ArmiesSrcCountryBefore);
 

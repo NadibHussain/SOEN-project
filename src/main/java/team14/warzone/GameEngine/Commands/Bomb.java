@@ -59,6 +59,7 @@ public class Bomb extends Order{
             l_CountryTo.setD_NumberOfArmies(l_RemainingArmies); //bombed
             d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).setD_TotalNumberOfArmies(l_TotalNumOfArmies - l_RemainingArmies);
             Console.displayMsg("Success: " + l_CurrentPlayer.getD_Name() + " bombed country " + d_CountryNameTo);
+            l_CurrentPlayer.removeCard(new Card("bomb"));
         }
 
     }
