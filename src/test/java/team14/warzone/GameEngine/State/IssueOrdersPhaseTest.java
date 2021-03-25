@@ -41,11 +41,11 @@ public class IssueOrdersPhaseTest {
         d_IssueOrderPh = new IssueOrdersPhase(d_GE);
 
         // setting up the scenario
-        d_GE.loadMap("bigeurope.map");
+        d_GE.getD_CurrentPhase().loadMap("bigeurope.map");
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
-        d_GE.addPlayer("p1");
-        d_GE.addPlayer("p2");
-        d_GE.assignCountries();
+        d_GE.getD_CurrentPhase().addPlayer("p1");
+        d_GE.getD_CurrentPhase().addPlayer("p2");
+        d_GE.getD_CurrentPhase().assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
     }
