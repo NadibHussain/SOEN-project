@@ -13,6 +13,9 @@ import java.util.List;
  */
 public abstract class Phase {
 
+    /**
+     * Reference to the game engine obj
+     */
     GameEngine d_GameEngine;
 
     /**
@@ -176,6 +179,13 @@ public abstract class Phase {
      * takes command in round robin manner in the play phase
      */
     abstract public void issueCommands(); // instant for map phase and round robin for play phase
+
+    /**
+     * display the list of cards in current players possession
+     */
+    abstract public void showCards(); // instant for map phase and round robin for play phase
+
+
 
     // execute order phase
     /**

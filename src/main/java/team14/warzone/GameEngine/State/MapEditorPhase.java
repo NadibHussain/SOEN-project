@@ -135,6 +135,14 @@ public abstract class MapEditorPhase extends Phase {
     }
 
     /**
+     * Command for showing current players cards. Invalid in this phase.
+     */
+    @Override
+    public void showCards() {
+        invalidCommandMessage();
+    }
+
+    /**
      * deploy order
      */
     @Override

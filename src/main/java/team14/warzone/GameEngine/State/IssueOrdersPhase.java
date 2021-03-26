@@ -1,6 +1,7 @@
 package team14.warzone.GameEngine.State;
 
 import team14.warzone.Console.Console;
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -18,6 +19,7 @@ import java.util.List;
 public class IssueOrdersPhase extends GamePlayPhase {
     /**
      * IssueOrdersPhase
+     *
      * @param p_GameEngine GE
      */
     public IssueOrdersPhase(GameEngine p_GameEngine) {
@@ -111,6 +113,23 @@ public class IssueOrdersPhase extends GamePlayPhase {
             }
         }
         next();
+    }
+
+    /**
+     * Show list of cards currently in possion of player
+     */
+    @Override
+    public void showCards() {
+        List<Card> l_Cards = d_GameEngine.getD_CurrentPlayer().getCardList();
+        if (l_Cards.isEmpty()) {
+            System.out.println(d_GameEngine.getD_CurrentPlayer().getD_Name() + " has no cards");
+        } else {
+            System.out.print(d_GameEngine.getD_CurrentPlayer().getD_Name() + " cards: [ ");
+            for (Card l_Card : l_Cards) {
+                System.out.print(l_Card.getD_CardType() + " ");
+            }
+            System.out.println("]");
+        }
     }
 
     /**
