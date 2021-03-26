@@ -65,6 +65,7 @@ public class Blockade extends Order {
             //execution
             d_CountryTo = l_CountryTo;
             d_CountryTo.setD_NumberOfArmies(3 * d_CountryTo.getD_NumberOfArmies());
+            //remove ownership from Player object
             d_CountryTo.setD_CurrentOwner("Neutral");
             l_CurrentPlayer.removeCountryOwned(l_CountryTo);
             l_CurrentPlayer.removeCard(new Card("blockade"));
@@ -72,7 +73,6 @@ public class Blockade extends Order {
             d_GameEngine.findPlayer("Neutral").addCountryOwned(l_CountryTo);
             d_GameEngine.getD_LogEntryBuffer().setD_log(l_CurrentPlayer.getD_Name() + " has used blockade in " + d_CountryNameTo);
             d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-            //remove ownership from Player object
         }
     }
 
