@@ -54,6 +54,8 @@ public class Deploy extends Order {
             throw new Exception("Deploy failed: country does not exist");
         }
         if (!l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryToDeployIn)) {
+            //player will lose armies if deployed to a country he doesn't own
+            l_CurrentPlayer.setD_TotalNumberOfArmies(l_CurrentPlayer.getD_TotalNumberOfArmies() - d_NumberOfArmies);
             throw new Exception("Deploy failed: " + l_CurrentPlayer.getD_Name() + " does not own " +
                     l_CountryToDeployIn.getD_CountryID());
         }

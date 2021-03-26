@@ -68,6 +68,8 @@ public class Airlift extends Order {
             }
             // check if destination country is owned by the player
             if (!l_CurrentPlayer.getD_CountriesOwned().contains(l_CountryTo)) {
+                //player will lose armies if airlifted to a country he doesn't own
+                l_CurrentPlayer.setD_TotalNumberOfArmies(l_CurrentPlayer.getD_TotalNumberOfArmies() - d_NumberOfArmies);
                 throw new Exception("Airlift failed: " + l_CurrentPlayer.getD_Name() + " does not own " +
                         l_CountryTo.getD_CountryID());
             }
