@@ -126,8 +126,8 @@ public class Advance extends Order {
                         //change the owner of the destination country, add the destination country to current player
                         // country list
                         // and remove it from the old owner list
-                        l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
                         d_GameEngine.findPlayer(l_CountryTo.getD_CurrentOwner()).removeCountryOwned(l_CountryTo);
+                        l_CountryTo.setD_CurrentOwner(l_CurrentPlayer.getD_Name());
                         l_CurrentPlayer.addCountryOwned(l_CountryTo);
                         // log
                         d_GameEngine.getD_LogEntryBuffer().setD_log("Success: " + l_CurrentPlayer.getD_Name() + " has conquered " + d_CountryNameTo
