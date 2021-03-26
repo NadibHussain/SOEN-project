@@ -60,10 +60,8 @@ public class DiplomacyTest {
     public void executeTest() {
         try {
             Diplomacy l_Diplomacy = new Diplomacy("p2", d_GE);
-            d_GE.allotCard(d_GE.getD_CurrentPlayer());
             boolean l_HasCard = d_GE.getD_CurrentPlayer().hasCard(new Card("diplomacy"));
             assert l_HasCard == true;
-            System.out.println(d_GE.getD_CurrentPlayer().getCardList().get(0).getD_CardType());
             l_Diplomacy.execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
