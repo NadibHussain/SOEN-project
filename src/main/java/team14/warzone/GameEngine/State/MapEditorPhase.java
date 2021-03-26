@@ -43,27 +43,9 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public void issueCommands() {
         // use console to prompt user to enter command
-//        System.out.println("Current phase is: " + this.getClass().getSimpleName());
         System.out.println("Enter command:");
         List<List<String>> l_CommandStrList = Console.readInput();
-        /*
-        loadmap
-        showmap
-        editmap filename
-        savemap filename
-        editcontinent -add continentName controlValue -remove continentName
-        editcountry -add countryName continentName -remove countryName
-        editneighbor -add countryName neighborCountryName -remove countryName neighborCountryName
-         */
         createAdminCommand(l_CommandStrList);
-
-        /*
-        for 1 word commands: {{"keyword", "", ""}}
-        for 2 words commands: {{"keyword", "", "argument"}}
-        for longer commands: {{"keyword", "optionName1", "arguments1_separated_by_comma"}, {"keyword", "optionName2",
-         "arguments2_separated_by_comma"}}
-        so you may use "argumentList".split(",") => to convert the arguments into a list
-         */
     }
 
     /**
