@@ -131,6 +131,14 @@ public class InputValidator {
                     return false;
                 }
 
+            case "showcards":
+                try {
+                    return showCards(p_OptionName, p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
             case "gameplayer":
                 try {
                     return validateGamePlayer(p_OptionName, p_Arguments);
@@ -346,6 +354,26 @@ public class InputValidator {
      * @throws Exception throws exception with error message
      */
     private static boolean showMap(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate no option was passed
+        if (!p_OptionName.equals("noOption"))
+            throw new Exception("Invalid option");
+
+        // Validate no arguments were passed
+        if (!p_Arguments.isEmpty())
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    /**
+     * Method checks the validity of "showcards" command
+     *
+     * @param p_OptionName Name of the option (Expect "noOption")
+     * @param p_Arguments  Contains list of arguments to be passed. In this case this should be an empty list.
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
+    private static boolean showCards(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate no option was passed
         if (!p_OptionName.equals("noOption"))
             throw new Exception("Invalid option");

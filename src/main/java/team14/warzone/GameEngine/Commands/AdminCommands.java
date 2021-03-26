@@ -32,6 +32,7 @@ public class AdminCommands implements ICommand {
     public static ArrayList<String> VALID_ADMIN_COMMANDS = new ArrayList<>(
             Arrays.asList(
                     "showmap",
+                    "showcards",
                     "exit",
                     "editcontinent",
                     "editcountry",
@@ -121,6 +122,10 @@ public class AdminCommands implements ICommand {
 
             case "showmap":
                 d_GameEngine.getD_CurrentPhase().showMap();
+                break;
+
+            case "showcards":
+                d_GameEngine.getD_CurrentPhase().showCards();
                 break;
 
             case "gameplayer":
