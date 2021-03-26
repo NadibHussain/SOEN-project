@@ -9,6 +9,7 @@ import team14.warzone.MapModule.Map;
 public class GameOverPhase extends GamePlayPhase {
     /**
      * ExecuteOrdersPhase
+     *
      * @param p_GameEngine GE
      */
     public GameOverPhase(GameEngine p_GameEngine) {
@@ -19,6 +20,7 @@ public class GameOverPhase extends GamePlayPhase {
     public void run() {
         System.out.println("Game over!");
         System.out.println("Congratulations, winner: " + d_GameEngine.getD_CurrentPlayer().getD_Name());
+        System.exit(0);
     }
 
     @Override
