@@ -24,15 +24,15 @@ public class GameEngine {
     /**
      * field stores the current player who's turn is ongoing
      */
-    private Player d_CurrentPlayer;
+    public static Player d_CurrentPlayer;
     /**
      * the loaded map
      */
-    private Map d_LoadedMap;
+    public static Map d_LoadedMap;
     /**
      * list of players active in the game
      */
-    private ArrayList<Player> d_PlayerList;
+    public static ArrayList<Player> d_PlayerList;
     /**
      * Neutral player
      */
@@ -70,7 +70,7 @@ public class GameEngine {
     /**
      * Current phase of the game engine
      */
-    private Phase d_CurrentPhase;
+    public static Phase d_CurrentPhase;
 
     /**
      * Phase before a map is loaded for editing

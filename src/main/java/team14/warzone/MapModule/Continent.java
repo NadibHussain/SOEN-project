@@ -24,6 +24,7 @@ public class Continent {
      * Control Value of continent
      */
     private int d_ControlValue;
+
     /**
      * Arraylist containing a record of owners
      */
@@ -88,6 +89,13 @@ public class Continent {
         this.d_ControlValue = p_ControlValue;
     }
 
+    public ArrayList<Player> getD_CurrentOwners() {
+        return d_CurrentOwners;
+    }
+
+    public void setD_CurrentOwners(ArrayList<Player> d_CurrentOwners) {
+        this.d_CurrentOwners = d_CurrentOwners;
+    }
     /**
      * Prints the continent
      * @return Continent type with all attributes
