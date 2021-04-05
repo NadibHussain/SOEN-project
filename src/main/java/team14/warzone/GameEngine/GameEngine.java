@@ -24,15 +24,15 @@ public class GameEngine {
     /**
      * field stores the current player who's turn is ongoing
      */
-    public static Player d_CurrentPlayer;
+    private Player d_CurrentPlayer;
     /**
      * the loaded map
      */
-    public static Map d_LoadedMap;
+    private Map d_LoadedMap;
     /**
      * list of players active in the game
      */
-    public static ArrayList<Player> d_PlayerList;
+    private ArrayList<Player> d_PlayerList;
     /**
      * Neutral player
      */
@@ -46,6 +46,10 @@ public class GameEngine {
      * instance of map editor
      */
     private MapEditor d_MapEditor;
+    /**
+     *
+     */
+    private GameSave d_GameSave;
 
     /**
      * Stores admin commands that are yet to be executed
@@ -70,7 +74,7 @@ public class GameEngine {
     /**
      * Current phase of the game engine
      */
-    public static Phase d_CurrentPhase;
+    private Phase d_CurrentPhase;
 
     /**
      * Phase before a map is loaded for editing
@@ -110,6 +114,7 @@ public class GameEngine {
         d_NeutralPlayer = new NeutralPlayer();
         d_AdminCommandsBuffer = new ArrayList<>();
         d_OrderBuffer = new ArrayList<>();
+        d_GameSave = new GameSave(this);
 
         d_PreMapLoadPhase = new PreMapLoadPhase(this);
         d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
@@ -429,5 +434,9 @@ public class GameEngine {
      */
     public LogEntryBuffer getD_LogEntryBuffer() {
         return d_LogEntryBuffer;
+    }
+
+    public GameSave getD_GameSave() {
+        return d_GameSave;
     }
 }

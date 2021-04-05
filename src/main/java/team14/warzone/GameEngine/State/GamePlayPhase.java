@@ -22,4 +22,14 @@ public abstract class GamePlayPhase extends Phase {
     public void showCards() {
         System.out.println("No cards in possession of player.");
     }
+
+    @Override
+    public void saveGame(String p_FileName) {
+        d_GameEngine.getD_GameSave().runSaveGame(p_FileName);
+    }
+
+    @Override
+    public void loadGame(String p_FileName) {
+        d_GameEngine.getD_GameSave().runLoadGame(p_FileName);
+    }
 }

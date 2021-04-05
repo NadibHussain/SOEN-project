@@ -93,9 +93,7 @@ public class Continent {
         return d_CurrentOwners;
     }
 
-    public void setD_CurrentOwners(ArrayList<Player> d_CurrentOwners) {
-        this.d_CurrentOwners = d_CurrentOwners;
-    }
+
     /**
      * Prints the continent
      * @return Continent type with all attributes

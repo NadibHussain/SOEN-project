@@ -118,4 +118,14 @@ public class PreMapLoadPhase extends MapEditorPhase {
     public void validateMap(Map p_Map) {
         errorLoadMapFirst();
     }
+
+    @Override
+    public void saveGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    @Override
+    public void loadGame(String p_FileName) {
+        invalidCommandMessage();
+    }
 }

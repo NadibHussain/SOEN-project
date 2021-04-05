@@ -174,6 +174,10 @@ public abstract class Phase {
      */
     abstract public void reinforce();
 
+    abstract public void saveGame(String p_FileName);
+
+    abstract public void loadGame(String p_FileName);
+
     // issue order phase
     /**
      * takes command in round robin manner in the play phase
