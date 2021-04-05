@@ -32,8 +32,8 @@ public class GameOverPhaseTest {
         // map editor phase
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");
         // startup phase
-        d_GE.getD_CurrentPhase().addPlayer("p1");
-        d_GE.getD_CurrentPhase().addPlayer("p2");
+        d_GE.getD_CurrentPhase().addPlayer("p1", "human");
+        d_GE.getD_CurrentPhase().addPlayer("p2", "human");
         d_GE.getD_CurrentPhase().assignCountries();
         // assign all countries to p1
         d_GE.getD_PlayerList().get(0).setD_CountriesOwned(d_GE.getD_LoadedMap().getD_Countries());

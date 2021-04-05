@@ -2,7 +2,7 @@ package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Commands.*;
-import team14.warzone.GameEngine.Strategy.Behavior;
+import team14.warzone.GameEngine.Strategy.*;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
@@ -72,7 +72,7 @@ public class Player {
      * @param d_OrderList           list of orders the player has issued but has not executed yet
      * @param p_GE                  game engine
      */
-    public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
+    public Player(String d_Name, String p_PlayerType, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
                   ArrayList<Order> d_OrderList, GameEngine p_GE) {
         this.d_Name = d_Name;
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
@@ -82,6 +82,28 @@ public class Player {
         d_ArmiesOrderedToBeDeployed = 0;
         d_CardList = new ArrayList<>();
         d_CardReceived = false;
+
+        switch (p_PlayerType) {
+            case "human":
+            case "Human":
+                d_IssueOrderBehavior = new Human();
+                break;
+            case "aggressive":
+            case "Aggressive":
+                d_IssueOrderBehavior = new Aggressive();
+                break;
+            case "benevolent":
+            case "Benevolent":
+                d_IssueOrderBehavior = new Benevolent();
+                break;
+            case "random":
+            case "Random":
+                d_IssueOrderBehavior = new Random();
+                break;
+            case "cheater":
+            case "Cheater":
+                d_IssueOrderBehavior = new Cheater();
+        }
     }
 
     /**
@@ -91,7 +113,18 @@ public class Player {
      * @param p_GE   gameengine
      */
     public Player(String p_Name, GameEngine p_GE) {
-        this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
+        this(p_Name, "human", 20, new ArrayList<Country>(Collections.emptyList()),
+                new ArrayList<Order>(Collections.emptyList()), p_GE);
+    }
+
+    /**
+     * Constructor that accepts playername, playertype and sets the other attributes with default values
+     *
+     * @param p_Name name of the player
+     * @param p_GE   gameengine
+     */
+    public Player(String p_Name, String p_PlayerType, GameEngine p_GE) {
+        this(p_Name, p_PlayerType, 20, new ArrayList<Country>(Collections.emptyList()),
                 new ArrayList<Order>(Collections.emptyList()), p_GE);
     }
 
@@ -345,6 +378,7 @@ public class Player {
 
     /**
      * Getter for order behavior
+     *
      * @return order behavior obj
      */
     public Behavior getD_IssueOrderBehavior() {
@@ -353,6 +387,7 @@ public class Player {
 
     /**
      * Set the player's order behavior
+     *
      * @param p_IssueOrderBehavior order behavior based on player type
      */
     public void setD_IssueOrderBehavior(Behavior p_IssueOrderBehavior) {

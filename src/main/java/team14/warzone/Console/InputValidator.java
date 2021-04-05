@@ -373,7 +373,7 @@ public class InputValidator {
         optionNameCheck(p_OptionName);
 
         // Validate -add arguments and -remove arguments
-        if (p_Arguments.size() != 1 || !isAlphaNumeric(p_Arguments.get(0)))
+        if (p_Arguments.size() > 2 || !isAlphaNumeric(p_Arguments.get(0)))
             throw new Exception("Invalid arguments");
 
         return true;

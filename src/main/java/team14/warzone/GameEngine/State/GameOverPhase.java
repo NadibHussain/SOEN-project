@@ -72,7 +72,7 @@ public class GameOverPhase extends GamePlayPhase {
     }
 
     @Override
-    public void addPlayer(String p_Name) {
+    public void addPlayer(String p_Name, String p_PlayerType) {
 
     }
 
