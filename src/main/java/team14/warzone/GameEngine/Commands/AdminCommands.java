@@ -60,9 +60,10 @@ public class AdminCommands implements ICommand {
 
     /**
      * AdminCommands constructor
+     *
      * @param p_Keyword Keyword param
      * @param p_Options Options param
-     * @param p_GE GameEngine param
+     * @param p_GE      GameEngine param
      */
     public AdminCommands(String p_Keyword, Option p_Options, GameEngine p_GE) {
         this.d_Keyword = p_Keyword;
@@ -130,7 +131,7 @@ public class AdminCommands implements ICommand {
 
             case "gameplayer":
                 if (l_OptionName.equals("-add"))
-                    d_GameEngine.getD_CurrentPhase().addPlayer(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().addPlayer(l_CommandArgs.get(0), l_CommandArgs.get(1));
                 else //-remove option
                     d_GameEngine.getD_CurrentPhase().removePlayer(l_CommandArgs.get(0));
                 break;

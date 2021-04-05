@@ -2,6 +2,7 @@ package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Commands.*;
+import team14.warzone.GameEngine.Strategy.*;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
@@ -51,6 +52,10 @@ public class Player {
      * Flag to keep track whether player has received card during turn
      */
     private boolean d_CardReceived;
+    /**
+     * Depending on the player strategy holds the suitable implementation of issue order
+     */
+    public Behavior d_IssueOrderBehavior;
 
     /**
      * Default constructor that takes no params
@@ -67,7 +72,7 @@ public class Player {
      * @param d_OrderList           list of orders the player has issued but has not executed yet
      * @param p_GE                  game engine
      */
-    public Player(String d_Name, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
+    public Player(String d_Name, String p_PlayerType, int d_TotalNumberOfArmies, ArrayList<Country> d_CountriesOwned,
                   ArrayList<Order> d_OrderList, GameEngine p_GE) {
         this.d_Name = d_Name;
         this.d_TotalNumberOfArmies = d_TotalNumberOfArmies;
@@ -77,6 +82,28 @@ public class Player {
         d_ArmiesOrderedToBeDeployed = 0;
         d_CardList = new ArrayList<>();
         d_CardReceived = false;
+
+        switch (p_PlayerType) {
+            case "human":
+            case "Human":
+                d_IssueOrderBehavior = new Human();
+                break;
+            case "aggressive":
+            case "Aggressive":
+                d_IssueOrderBehavior = new Aggressive();
+                break;
+            case "benevolent":
+            case "Benevolent":
+                d_IssueOrderBehavior = new Benevolent();
+                break;
+            case "random":
+            case "Random":
+                d_IssueOrderBehavior = new Random();
+                break;
+            case "cheater":
+            case "Cheater":
+                d_IssueOrderBehavior = new Cheater();
+        }
     }
 
     /**
@@ -86,7 +113,18 @@ public class Player {
      * @param p_GE   gameengine
      */
     public Player(String p_Name, GameEngine p_GE) {
-        this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
+        this(p_Name, "human", 20, new ArrayList<Country>(Collections.emptyList()),
+                new ArrayList<Order>(Collections.emptyList()), p_GE);
+    }
+
+    /**
+     * Constructor that accepts playername, playertype and sets the other attributes with default values
+     *
+     * @param p_Name name of the player
+     * @param p_GE   gameengine
+     */
+    public Player(String p_Name, String p_PlayerType, GameEngine p_GE) {
+        this(p_Name, p_PlayerType, 20, new ArrayList<Country>(Collections.emptyList()),
                 new ArrayList<Order>(Collections.emptyList()), p_GE);
     }
 
@@ -94,72 +132,7 @@ public class Player {
      * This method adds order to the list of orders
      */
     public void issueOrder() {
-        List<String> l_OrderStr = d_GE.getD_OrderStrBuffer().get(0);
-        switch (l_OrderStr.get(0)) {
-            // { "deploy", "", "countryFrom, numOfArmies" }
-            case "deploy":
-                String[] l_Temp = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Deploy l_DeployOrder = new Deploy(l_Temp[0], Integer.parseInt(l_Temp[1]), d_GE);
-                d_OrderList.add(l_DeployOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued deploy command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            // { "advance", "", "countryFrom, countryTo, numOfArmies" }
-            case "advance":
-                String[] l_ArgsAdvance = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Advance l_AdvanceOrder = new Advance(l_ArgsAdvance[0], l_ArgsAdvance[1],
-                        Integer.parseInt(l_ArgsAdvance[2]), d_GE);
-                d_OrderList.add(l_AdvanceOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued advance command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            // { "airlift", "", "countryFrom, countryTo, numOfArmies" }
-            case "airlift":
-                String[] l_ArgsAirlift = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Airlift l_AirliftOrder = new Airlift(l_ArgsAirlift[0], l_ArgsAirlift[1],
-                        Integer.parseInt(l_ArgsAirlift[2]), d_GE);
-                d_OrderList.add(l_AirliftOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued airlift command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            // { "blockade", "", "countryFrom, numOfArmies" }
-            case "blockade":
-                String[] l_ArgsBlockade = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Blockade l_BlockadeOrder = new Blockade(l_ArgsBlockade[0], d_GE);
-                d_OrderList.add(l_BlockadeOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued blockade command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            // { "bomb", "", "countryFrom, numOfArmies" }
-            case "bomb":
-                String[] l_ArgsBomb = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Bomb l_BombOrder = new Bomb(l_ArgsBomb[0], d_GE);
-                d_OrderList.add(l_BombOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued bomb command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            // { "diplomacy", "", "playerId" }
-            case "diplomacy":
-            case "negotiate":
-                String[] l_ArgsDiplomacy = l_OrderStr.get(2).replaceAll(" ", "").split(",");
-                Diplomacy l_DiplomacyOrder = new Diplomacy(l_ArgsDiplomacy[0], d_GE);
-                d_OrderList.add(l_DiplomacyOrder);
-                d_GE.getD_LogEntryBuffer().setD_log(getD_Name() + " issued diplomacy command");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-                break;
-
-            default:
-                Console.displayMsg("Error in issue order!");
-                d_GE.getD_LogEntryBuffer().setD_log("Error in issue order!");
-                d_GE.getD_LogEntryBuffer().notifyObservers(d_GE.getD_LogEntryBuffer());
-
-        }
-        d_GE.clearOrderStrBuffer();
+        d_IssueOrderBehavior.issueOrder(d_GE, this);
     }
 
     /**
@@ -401,5 +374,23 @@ public class Player {
      */
     public void resetCardReceivedFlag() {
         d_CardReceived = false;
+    }
+
+    /**
+     * Getter for order behavior
+     *
+     * @return order behavior obj
+     */
+    public Behavior getD_IssueOrderBehavior() {
+        return d_IssueOrderBehavior;
+    }
+
+    /**
+     * Set the player's order behavior
+     *
+     * @param p_IssueOrderBehavior order behavior based on player type
+     */
+    public void setD_IssueOrderBehavior(Behavior p_IssueOrderBehavior) {
+        d_IssueOrderBehavior = p_IssueOrderBehavior;
     }
 }

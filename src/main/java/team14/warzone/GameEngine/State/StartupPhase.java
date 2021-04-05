@@ -35,118 +35,25 @@ public class StartupPhase extends GamePlayPhase {
         executeCommands();
     }
 
-
     /**
-     * Add to country list
-     *
-     * @param p_CountryId   name of country
-     * @param p_ContinentId name of continent
+     * Issue a command
      */
     @Override
-    public void addCountry(String p_CountryId, String p_ContinentId) {
-        invalidCommandMessage();
+    public void issueCommands() {
+        System.out.println("Enter command:");
+        List<List<String>> l_CommandStrList = Console.readInput();
+        createAdminCommand(l_CommandStrList);
     }
 
-
     /**
-     * Remove from country list
-     *
-     * @param p_CountryId name of country
+     * Executes command
      */
     @Override
-    public void removeCountry(String p_CountryId) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Add to continent list
-     *
-     * @param p_ContinentId  name of continent
-     * @param p_ControlValue control value
-     */
-    @Override
-    public void addContinent(String p_ContinentId, int p_ControlValue) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Remove from Continent list
-     *
-     * @param p_ContinentId name of continent
-     */
-    @Override
-    public void removeContinent(String p_ContinentId) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Add neighbor
-     *
-     * @param p_CountryId  name of country
-     * @param p_NeighborId name of neighbor
-     */
-    @Override
-    public void addNeighbor(String p_CountryId, String p_NeighborId) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Remove neighbor
-     *
-     * @param p_CountryId  name of country
-     * @param p_NeighborId name of neighbor
-     */
-    @Override
-    public void removeNeighbor(String p_CountryId, String p_NeighborId) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Loads map
-     *
-     * @param p_FileName map file name
-     */
-    @Override
-    public void loadMap(String p_FileName) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Saves map
-     *
-     * @param p_FileName map file name
-     */
-    @Override
-    public void saveMap(String p_FileName) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Edit map
-     *
-     * @param p_FileName map file name
-     */
-    @Override
-    public void editMap(String p_FileName) {
-        invalidCommandMessage();
-    }
-
-
-    /**
-     * Validates a map
-     *
-     * @param p_Map map object
-     */
-    @Override
-    public void validateMap(Map p_Map) {
-        invalidCommandMessage();
+    public void executeCommands() {
+        for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
+            l_AdminCommands.execute();
+        }
+        d_GameEngine.clearCommandBuffer();
     }
 
     /**
@@ -155,7 +62,7 @@ public class StartupPhase extends GamePlayPhase {
      * @param p_Name Name of the player
      */
     @Override
-    public void addPlayer(String p_Name) {
+    public void addPlayer(String p_Name, String p_PlayerType) {
         if (d_GameEngine.getD_PlayerList().size() == 5)
             Console.displayMsg("You can not addd more than 5 players");
         else if (d_GameEngine.getD_PlayerList().stream().anyMatch(o -> o.getD_Name().equals(p_Name)))
@@ -238,24 +145,116 @@ public class StartupPhase extends GamePlayPhase {
     }
 
     /**
-     * Issue a command
+     * Add to country list
+     *
+     * @param p_CountryId
+     * @param p_ContinentId
      */
     @Override
-    public void issueCommands() {
-        System.out.println("Enter command:");
-        List<List<String>> l_CommandStrList = Console.readInput();
-        createAdminCommand(l_CommandStrList);
+    public void addCountry(String p_CountryId, String p_ContinentId) {
+        invalidCommandMessage();
     }
 
+
     /**
-     * Executes command
+     * Remove from country list
+     *
+     * @param p_CountryId
      */
     @Override
-    public void executeCommands() {
-        for (AdminCommands l_AdminCommands : d_GameEngine.getD_CommandBuffer()) {
-            l_AdminCommands.execute();
-        }
-        d_GameEngine.clearCommandBuffer();
+    public void removeCountry(String p_CountryId) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Add to continent list
+     *
+     * @param p_ContinentId
+     * @param p_ControlValue
+     */
+    @Override
+    public void addContinent(String p_ContinentId, int p_ControlValue) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * REmove from Continent list
+     *
+     * @param p_ContinentId
+     */
+    @Override
+    public void removeContinent(String p_ContinentId) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Add neighbor
+     *
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
+    @Override
+    public void addNeighbor(String p_CountryId, String p_NeighborId) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Remove neighbor
+     *
+     * @param p_CountryId
+     * @param p_NeighborId
+     */
+    @Override
+    public void removeNeighbor(String p_CountryId, String p_NeighborId) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Loads map
+     *
+     * @param p_FileName
+     */
+    @Override
+    public void loadMap(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Saves map
+     *
+     * @param p_FileName
+     */
+    @Override
+    public void saveMap(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Edit map
+     *
+     * @param p_FileName
+     */
+    @Override
+    public void editMap(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+
+    /**
+     * Validates a map
+     *
+     * @param p_Map
+     */
+    @Override
+    public void validateMap(Map p_Map) {
+        invalidCommandMessage();
     }
 
     /**
