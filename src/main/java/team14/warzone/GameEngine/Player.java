@@ -2,6 +2,7 @@ package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Commands.*;
+import team14.warzone.GameEngine.Strategy.Behavior;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
@@ -51,6 +52,10 @@ public class Player {
      * Flag to keep track whether player has received card during turn
      */
     private boolean d_CardReceived;
+    /**
+     * Depending on the player strategy holds the suitable implementation of issue order
+     */
+    public Behavior d_IssueOrderBehavior;
 
     /**
      * Default constructor that takes no params
@@ -59,7 +64,6 @@ public class Player {
     }
 
     /**
-     *
      * Constructor that takes all attributes as params
      *
      * @param d_Name                name of the player
@@ -84,7 +88,7 @@ public class Player {
      * Constructor that accepts playername and sets the other attributes with default values
      *
      * @param p_Name name of the player
-     * @param p_GE gameengine
+     * @param p_GE   gameengine
      */
     public Player(String p_Name, GameEngine p_GE) {
         this(p_Name, 20, new ArrayList<Country>(Collections.emptyList()),
@@ -209,6 +213,7 @@ public class Player {
 
     /**
      * Method to check player cards
+     *
      * @param p_Card card
      * @return true or false
      */
@@ -219,7 +224,7 @@ public class Player {
         }
         return false;
     }
-    
+
     /**
      * Getter method for name of the player
      *
@@ -303,6 +308,7 @@ public class Player {
 
     /**
      * Remove card method
+     *
      * @param p_Card card
      */
     public void removeCard(Card p_Card) {
@@ -385,7 +391,7 @@ public class Player {
      * Checks if the players are in diplomatic relation
      *
      * @param p_CurrentPlayer the current player
-     * @param p_TargetPlayer the target player
+     * @param p_TargetPlayer  the target player
      * @return true if either of them have used diplomacy card on each other
      */
     public boolean isDiplomaticPlayer(Player p_CurrentPlayer, Player p_TargetPlayer) {
@@ -400,5 +406,21 @@ public class Player {
      */
     public void resetCardReceivedFlag() {
         d_CardReceived = false;
+    }
+
+    /**
+     * Getter for order behavior
+     * @return order behavior obj
+     */
+    public Behavior getD_IssueOrderBehavior() {
+        return d_IssueOrderBehavior;
+    }
+
+    /**
+     * Set the player's order behavior
+     * @param p_IssueOrderBehavior order behavior based on player type
+     */
+    public void setD_IssueOrderBehavior(Behavior p_IssueOrderBehavior) {
+        d_IssueOrderBehavior = p_IssueOrderBehavior;
     }
 }
