@@ -5,6 +5,7 @@ import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.GameEngine.Strategy.Cheater;
 import team14.warzone.GameEngine.Strategy.Human;
 import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Map;
@@ -99,8 +100,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     // passing the turn
                     if (!l_CommandStrList.isEmpty()) {
                         if (l_CommandStrList.get(0).get(0).equals("pass")) {
-                            // check if all armies are issued to be deployed
-                            if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() >= l_CurrentPlayer.getD_TotalNumberOfArmies()) {
+                            // check if all armies are issued to be deployed, excluding cheater
+                            if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() >= l_CurrentPlayer.getD_TotalNumberOfArmies()
+                                    || l_CurrentPlayer.getD_IssueOrderBehavior() instanceof Cheater) {
                                 // set flag to true
                                 l_Flag.set(l_Counter, Boolean.TRUE);
                                 l_Counter++;

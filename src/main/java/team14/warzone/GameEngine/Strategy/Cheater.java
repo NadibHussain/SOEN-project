@@ -1,9 +1,11 @@
 package team14.warzone.GameEngine.Strategy;
 
+import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +21,7 @@ public class Cheater implements Behavior {
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         //conquer all the immediate neighboring enemy countries
         List<Country> l_CountriesOwned = p_Player.getD_CountriesOwned();
+        List<Country> l_ConqueredCountries = new ArrayList<>();
         for (Country l_Country : l_CountriesOwned){
             List<Country> l_CountryNeighbors = l_Country.getD_Neighbours();
             for (Country l_NeighborCountry : l_CountryNeighbors){
@@ -27,10 +30,14 @@ public class Cheater implements Behavior {
                     // and remove it from the old owner list
                     p_GE.findPlayer(l_NeighborCountry.getD_CurrentOwner()).removeCountryOwned(l_NeighborCountry);
                     l_NeighborCountry.setD_CurrentOwner(p_Player.getD_Name());
-                    p_Player.addCountryOwned(l_NeighborCountry);
+                    l_ConqueredCountries.add(l_NeighborCountry);
                 }
             }
         }
+        //add conquered countries to player countries owned list
+        for (Country l_Country : l_ConqueredCountries)
+            p_Player.addCountryOwned(l_Country);
+        
         //double the number of armies on its countries that have enemy neighbors
         l_CountriesOwned = p_Player.getD_CountriesOwned();//update after changes made in previous step
         //find countries he owned that have enemy neighbors
@@ -44,5 +51,7 @@ public class Cheater implements Behavior {
                 }
             }
         }
+        Console.displayMsg(p_Player.getD_Name() + ": pass");
+        p_GE.setD_PlayerPassed(true);
     }
 }
