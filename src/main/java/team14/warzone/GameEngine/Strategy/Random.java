@@ -13,9 +13,10 @@ import java.util.ArrayList;
 public class Random implements Behavior {
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
+        int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
         // check if already deployed all undeployed armies
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
-        if (l_ArmiesLeftToDeploy != 0) {
+        if (l_ArmiesLeftToDeploy > 0) {
             // deploy to random country
             // select random country from countries owned list
             int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size());
@@ -35,8 +36,7 @@ public class Random implements Behavior {
         }
 
         // attack random neighbor or move (minimum one of each)
-        int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(3, 7);
-        if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
             // randomly select either attack enemy or move army between owned country
             switch (Randomizer.generateRandomNumber(0, 2)) {
                 case 0:
@@ -46,6 +46,10 @@ public class Random implements Behavior {
                     moveArmy(p_GE, p_Player);
                     break;
             }
+        } else {
+            // pass
+            Console.displayMsg(p_Player.getD_Name() + ": pass");
+            p_GE.setD_PlayerPassed(true);
         }
     }
 
@@ -83,6 +87,36 @@ public class Random implements Behavior {
     }
 
     private void moveArmy(GameEngine p_GE, Player p_Player) {
+        // randomly select country and neighbor owned by self
+        ArrayList<Country> l_CountriesOwned = p_Player.getD_CountriesOwned();
+        Country l_AttackFrom = null;
+        Country l_NeighborCountry = null;
+        boolean l_Flag = false;
+        while (!l_Flag) {
+            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size());
+            ArrayList<Country> l_NeighborList = l_CountriesOwned.get(l_RandomCountryIndex).getD_Neighbours();
+            for (Country l_Country : l_NeighborList) {
+                if (l_Country.getD_CurrentOwner().equals(p_Player.getD_Name())) {
+                    l_NeighborCountry = l_Country;
+                    l_AttackFrom = l_CountriesOwned.get(l_RandomCountryIndex);
+                    l_Flag = true;
+                    break;
+                }
+            }
+        }
 
+        // issue advance order
+        if (l_AttackFrom != null && l_NeighborCountry != null) {
+            int l_NumOfArmiesToAttackWith = Randomizer.generateRandomNumber(1, l_AttackFrom.getD_NumberOfArmies());
+            Advance l_Advance = new Advance(l_AttackFrom.getD_CountryID(), l_NeighborCountry.getD_CountryID(),
+                    l_NumOfArmiesToAttackWith, p_GE);
+            // add order to order list
+            p_Player.getD_OrderList().add(l_Advance);
+            Console.displayMsg(p_Player.getD_Name() + " issued: advance (relocate army) " + l_AttackFrom.getD_CountryID() +
+                    " " + l_NeighborCountry.getD_CountryID() + " " + l_NumOfArmiesToAttackWith);
+            // write to log
+            p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
+            p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+        }
     }
 }

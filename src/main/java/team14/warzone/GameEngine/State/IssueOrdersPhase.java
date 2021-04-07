@@ -4,6 +4,7 @@ import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.GameEngine.Strategy.Human;
 import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Map;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class IssueOrdersPhase extends GamePlayPhase {
     /**
      * IssueOrdersPhase
+     *
      * @param p_GameEngine GE
      */
     public IssueOrdersPhase(GameEngine p_GameEngine) {
@@ -72,6 +74,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
         while (l_Flag.contains(Boolean.FALSE)) {
             int l_Counter = 0;
             while (l_Counter < l_PlayerList.size()) {
+                d_GameEngine.resetPlayerPassed();
                 // check if player has already passed
                 if (!l_Flag.get(l_Counter)) {
                     // print current player's name and ask for command
@@ -80,7 +83,18 @@ public class IssueOrdersPhase extends GamePlayPhase {
                     Console.displayMsg("Enter command, for " + d_GameEngine.getD_CurrentPlayer().getD_Name() +
                             ", number of undeployed armies : "
                             + (l_CurrentPlayer.getD_TotalNumberOfArmies() - l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed()));
-                    List<List<String>> l_CommandStrList = Console.readInput();
+                    // prompt for order if current_player = human
+                    List<List<String>> l_CommandStrList = new ArrayList<>();
+                    if (l_CurrentPlayer.getD_IssueOrderBehavior() instanceof Human) {
+                        l_CommandStrList = Console.readInput();
+                    } else {
+                        // automatically issue order for AI players
+                        l_CurrentPlayer.issueOrder();
+                        if (d_GameEngine.getD_PlayerPassed())
+                            l_CommandStrList.add(Arrays.asList("pass"));
+                        else
+                            l_CommandStrList.add(Arrays.asList("ai_command"));
+                    }
                     // passing the turn
                     if (!l_CommandStrList.isEmpty()) {
                         if (l_CommandStrList.get(0).get(0).equals("pass")) {
@@ -92,6 +106,10 @@ public class IssueOrdersPhase extends GamePlayPhase {
                             } else {
                                 Console.displayMsg("Error: cannot pass, still " + (l_CurrentPlayer.getD_TotalNumberOfArmies() - l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed()) + " armies are undeployed");
                             }
+                        }
+                        // check if command is issued by ai
+                        else if (l_CommandStrList.get(0).get(0).equals("ai_command")) {
+                            l_Counter++;
                         }
                         // check if command is admin command
                         else if (AdminCommands.VALID_ADMIN_COMMANDS.contains(l_CommandStrList.get(0).get(0))) {

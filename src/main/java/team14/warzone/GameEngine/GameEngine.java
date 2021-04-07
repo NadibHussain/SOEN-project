@@ -96,6 +96,10 @@ public class GameEngine {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
+    /**
+     * Flag to check whether automated player passed their turn
+     */
+    private boolean d_PlayerPassed;
 
     /**
      * Constructor for Game Engine
@@ -120,6 +124,7 @@ public class GameEngine {
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
+        d_PlayerPassed = false;
     }
 
     /**
@@ -157,6 +162,7 @@ public class GameEngine {
 
     /**
      * appending to command buffer
+     *
      * @param p_AdminCommands commands
      */
     public void appendToCommandBuffer(AdminCommands p_AdminCommands) {
@@ -303,6 +309,7 @@ public class GameEngine {
 
     /**
      * Getter method
+     *
      * @return returns unexecuted commands stored in buffer
      */
     public ArrayList<AdminCommands> getD_CommandBuffer() {
@@ -311,6 +318,7 @@ public class GameEngine {
 
     /**
      * Setter
+     *
      * @param p_AdminCommandsBuffer command buffer
      */
     public void setD_CommandBuffer(ArrayList<AdminCommands> p_AdminCommandsBuffer) {
@@ -319,6 +327,7 @@ public class GameEngine {
 
     /**
      * Getter
+     *
      * @return current player
      */
     public Player getD_CurrentPlayer() {
@@ -327,6 +336,7 @@ public class GameEngine {
 
     /**
      * setter
+     *
      * @param d_LoadedMap loaded map
      */
     public void setD_LoadedMap(Map d_LoadedMap) {
@@ -335,6 +345,7 @@ public class GameEngine {
 
     /**
      * Allot card method using random
+     *
      * @param p_player current player to be given a card
      */
     public void allotCard(Player p_player) {
@@ -347,6 +358,7 @@ public class GameEngine {
 
     /**
      * getter
+     *
      * @return d_OrderStrBuffer
      */
     public List<List<String>> getD_OrderStrBuffer() {
@@ -355,6 +367,7 @@ public class GameEngine {
 
     /**
      * setter
+     *
      * @param p_OrderStrBuffer d_OrderStrBuffer
      */
     public void setD_OrderStrBuffer(List<List<String>> p_OrderStrBuffer) {
@@ -370,6 +383,7 @@ public class GameEngine {
 
     /**
      * Neutral player
+     *
      * @return neutral player
      */
     public NeutralPlayer getD_NeutralPlayer() {
@@ -378,6 +392,7 @@ public class GameEngine {
 
     /**
      * getter
+     *
      * @return d_OrderBuffer
      */
     public ArrayList<Order> getD_OrderBuffer() {
@@ -386,6 +401,7 @@ public class GameEngine {
 
     /**
      * appending to buffer
+     *
      * @param p_Order orders
      */
     public void appendToOrderBuffer(Order p_Order) {
@@ -404,6 +420,7 @@ public class GameEngine {
 
     /**
      * getter
+     *
      * @return d_GameOverPhase
      */
     public Phase getD_GameOverPhase() {
@@ -417,5 +434,17 @@ public class GameEngine {
      */
     public LogEntryBuffer getD_LogEntryBuffer() {
         return d_LogEntryBuffer;
+    }
+
+    public boolean getD_PlayerPassed() {
+        return d_PlayerPassed;
+    }
+
+    public void setD_PlayerPassed(boolean p_PlayerPassed) {
+        d_PlayerPassed = p_PlayerPassed;
+    }
+
+    public void resetPlayerPassed() {
+        d_PlayerPassed = false;
     }
 }
