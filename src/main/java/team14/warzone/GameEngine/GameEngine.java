@@ -96,6 +96,10 @@ public class GameEngine {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
+    /**
+     * Flag to check whether automated player passed their turn
+     */
+    private boolean d_PlayerPassed;
 
     /**
      * Constructor for Game Engine
@@ -120,6 +124,7 @@ public class GameEngine {
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
+        d_PlayerPassed = false;
     }
 
     /**
@@ -429,5 +434,17 @@ public class GameEngine {
      */
     public LogEntryBuffer getD_LogEntryBuffer() {
         return d_LogEntryBuffer;
+    }
+
+    public boolean getD_PlayerPassed() {
+        return d_PlayerPassed;
+    }
+
+    public void setD_PlayerPassed(boolean p_PlayerPassed) {
+        d_PlayerPassed = p_PlayerPassed;
+    }
+
+    public void resetPlayerPassed() {
+        d_PlayerPassed = false;
     }
 }

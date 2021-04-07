@@ -1,0 +1,1029 @@
+Warzone game has started
+
+Warzone game has started
+Success: map loaded and validated map:europass.map
+
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 8 to b7
+battle result: attacker: 8, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has lost the battle, 5 : 2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 4 to b7
+battle result: attacker: 4, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 6 to b7
+battle result: attacker: 6, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has lost the battle, 6 : 1
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 7 to b7
+battle result: attacker: 7, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 5 to b7
+battle result: attacker: 5, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has lost the battle, 5 : 1
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 4 to b7
+battle result: attacker: 4, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 5 to b7
+battle result: attacker: 5, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 6 to b7
+battle result: attacker: 6, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 7 to b7
+battle result: attacker: 7, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 7 to b7
+battle result: attacker: 7, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has lost the battle, 4 : 1
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success : p1 and p2 are allies for this turn
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Opened map editor for: bigeurope.map
+Opened map editor for: bigeurope.map
+Opened map editor for: bigeurope.map
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 7 to b7
+battle result: attacker: 7, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success : p1 and p2 are allies for this turn
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Opened map editor for: bigeurope.map
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has conquered b7, moving 7 to b7
+battle result: attacker: 7, defender: 0
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success : p1 and p2 are allies for this turn
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Opened map editor for: bigeurope.map
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 has lost the battle, 4 : 1
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: p1 airlifted 10 armies from s1 to s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 has bombeds2
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 deployed 20 armies in s3
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Success : p1 and p2 are allies for this turn
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 gets 35 armies as reinforcement
+p2 gets 29 armies as reinforcement
+Opened map editor for: bigeurope.map
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Added player:p3
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 20 armies as reinforcement
+p2 gets 20 armies as reinforcement
+p3 gets 20 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p3 issued deploy command
+p1 deployed 40 armies in s1
+p2 deployed 40 armies in s2
+p3 deployed 40 armies in s3
+p1 gets 20 armies as reinforcement
+p2 gets 20 armies as reinforcement
+p3 gets 20 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued advance command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued advance command
+p2 issued advance command
+p2 issued advance command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued advance command
+p2 issued advance command
+p2 issued advance command
+p2 issued advance command
+p2 issued advance command
+p1 deployed 50 armies in s1
+p2 deployed 50 armies in gm8
+Success: p2 has lost the battle, 0 : 0
+Success: p2 has lost the battle, 0 : 0
+Success: p2 has lost the battle, 0 : 0
+Success: p2 has lost the battle, 0 : 0
+Success: p2 has lost the battle, 0 : 0
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+Warzone game has started
+Success: map loaded and validated map:bigeurope.map
+Changing Phase from MapEditor Phase to Startup Phase
+Added player:p1
+Added player:p2
+Assigned Countries to players
+Changing Phase from Startup Phase to IssueOrder Phase
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement
+p1 issued deploy command
+p2 issued deploy command
+p2 issued advance command
+p1 deployed 50 armies in s1
+p2 deployed 50 armies in r14
+p1 gets 30 armies as reinforcement
+p2 gets 30 armies as reinforcement

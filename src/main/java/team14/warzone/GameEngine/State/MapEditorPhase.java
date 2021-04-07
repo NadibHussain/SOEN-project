@@ -96,7 +96,7 @@ public abstract class MapEditorPhase extends Phase {
      * adds player
      */
     @Override
-    public void addPlayer(String p_Name) {
+    public void addPlayer(String p_Name, String p_PlayerType) {
         invalidCommandMessage();
     }
 

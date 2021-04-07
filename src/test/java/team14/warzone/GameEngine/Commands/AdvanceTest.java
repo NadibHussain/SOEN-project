@@ -1,7 +1,5 @@
 package team14.warzone.GameEngine.Commands;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +8,8 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test for Advance
@@ -43,8 +43,8 @@ public class AdvanceTest {
         // setting up the scenario
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
-        d_GE.getD_CurrentPhase().addPlayer("p1");
-        d_GE.getD_CurrentPhase().addPlayer("p2");
+        d_GE.getD_CurrentPhase().addPlayer("p1", "human");
+        d_GE.getD_CurrentPhase().addPlayer("p2", "human");
         d_GE.getD_CurrentPhase().assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn

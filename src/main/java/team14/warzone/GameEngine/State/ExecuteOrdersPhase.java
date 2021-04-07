@@ -182,7 +182,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
      * @param p_Name Name of the player
      */
     @Override
-    public void addPlayer(String p_Name) {
+    public void addPlayer(String p_Name, String p_PlayerType) {
         invalidCommandMessage();
     }
 
