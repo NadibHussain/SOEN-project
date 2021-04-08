@@ -5,13 +5,14 @@ import team14.warzone.GameEngine.Commands.Option;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.Map;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * This class
  */
-public abstract class Phase {
+public abstract class Phase implements Serializable {
 
     /**
      * Reference to the game engine obj
@@ -193,6 +194,10 @@ public abstract class Phase {
     abstract public void reinforce();
 
     // issue order phase
+
+    abstract public void saveGame(String p_FileName);
+
+    abstract public void loadGame(String p_FileName);
 
     /**
      * takes command in round robin manner in the play phase

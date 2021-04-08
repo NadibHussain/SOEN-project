@@ -2,6 +2,7 @@ package team14.warzone.MapModule;
 
 import team14.warzone.GameEngine.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * @version 1.0
 */
 
-public class Continent {
+public class Continent implements Serializable {
 
     /**
      * Unique integer ID of continent
