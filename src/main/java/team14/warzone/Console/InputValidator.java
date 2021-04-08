@@ -198,11 +198,28 @@ public class InputValidator {
                 }
 
 
+            case "savegame":
+                try {
+                    return validateSaveGame(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
+            case "loadgame":
+                try {
+                    return validateLoadGame(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
             default:
                 System.out.println("Invalid command: " + p_CommandName);
                 return false;
         }
     }
+
 
     /**
      * This method checks the validity of "editcontinent" command.

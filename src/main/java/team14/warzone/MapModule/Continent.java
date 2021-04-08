@@ -25,6 +25,7 @@ public class Continent implements Serializable {
      * Control Value of continent
      */
     private int d_ControlValue;
+
     /**
      * Arraylist containing a record of owners
      */
@@ -88,6 +89,11 @@ public class Continent implements Serializable {
     public void setD_ControlValue(int p_ControlValue) {
         this.d_ControlValue = p_ControlValue;
     }
+
+    public ArrayList<Player> getD_CurrentOwners() {
+        return d_CurrentOwners;
+    }
+
 
     /**
      * Prints the continent
