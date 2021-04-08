@@ -111,13 +111,6 @@ public class AdminCommands implements ICommand, Serializable {
             case "savemap":
                 d_GameEngine.getD_CurrentPhase().saveMap(l_CommandArgs.get(0));
                 break;
-            case "savegame":
-                d_GameEngine.getD_CurrentPhase().saveGame(l_CommandArgs.get(0));
-                break;
-
-            case "loadgame":
-                d_GameEngine.getD_CurrentPhase().loadGame(l_CommandArgs.get(0));
-                break;
 
             case "savegame":
                 d_GameEngine.getD_CurrentPhase().saveGame(l_CommandArgs.get(0));
