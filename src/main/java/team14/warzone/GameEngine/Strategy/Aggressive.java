@@ -11,9 +11,11 @@ import team14.warzone.Utils.Randomizer;
 import java.util.List;
 
 /**
- * An aggressive computer player strategy that focuses on centralization of forces and then attack,
- * i.e. it deploys on its strongest country, then always attack with its strongest country,
- * then moves its armies in order to maximize aggregation of forces in one country.
+ * This class implements the aggressive strategy
+ * Aggressive computer player strategy focuses on centralization of forces and then attack
+ *
+ * @author Zeina
+ * @version 1.0
  */
 public class Aggressive implements Behavior {
     int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
@@ -39,6 +41,12 @@ public class Aggressive implements Behavior {
                 p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
             }
         } else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+            //first use cards if available
+            //    public String TYPES[] = {d_Bomb, d_Blockade, d_Airlift, d_Diplomacy};
+            //Bomb the strongest country of his neighbors
+            //Blockade country ?
+            //AirLift move armies to his strongest country if it is not adjacent
+            //Diplomacy with the owner of the strongest neighbor
             List<Country> l_CountriesOwnedByPlayer = p_Player.getD_CountriesOwned();
             //always attack with its strongest country
             int l_StrongestCountryIndex = findStrongestCountry(l_CountriesOwnedByPlayer);
