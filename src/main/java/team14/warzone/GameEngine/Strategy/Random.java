@@ -19,7 +19,7 @@ public class Random implements Behavior {
         if (l_ArmiesLeftToDeploy > 0) {
             // deploy to random country
             // select random country from countries owned list
-            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size());
+            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
             String l_Country = p_Player.getD_CountriesOwned().get(l_RandomCountryIndex).getD_CountryID();
 
             // instantiate deploy order
@@ -60,7 +60,7 @@ public class Random implements Behavior {
         Country l_NeighborToAttack = null;
         boolean l_Flag = false;
         while (!l_Flag) {
-            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size());
+            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
             ArrayList<Country> l_NeighborList = l_CountriesOwned.get(l_RandomCountryIndex).getD_Neighbours();
             for (Country l_Country : l_NeighborList) {
                 if (!l_Country.getD_CurrentOwner().equals(p_Player.getD_Name())) {
@@ -93,7 +93,7 @@ public class Random implements Behavior {
         Country l_NeighborCountry = null;
         boolean l_Flag = false;
         while (!l_Flag) {
-            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size());
+            int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
             ArrayList<Country> l_NeighborList = l_CountriesOwned.get(l_RandomCountryIndex).getD_Neighbours();
             for (Country l_Country : l_NeighborList) {
                 if (l_Country.getD_CurrentOwner().equals(p_Player.getD_Name())) {

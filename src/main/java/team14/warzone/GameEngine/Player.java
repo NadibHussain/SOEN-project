@@ -194,6 +194,20 @@ public class Player {
     }
 
     /**
+     * Method to check player cards
+     *
+     * @param p_CardType string
+     * @return true or false
+     */
+    public boolean hasCard(String p_CardType) {
+        for (Card l_Card : d_CardList) {
+            if (l_Card.getD_CardType().equals(p_CardType))
+                return true;
+        }
+        return false;
+    }
+
+    /**
      * Getter method for name of the player
      *
      * @return name of the player
