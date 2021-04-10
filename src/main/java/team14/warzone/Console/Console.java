@@ -2,6 +2,7 @@ package team14.warzone.Console;
 
 import team14.warzone.GameEngine.Commands.AdminCommands;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 /**
  * This class is used to read commands from user console, validate it then send the commands to the appropriate classes
  */
-public class Console {
+public class Console implements Serializable {
     /**
      * A scanner to read user input
      */

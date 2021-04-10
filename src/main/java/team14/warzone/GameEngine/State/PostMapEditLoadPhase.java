@@ -126,4 +126,15 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().setD_log("Validate map:"+p_Map);
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
+
+    @Override
+    public void saveGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    @Override
+    public void loadGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
 }

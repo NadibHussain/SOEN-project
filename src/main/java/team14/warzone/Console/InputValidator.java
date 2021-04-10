@@ -209,6 +209,21 @@ public class InputValidator {
                     System.out.println(e.getMessage());
                     return false;
                 }
+            case "savegame":
+                try {
+                    return validateSaveGame(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
+            case "loadgame":
+                try {
+                    return validateLoadGame(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
 
             case "tournament":
                 try {
@@ -223,6 +238,7 @@ public class InputValidator {
                 return false;
         }
     }
+
 
     /**
      * This method checks the validity of "editcontinent" command.
@@ -660,5 +676,27 @@ public class InputValidator {
      */
     public static void setCurrentPhase(String p_CurrentPhase) {
         CURRENT_PHASE = Phase.valueOf(p_CurrentPhase);
+    }
+
+    private static boolean validateSaveGame(List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.GAMEPLAY);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1)
+            throw new Exception("Invalid arguments");
+
+        return true;
+    }
+
+    private static boolean validateLoadGame(List<String> p_Arguments) throws Exception {
+        // Validate command for current gamephase
+        gamePhaseCheck(Phase.GAMEPLAY);
+
+        // Validate -add arguments and -remove arguments
+        if (p_Arguments.size() != 1)
+            throw new Exception("Invalid arguments");
+
+        return true;
     }
 }
