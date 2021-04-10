@@ -54,14 +54,24 @@ public class MapEditorConquest {
         while (l_ReaderObject.hasNextLine()) {
             String l_Data = l_ReaderObject.nextLine();
             switch (l_Data) {
-                case "[countries]":
+                case "[Territories]":
                     handleCountriesConquest(l_ReaderObject, l_Map);
                     break;
-                case "[continents]":
+                case "[Continents]":
                     handleContinentsConquest(l_ReaderObject,l_Map);
                     break;
-                case "[borders]":
-                    handleNeighbourConquest(l_ReaderObject,l_Map);
+            }
+
+        }
+
+        l_ReaderObject.close();
+
+        l_ReaderObject = new Scanner(l_FileObject);
+        while (l_ReaderObject.hasNextLine()) {
+            String l_Data = l_ReaderObject.nextLine();
+            switch (l_Data) {
+                case "[Territories]":
+                    handleNeighbourConquest(l_ReaderObject, l_Map);
                     break;
             }
 
@@ -77,7 +87,7 @@ public class MapEditorConquest {
      * @param l_Map the map which needs to be edited
      */
     private void handleCountriesConquest(Scanner l_ReaderObject,Map l_Map){
-        while (true) {
+        while (l_ReaderObject.hasNextLine()) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
                 continue;
@@ -86,15 +96,15 @@ public class MapEditorConquest {
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_CountryArray = l_Line.split(" ");
+                String[] l_CountryArray = l_Line.split(",");
                 String l_ContinentName = "";
                 for (Continent l_Conrinent : l_ContinentList) {
-                    if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
+                    if (l_Conrinent.getD_ContinentID().equals(l_CountryArray[3])) {
                         l_ContinentName = l_Conrinent.getD_ContinentID();
                         break;
                     }
                 }
-                l_Map.addCountry(l_CountryArray[1], l_ContinentName);
+                l_Map.addCountry(l_CountryArray[0], l_ContinentName);
             }
         }
     }
@@ -113,7 +123,7 @@ public class MapEditorConquest {
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_ContinentArray = l_Line.split(" ");
+                String[] l_ContinentArray = l_Line.split("=");
                 l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
             }
         }
@@ -124,28 +134,21 @@ public class MapEditorConquest {
      * @param l_Map the map which needs to be edited
      */
     private void handleNeighbourConquest(Scanner l_ReaderObject,Map l_Map){
-        ArrayList<Country> l_Countires = l_Map.getD_Countries();
-        int l_Index = 0;
         while (l_ReaderObject.hasNextLine()) {
             String l_Line = l_ReaderObject.nextLine();
-            if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
+            if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
                 continue;
             }
+            ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_NeighbourArray = l_Line.split(" ");
-                ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
-                for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
-                    for (int l_CountryIndex = 0; l_CountryIndex < l_Countires.size(); l_CountryIndex++) {
-                        if (l_Countires.get(l_CountryIndex).getD_CountryIntID() == Integer
-                                .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
-                            l_NeighbourIDArray.add(l_Countires.get(l_CountryIndex));
-                        }
-                    }
+                String[] l_CountryArray = l_Line.split(",");
+                for (int x=4;x<l_CountryArray.length;x++)
+                {
+                    Country l_Neighbour = l_Map.findCountry(l_CountryArray[x]);
+                    l_Map.findCountry(l_CountryArray[0]).addNeighbour(l_Neighbour);
                 }
-                l_Countires.get(l_Index).setD_Neighbours(l_NeighbourIDArray);
-                l_Index++;
             }
         }
     }
