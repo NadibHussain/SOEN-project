@@ -2,6 +2,8 @@ package team14.warzone.GameEngine.State;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import team14.warzone.GameEngine.GameEngine;
@@ -35,6 +37,14 @@ public class Tournament extends Phase {
      * instance of Map Editor
      */
     private MapEditor d_MapEditor;
+    /**
+     * tournament table
+     */
+    private String [][] d_GameTable;
+    /**
+     * Constructor
+     * @param p_GameEngine
+     */
 
     public Tournament(GameEngine p_GameEngine) {
         super(p_GameEngine);
@@ -81,26 +91,59 @@ public class Tournament extends Phase {
     }
 
     /**
+     * @param p_NumOfGames
+     */
+    public void tournamentNumOfGames(String p_NumOfGames) {
+        this.d_NumOfGames = Integer.parseInt(p_NumOfGames);
+    }
+
+    /**
      * @param p_NumOfTurns
      */
     public void tournamentMaxNumOfTurns(String p_NumOfTurns) {
         this.d_NumOfTurns = Integer.parseInt(p_NumOfTurns);
     }
 
-    /**
-     * @param p_NumOfGames
-     */
-    public void tournamentNumOfGames(String p_NumOfGames) {
-        this.d_NumOfGames = Integer.parseInt(p_NumOfGames)
-    }
-
     @Override
     public void run() {
-        for (Map l_map : d_Maps) {
-            for (int l_Index = 0; l_Index < d_NumOfGames; l_Index++) {
-
+        d_GameTable = new String [d_Maps.size()][d_NumOfGames];
+        for (int l_MapIndex=0; l_MapIndex< d_Maps.size(); l_MapIndex++) {
+            for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
+                    for (Player l_APlayer : d_Players) {
+                        l_APlayer.issueOrder();
+                    }
+                }
+                ArrayList<Integer> l_IndexListOfWinners=determineWinner();
+                String l_PlayerBehaviors = "";
+                if(l_IndexListOfWinners.size()>1){
+                    for(int i=0; i<l_IndexListOfWinners.size(); i++){
+                        l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior();
+                    }
+                    System.out.println("The game is a draw between "+ l_PlayerBehaviors);
+                    d_GameTable[l_MapIndex][l_GameCount] = "Draw between "+ l_PlayerBehaviors;
+                }
+                if(l_IndexListOfWinners.size() == 1){
+                    l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(0)).getD_Name();
+                    System.out.println("The winner is "+ l_PlayerBehaviors);
+                    d_GameTable[l_MapIndex][l_GameCount] = l_PlayerBehaviors;
+                }else System.out.println("The game does not have any winner");
             }
         }
+       
+    }
+
+    private ArrayList<Integer> determineWinner() {
+        ArrayList<Integer> l_maxCoOwn = new ArrayList<>();
+        for(int l_PCount=0; l_PCount< d_Players.size(); l_PCount++){
+            l_maxCoOwn.add(d_Players.get(l_PCount).getD_CountriesOwned().size());
+        }
+        int l_maxVal = Collections.max(l_maxCoOwn);
+        ArrayList<Integer> l_IndexListOfWinners = new ArrayList<>();
+        for(int i=0;i<l_maxCoOwn.size();i++){
+            l_IndexListOfWinners.add(l_maxCoOwn.indexOf(l_maxVal));
+        }              
+        return l_IndexListOfWinners;
     }
 
     /**
