@@ -1,42 +1,50 @@
 package team14.warzone.GameEngine.State;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Map;
+import team14.warzone.MapModule.MapEditor;
 
 public class Tournament extends Phase{
     private ArrayList<Map> d_Maps;
-    private String d_ListOfMapFiles;
     private ArrayList<Player> d_Players;
-    private String d_ListOfPlayerStrategies;
     private int d_NumOfGames;
     private int d_NumOfTurns;
+    private MapEditor d_MapEditor;
 
     public Tournament(GameEngine p_GameEngine){
         super(p_GameEngine);
+        d_MapEditor = new MapEditor();
     }
     
     /** 
      * @param p_MapList
      */
     public void tournamentAddMaps(List<String> p_MapList){
-
+        for(String p_MapFileName:p_MapList){
+            try {
+                d_MapEditor.loadMap(p_MapFileName);
+            } catch (FileNotFoundException e) {
+                System.out.println(p_MapFileName+" file does not exist.");
+                e.printStackTrace();
+            }
+            if(d_MapEditor.validateMap(d_MapEditor.getD_LoadedMap()))
+                d_Maps.add(d_MapEditor.getD_LoadedMap());
+                else System.out.println(p_MapFileName+" map is not valid.");
+        }
     }
-    public void play(){
-
+    
+    @Override
+    public void run() {
         for(Map l_map : d_Maps){
             for(int l_Index = 0; l_Index<d_NumOfGames; l_Index++){
                 
             }
         }
-    }
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        
     }
     
     /** 
