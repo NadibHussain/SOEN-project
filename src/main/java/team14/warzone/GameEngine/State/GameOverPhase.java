@@ -94,6 +94,16 @@ public class GameOverPhase extends GamePlayPhase {
     }
 
     @Override
+    public void saveGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    @Override
+    public void loadGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    @Override
     public void issueCommands() {
 
     }

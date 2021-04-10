@@ -5,6 +5,7 @@ import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.Strategy.*;
 import team14.warzone.MapModule.Country;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class Player {
+public class Player implements Serializable {
     /**
      * name of player
      */

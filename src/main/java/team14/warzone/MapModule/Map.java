@@ -1,6 +1,7 @@
 package team14.warzone.MapModule;
 
 import javax.swing.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,7 +13,7 @@ import java.util.Iterator;
  * @version 1.0
  */
 
-public class Map {
+public class Map implements Serializable {
 
     /**
      * Array List of Continents defined in our map

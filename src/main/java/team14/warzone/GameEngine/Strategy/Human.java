@@ -5,9 +5,10 @@ import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Human implements Behavior {
+public class Human implements Behavior, Serializable {
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         List<String> l_OrderStr = p_GE.getD_OrderStrBuffer().get(0);

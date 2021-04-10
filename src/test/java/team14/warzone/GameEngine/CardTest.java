@@ -42,8 +42,8 @@ public class CardTest {
         // setting up the scenario
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");
         InputValidator.CURRENT_PHASE = InputValidator.Phase.STARTUP;
-        d_GE.getD_CurrentPhase().addPlayer("p1");
-        d_GE.getD_CurrentPhase().addPlayer("p2");
+        d_GE.getD_CurrentPhase().addPlayer("p1", "human");
+        d_GE.getD_CurrentPhase().addPlayer("p2", "human");
         d_GE.getD_CurrentPhase().assignCountries();
         InputValidator.CURRENT_PHASE = InputValidator.Phase.GAMEPLAY;
         d_GE.setD_CurrentPlayer(d_GE.getD_PlayerList().get(0)); // p1 turn
