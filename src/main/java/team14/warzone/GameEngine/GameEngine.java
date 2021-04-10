@@ -97,14 +97,11 @@ public class GameEngine implements Serializable {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
-<<<<<<< HEAD
     /**
      * Flag to check whether automated player passed their turn
      */
     private boolean d_PlayerPassed;
-=======
     private GameSaveLoad d_GameSaveLoad;
->>>>>>> be9fc428ae0f29d8c527c943c8d533587fa25f71
 
     /**
      * Constructor for Game Engine
@@ -441,7 +438,6 @@ public class GameEngine implements Serializable {
         return d_LogEntryBuffer;
     }
 
-<<<<<<< HEAD
     public boolean getD_PlayerPassed() {
         return d_PlayerPassed;
     }
@@ -453,7 +449,6 @@ public class GameEngine implements Serializable {
     public void resetPlayerPassed() {
         d_PlayerPassed = false;
     }
-=======
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
@@ -478,5 +473,4 @@ public class GameEngine implements Serializable {
         }
     }
      */
->>>>>>> be9fc428ae0f29d8c527c943c8d533587fa25f71
 }
