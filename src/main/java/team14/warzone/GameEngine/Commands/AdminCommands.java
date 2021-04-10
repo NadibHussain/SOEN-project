@@ -45,7 +45,7 @@ public class AdminCommands implements ICommand, Serializable {
                     "showmap",
                     "gameplayer",
                     "assigncountries",
-                    "tournament"
+                    "tournament",
                     "savegame",
                     "loadgame"
             )

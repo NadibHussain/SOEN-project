@@ -19,6 +19,11 @@ import java.util.List;
  */
 public class Aggressive implements Behavior {
     int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         // check if already deployed all un-deployed armies

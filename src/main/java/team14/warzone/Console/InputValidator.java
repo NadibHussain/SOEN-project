@@ -678,6 +678,12 @@ public class InputValidator {
         CURRENT_PHASE = Phase.valueOf(p_CurrentPhase);
     }
 
+    
+    /** 
+     * @param p_Arguments
+     * @return boolean
+     * @throws Exception
+     */
     private static boolean validateSaveGame(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);
@@ -689,6 +695,12 @@ public class InputValidator {
         return true;
     }
 
+    
+    /** 
+     * @param p_Arguments
+     * @return boolean
+     * @throws Exception
+     */
     private static boolean validateLoadGame(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);

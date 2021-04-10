@@ -11,6 +11,11 @@ import team14.warzone.Utils.Randomizer;
 import java.util.ArrayList;
 
 public class Random implements Behavior {
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
@@ -53,6 +58,11 @@ public class Random implements Behavior {
         }
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     private void attackNeighbor(GameEngine p_GE, Player p_Player) {
         // randomly keep selecting country until enemy neighbor found
         ArrayList<Country> l_CountriesOwned = p_Player.getD_CountriesOwned();
@@ -86,6 +96,11 @@ public class Random implements Behavior {
         }
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     private void moveArmy(GameEngine p_GE, Player p_Player) {
         // randomly select country and neighbor owned by self
         ArrayList<Country> l_CountriesOwned = p_Player.getD_CountriesOwned();

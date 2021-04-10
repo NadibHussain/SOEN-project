@@ -17,6 +17,11 @@ import java.util.List;
  * @version 1.0
  */
 public class Cheater implements Behavior {
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         //conquer all the immediate neighboring enemy countries

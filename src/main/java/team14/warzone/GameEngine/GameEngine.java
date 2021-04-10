@@ -438,10 +438,18 @@ public class GameEngine implements Serializable {
         return d_LogEntryBuffer;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getD_PlayerPassed() {
         return d_PlayerPassed;
     }
 
+    
+    /** 
+     * @param p_PlayerPassed
+     */
     public void setD_PlayerPassed(boolean p_PlayerPassed) {
         d_PlayerPassed = p_PlayerPassed;
     }
@@ -449,6 +457,10 @@ public class GameEngine implements Serializable {
     public void resetPlayerPassed() {
         d_PlayerPassed = false;
     }
+    
+    /** 
+     * @return GameSaveLoad
+     */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }

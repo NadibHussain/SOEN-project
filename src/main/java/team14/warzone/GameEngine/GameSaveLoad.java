@@ -14,6 +14,11 @@ public class GameSaveLoad implements Serializable {
     public GameSaveLoad(GameEngine p_GE) {
         d_GE = p_GE;
     }
+    
+    /** 
+     * @param p_FileName
+     * @return boolean
+     */
     public boolean saveGame(String p_FileName) {
         boolean d_saved = false;
         try {
@@ -40,6 +45,10 @@ public class GameSaveLoad implements Serializable {
         return d_saved;
     }
 
+    
+    /** 
+     * @param d_GameFile
+     */
     public void deserealize(File d_GameFile) {
         try {
             File file = d_GameFile;
@@ -100,6 +109,10 @@ public class GameSaveLoad implements Serializable {
         deserealize(d_GameFile);
     }
 
+    
+    /** 
+     * @param p_FileName
+     */
     public void runLoadGame(String p_FileName) {
 
     }
