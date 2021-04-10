@@ -30,6 +30,6 @@ public abstract class GamePlayPhase extends Phase {
 
     @Override
     public void loadGame(String p_FileName) {
-        d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
+        invalidCommandMessage();
     }
 }

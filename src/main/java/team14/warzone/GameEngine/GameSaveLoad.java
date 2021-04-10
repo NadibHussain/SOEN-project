@@ -1,10 +1,6 @@
 package team14.warzone.GameEngine;
 
 import java.io.*;
-import team14.warzone.Console.Console;
-import team14.warzone.MapModule.Map;
-
-import java.io.FileWriter;
 
 public class GameSaveLoad implements Serializable {
 
@@ -100,7 +96,7 @@ public class GameSaveLoad implements Serializable {
         deserealize(d_GameFile);
     }
 
-    public void runLoadGame(String p_FileName) {
-
+    public GameEngine runLoadGame(String p_FileName) {
+        return null;
     }
 }

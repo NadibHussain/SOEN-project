@@ -136,6 +136,11 @@ public class StartupPhase extends GamePlayPhase {
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    @Override
+    public void loadGame(String p_FileName) {
+        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
+    }
+
     /**
      * Reinforcement beginning of game play
      */
