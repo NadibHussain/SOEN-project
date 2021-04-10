@@ -436,25 +436,5 @@ public class GameEngine implements Serializable {
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
-    /**
-    public static void saveGame(String p_FileName, GameEngine p_GE) {
-        File d_GameFile = new File(p_FileName);
-        GameEngine d_GE = p_GE;
-        try {
-            FileWriter d_GameFileWriter = new FileWriter(d_GameFile);
-            FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
-            ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-            d_ObjectOut.close();
-            d_ObjectOut.flush();
-            System.out.println("Game Saved Successfully as" + p_FileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-     */
+
 }
