@@ -9,11 +9,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +22,7 @@ public class TestMapEditor {
     /**
      * static mapeditor
      */
-    public static MapEditor d_MapEditor;
+    public static MapEditorDomination d_MapEditor;
 
     /** 
      * Initialize before tests run
@@ -34,8 +31,8 @@ public class TestMapEditor {
     @BeforeClass
     public static void init() throws FileNotFoundException {
 
-        d_MapEditor = new MapEditor();
-        d_MapEditor.loadMap("europass.map");
+        d_MapEditor = new MapEditorDomination();
+        d_MapEditor.loadMapDomination("europass.map");
     }
 
     /**
@@ -149,7 +146,7 @@ public class TestMapEditor {
     @DisplayName("Testing invalid map")
     public void testInvalidMap() {
         try {
-            d_MapEditor.loadMap("invalidmap.map");
+            d_MapEditor.loadMapDomination("invalidmap.map");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

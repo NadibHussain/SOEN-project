@@ -1,6 +1,9 @@
 package team14.warzone.MapModule;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -9,7 +12,7 @@ import java.util.Stack;
  * This is the main class for Mapeditor functions
  */
 
-public class MapEditor implements Serializable {
+public class MapEditorConquest {
 
     /**
      * loaded map object
@@ -19,22 +22,22 @@ public class MapEditor implements Serializable {
     /**
      * Mapeditor method
      */
-    public MapEditor() {
+    public MapEditorConquest() {
     }
 
     /**
      * This method loads an existing file. If file is not found, it creates a file
      * and map from scratch.
-     * 
+     *
      * @param p_FileName filename param
      */
-    public void editMap(String p_FileName) {
+    public void editMapConquest(String p_FileName) {
         try {
-            loadMap(p_FileName);
+            loadMapConquest(p_FileName);
         } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
-            saveMap(p_FileName);
+            saveMapConquest(p_FileName);
         }
     }
 
@@ -44,7 +47,7 @@ public class MapEditor implements Serializable {
      * @param p_FileName String filename
      * @throws FileNotFoundException throws exception when filename is invalid
      */
-    public void loadMap(String p_FileName) throws FileNotFoundException {
+    public void loadMapConquest(String p_FileName) throws FileNotFoundException {
         Map l_Map = new Map();
         File l_FileObject = new File(p_FileName);
         Scanner l_ReaderObject = new Scanner(l_FileObject);
@@ -52,13 +55,13 @@ public class MapEditor implements Serializable {
             String l_Data = l_ReaderObject.nextLine();
             switch (l_Data) {
                 case "[countries]":
-                    handleCountries(l_ReaderObject, l_Map);
+                    handleCountriesConquest(l_ReaderObject, l_Map);
                     break;
                 case "[continents]":
-                    handleContinents(l_ReaderObject,l_Map);
+                    handleContinentsConquest(l_ReaderObject,l_Map);
                     break;
                 case "[borders]":
-                    handleNeighbour(l_ReaderObject,l_Map);
+                    handleNeighbourConquest(l_ReaderObject,l_Map);
                     break;
             }
 
@@ -73,7 +76,7 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleCountries(Scanner l_ReaderObject,Map l_Map){
+    private void handleCountriesConquest(Scanner l_ReaderObject,Map l_Map){
         while (true) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
@@ -101,7 +104,7 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleContinents(Scanner l_ReaderObject,Map l_Map){
+    private void handleContinentsConquest(Scanner l_ReaderObject,Map l_Map){
         while (true) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
@@ -120,7 +123,7 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleNeighbour(Scanner l_ReaderObject,Map l_Map){
+    private void handleNeighbourConquest(Scanner l_ReaderObject,Map l_Map){
         ArrayList<Country> l_Countires = l_Map.getD_Countries();
         int l_Index = 0;
         while (l_ReaderObject.hasNextLine()) {
@@ -152,7 +155,7 @@ public class MapEditor implements Serializable {
      *
      * @param p_FileName String filename
      */
-    public void saveMap(String p_FileName) {
+    public void saveMapConquest(String p_FileName) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
         // writing all the continents
         l_Content.append("[continents]\n");
@@ -212,7 +215,7 @@ public class MapEditor implements Serializable {
 
         l_ConnectedGraph = dfs(l_Countries, "graph");
         // checking if map is connected
-        if (l_ConnectedGraph == true)
+        if (l_ConnectedGraph)
             System.out.println(l_ConnectedGraph+" The map is connected.");
 
         else {
@@ -274,7 +277,7 @@ public class MapEditor implements Serializable {
 
     /**
      * Depth-first-search (dfs)
-     * 
+     *
      * @param p_CountryList list of countries
      * @param p_typeOfGraph type of graph
      * @return true if dfs was successful
@@ -326,7 +329,7 @@ public class MapEditor implements Serializable {
 
     /**
      * counts how many nodes were visited
-     * 
+     *
      * @param l_Visited list of visited nodes
      * @return total nodes visited
      */

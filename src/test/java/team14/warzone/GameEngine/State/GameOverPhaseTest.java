@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.MapEditorDomination;
 
 public class GameOverPhaseTest {
     /**
@@ -15,7 +15,7 @@ public class GameOverPhaseTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private MapEditorDomination d_MapEditor;
     /**
      * game engine field
      */
@@ -27,7 +27,7 @@ public class GameOverPhaseTest {
     @Before
     public void init() {
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new MapEditorDomination();
         d_GE = new GameEngine(d_Console, d_MapEditor);
         // map editor phase
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");
