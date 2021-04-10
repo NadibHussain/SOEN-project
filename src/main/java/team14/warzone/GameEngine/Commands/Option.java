@@ -1,12 +1,13 @@
 package team14.warzone.GameEngine.Commands;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class is used to create objects representing the options entered by user in the command line
  */
-public class Option {
+public class Option implements Serializable {
     /**
      * name of the option (-add or -remove)
      */

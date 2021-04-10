@@ -9,6 +9,7 @@ import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +21,7 @@ import java.util.Random;
  * @author Zeina
  * @version 1.0
  */
-public class GameEngine {
+public class GameEngine implements Serializable {
     /**
      * field stores the current player who's turn is ongoing
      */
@@ -96,6 +97,7 @@ public class GameEngine {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
+    private GameSaveLoad d_GameSaveLoad;
 
     /**
      * Constructor for Game Engine
@@ -110,7 +112,7 @@ public class GameEngine {
         d_NeutralPlayer = new NeutralPlayer();
         d_AdminCommandsBuffer = new ArrayList<>();
         d_OrderBuffer = new ArrayList<>();
-
+        d_GameSaveLoad = new GameSaveLoad(this);
         d_PreMapLoadPhase = new PreMapLoadPhase(this);
         d_PostMapEditLoadPhase = new PostMapEditLoadPhase(this);
         d_StartupPhase = new StartupPhase(this);
@@ -430,4 +432,29 @@ public class GameEngine {
     public LogEntryBuffer getD_LogEntryBuffer() {
         return d_LogEntryBuffer;
     }
+
+    public GameSaveLoad getD_GameSaveLoad() {
+        return d_GameSaveLoad;
+    }
+    /**
+    public static void saveGame(String p_FileName, GameEngine p_GE) {
+        File d_GameFile = new File(p_FileName);
+        GameEngine d_GE = p_GE;
+        try {
+            FileWriter d_GameFileWriter = new FileWriter(d_GameFile);
+            FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
+            ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
+            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
+            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
+            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
+            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
+            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
+            d_ObjectOut.close();
+            d_ObjectOut.flush();
+            System.out.println("Game Saved Successfully as" + p_FileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+     */
 }

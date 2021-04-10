@@ -2,6 +2,7 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class AdminCommands implements ICommand {
+public class AdminCommands implements ICommand, Serializable {
     /**
      * field stores keyword for the command
      */
@@ -43,7 +44,9 @@ public class AdminCommands implements ICommand {
                     "loadmap",
                     "showmap",
                     "gameplayer",
-                    "assigncountries"
+                    "assigncountries",
+                    "savegame",
+                    "loadgame"
             )
     );
 
@@ -107,6 +110,14 @@ public class AdminCommands implements ICommand {
 
             case "savemap":
                 d_GameEngine.getD_CurrentPhase().saveMap(l_CommandArgs.get(0));
+                break;
+
+            case "savegame":
+                d_GameEngine.getD_CurrentPhase().saveGame(l_CommandArgs.get(0));
+                break;
+
+            case "loadgame":
+                d_GameEngine.getD_CurrentPhase().loadGame(l_CommandArgs.get(0));
                 break;
 
             case "editmap":
