@@ -595,9 +595,6 @@ public class InputValidator {
     }
 
     private static boolean validateLoadGame(List<String> p_Arguments) throws Exception {
-        // Validate command for current gamephase
-        gamePhaseCheck(Phase.GAMEPLAY);
-
         // Validate -add arguments and -remove arguments
         if (p_Arguments.size() != 1)
             throw new Exception("Invalid arguments");

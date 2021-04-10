@@ -2,7 +2,6 @@ package team14.warzone.GameEngine;
 
 import java.io.*;
 
-
 public class GameSaveLoad implements Serializable {
 
     private File d_GameFile;
@@ -62,7 +61,7 @@ public class GameSaveLoad implements Serializable {
         saveGame(p_FileName);
     }
 
-    public void runLoadGame(String p_FileName) {
-
+    public GameEngine runLoadGame(String p_FileName) {
+        return null;
     }
 }

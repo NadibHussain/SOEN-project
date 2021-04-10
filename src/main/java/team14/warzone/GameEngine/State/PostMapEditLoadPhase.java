@@ -132,9 +132,4 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         invalidCommandMessage();
     }
 
-    @Override
-    public void loadGame(String p_FileName) {
-        invalidCommandMessage();
-    }
-
 }
