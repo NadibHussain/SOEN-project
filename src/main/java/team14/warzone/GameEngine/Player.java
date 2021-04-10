@@ -281,8 +281,8 @@ public class Player {
      */
     public void removeCard(Card p_Card) {
         for (Card l_Card : getCardList()) {
-            if (l_Card == p_Card) {
-                getCardList().remove(p_Card);
+            if (l_Card.getD_CardType().equals(p_Card.getD_CardType())) {
+                getCardList().remove(l_Card);
                 break;
             }
         }

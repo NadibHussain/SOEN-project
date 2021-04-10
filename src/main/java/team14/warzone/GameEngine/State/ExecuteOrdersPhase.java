@@ -84,8 +84,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Add to country list
-     * @param p_CountryId
-     * @param p_ContinentId
+     * @param p_CountryId name of country
+     * @param p_ContinentId name of continent
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -94,7 +94,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Remove from country list
-     * @param p_CountryId
+     * @param p_CountryId name of country
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -103,8 +103,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Add to continent list
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * @param p_ContinentId name of continent
+     * @param p_ControlValue control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -113,7 +113,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * REmove from Continent list
-     * @param p_ContinentId
+     * @param p_ContinentId name of continent
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -122,8 +122,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
      /** 
      * Add neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor country
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -132,8 +132,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Remove neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -142,7 +142,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Loads map
-     * @param p_FileName
+     * @param p_FileName name of map file
      */
     @Override
     public void loadMap(String p_FileName) {
@@ -151,7 +151,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Saves map
-     * @param p_FileName
+     * @param p_FileName name of map file
      */
     @Override
     public void saveMap(String p_FileName) {
@@ -160,7 +160,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Edit map
-     * @param p_FileName
+     * @param p_FileName name of map file
      */
     @Override
     public void editMap(String p_FileName) {
@@ -169,7 +169,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /** 
      * Validates a map
-     * @param p_Map
+     * @param p_Map map object
      */
     @Override
     public void validateMap(Map p_Map) {
@@ -259,5 +259,4 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
     public void diplomacy() {
         invalidCommandMessage();
     }
-
 }

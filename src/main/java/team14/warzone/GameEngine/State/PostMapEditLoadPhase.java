@@ -18,8 +18,8 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * add country
-     * @param p_CountryId
-     * @param p_ContinentId
+     * @param p_CountryId name of country
+     * @param p_ContinentId name of continent
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -31,7 +31,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * remove country
-     * @param p_CountryId
+     * @param p_CountryId name of country
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -43,8 +43,8 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * add continent
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * @param p_ContinentId name of continent
+     * @param p_ControlValue control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -56,7 +56,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * remove continent
-     * @param p_ContinentId
+     * @param p_ContinentId name of continent
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -68,8 +68,8 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * add neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -81,8 +81,8 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * remove neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -94,7 +94,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * saves map
-     * @param p_FileName
+     * @param p_FileName name of map file
      */
     @Override
     public void saveMap(String p_FileName) {
@@ -106,7 +106,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * edits map
-     * @param p_FileName
+     * @param p_FileName name of map file
      */
     @Override
     public void editMap(String p_FileName) {
@@ -118,7 +118,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
     
     /** 
      * validates map
-     * @param p_Map
+     * @param p_Map map object
      */
     @Override
     public void validateMap(Map p_Map) {
