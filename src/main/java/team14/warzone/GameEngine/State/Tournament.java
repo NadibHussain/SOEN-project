@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -135,24 +139,40 @@ public class Tournament extends Phase {
                 }
                 
                 ArrayList<Integer> l_IndexListOfWinners = determineWinner();
-                String l_PlayerBehaviors = "";
+                String l_WinningValue = "";
                 if (l_IndexListOfWinners.size() > 1) {
                     System.out.println(l_IndexListOfWinners.get(0) + " " + l_IndexListOfWinners.get(1));
                     for (int i = 0; i < l_IndexListOfWinners.size(); i++) {
-                        l_PlayerBehaviors = l_PlayerBehaviors + " "
+                        l_WinningValue = l_WinningValue + " "+d_Players.get(l_IndexListOfWinners.get(i)).getD_Name()+" "
                                 + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
-                    System.out.println("The game is a draw between " + l_PlayerBehaviors);
-                    d_GameTable[l_MapIndex][l_GameCount] = "Draw between " + l_PlayerBehaviors;
+                    System.out.println("The game is a draw between " + l_WinningValue);
+                    d_GameTable[l_MapIndex][l_GameCount] = "Draw between " + l_WinningValue;
                 } else if (l_IndexListOfWinners.size() == 1) {
-                    l_PlayerBehaviors = l_PlayerBehaviors + " "
+                    l_WinningValue = l_WinningValue + " "+d_Players.get(l_IndexListOfWinners.get(0)).getD_Name()+" "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
-                    System.out.println("The winner is " + l_PlayerBehaviors+" with owning countries " +d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
-                    d_GameTable[l_MapIndex][l_GameCount] = l_PlayerBehaviors;
+                    System.out.println("The winner is " + l_WinningValue+" with owning countries " +d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
+                    d_GameTable[l_MapIndex][l_GameCount] = l_WinningValue;
                 } else
                     System.out.println("The game does not have any winner");
             }
         }
+        //show in table
+        String[] l_ColumnNames = new String[d_NumOfGames];
+        for(int l_IndexColumn = 0; l_IndexColumn<d_NumOfGames; l_IndexColumn++){
+            l_ColumnNames[l_IndexColumn] = "Game"+(l_IndexColumn+1);
+        }
+        JTable l_Table = new JTable(d_GameTable,l_ColumnNames);
+
+        //Create and set up the window.
+        JFrame l_Frame = new JFrame("Tournament");
+
+        //Create and set up the content pane.
+        l_Frame.add(new JScrollPane(l_Table));
+
+        //Display the window.
+        l_Frame.pack();
+        l_Frame.setVisible(true);
 
     }
 

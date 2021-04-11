@@ -196,4 +196,11 @@ public class Aggressive implements Behavior {
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
+    /**
+     * @return name of behavior
+     */
+    @Override
+    public String toString(){
+        return "aggressive";
+    }
 }
