@@ -1,8 +1,8 @@
 package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
-import team14.warzone.GameEngine.Commands.Advance;
-import team14.warzone.GameEngine.Commands.Deploy;
+import team14.warzone.GameEngine.Card;
+import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
@@ -16,7 +16,7 @@ public class Benevolent implements Behavior {
 
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
-        int l_ExpectedNumberOfOrders = 2;
+        int l_ExpectedNumberOfOrders = 3;
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
 
         // deploy to weakest
@@ -32,6 +32,26 @@ public class Benevolent implements Behavior {
             // write to log
             p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued deploy command");
             p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+        }
+
+        // play cards if any
+        else if (!p_Player.getCardList().isEmpty()) {
+            Card l_Card = p_Player.getCardList().get(0);
+            switch (l_Card.getD_CardType()) {
+                case "blockade":
+                    issueBlockade(p_GE, p_Player, l_Card);
+                    break;
+                case "airlift":
+                    issueAirlift(p_GE, p_Player, l_Card);
+                    break;
+                case "diplomacy":
+                    issueDiplomacy(p_GE, p_Player, l_Card);
+                    break;
+
+                default:
+                    p_Player.removeCard(l_Card);
+                    break;
+            }
         }
 
         // advance from strong to weak (self)
@@ -79,6 +99,14 @@ public class Benevolent implements Behavior {
         return l_WeakestCountry;
     }
 
+    private Country findStrongestCountry(Player p_Player) {
+        ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
+        Country l_StrongestCountry = null;
+        l_CountryList.sort(Comparator.comparing(Country::getD_NumberOfArmies));
+        l_StrongestCountry = l_CountryList.get(l_CountryList.size() - 1);
+        return l_StrongestCountry;
+    }
+
     // reinforce weaker country - find weaker countries
     private ArrayList<Country> findWeakerCountriesWithStrongNeighbor(Player p_Player) {
         findWeakestCountry(p_Player);
@@ -107,5 +135,87 @@ public class Benevolent implements Behavior {
             }
         }
         return null;
+    }
+
+    private Country findCountryAtRisk(Player p_Player) {
+        int l_Risk = 0;
+        Country l_CountryAtRisk = null;
+        ArrayList<Country> l_CountriesOwned = p_Player.getD_CountriesOwned();
+
+        // loop and try to find country which has enemy neighbor with highest number of armies
+        for (Country l_Country : l_CountriesOwned) {
+            for (Country l_Neighbor : l_Country.getD_Neighbours()) {
+                // country has armies
+                if (l_Country.getD_NumberOfArmies() > 0) {
+                    // check neighbor is enemy and enemy army greater than current risk
+                    if (!l_Neighbor.getD_CurrentOwner().equals(l_Country.getD_CurrentOwner()) && l_Neighbor.getD_NumberOfArmies() > l_Risk) {
+                        l_Risk = l_Neighbor.getD_NumberOfArmies();
+                        l_CountryAtRisk = l_Country;
+                    }
+                }
+            }
+        }
+
+        // if no country with army+enemy neighbor found play blockade at any country with army
+        if (Objects.isNull(l_CountryAtRisk)) {
+            for (Country l_Country : l_CountriesOwned) {
+                if (l_Country.getD_NumberOfArmies() > 0) {
+                    l_CountryAtRisk = l_Country;
+                    break;
+                }
+            }
+        }
+
+        return l_CountryAtRisk;
+    }
+
+    private void issueBlockade(GameEngine p_GE, Player p_Player, Card p_Card) {
+        Country l_DestinationCountry = findCountryAtRisk(p_Player);
+        Blockade l_Blockade = new Blockade(l_DestinationCountry.getD_CountryID(), p_GE);
+
+        p_Player.getD_OrderList().add(l_Blockade);
+        Console.displayMsg(p_Player.getD_Name() + " issued: blockade on " + l_DestinationCountry.getD_CountryID());
+        // write to log
+        p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued blockade command on " + l_DestinationCountry.getD_CountryID());
+        p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+    }
+
+    private void issueAirlift(GameEngine p_GE, Player p_Player, Card p_Card) {
+        // find strongest country and weakest country
+        Country l_StrongestCountry = findStrongestCountry(p_Player);
+        Country l_WeakestCountry = findWeakestCountry(p_Player);
+        int l_NumOfArmies = l_StrongestCountry.getD_NumberOfArmies() / 2;
+
+        // airlift from strongest to weakest
+        Airlift l_Airlift = new Airlift(l_StrongestCountry.getD_CountryID(), l_WeakestCountry.getD_CountryID(),
+                l_NumOfArmies, p_GE);
+
+        p_Player.getD_OrderList().add(l_Airlift);
+        Console.displayMsg(p_Player.getD_Name() + " issued: airlift from " + l_StrongestCountry.getD_CountryID() + " " +
+                "to " + l_WeakestCountry.getD_CountryID());
+        // write to log
+        p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued airlift command from " + l_StrongestCountry.getD_CountryID() + " " +
+                "to " + l_WeakestCountry.getD_CountryID());
+        p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+    }
+
+    private void issueDiplomacy(GameEngine p_GE, Player p_Player, Card p_Card) {
+        // find target player
+        Player l_TargetPlayer = null;
+        for (Player l_Player : p_GE.getD_PlayerList()) {
+            if (!l_Player.equals(p_Player)) {
+                l_TargetPlayer = l_Player;
+                break;
+            }
+        }
+
+        // issue diplomacy order
+        Diplomacy l_Diplomacy = new Diplomacy(l_TargetPlayer.getD_Name(), p_GE);
+
+        p_Player.getD_OrderList().add(l_Diplomacy);
+        Console.displayMsg(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
+        // write to log
+        p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
+        p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
 }
