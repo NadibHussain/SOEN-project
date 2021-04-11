@@ -394,4 +394,16 @@ public class Player implements Serializable {
     public void setD_IssueOrderBehavior(Behavior p_IssueOrderBehavior) {
         d_IssueOrderBehavior = p_IssueOrderBehavior;
     }
+
+    /**
+     * Reset all game progress for player
+     */
+    public void resetPlayer() {
+        d_TotalNumberOfArmies = 0;
+        d_ArmiesOrderedToBeDeployed = 0;
+        d_CountriesOwned.clear();
+        d_OrderList.clear();
+        d_CardList.clear();
+        d_DiplomaticPlayers.clear();
+    }
 }
