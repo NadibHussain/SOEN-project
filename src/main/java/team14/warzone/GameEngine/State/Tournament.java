@@ -122,7 +122,7 @@ public class Tournament extends Phase {
         for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
             
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
-                // TO-DO reset player values
+                d_GameEngine.resetPlayers();
                 d_CurrentMap = d_Maps.get(l_MapIndex);
                 d_GameEngine.setD_LoadedMap(d_CurrentMap);
                 assignCountries();// assign countries to players for current map
@@ -133,6 +133,7 @@ public class Tournament extends Phase {
                         l_APlayer.issueOrder();
                     }
                 }
+                
                 ArrayList<Integer> l_IndexListOfWinners = determineWinner();
                 String l_PlayerBehaviors = "";
                 if (l_IndexListOfWinners.size() > 1) {
