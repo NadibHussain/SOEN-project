@@ -127,6 +127,10 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    /**
+     * Savegame method which is invalid in PostMapEditLoadPhase phase
+     * @param p_FileName filename with which the game has to be saved
+     */
     @Override
     public void saveGame(String p_FileName) {
         invalidCommandMessage();
