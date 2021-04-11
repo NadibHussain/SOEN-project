@@ -6,8 +6,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditor;
 
@@ -40,9 +42,15 @@ public class Tournament extends Phase {
     /**
      * tournament table
      */
-    private String [][] d_GameTable;
+    private String[][] d_GameTable;
+    /**
+     * Current Map object
+     */
+    private Map d_CurrentMap;
+
     /**
      * Constructor
+     * 
      * @param p_GameEngine
      */
 
@@ -57,17 +65,21 @@ public class Tournament extends Phase {
      * @param p_MapList
      */
     public void tournamentAddMaps(List<String> p_MapList) {
+        d_Maps = new ArrayList<>();
         for (String p_MapFileName : p_MapList) {
             try {
+                
                 d_MapEditor.loadMap(p_MapFileName);
+                d_GameEngine.setD_LoadedMap(d_MapEditor.d_LoadedMap);
+                if (d_MapEditor.validateMap(d_MapEditor.d_LoadedMap))
+                    d_Maps.add(d_MapEditor.d_LoadedMap);
+                else
+                    System.out.println(p_MapFileName + " map is not valid.");
             } catch (FileNotFoundException e) {
                 System.out.println(p_MapFileName + " file does not exist.");
                 e.printStackTrace();
             }
-            if (d_MapEditor.validateMap(d_MapEditor.getD_LoadedMap()))
-                d_Maps.add(d_MapEditor.getD_LoadedMap());
-            else
-                System.out.println(p_MapFileName + " map is not valid.");
+
         }
     }
 
@@ -77,6 +89,7 @@ public class Tournament extends Phase {
      * @param p_Strategies
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
+        d_Players = new ArrayList<>();
         int l_Count = 1;
         for (String p_AStrategy : p_Strategies) {
             if (p_AStrategy.equalsIgnoreCase("aggressive") || p_AStrategy.equalsIgnoreCase("benevolent")
@@ -87,7 +100,7 @@ public class Tournament extends Phase {
             } else
                 System.out.println(p_AStrategy + " is not valid or allowed to play tournament.");
         }
-        this.assignCountries();
+        d_GameEngine.setD_PlayerList(d_Players);
     }
 
     /**
@@ -106,43 +119,53 @@ public class Tournament extends Phase {
 
     @Override
     public void run() {
-        d_GameTable = new String [d_Maps.size()][d_NumOfGames];
-        for (int l_MapIndex=0; l_MapIndex< d_Maps.size(); l_MapIndex++) {
+        d_GameTable = new String[d_Maps.size()][d_NumOfGames];
+        for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
+
+            d_CurrentMap = d_Maps.get(l_MapIndex);
+            
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                assignCountries();// assign countries to players for current map
                 for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
                     for (Player l_APlayer : d_Players) {
+                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
                         l_APlayer.issueOrder();
                     }
                 }
-                ArrayList<Integer> l_IndexListOfWinners=determineWinner();
+                ArrayList<Integer> l_IndexListOfWinners = determineWinner();
                 String l_PlayerBehaviors = "";
-                if(l_IndexListOfWinners.size()>1){
-                    for(int i=0; i<l_IndexListOfWinners.size(); i++){
-                        l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
+                if (l_IndexListOfWinners.size() > 1) {
+                    System.out.println(l_IndexListOfWinners.get(0) + " " + l_IndexListOfWinners.get(1));
+                    for (int i = 0; i < l_IndexListOfWinners.size(); i++) {
+                        l_PlayerBehaviors = l_PlayerBehaviors + " "
+                                + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
-                    System.out.println("The game is a draw between "+ l_PlayerBehaviors);
-                    d_GameTable[l_MapIndex][l_GameCount] = "Draw between "+ l_PlayerBehaviors;
-                }
-                if(l_IndexListOfWinners.size() == 1){
-                    l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
-                    System.out.println("The winner is "+ l_PlayerBehaviors);
+                    System.out.println("The game is a draw between " + l_PlayerBehaviors);
+                    d_GameTable[l_MapIndex][l_GameCount] = "Draw between " + l_PlayerBehaviors;
+                } else if (l_IndexListOfWinners.size() == 1) {
+                    l_PlayerBehaviors = l_PlayerBehaviors + " "
+                            + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
+                    System.out.println("The winner is " + l_PlayerBehaviors);
                     d_GameTable[l_MapIndex][l_GameCount] = l_PlayerBehaviors;
-                }else System.out.println("The game does not have any winner");
+                } else
+                    System.out.println("The game does not have any winner");
             }
         }
-       
+
     }
 
     private ArrayList<Integer> determineWinner() {
-        ArrayList<Integer> l_maxCoOwn = new ArrayList<>();
-        for(int l_PCount=0; l_PCount< d_Players.size(); l_PCount++){
-            l_maxCoOwn.add(d_Players.get(l_PCount).getD_CountriesOwned().size());
+        ArrayList<Integer> l_NumCountriesOwned = new ArrayList<>();//num of countries for each player
+        for (int l_PCount = 0; l_PCount < d_Players.size(); l_PCount++) {
+            l_NumCountriesOwned.add(d_Players.get(l_PCount).getD_CountriesOwned().size());
         }
-        int l_maxVal = Collections.max(l_maxCoOwn);
+        int l_MaxVal = Collections.max(l_NumCountriesOwned);
         ArrayList<Integer> l_IndexListOfWinners = new ArrayList<>();
-        for(int i=0;i<l_maxCoOwn.size();i++){
-            l_IndexListOfWinners.add(l_maxCoOwn.indexOf(l_maxVal));
-        }              
+        for (int i = 0; i < l_NumCountriesOwned.size(); i++) {
+            if(l_NumCountriesOwned.get(i) == l_MaxVal){
+                l_IndexListOfWinners.add(i);
+            }
+        }
         return l_IndexListOfWinners;
     }
 
@@ -261,8 +284,24 @@ public class Tournament extends Phase {
 
     @Override
     public void assignCountries() {
-        // TODO Auto-generated method stub
-
+        // if number of players between 2 and 5, assign countries to players randomly
+        if (d_Players.size() >= 2 && d_Players.size() <= 5) {
+            int l_CountryCounter = 0;
+            ArrayList<Country> l_Countries = d_CurrentMap.getD_Countries();
+            while (l_CountryCounter < l_Countries.size()) {
+                for (int l_PlayerIterator = 0; l_PlayerIterator < d_Players.size()
+                        && l_CountryCounter < l_Countries.size(); l_PlayerIterator++) {
+                    // add country to player's country-list
+                    d_Players.get(l_PlayerIterator).addCountryOwned(l_Countries.get(l_CountryCounter));
+                    // set country's current owner to player
+                    l_Countries.get(l_CountryCounter).setD_CurrentOwner(d_Players.get(l_PlayerIterator).getD_Name());
+                    l_CountryCounter++;
+                }
+            }
+            Console.displayMsg("Success: countries assigned");
+        } else {
+            Console.displayMsg("Failed: 2-5 players required");
+        }
     }
 
     @Override
