@@ -42,7 +42,7 @@ public class TestMapEditor {
     @DisplayName("Testing loading a map")
     public void testLoadMap() {
         Map l_Map = d_MapEditor.getD_LoadedMap();
-        assertEquals(11, l_Map.getD_Continents().size());
+        assertEquals(7, l_Map.getD_Continents().size());
         assertEquals(110, l_Map.getD_Countries().size());
         assertEquals(51, l_Map.getD_Countries().get(1).getD_Neighbours().get(1).getD_CountryIntID());
     }
