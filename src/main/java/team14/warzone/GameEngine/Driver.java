@@ -3,6 +3,8 @@ package team14.warzone.GameEngine;
 import team14.warzone.Console.Console;
 import team14.warzone.MapModule.MapEditor;
 
+import java.io.FileNotFoundException;
+
 /**
  * This is a driver class for the game engine
  */
@@ -12,7 +14,7 @@ public class Driver {
      *
      * @param args main args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Console l_Console = new Console();
         MapEditor l_ME = new MapEditor();
         GameEngine l_GE = new GameEngine(l_Console, l_ME);

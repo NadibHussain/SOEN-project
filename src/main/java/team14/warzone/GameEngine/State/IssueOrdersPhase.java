@@ -77,8 +77,8 @@ public class IssueOrdersPhase extends GamePlayPhase {
             int l_Counter = 0;
             while (l_Counter < l_PlayerList.size()) {
                 d_GameEngine.resetPlayerPassed();
-                // check if player has already passed
-                if (!l_Flag.get(l_Counter)) {
+                // check if player has already passed or lost all his countries
+                if (!l_Flag.get(l_Counter) && l_PlayerList.get(l_Counter).getD_CountriesOwned().size() != 0) {
                     // print current player's name and ask for command
                     d_GameEngine.setD_CurrentPlayer(l_PlayerList.get(l_Counter));
                     Player l_CurrentPlayer = l_PlayerList.get(l_Counter);
