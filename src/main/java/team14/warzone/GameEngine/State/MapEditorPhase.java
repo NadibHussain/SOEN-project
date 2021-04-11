@@ -67,7 +67,7 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public void loadMap(String p_FileName) {
         try {
-            d_GameEngine.getD_MapEditor().loadMap(p_FileName);
+            d_GameEngine.getD_MapEditor().loadMapDomination(p_FileName);
             d_GameEngine.setD_LoadedMap(d_GameEngine.getD_MapEditor().getD_LoadedMap());
             // validate map right after loading
             if (!d_GameEngine.getD_MapEditor().validateMap(d_GameEngine.getD_LoadedMap()))

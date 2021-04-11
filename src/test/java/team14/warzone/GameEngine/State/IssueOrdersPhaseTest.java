@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.MapEditorDomination;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +21,7 @@ public class IssueOrdersPhaseTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private MapEditorDomination d_MapEditor;
     /**
      * game engine field
      */
@@ -39,7 +39,7 @@ public class IssueOrdersPhaseTest {
     public void setup() {
         // object instantiation
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new MapEditorDomination();
         d_GE = new GameEngine(d_Console, d_MapEditor);
         d_IssueOrderPh = new IssueOrdersPhase(d_GE);
 
