@@ -6,15 +6,32 @@ import java.io.*;
  * This class implements the Save Game and Load Game feature
  */
 public class GameSaveLoad implements Serializable {
-
+    /**
+     * File to save the game
+     */
     private File d_GameFile;
+    /**
+     * Game Engine object to save the state of the game
+     */
     private GameEngine d_GE;
+    /**
+     * Game Engine object to load the game from
+     */
     private GameEngine d_loadGameEngine;
 
+    /**
+     * GameSaveLoad method
+     * @param p_GE GameEngine parameter
+     */
     public GameSaveLoad(GameEngine p_GE) {
         d_GE = p_GE;
     }
 
+    /**
+     * Save Game implementation
+     * @param p_FileName takes input as a string to save file with the name
+     * @return true if game is saved
+     */
     public boolean saveGame(String p_FileName) {
         boolean d_saved = false;
         try {
@@ -35,6 +52,11 @@ public class GameSaveLoad implements Serializable {
         return d_saved;
     }
 
+    /**
+     * Save Game implementation
+     * @param p_FileName takes input as a string to load file with the name
+     * @return true if game is loaded
+     */
     public boolean loadGame(String p_FileName) {
         boolean d_loaded = false;
         try {
@@ -54,6 +76,10 @@ public class GameSaveLoad implements Serializable {
         return d_loaded;
     }
 
+    /**
+     * Deserealizing the object stream which has the saved game in serealized form
+     * @param d_GameFile takes input as a gamefile
+     */
     public void deserealize(File d_GameFile) {
         try {
             File file = d_GameFile;
@@ -73,10 +99,19 @@ public class GameSaveLoad implements Serializable {
         }
     }
 
+    /**
+     * Run Save Game method to trigger savegame from command
+     * @param p_FileName filename
+     */
     public void runSaveGame(String p_FileName) {
         saveGame(p_FileName);
     }
 
+    /**
+     * Run Load Game method to trigger loadgame from command
+     * @param p_FileName filename
+     * @return Game Engine with parameters same as when game was saved
+     */
     public GameEngine runLoadGame(String p_FileName) {
         loadGame(p_FileName);
         return d_loadGameEngine;
