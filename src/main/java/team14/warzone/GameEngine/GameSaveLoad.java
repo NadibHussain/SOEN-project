@@ -2,10 +2,14 @@ package team14.warzone.GameEngine;
 
 import java.io.*;
 
+/**
+ * This class implements the Save Game and Load Game feature
+ */
 public class GameSaveLoad implements Serializable {
 
     private File d_GameFile;
     private GameEngine d_GE;
+    private GameEngine d_loadGameEngine;
 
     public GameSaveLoad(GameEngine p_GE) {
         d_GE = p_GE;
@@ -22,13 +26,6 @@ public class GameSaveLoad implements Serializable {
             FileOutputStream d_FileOut = new FileOutputStream(p_FileName);
             ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
             d_ObjectOut.writeObject(d_GE);
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-            d_ObjectOut.close();
-            d_ObjectOut.flush();
             System.out.println("Game Saved Successfully as" + " " + p_FileName);
             d_saved = true;
         } catch (IOException e) {
@@ -36,6 +33,25 @@ public class GameSaveLoad implements Serializable {
             d_saved = false;
         }
         return d_saved;
+    }
+
+    public boolean loadGame(String p_FileName) {
+        boolean d_loaded = false;
+        try {
+            FileInputStream d_FileIn = new FileInputStream(p_FileName);
+            ObjectInputStream d_ObjectIn = new ObjectInputStream(d_FileIn);
+
+            d_loadGameEngine = (GameEngine) d_ObjectIn.readObject();
+            d_loaded = true;
+        } catch (EOFException f) {
+                f.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            d_loaded = false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return d_loaded;
     }
 
     public void deserealize(File d_GameFile) {
@@ -62,6 +78,7 @@ public class GameSaveLoad implements Serializable {
     }
 
     public GameEngine runLoadGame(String p_FileName) {
-        return null;
+        loadGame(p_FileName);
+        return d_loadGameEngine;
     }
 }

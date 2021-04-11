@@ -97,6 +97,9 @@ public class GameEngine implements Serializable {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
+    /**
+     * GameSaveLoad object to access GameEngine
+     */
     private GameSaveLoad d_GameSaveLoad;
 
     /**
@@ -433,6 +436,10 @@ public class GameEngine implements Serializable {
         return d_LogEntryBuffer;
     }
 
+    /**
+     * Getter for GameSaveLoad function
+     * @return d_GameSaveLoad
+     */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
