@@ -97,6 +97,10 @@ public class GameEngine implements Serializable {
      * Phase when game ends
      */
     private Phase d_GameOverPhase;
+    /**
+     * Flag to check whether automated player passed their turn
+     */
+    private boolean d_PlayerPassed;
     private GameSaveLoad d_GameSaveLoad;
 
     /**
@@ -122,6 +126,7 @@ public class GameEngine implements Serializable {
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
+        d_PlayerPassed = false;
     }
 
     /**
@@ -154,6 +159,15 @@ public class GameEngine implements Serializable {
     public void gameLoop() {
         while (true) {
             d_CurrentPhase.run();
+        }
+    }
+
+    /**
+     * Reset all players
+     */
+    public void resetPlayers() {
+        for (Player l_Player : d_PlayerList) {
+            l_Player.resetPlayer();
         }
     }
 
@@ -433,28 +447,51 @@ public class GameEngine implements Serializable {
         return d_LogEntryBuffer;
     }
 
+
+    /**
+     * @return boolean
+     */
+    public boolean getD_PlayerPassed() {
+        return d_PlayerPassed;
+    }
+
+
+    /**
+     * @param p_PlayerPassed
+     */
+    public void setD_PlayerPassed(boolean p_PlayerPassed) {
+        d_PlayerPassed = p_PlayerPassed;
+    }
+
+    public void resetPlayerPassed() {
+        d_PlayerPassed = false;
+    }
+
+    /**
+     * @return GameSaveLoad
+     */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
     /**
-    public static void saveGame(String p_FileName, GameEngine p_GE) {
-        File d_GameFile = new File(p_FileName);
-        GameEngine d_GE = p_GE;
-        try {
-            FileWriter d_GameFileWriter = new FileWriter(d_GameFile);
-            FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
-            ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-            d_ObjectOut.close();
-            d_ObjectOut.flush();
-            System.out.println("Game Saved Successfully as" + p_FileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+     public static void saveGame(String p_FileName, GameEngine p_GE) {
+     File d_GameFile = new File(p_FileName);
+     GameEngine d_GE = p_GE;
+     try {
+     FileWriter d_GameFileWriter = new FileWriter(d_GameFile);
+     FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
+     ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
+     d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
+     d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
+     d_ObjectOut.writeObject(d_GE.getD_PlayerList());
+     d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
+     d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
+     d_ObjectOut.close();
+     d_ObjectOut.flush();
+     System.out.println("Game Saved Successfully as" + p_FileName);
+     } catch (IOException e) {
+     e.printStackTrace();
+     }
+     }
      */
 }

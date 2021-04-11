@@ -28,6 +28,10 @@ public abstract class Phase implements Serializable {
         d_GameEngine = p_GameEngine;
     }
 
+    
+    /** 
+     * @param showMap(
+     */
     /**
      * run method
      */
@@ -89,6 +93,15 @@ public abstract class Phase implements Serializable {
     public void endGame() {
     }
 
+    
+    /** 
+     * @param p_CountryId
+     * @param p_ContinentId
+     * @param p_CountryId
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Adds country to the loaded-map in the game engine
      *
@@ -97,6 +110,14 @@ public abstract class Phase implements Serializable {
      */
     abstract public void addCountry(String p_CountryId, String p_ContinentId);
 
+    
+    /** 
+     * @param p_ContinentId
+     * @param p_CountryId
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * removes country to the loaded-map in the game engine
      *
@@ -104,6 +125,14 @@ public abstract class Phase implements Serializable {
      */
     abstract public void removeCountry(String p_CountryId);
 
+    
+    /** 
+     * @param p_ContinentId
+     * @param p_CountryId
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Adds Continent to the loaded-map in the game engine
      *
@@ -112,6 +141,13 @@ public abstract class Phase implements Serializable {
      */
     abstract public void addContinent(String p_ContinentId, int p_ControlValue);
 
+    
+    /** 
+     * @param p_CountryId
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Removes Continent to the loaded-map in the game engine
      *
@@ -119,6 +155,13 @@ public abstract class Phase implements Serializable {
      */
     abstract public void removeContinent(String p_ContinentId);
 
+    
+    /** 
+     * @param p_CountryId
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Makes 2 country neighbour of each other
      *
@@ -127,6 +170,12 @@ public abstract class Phase implements Serializable {
      */
     abstract public void addNeighbor(String p_CountryId, String p_NeighborId);
 
+    
+    /** 
+     * @param p_CountryId
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Makes 2 neighbour country not neighbour anymore
      *
@@ -135,6 +184,11 @@ public abstract class Phase implements Serializable {
      */
     abstract public void removeNeighbor(String p_CountryId, String p_NeighborId);
 
+    
+    /** 
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * load .map file as Map object in the game engine
      *
@@ -142,6 +196,11 @@ public abstract class Phase implements Serializable {
      */
     abstract public void loadMap(String p_FileName);
 
+    
+    /** 
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * save Map object as .map file
      *
@@ -149,6 +208,11 @@ public abstract class Phase implements Serializable {
      */
     abstract public void saveMap(String p_FileName);
 
+    
+    /** 
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Needed command before editing the Map object
      *
@@ -156,6 +220,11 @@ public abstract class Phase implements Serializable {
      */
     abstract public void editMap(String p_FileName);
 
+    
+    /** 
+     * @param p_Name
+     * @param p_Maps
+     */
     /**
      * Validate the map
      *
@@ -163,6 +232,11 @@ public abstract class Phase implements Serializable {
      */
     abstract public void validateMap(Map p_Map);
 
+    
+    /** 
+     * @param p_Name
+     * @param p_Maps
+     */
     // gameplay phase: startup, reinforce, issue, execute
     // startup state
 
@@ -174,6 +248,10 @@ public abstract class Phase implements Serializable {
      */
     abstract public void addPlayer(String p_Name, String p_PlayerType);
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * Removing players in the game
      *
@@ -181,11 +259,19 @@ public abstract class Phase implements Serializable {
      */
     abstract public void removePlayer(String p_Name);
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * Assign and divide all countries among all players
      */
     abstract public void assignCountries();
 
+    
+    /** 
+     * @param p_Maps
+     */
     // reinforce phase
 
     /**
@@ -193,10 +279,22 @@ public abstract class Phase implements Serializable {
      */
     abstract public void reinforce();
 
+    
+    /** 
+     * @param p_Maps
+     */
     abstract public void saveGame(String p_FileName);
 
+    
+    /** 
+     * @param p_Maps
+     */
     abstract public void loadGame(String p_FileName);
 
+    
+    /** 
+     * @param p_Maps
+     */
     // issue order phase
 
 
@@ -205,6 +303,10 @@ public abstract class Phase implements Serializable {
      */
     abstract public void issueCommands(); // instant for map phase and round robin for play phase
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * display the list of cards in current players possession
      */
@@ -212,6 +314,10 @@ public abstract class Phase implements Serializable {
 
 
 
+    
+    /** 
+     * @param p_Maps
+     */
     // execute order phase
 
     /**
@@ -219,35 +325,87 @@ public abstract class Phase implements Serializable {
      */
     abstract public void executeCommands(); // instant for map phase and round robin for play phase
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * place some armies on one of the current players territories.
      */
     abstract public void deploy();
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * move some armies from one of the current players territories (source) to an adjacent territory
      * (target).
      */
     abstract public void advance();
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * destroy half of the armies located on an opponents territory that is adjacent to one of the current
      * players territories
      */
     abstract public void bomb();
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * triple the number of armies on one of the current players territories and make it a neutral territory
      */
     abstract public void blockade();
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * advance some armies from one of the current players territories to any another territory
      */
     abstract public void airlift();
 
+    
+    /** 
+     * @param p_Maps
+     */
     /**
      * prevent attacks between the current player and another player until the end of the turn.
      */
     abstract public void diplomacy();
+
+    
+    /** 
+     * @param p_Maps
+     */
+    public void tournamentAddMaps(List<String> p_Maps) {
+    }
+
+    
+    /** 
+     * @param p_Strategies
+     */
+    public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
+    }
+
+    
+    /** 
+     * @param p_NumOfTurns
+     */
+    public void tournamentMaxNumOfTurns(String p_NumOfTurns) {
+    }
+
+    
+    /** 
+     * @param p_NumOfGames
+     */
+    public void tournamentNumOfGames(String p_NumOfGames) {
+    }
 }

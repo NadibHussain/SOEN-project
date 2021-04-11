@@ -45,6 +45,7 @@ public class AdminCommands implements ICommand, Serializable {
                     "showmap",
                     "gameplayer",
                     "assigncountries",
+                    "tournament",
                     "savegame",
                     "loadgame"
             )
@@ -149,6 +150,17 @@ public class AdminCommands implements ICommand, Serializable {
 
             case "assigncountries":
                 d_GameEngine.getD_CurrentPhase().assignCountries();
+                break;
+
+            case "tournament":
+                if (l_OptionName.equals("-M") || l_OptionName.equals("-m"))
+                    d_GameEngine.getD_CurrentPhase().tournamentAddMaps(l_CommandArgs);
+                else if (l_OptionName.equals("-P") || l_OptionName.equals("-p"))
+                    d_GameEngine.getD_CurrentPhase().tournamentAddPlayersStrategies(l_CommandArgs);
+                else if (l_OptionName.equals("-G") || l_OptionName.equals("-g"))
+                    d_GameEngine.getD_CurrentPhase().tournamentNumOfGames(l_CommandArgs.get(0));
+                else if (l_OptionName.equals("-D") || l_OptionName.equals("-d"))
+                    d_GameEngine.getD_CurrentPhase().tournamentMaxNumOfTurns(l_CommandArgs.get(0));
                 break;
         }
     }

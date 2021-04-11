@@ -9,6 +9,11 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Human implements Behavior, Serializable {
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         List<String> l_OrderStr = p_GE.getD_OrderStrBuffer().get(0);

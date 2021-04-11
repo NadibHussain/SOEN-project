@@ -127,11 +127,19 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * @param p_FileName
+     */
     @Override
     public void saveGame(String p_FileName) {
         invalidCommandMessage();
     }
 
+    
+    /** 
+     * @param p_FileName
+     */
     @Override
     public void loadGame(String p_FileName) {
         invalidCommandMessage();

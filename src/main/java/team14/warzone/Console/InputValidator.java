@@ -26,7 +26,11 @@ public class InputValidator {
         /**
          * constant GAMEPLAY
          */
-        GAMEPLAY
+        GAMEPLAY,
+        /**
+         * constant TOURNAMENT
+         */
+        TOURNAMENT
     }
 
     /**
@@ -49,6 +53,30 @@ public class InputValidator {
             Arrays.asList(
                     "-add",
                     "-remove"
+            )
+    );
+
+    /**
+     * static variable VALID_TOURNAMENT_OPTIONS of type String
+     */
+    public static ArrayList<String> VALID_TOURNAMENT_OPTIONS = new ArrayList<>(
+            Arrays.asList(
+                    "-M","-m",
+                    "-P","-p",
+                    "-G", "-g",
+                    "-D", "-d"
+            )
+    );
+
+    /**
+     * static variable VALID_STRATEGIES of type String
+     */
+    public static ArrayList<String> VALID_STRATEGIES = new ArrayList<>(
+            Arrays.asList(
+                    "aggressive",
+                    "benevolent",
+                    "cheater",
+                    "random"
             )
     );
 
@@ -192,6 +220,14 @@ public class InputValidator {
             case "loadgame":
                 try {
                     return validateLoadGame(p_Arguments);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    return false;
+                }
+
+            case "tournament":
+                try {
+                    return validateTournament(p_OptionName, p_Arguments);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                     return false;
@@ -522,6 +558,39 @@ public class InputValidator {
     }
 
     /**
+     * Method checks the validity of "tournament" command
+     *
+     * @param p_OptionName Name of the option
+     * @param p_Arguments  arguments related to the option
+     * @return true if all checks pass
+     * @throws Exception throws exception with error message
+     */
+    private static boolean validateTournament(String p_OptionName, List<String> p_Arguments) throws Exception {
+        // Validate command for current tournament
+        gamePhaseCheck(Phase.TOURNAMENT);
+
+        // Validate option name
+        tournamentOptionNameCheck(p_OptionName);
+
+        // Validate tournament arguments
+        //tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
+        if (p_OptionName.equals("-M") || p_OptionName.equals("-m")) {
+            if (p_Arguments.size() < 1)
+                throw new Exception("Invalid arguments");
+        }
+        if (p_OptionName.equals("-P") || p_OptionName.equals("-p")) {
+            if (p_Arguments.size() < 1 || !isValidStategy(p_Arguments))
+                throw new Exception("Invalid arguments");
+        }
+        else if (p_OptionName.equals("-G") || p_OptionName.equals("-g")
+                || p_OptionName.equals("-D") || p_OptionName.equals("-d")) {
+            if (p_Arguments.size() != 1 || !isNumeric(p_Arguments.get(0)))
+                throw new Exception("Invalid arguments");
+        }
+        return true;
+    }
+
+    /**
      * This method checks the current gamephase with the expected phase
      *
      * @param p_ExpectedPhase Expected phase that should be compared with current phase
@@ -544,6 +613,32 @@ public class InputValidator {
         if (!VALID_MAPEDITOR_OPTIONS.contains(p_OptionName)) {
             throw new Exception("Invalid option: " + p_OptionName);
         }
+    }
+
+    /**
+     * This methods checks that the option name is valid. Finds the option name from the list of valid options
+     *
+     * @param p_OptionName name of the option
+     * @throws Exception throws exception with error message when option name is not valid
+     */
+    private static void tournamentOptionNameCheck(String p_OptionName) throws Exception {
+        if (!VALID_TOURNAMENT_OPTIONS.contains(p_OptionName)) {
+            throw new Exception("Invalid option: " + p_OptionName);
+        }
+    }
+
+    /**
+     * This methods checks that the strategy name is valid. using the list of valid strategies
+     *
+     * @param p_Strategies list of strategies to be checked
+     * @return true if all strategies are valid; else return false
+     */
+    private static boolean isValidStategy(List<String> p_Strategies) throws Exception {
+        for(String l_Strategy : p_Strategies){
+            if(!VALID_STRATEGIES.contains(l_Strategy.toLowerCase()))
+                return false;
+        }
+        return true;
     }
 
     /**
@@ -583,6 +678,12 @@ public class InputValidator {
         CURRENT_PHASE = Phase.valueOf(p_CurrentPhase);
     }
 
+    
+    /** 
+     * @param p_Arguments
+     * @return boolean
+     * @throws Exception
+     */
     private static boolean validateSaveGame(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);
@@ -594,6 +695,12 @@ public class InputValidator {
         return true;
     }
 
+    
+    /** 
+     * @param p_Arguments
+     * @return boolean
+     * @throws Exception
+     */
     private static boolean validateLoadGame(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);

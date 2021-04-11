@@ -68,7 +68,7 @@ public class StartupPhase extends GamePlayPhase {
         else if (d_GameEngine.getD_PlayerList().stream().anyMatch(o -> o.getD_Name().equals(p_Name)))
             Console.displayMsg("Player already exists!");
         else {
-            Player l_LocalPlayer = new Player(p_Name, d_GameEngine);
+            Player l_LocalPlayer = new Player(p_Name, p_PlayerType, d_GameEngine);
             d_GameEngine.getD_PlayerList().add(l_LocalPlayer);
             Console.displayMsg("Player added: " + p_Name);
         }
