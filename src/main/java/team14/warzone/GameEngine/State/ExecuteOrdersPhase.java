@@ -7,6 +7,7 @@ import team14.warzone.MapModule.Map;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Scanner;
 
 /**
  * This is a class for ExecuteOrdersPhase
@@ -26,6 +27,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
     @Override
     public void run() {
         executeCommands();
+        promptEnterKey();
     }
 
     /**
@@ -74,12 +76,18 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         return false;
     }
 
+    public void promptEnterKey(){
+        System.out.println("\nPress \"ENTER\" to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
+
     /**
      * issues commands
      */
     @Override
     public void issueCommands() {
-        issueCommands();
+        invalidCommandMessage();
     }
 
     /** 

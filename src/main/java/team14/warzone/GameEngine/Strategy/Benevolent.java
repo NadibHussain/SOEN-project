@@ -9,6 +9,7 @@ import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class Benevolent implements Behavior {
     private ArrayList<Country> d_WeakCountryList = new ArrayList<>();
@@ -40,7 +41,7 @@ public class Benevolent implements Behavior {
             if (l_WeakCountries.size() > 0) {
                 Country l_DestinationCountry = l_WeakCountries.get(0);
                 Country l_SourceCountry = findStrongNeighbor(l_DestinationCountry);
-                if (!l_SourceCountry.equals(null)) {
+                if (Objects.nonNull(l_SourceCountry)) {
                     int l_NumOfArmiesToAttackWith = (l_SourceCountry.getD_NumberOfArmies() / 2) + 1;
                     // generate advance order
                     Advance l_Advance = new Advance(l_SourceCountry.getD_CountryID(),
