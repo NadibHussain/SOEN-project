@@ -142,4 +142,12 @@ public class Aggressive implements Behavior {
         }
         return l_MaxIndex;
     }
+    
+    /**
+     * returns the name of behavior
+     */
+    @Override
+    public String toString(){
+        return "aggressive";
+    }
 }

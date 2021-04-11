@@ -118,13 +118,13 @@ public class Tournament extends Phase {
                 String l_PlayerBehaviors = "";
                 if(l_IndexListOfWinners.size()>1){
                     for(int i=0; i<l_IndexListOfWinners.size(); i++){
-                        l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior();
+                        l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
                     System.out.println("The game is a draw between "+ l_PlayerBehaviors);
                     d_GameTable[l_MapIndex][l_GameCount] = "Draw between "+ l_PlayerBehaviors;
                 }
                 if(l_IndexListOfWinners.size() == 1){
-                    l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(0)).getD_Name();
+                    l_PlayerBehaviors = l_PlayerBehaviors+" "+d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
                     System.out.println("The winner is "+ l_PlayerBehaviors);
                     d_GameTable[l_MapIndex][l_GameCount] = l_PlayerBehaviors;
                 }else System.out.println("The game does not have any winner");

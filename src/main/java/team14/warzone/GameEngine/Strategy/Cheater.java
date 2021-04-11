@@ -59,4 +59,11 @@ public class Cheater implements Behavior {
         Console.displayMsg(p_Player.getD_Name() + ": pass");
         p_GE.setD_PlayerPassed(true);
     }
+    /**
+     * returns the name of behavior
+     */
+    @Override
+    public String toString(){
+        return "cheater";
+    }
 }
