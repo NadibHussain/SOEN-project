@@ -7,7 +7,7 @@ import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
 import team14.warzone.GameEngine.State.*;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditorDomination;
+import team14.warzone.MapModule.MapEditor;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class GameEngine implements Serializable {
     /**
      * instance of map editor
      */
-    private MapEditorDomination d_MapEditor;
+    private MapEditor d_MapEditor;
 
     /**
      * Stores admin commands that are yet to be executed
@@ -105,7 +105,7 @@ public class GameEngine implements Serializable {
      * @param p_Console   console object
      * @param p_MapEditor map editor object
      */
-    public GameEngine(Console p_Console, MapEditorDomination p_MapEditor) {
+    public GameEngine(Console p_Console, MapEditor p_MapEditor) {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
@@ -196,7 +196,7 @@ public class GameEngine implements Serializable {
      *
      * @return Object of type Map Editor
      */
-    public MapEditorDomination getD_MapEditor() {
+    public MapEditor getD_MapEditor() {
         return d_MapEditor;
     }
 

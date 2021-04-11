@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditorDomination;
+import team14.warzone.MapModule.MapEditor;
 
 /**
  * Class test the functionalities of the phase before a map has been loaded
@@ -18,7 +18,7 @@ public class PreMapLoadPhaseTest {
     /**
      * map editor field
      */
-    private MapEditorDomination d_MapEditor;
+    private MapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -30,7 +30,7 @@ public class PreMapLoadPhaseTest {
     @Before
     public void setUp() {
         d_Console = new Console();
-        d_MapEditor = new MapEditorDomination();
+        d_MapEditor = new MapEditor();
         d_GE = new GameEngine(d_Console, d_MapEditor);
     }
 
