@@ -2,6 +2,7 @@ package team14.warzone.MapModule;
 
 import team14.warzone.GameEngine.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * @version 1.0
 */
 
-public class Continent {
+public class Continent implements Serializable {
 
     /**
      * Unique integer ID of continent
@@ -24,6 +25,7 @@ public class Continent {
      * Control Value of continent
      */
     private int d_ControlValue;
+
     /**
      * Arraylist containing a record of owners
      */
@@ -87,6 +89,15 @@ public class Continent {
     public void setD_ControlValue(int p_ControlValue) {
         this.d_ControlValue = p_ControlValue;
     }
+
+    
+    /** 
+     * @return ArrayList<Player>
+     */
+    public ArrayList<Player> getD_CurrentOwners() {
+        return d_CurrentOwners;
+    }
+
 
     /**
      * Prints the continent

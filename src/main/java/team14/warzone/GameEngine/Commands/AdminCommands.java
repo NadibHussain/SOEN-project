@@ -2,6 +2,7 @@ package team14.warzone.GameEngine.Commands;
 
 import team14.warzone.GameEngine.GameEngine;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class AdminCommands implements ICommand {
+public class AdminCommands implements ICommand, Serializable {
     /**
      * field stores keyword for the command
      */
@@ -43,7 +44,10 @@ public class AdminCommands implements ICommand {
                     "loadmap",
                     "showmap",
                     "gameplayer",
-                    "assigncountries"
+                    "assigncountries",
+                    "tournament",
+                    "savegame",
+                    "loadgame"
             )
     );
 
@@ -109,6 +113,14 @@ public class AdminCommands implements ICommand {
                 d_GameEngine.getD_CurrentPhase().saveMap(l_CommandArgs.get(0));
                 break;
 
+            case "savegame":
+                d_GameEngine.getD_CurrentPhase().saveGame(l_CommandArgs.get(0));
+                break;
+
+            case "loadgame":
+                d_GameEngine.getD_CurrentPhase().loadGame(l_CommandArgs.get(0));
+                break;
+
             case "editmap":
                 d_GameEngine.getD_CurrentPhase().editMap(l_CommandArgs.get(0));
                 break;
@@ -138,6 +150,17 @@ public class AdminCommands implements ICommand {
 
             case "assigncountries":
                 d_GameEngine.getD_CurrentPhase().assignCountries();
+                break;
+
+            case "tournament":
+                if (l_OptionName.equals("-M") || l_OptionName.equals("-m"))
+                    d_GameEngine.getD_CurrentPhase().tournamentAddMaps(l_CommandArgs);
+                else if (l_OptionName.equals("-P") || l_OptionName.equals("-p"))
+                    d_GameEngine.getD_CurrentPhase().tournamentAddPlayersStrategies(l_CommandArgs);
+                else if (l_OptionName.equals("-G") || l_OptionName.equals("-g"))
+                    d_GameEngine.getD_CurrentPhase().tournamentNumOfGames(l_CommandArgs.get(0));
+                else if (l_OptionName.equals("-D") || l_OptionName.equals("-d"))
+                    d_GameEngine.getD_CurrentPhase().tournamentMaxNumOfTurns(l_CommandArgs.get(0));
                 break;
         }
     }

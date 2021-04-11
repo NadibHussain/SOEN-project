@@ -1,12 +1,13 @@
 package team14.warzone.GameEngine.Observer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Observable LogEntryBuffer
  */
-public class LogEntryBuffer extends Observable{
+public class LogEntryBuffer extends Observable implements Serializable {
 
     /**
      * String for logs

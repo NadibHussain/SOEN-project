@@ -1,13 +1,9 @@
 package team14.warzone.GameEngine;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import team14.warzone.Console.Console;
-import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
-import team14.warzone.MapModule.MapEditor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,10 +30,11 @@ public class ObserverTest {
         int l_PreviousCount = l_LogBufferEnrty.getD_ObserverList().size();
         l_LogBufferEnrty.attach(l_LogerObserver);
         int l_NewCount = l_LogBufferEnrty.getD_ObserverList().size();
-        assertEquals(l_NewCount,l_PreviousCount+1);
+        assertEquals(l_NewCount, l_PreviousCount + 1);
 
 
     }
+
     /**
      * Testing if observer can detach
      */
@@ -50,13 +47,15 @@ public class ObserverTest {
         int l_PreviousCount = l_LogBufferEnrty.getD_ObserverList().size();
         l_LogBufferEnrty.detach(l_LogerObserver);
         int l_NewCount = l_LogBufferEnrty.getD_ObserverList().size();
-        assertEquals(l_NewCount,l_PreviousCount-1);
+        assertEquals(l_NewCount, l_PreviousCount - 1);
 
 
     }
 
     /**
      * Testing if observer can be Notified
+     *
+     * @throws FileNotFoundException throws exception when map file does not exist
      */
     @Test
     @DisplayName("Testing if observer can be Notified")
@@ -71,10 +70,10 @@ public class ObserverTest {
         Scanner l_ReaderObject = new Scanner(l_FileObject);
         String l_LastLine = "";
         while (l_ReaderObject.hasNextLine()) {
-             l_LastLine = l_ReaderObject.nextLine();
+            l_LastLine = l_ReaderObject.nextLine();
 
         }
-        assertEquals("new log test",l_LastLine);
+        assertEquals("new log test", l_LastLine);
 
     }
 }

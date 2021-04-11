@@ -5,6 +5,7 @@ import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.Strategy.*;
 import team14.warzone.MapModule.Country;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Anagh
  * @version 1.0
  */
-public class Player {
+public class Player implements Serializable {
     /**
      * name of player
      */
@@ -295,8 +296,8 @@ public class Player {
      */
     public void removeCard(Card p_Card) {
         for (Card l_Card : getCardList()) {
-            if (l_Card == p_Card) {
-                getCardList().remove(p_Card);
+            if (l_Card.getD_CardType().equals(p_Card.getD_CardType())) {
+                getCardList().remove(l_Card);
                 break;
             }
         }
@@ -406,5 +407,17 @@ public class Player {
      */
     public void setD_IssueOrderBehavior(Behavior p_IssueOrderBehavior) {
         d_IssueOrderBehavior = p_IssueOrderBehavior;
+    }
+
+    /**
+     * Reset all game progress for player
+     */
+    public void resetPlayer() {
+        d_TotalNumberOfArmies = 0;
+        d_ArmiesOrderedToBeDeployed = 0;
+        d_CountriesOwned.clear();
+        d_OrderList.clear();
+        d_CardList.clear();
+        d_DiplomaticPlayers.clear();
     }
 }

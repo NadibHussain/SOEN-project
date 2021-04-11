@@ -1,5 +1,6 @@
 package team14.warzone.MapModule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class Country {
+public class Country implements Serializable {
     /**
      * Unique integer ID of country
      */

@@ -25,8 +25,8 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * adds country
-     * @param p_CountryId
-     * @param p_ContinentId
+     * @param p_CountryId name of country
+     * @param p_ContinentId name of continent
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -36,7 +36,7 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * removes country
-     * @param p_CountryId
+     * @param p_CountryId name of country
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -46,8 +46,8 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * adds continent
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * @param p_ContinentId name of continent
+     * @param p_ControlValue control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -57,7 +57,7 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * removes a continent
-     * @param p_ContinentId
+     * @param p_ContinentId name of continent
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -67,8 +67,8 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * adds a neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -78,8 +78,8 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * removes a neighbor
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId name of country
+     * @param p_NeighborId name of neighbor
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -89,7 +89,7 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * saves map
-     * @param p_FileName
+     * @param p_FileName map file name
      */
     @Override
     public void saveMap(String p_FileName) {
@@ -99,7 +99,7 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * edits map
-     * @param p_FileName
+     * @param p_FileName map file name
      */
     @Override
     public void editMap(String p_FileName) {
@@ -112,10 +112,29 @@ public class PreMapLoadPhase extends MapEditorPhase {
     
     /** 
      * validates map
-     * @param p_Map
+     * @param p_Map map object
      */
     @Override
     public void validateMap(Map p_Map) {
         errorLoadMapFirst();
     }
+
+    
+    /** 
+     * @param p_FileName
+     */
+    @Override
+    public void saveGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    
+    /** 
+     * @param p_FileName
+     */
+    @Override
+    public void loadGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
 }
