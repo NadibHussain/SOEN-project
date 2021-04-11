@@ -40,7 +40,7 @@ public class TournamentTest {
         l_MapList.add("bigeurope.map");
         List<String> l_PlayerList = new ArrayList<>();
         l_PlayerList.add("cheater");
-        l_PlayerList.add("aggressive");
+        l_PlayerList.add("cheater");
         l_PlayerList.add("cheater");
         String l_NumofGame = "3";
         String l_NumofTurn = "4";

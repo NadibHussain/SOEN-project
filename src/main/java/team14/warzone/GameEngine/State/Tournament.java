@@ -70,7 +70,6 @@ public class Tournament extends Phase {
             try {
                 
                 d_MapEditor.loadMap(p_MapFileName);
-                d_GameEngine.setD_LoadedMap(d_MapEditor.d_LoadedMap);
                 if (d_MapEditor.validateMap(d_MapEditor.d_LoadedMap))
                     d_Maps.add(d_MapEditor.d_LoadedMap);
                 else
@@ -121,11 +120,13 @@ public class Tournament extends Phase {
     public void run() {
         d_GameTable = new String[d_Maps.size()][d_NumOfGames];
         for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
-
-            d_CurrentMap = d_Maps.get(l_MapIndex);
             
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                // TO-DO reset player values
+                d_CurrentMap = d_Maps.get(l_MapIndex);
+                d_GameEngine.setD_LoadedMap(d_CurrentMap);
                 assignCountries();// assign countries to players for current map
+
                 for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
                     for (Player l_APlayer : d_Players) {
                         d_GameEngine.setD_CurrentPlayer(l_APlayer);
@@ -145,7 +146,7 @@ public class Tournament extends Phase {
                 } else if (l_IndexListOfWinners.size() == 1) {
                     l_PlayerBehaviors = l_PlayerBehaviors + " "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
-                    System.out.println("The winner is " + l_PlayerBehaviors);
+                    System.out.println("The winner is " + l_PlayerBehaviors+" with owning countries " +d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
                     d_GameTable[l_MapIndex][l_GameCount] = l_PlayerBehaviors;
                 } else
                     System.out.println("The game does not have any winner");
