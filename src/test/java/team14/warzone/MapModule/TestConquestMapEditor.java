@@ -32,10 +32,36 @@ public class TestConquestMapEditor {
      */
     @Test
     @DisplayName("Testing loading a map")
-    public void testLoadMap() {
+    public void testLoadConquestMap() {
         Map l_Map = d_MapEditorConquest.getD_LoadedMap();
         assertEquals(11, l_Map.getD_Continents().size());
         assertEquals(128, l_Map.getD_Countries().size());
         assertEquals(6, l_Map.getD_Countries().get(8).getD_Neighbours().size());
     }
+
+    /**
+     * tests Save map
+     */
+    @Test
+    @DisplayName("Testing Save map")
+    public void testSaveConquestMap() {
+        d_MapEditorConquest.saveMapConquest("saveConquest.map");
+        Map l_Map = d_MapEditorConquest.getD_LoadedMap();
+        assertEquals(11, l_Map.getD_Continents().size());
+        assertEquals(128, l_Map.getD_Countries().size());
+        assertEquals(6, l_Map.getD_Countries().get(8).getD_Neighbours().size());
+    }
+
+
+    /**
+     * tests Validate map
+     */
+    @Test
+    @DisplayName("Testing Validate a map")
+    public void testValidateConquestMap() {
+        d_MapEditorConquest.validateMap(d_MapEditorConquest.getD_LoadedMap());
+    }
+
+
+
 }
