@@ -98,7 +98,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
      */
     @Override
     public void saveMap(String p_FileName) {
-        d_GameEngine.getD_MapEditor().saveMapDomination(p_FileName);
+        d_GameEngine.getD_MapEditor().saveMap(p_FileName);
         d_GameEngine.getD_LogEntryBuffer().setD_log("Saved map:"+p_FileName);
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
@@ -110,7 +110,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
      */
     @Override
     public void editMap(String p_FileName) {
-        d_GameEngine.getD_MapEditor().editMapDomination(p_FileName);
+        d_GameEngine.getD_MapEditor().editMap(p_FileName);
         d_GameEngine.getD_LogEntryBuffer().setD_log("Edit map:"+p_FileName);
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }

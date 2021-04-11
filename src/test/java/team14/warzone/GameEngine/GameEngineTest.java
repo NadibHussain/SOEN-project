@@ -3,7 +3,7 @@ package team14.warzone.GameEngine;
 import org.junit.Before;
 import org.junit.Test;
 import team14.warzone.Console.Console;
-import team14.warzone.MapModule.MapEditorDomination;
+import team14.warzone.MapModule.MapEditor;
 
 public class GameEngineTest {
     /**
@@ -13,7 +13,7 @@ public class GameEngineTest {
     /**
      * map editor field
      */
-    private MapEditorDomination d_MapEditor;
+    private MapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -25,7 +25,7 @@ public class GameEngineTest {
     @Before
     public void setup() {
         d_Console = new Console();
-        d_MapEditor = new MapEditorDomination();
+        d_MapEditor = new MapEditor();
         d_GE = new GameEngine(d_Console, d_MapEditor);
     }
 

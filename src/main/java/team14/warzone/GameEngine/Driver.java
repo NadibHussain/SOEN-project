@@ -1,7 +1,7 @@
 package team14.warzone.GameEngine;
 
 import team14.warzone.Console.Console;
-import team14.warzone.MapModule.MapEditorDomination;
+import team14.warzone.MapModule.MapEditor;
 
 /**
  * This is a driver class for the game engine
@@ -14,7 +14,7 @@ public class Driver {
      */
     public static void main(String[] args) {
         Console l_Console = new Console();
-        MapEditorDomination l_ME = new MapEditorDomination();
+        MapEditor l_ME = new MapEditor();
         GameEngine l_GE = new GameEngine(l_Console, l_ME);
 
         System.out.println("Welcome to warzone game!");

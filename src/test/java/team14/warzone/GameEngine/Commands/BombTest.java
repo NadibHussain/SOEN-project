@@ -9,7 +9,7 @@ import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditorDomination;
+import team14.warzone.MapModule.MapEditor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -25,7 +25,7 @@ public class BombTest {
     /**
      * map editor field
      */
-    private MapEditorDomination d_MapEditor;
+    private MapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -39,7 +39,7 @@ public class BombTest {
     public void setup() {
         // object instantiation
         d_Console = new Console();
-        d_MapEditor = new MapEditorDomination();
+        d_MapEditor = new MapEditor();
         d_GE = new GameEngine(d_Console, d_MapEditor);
 
         // setting up the scenario
