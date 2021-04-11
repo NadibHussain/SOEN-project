@@ -136,6 +136,10 @@ public class StartupPhase extends GamePlayPhase {
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
 
+    /**
+     * Loadgame method which is valid in startup phase
+     * @param p_FileName filename
+     */
     @Override
     public void loadGame(String p_FileName) {
         d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
