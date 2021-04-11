@@ -161,32 +161,22 @@ public class MapEditorConquest {
     public void saveMapConquest(String p_FileName) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
         // writing all the continents
-        l_Content.append("[continents]\n");
+        l_Content.append("[Continents]\n");
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-            l_Content.append(l_Continent.getD_ContinentID()).append(" ").append(l_Continent.getD_ControlValue()).append("\n");
+            l_Content.append(l_Continent.getD_ContinentID()).append("=").append(l_Continent.getD_ControlValue()).append("\n");
         }
 
         // writing all the countries
-        l_Content.append("\n[countries]\n");
+        l_Content.append("\n[Territories]\n");
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
-            int l_ContinentIntId = -1;
-            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-                if (l_Continent.getD_ContinentID().equals(l_Country.getD_CountryContinentID())) {
-                    l_ContinentIntId = l_Continent.getD_ContinentIntID();
-                }
-            }
-            l_Content.append(l_Country.getD_CountryIntID()).append(" ").append(l_Country.getD_CountryID()).append(" ").append(l_ContinentIntId).append("\n");
-        }
+            l_Content.append(l_Country.getD_CountryID()).append(", , ,").append(l_Country.getD_CountryContinentID()).append(",");
 
-        // writing all the borders
-        l_Content.append("\n[borders]\n");
-        for (Country l_Country : d_LoadedMap.getD_Countries()) {
-            l_Content.append(l_Country.getD_CountryIntID()).append(" ");
-            for (Country l_Neighbour : l_Country.getD_Neighbours()) {
-                l_Content.append(l_Neighbour.getD_CountryIntID()).append(" ");
+            for (Country l_neighbour:l_Country.getD_Neighbours()){
+                l_Content.append(l_neighbour.getD_CountryID());
             }
             l_Content.append("\n");
         }
+
 
         try {
             FileWriter l_Writer = new FileWriter(p_FileName);
