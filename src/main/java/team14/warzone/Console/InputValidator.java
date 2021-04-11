@@ -583,6 +583,12 @@ public class InputValidator {
         CURRENT_PHASE = Phase.valueOf(p_CurrentPhase);
     }
 
+    /**
+     * Validating a savegame command
+     * @param p_Arguments list of arguments passed
+     * @return true if valid
+     * @throws Exception invalid arguments
+     */
     private static boolean validateSaveGame(List<String> p_Arguments) throws Exception {
         // Validate command for current gamephase
         gamePhaseCheck(Phase.GAMEPLAY);
@@ -594,6 +600,12 @@ public class InputValidator {
         return true;
     }
 
+    /**
+     * Validating a loadgame command
+     * @param p_Arguments list of arguments passed
+     * @return true if valid
+     * @throws Exception invalid arguments
+     */
     private static boolean validateLoadGame(List<String> p_Arguments) throws Exception {
         // Validate -add arguments and -remove arguments
         if (p_Arguments.size() != 1)

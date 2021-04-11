@@ -193,8 +193,16 @@ public abstract class Phase implements Serializable {
      */
     abstract public void reinforce();
 
+    /**
+     * Used for saving a game
+     * @param p_FileName filename
+     */
     abstract public void saveGame(String p_FileName);
 
+    /**
+     * used for loading a saved game
+     * @param p_FileName filename
+     */
     abstract public void loadGame(String p_FileName);
 
     // issue order phase
