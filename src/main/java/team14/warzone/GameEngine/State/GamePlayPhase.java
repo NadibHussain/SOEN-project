@@ -23,21 +23,21 @@ public abstract class GamePlayPhase extends Phase {
         System.out.println("No cards in possession of player.");
     }
 
-    
-    /** 
-     * @param p_FileName
+    /**
+     * Savegame method which is valid in gameplay phase
+     * @param p_FileName filename with which the game has to be saved
      */
     @Override
     public void saveGame(String p_FileName) {
         d_GameEngine.getD_GameSaveLoad().runSaveGame(p_FileName);
     }
 
-    
-    /** 
-     * @param p_FileName
+    /**
+     * Loadgame method which is invalid in gameplay phase
+     * @param p_FileName filename
      */
-    @Override
-    public void loadGame(String p_FileName) {
-        d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
-    }
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        invalidCommandMessage();
+//    }
 }

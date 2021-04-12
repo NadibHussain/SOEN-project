@@ -93,6 +93,15 @@ public abstract class MapEditorPhase extends Phase {
     }
 
     /**
+     * Loadgame method which is valid in mapeditor phase
+     * @param p_FileName filename
+     */
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
+//    }
+
+    /**
      * adds player
      */
     @Override

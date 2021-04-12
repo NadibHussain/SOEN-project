@@ -119,22 +119,12 @@ public class PreMapLoadPhase extends MapEditorPhase {
         errorLoadMapFirst();
     }
 
-    
-    /** 
-     * @param p_FileName
+    /**
+     * Savegame method which is invalid in PreMapEditLoadPhase phase
+     * @param p_FileName filename with which the game has to be saved
      */
     @Override
     public void saveGame(String p_FileName) {
         invalidCommandMessage();
     }
-
-    
-    /** 
-     * @param p_FileName
-     */
-    @Override
-    public void loadGame(String p_FileName) {
-        invalidCommandMessage();
-    }
-
 }

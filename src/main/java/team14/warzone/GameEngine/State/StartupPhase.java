@@ -137,6 +137,15 @@ public class StartupPhase extends GamePlayPhase {
     }
 
     /**
+     * Loadgame method which is valid in startup phase
+     * @param p_FileName filename
+     */
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
+//    }
+
+    /**
      * Reinforcement beginning of game play
      */
     @Override
