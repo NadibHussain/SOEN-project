@@ -333,20 +333,20 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_FileName
+     * @param p_FileName filename
      */
     @Override
     public void saveGame(String p_FileName) {
-        // TODO Auto-generated method stub
+        invalidCommandMessage();
 
     }
 
     /**
-     * @param p_FileName
+     * @param p_FileName filename
      */
     @Override
     public void loadGame(String p_FileName) {
-        // TODO Auto-generated method stub
+        invalidCommandMessage();
 
     }
 

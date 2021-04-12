@@ -92,14 +92,6 @@ public abstract class MapEditorPhase extends Phase {
         }
     }
 
-    /**
-     * Loadgame method which is valid in mapeditor phase
-     * @param p_FileName filename
-     */
-//    @Override
-//    public void loadGame(String p_FileName) {
-//        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
-//    }
 
     /**
      * adds player
@@ -179,5 +171,22 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public void diplomacy() {
         invalidCommandMessage();
+    }
+    /**
+     * Savegame method which is valid in gameplay phase
+     * @param p_FileName filename with which the game has to be saved
+     */
+    @Override
+    public void saveGame(String p_FileName) {
+        invalidCommandMessage();
+    }
+
+    /**
+     * Loadgame method which is valid in startup phase
+     * @param p_FileName filename
+     */
+    @Override
+    public void loadGame(String p_FileName) {
+        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
     }
 }

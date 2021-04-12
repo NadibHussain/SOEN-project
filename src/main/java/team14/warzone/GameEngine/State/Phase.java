@@ -203,10 +203,7 @@ public abstract class Phase implements Serializable {
      * used for loading a saved game
      * @param p_FileName filename
      */
-//    abstract public void loadGame(String p_FileName);
-
-    // issue order phase
-
+    public abstract void loadGame(String p_FileName);
 
     /**
      * takes command in round robin manner in the play phase

@@ -36,8 +36,8 @@ public abstract class GamePlayPhase extends Phase {
      * Loadgame method which is invalid in gameplay phase
      * @param p_FileName filename
      */
-//    @Override
-//    public void loadGame(String p_FileName) {
-//        invalidCommandMessage();
-//    }
+    @Override
+    public void loadGame(String p_FileName) {
+        invalidCommandMessage();
+    }
 }
