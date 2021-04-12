@@ -218,4 +218,12 @@ public class Benevolent implements Behavior {
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
+
+    /**
+     * @return name of behavior
+     */
+    @Override
+    public String toString(){
+        return "benevolent";
+    }
 }
