@@ -98,10 +98,10 @@ public class GameOverPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    @Override
-    public void loadGame(String p_FileName) {
-        invalidCommandMessage();
-    }
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        invalidCommandMessage();
+//    }
 
     @Override
     public void issueCommands() {

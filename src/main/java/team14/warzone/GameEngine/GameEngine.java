@@ -122,6 +122,7 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_GameOverPhase = new GameOverPhase(this);
+        d_CurrentPlayer = new Player("temp", this);
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
@@ -158,6 +159,27 @@ public class GameEngine implements Serializable {
         while (true) {
             d_CurrentPhase.run();
         }
+    }
+
+    public void loadGame(String p_FileName) {
+        GameEngine l_GE = d_GameSaveLoad.runLoadGame(p_FileName);
+        this.d_LoadedMap = l_GE.getD_LoadedMap();
+        this.d_CurrentPlayer = l_GE.getD_CurrentPlayer();
+        this.d_PlayerList = l_GE.getD_PlayerList();
+        this.d_Console = l_GE.getD_Console();
+        this.d_MapEditor = l_GE.getD_MapEditor();
+        this.d_AdminCommandsBuffer = l_GE.getD_AdminCommandsBuffer();
+        this.d_OrderBuffer = l_GE.getD_OrderBuffer();
+        this.d_OrderStrBuffer = l_GE.getD_OrderStrBuffer();
+        this.d_LogEntryBuffer = l_GE.getD_LogEntryBuffer();
+        this.d_CurrentPhase = l_GE.getD_CurrentPhase();
+        this.d_PreMapLoadPhase = l_GE.getD_PreMapLoadPhase();
+        this.d_PostMapEditLoadPhase = l_GE.getD_PostMapEditLoadPhase();
+        this.d_StartupPhase = l_GE.getD_StartupPhase();
+        this.d_IssueOrdersPhase = l_GE.getD_IssueOrdersPhase();
+        this.d_ExecuteOrdersPhase = l_GE.getD_ExecuteOrdersPhase();
+        this.d_GameOverPhase = l_GE.getD_GameOverPhase();
+        this.d_GameSaveLoad = l_GE.getD_GameSaveLoad();
     }
 
     /**
@@ -438,10 +460,18 @@ public class GameEngine implements Serializable {
 
     /**
      * Getter for GameSaveLoad function
+     *
      * @return d_GameSaveLoad
      */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
 
+    public Console getD_Console() {
+        return d_Console;
+    }
+
+    public ArrayList<AdminCommands> getD_AdminCommandsBuffer() {
+        return d_AdminCommandsBuffer;
+    }
 }
