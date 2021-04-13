@@ -1,16 +1,14 @@
 package team14.warzone.GameEngine.State;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.MapEditor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TournamentTest {
      /**
@@ -38,10 +36,11 @@ public class TournamentTest {
     public void tournamentRun() {
         List<String> l_MapList = new ArrayList<>();
         l_MapList.add("bigeurope.map");
+        l_MapList.add("europass.map");
         List<String> l_PlayerList = new ArrayList<>();
-        l_PlayerList.add("cheater");
-        l_PlayerList.add("cheater");
-        l_PlayerList.add("cheater");
+        l_PlayerList.add("aggressive");
+        l_PlayerList.add("benevolent");
+        l_PlayerList.add("random");
         String l_NumofGame = "3";
         String l_NumofTurn = "4";
 

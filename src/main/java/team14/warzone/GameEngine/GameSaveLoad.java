@@ -1,41 +1,48 @@
 package team14.warzone.GameEngine;
 
 import java.io.*;
-import team14.warzone.Console.Console;
-import team14.warzone.MapModule.Map;
 
-import java.io.FileWriter;
-
+/**
+ * This class implements the Save Game and Load Game feature
+ */
 public class GameSaveLoad implements Serializable {
-
+    /**
+     * File to save the game
+     */
     private File d_GameFile;
+    /**
+     * Game Engine object to save the state of the game
+     */
     private GameEngine d_GE;
+    /**
+     * Game Engine object to load the game from
+     */
+    private GameEngine d_loadGameEngine;
 
+    /**
+     * GameSaveLoad method
+     * @param p_GE GameEngine parameter
+     */
     public GameSaveLoad(GameEngine p_GE) {
         d_GE = p_GE;
     }
-    
-    /** 
-     * @param p_FileName
-     * @return boolean
+
+    /**
+     * Save Game implementation
+     * @param p_FileName takes input as a string to save file with the name
+     * @return true if game is saved
      */
     public boolean saveGame(String p_FileName) {
         boolean d_saved = false;
         try {
-            d_GameFile = new File(p_FileName + ".wrz");
+            d_GameFile = new File(p_FileName);
             if (!d_GameFile.createNewFile()) {
-                System.out.println("Overriding " + p_FileName + ".wrz");
+
             }
 
             FileOutputStream d_FileOut = new FileOutputStream(p_FileName);
             ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-            d_ObjectOut.close();
-            d_ObjectOut.flush();
+            d_ObjectOut.writeObject(d_GE);
             System.out.println("Game Saved Successfully as" + " " + p_FileName);
             d_saved = true;
         } catch (IOException e) {
@@ -45,9 +52,33 @@ public class GameSaveLoad implements Serializable {
         return d_saved;
     }
 
-    
-    /** 
-     * @param d_GameFile
+    /**
+     * Save Game implementation
+     * @param p_FileName takes input as a string to load file with the name
+     * @return true if game is loaded
+     */
+    public boolean loadGame(String p_FileName) {
+        boolean d_loaded = false;
+        try {
+            FileInputStream d_FileIn = new FileInputStream(p_FileName);
+            ObjectInputStream d_ObjectIn = new ObjectInputStream(d_FileIn);
+
+            d_loadGameEngine = (GameEngine) d_ObjectIn.readObject();
+            d_loaded = true;
+        } catch (EOFException f) {
+                f.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            d_loaded = false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return d_loaded;
+    }
+
+    /**
+     * Deserealizing the object stream which has the saved game in serealized form
+     * @param d_GameFile takes input as a gamefile
      */
     public void deserealize(File d_GameFile) {
         try {
@@ -67,53 +98,22 @@ public class GameSaveLoad implements Serializable {
             e.printStackTrace();
         }
     }
-/**
-    private File d_GameFile;
-    private FileWriter d_GameFileWriter;
-    private GameEngine d_GE;
 
-    public GameSaveLoad(GameEngine p_GE) {
-        d_GE = p_GE;
-    }
-    public void setD_GameFile(String p_GameFileName) throws IOException {
-        d_GameFile = new File(p_GameFileName);
-        d_GameFile.createNewFile();
-        d_GameFileWriter = new FileWriter(d_GameFile);
-    }
-
-    public File getD_GameFile() {
-        return d_GameFile;
-    }
-
-    public void saveGame(String p_FileName) {
-        try {
-
-            FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
-            ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-            d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-            d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-            d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-            d_ObjectOut.close();
-            d_ObjectOut.flush();
-            System.out.println("Game Saved Successfully as" + p_FileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    */
-    public void runSaveGame(String p_FileName) {
-
-        saveGame(p_FileName);
-        deserealize(d_GameFile);
-    }
-
-    
-    /** 
-     * @param p_FileName
+    /**
+     * Run Save Game method to trigger savegame from command
+     * @param p_FileName filename
      */
-    public void runLoadGame(String p_FileName) {
+    public void runSaveGame(String p_FileName) {
+        saveGame(p_FileName);
+    }
 
+    /**
+     * Run Load Game method to trigger loadgame from command
+     * @param p_FileName filename
+     * @return Game Engine with parameters same as when game was saved
+     */
+    public GameEngine runLoadGame(String p_FileName) {
+        loadGame(p_FileName);
+        return d_loadGameEngine;
     }
 }
