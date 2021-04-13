@@ -101,6 +101,9 @@ public class GameEngine implements Serializable {
      * Flag to check whether automated player passed their turn
      */
     private boolean d_PlayerPassed;
+    /**
+     * GameSaveLoad object to access GameEngine
+     */
     private GameSaveLoad d_GameSaveLoad;
 
     /**
@@ -123,6 +126,7 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_GameOverPhase = new GameOverPhase(this);
+        d_CurrentPlayer = new Player("temp", this);
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
@@ -169,6 +173,27 @@ public class GameEngine implements Serializable {
         for (Player l_Player : d_PlayerList) {
             l_Player.resetPlayer();
         }
+    }
+
+    public void loadGame(String p_FileName) {
+        GameEngine l_GE = d_GameSaveLoad.runLoadGame(p_FileName);
+        this.d_LoadedMap = l_GE.getD_LoadedMap();
+        this.d_CurrentPlayer = l_GE.getD_CurrentPlayer();
+        this.d_PlayerList = l_GE.getD_PlayerList();
+        this.d_Console = l_GE.getD_Console();
+        this.d_MapEditor = l_GE.getD_MapEditor();
+        this.d_AdminCommandsBuffer = l_GE.getD_AdminCommandsBuffer();
+        this.d_OrderBuffer = l_GE.getD_OrderBuffer();
+        this.d_OrderStrBuffer = l_GE.getD_OrderStrBuffer();
+        this.d_LogEntryBuffer = l_GE.getD_LogEntryBuffer();
+        this.d_CurrentPhase = l_GE.getD_CurrentPhase();
+        this.d_PreMapLoadPhase = l_GE.getD_PreMapLoadPhase();
+        this.d_PostMapEditLoadPhase = l_GE.getD_PostMapEditLoadPhase();
+        this.d_StartupPhase = l_GE.getD_StartupPhase();
+        this.d_IssueOrdersPhase = l_GE.getD_IssueOrdersPhase();
+        this.d_ExecuteOrdersPhase = l_GE.getD_ExecuteOrdersPhase();
+        this.d_GameOverPhase = l_GE.getD_GameOverPhase();
+        this.d_GameSaveLoad = l_GE.getD_GameSaveLoad();
     }
 
     /**
@@ -470,28 +495,20 @@ public class GameEngine implements Serializable {
     /**
      * @return GameSaveLoad
      */
+    /**
+     * Getter for GameSaveLoad function
+     *
+     * @return d_GameSaveLoad
+     */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
-    /**
-     public static void saveGame(String p_FileName, GameEngine p_GE) {
-     File d_GameFile = new File(p_FileName);
-     GameEngine d_GE = p_GE;
-     try {
-     FileWriter d_GameFileWriter = new FileWriter(d_GameFile);
-     FileOutputStream d_FileOut = new FileOutputStream(d_GameFile);
-     ObjectOutputStream d_ObjectOut = new ObjectOutputStream(d_FileOut);
-     d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Continents());
-     d_ObjectOut.writeObject(d_GE.getD_LoadedMap().getD_Countries());
-     d_ObjectOut.writeObject(d_GE.getD_PlayerList());
-     d_ObjectOut.writeObject(d_GE.getD_CurrentPlayer());
-     d_ObjectOut.writeObject(d_GE.getD_CurrentPhase());
-     d_ObjectOut.close();
-     d_ObjectOut.flush();
-     System.out.println("Game Saved Successfully as" + p_FileName);
-     } catch (IOException e) {
-     e.printStackTrace();
-     }
-     }
-     */
+
+    public Console getD_Console() {
+        return d_Console;
+    }
+
+    public ArrayList<AdminCommands> getD_AdminCommandsBuffer() {
+        return d_AdminCommandsBuffer;
+    }
 }

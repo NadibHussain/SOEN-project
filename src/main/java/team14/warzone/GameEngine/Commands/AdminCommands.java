@@ -118,7 +118,7 @@ public class AdminCommands implements ICommand, Serializable {
                 break;
 
             case "loadgame":
-                d_GameEngine.getD_CurrentPhase().loadGame(l_CommandArgs.get(0));
+                d_GameEngine.loadGame(l_CommandArgs.get(0));
                 break;
 
             case "editmap":

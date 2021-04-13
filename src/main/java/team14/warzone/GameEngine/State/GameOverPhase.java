@@ -23,8 +23,8 @@ public class GameOverPhase extends GamePlayPhase {
         System.exit(0);
     }
 
-    
-    /** 
+
+    /**
      * @param p_CountryId
      * @param p_ContinentId
      */
@@ -33,8 +33,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_CountryId
      */
     @Override
@@ -42,8 +42,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_ContinentId
      * @param p_ControlValue
      */
@@ -52,8 +52,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_ContinentId
      */
     @Override
@@ -61,8 +61,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_CountryId
      * @param p_NeighborId
      */
@@ -71,8 +71,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_CountryId
      * @param p_NeighborId
      */
@@ -81,8 +81,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_FileName
      */
     @Override
@@ -90,8 +90,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_FileName
      */
     @Override
@@ -99,8 +99,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_FileName
      */
     @Override
@@ -108,8 +108,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_Map
      */
     @Override
@@ -117,8 +117,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_Name
      * @param p_PlayerType
      */
@@ -127,8 +127,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_Name
      */
     @Override
@@ -146,8 +146,8 @@ public class GameOverPhase extends GamePlayPhase {
 
     }
 
-    
-    /** 
+
+    /**
      * @param p_FileName
      */
     @Override
@@ -155,14 +155,10 @@ public class GameOverPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    
-    /** 
-     * @param p_FileName
-     */
-    @Override
-    public void loadGame(String p_FileName) {
-        invalidCommandMessage();
-    }
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        invalidCommandMessage();
+//    }
 
     @Override
     public void issueCommands() {
