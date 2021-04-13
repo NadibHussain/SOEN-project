@@ -98,7 +98,7 @@ public class PostMapEditLoadPhase extends MapEditorPhase{
      */
     @Override
     public void saveMap(String p_FileName) {
-        d_GameEngine.getD_MapEditor().saveMap(p_FileName);
+        d_GameEngine.getD_MapEditor().saveMap("domination",p_FileName);
         d_GameEngine.getD_LogEntryBuffer().setD_log("Saved map:"+p_FileName);
         d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
     }
