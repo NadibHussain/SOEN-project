@@ -94,8 +94,10 @@ public class Benevolent implements Behavior {
     private Country findWeakestCountry(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
         Country l_WeakestCountry = null;
-        l_CountryList.sort(Comparator.comparing(Country::getD_NumberOfArmies));
-        l_WeakestCountry = l_CountryList.get(0);
+        if(l_CountryList.size() != 0){
+            l_CountryList.sort(Comparator.comparing(Country::getD_NumberOfArmies));
+            l_WeakestCountry = l_CountryList.get(0);
+        }
         return l_WeakestCountry;
     }
 

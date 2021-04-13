@@ -123,7 +123,7 @@ public class Aggressive implements Behavior {
                     }
                 }else {//player has no armies to move or attack
                     // pass
-                    Console.displayMsg(p_Player.getD_Name() + ": pass mid");
+                    Console.displayMsg(p_Player.getD_Name() + ": pass");
                     p_GE.setD_PlayerPassed(true);
                 }
             }
