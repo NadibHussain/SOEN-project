@@ -9,9 +9,7 @@ import team14.warzone.MapModule.MapEditor;
 import static org.junit.Assert.assertTrue;
 
 
-import java.io.*;
-
-public class GameSaveLoadTest {
+public class GameSaveTest {
 
     private GameEngine d_GE;
     private MapEditor d_MapEditor;
