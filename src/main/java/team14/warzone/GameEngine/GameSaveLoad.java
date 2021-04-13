@@ -117,6 +117,10 @@ public class GameSaveLoad implements Serializable {
         return d_loadGameEngine;
     }
 
+    /**
+     * Getter for the loaded game engine after loading a game
+     * @return loaded game engine
+     */
     public GameEngine getD_loadGameEngine() {
         return d_loadGameEngine;
     }

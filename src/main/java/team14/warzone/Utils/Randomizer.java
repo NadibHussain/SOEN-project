@@ -2,12 +2,15 @@ package team14.warzone.Utils;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Class to use random number generation
+ */
 public class Randomizer {
 
     
     /** 
-     * @param p_LowerLimit
-     * @param p_UpperLimit
+     * @param p_LowerLimit upper limit of number
+     * @param p_UpperLimit lower limit of number
      * @return int
      */
     public static int generateRandomNumber(int p_LowerLimit, int p_UpperLimit) {

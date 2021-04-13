@@ -8,15 +8,31 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.MapEditor;
 import static org.junit.Assert.assertTrue;
 
-
+/**
+ * This is a test class for Save Game feature
+ */
 public class GameSaveTest {
-
+    /**
+     * Game Engine Field
+     */
     private GameEngine d_GE;
+    /**
+     * Map Editor Field
+     */
     private MapEditor d_MapEditor;
+    /**
+     * Console Field
+     */
     private Console d_Console;
+    /**
+     * GameSaveLoad Field
+     */
     private GameSaveLoad d_GameSaveLoad;
 
-
+    /**
+     * Method initializes the context under which test should run
+     * Load a map, add players, assigncountries, deploy armies to countries
+     */
     @Before
     public void setup() {
         d_MapEditor = new MapEditor();
@@ -37,6 +53,10 @@ public class GameSaveTest {
         d_GameSaveLoad = new GameSaveLoad(d_GE);
     }
 
+    /**
+     * The test saves the game at the particular instance
+     * if the save game is succesful saveTest returns TRUE else returns FALSE
+     */
     @Test
     @DisplayName("Testing Save Game")
     public void saveTest() {

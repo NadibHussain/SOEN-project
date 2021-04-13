@@ -482,7 +482,7 @@ public class GameEngine implements Serializable {
 
 
     /**
-     * @param p_PlayerPassed
+     * @param p_PlayerPassed player passed true or false
      */
     public void setD_PlayerPassed(boolean p_PlayerPassed) {
         d_PlayerPassed = p_PlayerPassed;

@@ -258,28 +258,28 @@ public abstract class Phase implements Serializable {
 
 
     /**
-     * @param p_Maps
+     * @param p_Maps maps for tournament
      */
     public void tournamentAddMaps(List<String> p_Maps) {
     }
 
 
     /**
-     * @param p_Strategies
+     * @param p_Strategies player strategies for tournament
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
     }
 
 
     /**
-     * @param p_NumOfTurns
+     * @param p_NumOfTurns number of turns to be given
      */
     public void tournamentMaxNumOfTurns(String p_NumOfTurns) {
     }
 
 
     /**
-     * @param p_NumOfGames
+     * @param p_NumOfGames number of games to be played
      */
     public void tournamentNumOfGames(String p_NumOfGames) {
     }

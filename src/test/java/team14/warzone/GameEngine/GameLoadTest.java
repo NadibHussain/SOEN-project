@@ -5,16 +5,34 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.MapModule.MapEditor;
-
 import static org.junit.Assert.assertEquals;
 
-
+/**
+ * This is a test class for Load Game feature
+ */
 public class GameLoadTest {
+    /**
+     * Game Engine Field
+     */
     private GameEngine d_GE;
+    /**
+     * Map Editor Field
+     */
     private MapEditor d_MapEditor;
+    /**
+     * Console Field
+     */
     private Console d_Console;
+    /**
+     * GameSaveLoad Field
+     */
     private GameSaveLoad d_GameSaveLoad;
 
+    /**
+     * Method initializes the context under which test should run
+     * Load a map, add players, assigncountries, deploy armies to countries and save the game
+     * at this point
+     */
     @Before
     public void setup() {
         d_MapEditor = new MapEditor();
@@ -36,6 +54,10 @@ public class GameLoadTest {
         d_GameSaveLoad.runSaveGame("TestLoad");
     }
 
+    /**
+     * The test loads the saved file and checks for various parameters which were setup earlier
+     * checks the players names added, country owned by a player, number of armies on a country after deploy
+     */
     @Test
     @DisplayName("Testing Load Game")
     public void loadTest() {
