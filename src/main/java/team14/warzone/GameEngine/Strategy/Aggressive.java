@@ -95,7 +95,7 @@ public class Aggressive implements Behavior {
                         Country l_SecondStrongestCountry = l_CountriesOwnedByPlayer.get(l_SecondStrongestCountryIndex);
                         if(l_StrongestCountry.getD_NumberOfArmies() == 0){
                             // pass
-                            Console.displayMsg(p_Player.getD_Name() + ": pass first");
+                            Console.displayMsg(p_Player.getD_Name() + ": pass");
                             p_GE.setD_PlayerPassed(true);
                         }
                         else{
@@ -123,13 +123,13 @@ public class Aggressive implements Behavior {
                     }
                 }else {//player has no armies to move or attack
                     // pass
-                    Console.displayMsg(p_Player.getD_Name() + ": pass");
+                    Console.displayMsg(p_Player.getD_Name() + ": pass no armies left");
                     p_GE.setD_PlayerPassed(true);
                 }
             }
         } else { //if player has reached the maximum number of issued commands
             // pass
-            Console.displayMsg(p_Player.getD_Name() + ": pass end");
+            Console.displayMsg(p_Player.getD_Name() + ": pass");
             p_GE.setD_PlayerPassed(true);
         }
     }

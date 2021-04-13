@@ -86,7 +86,7 @@ public class Random implements Behavior {
                 }
             }
             //if all counties owned by player have zero armies
-            if(l_AttackFrom.getD_NumberOfArmies() != 0)
+            if(l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0)
                 l_Flag = true;
         }
 
@@ -132,7 +132,7 @@ public class Random implements Behavior {
                 }
             }
             //if all counties owned by player have zero armies
-            if(l_AttackFrom.getD_NumberOfArmies() != 0)
+            if(l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0)
                 l_Flag = true;
         }
         // this is a mechanical keyboard
