@@ -34,13 +34,14 @@ public class TournamentTest {
     @Test
     @DisplayName("Testing Tournament")
     public void tournamentRun() {
+        //tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
         List<String> l_MapList = new ArrayList<>();
         l_MapList.add("bigeurope.map");
         l_MapList.add("europass.map");
         List<String> l_PlayerList = new ArrayList<>();
-        l_PlayerList.add("random");
-        l_PlayerList.add("benevolent");
         l_PlayerList.add("aggressive");
+        l_PlayerList.add("benevolent");
+        l_PlayerList.add("random");
         String l_NumofGame = "3";
         String l_NumofTurn = "4";
 
