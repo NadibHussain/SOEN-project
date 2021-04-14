@@ -147,7 +147,7 @@ public abstract class Phase implements Serializable {
      *
      * @param p_FileName Path of the .map file
      */
-    abstract public void saveMap(String p_FileName);
+    abstract public void saveMap(String p_FileName, String p_MapType);
 
     /**
      * Needed command before editing the Map object

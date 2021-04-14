@@ -1,15 +1,5 @@
 package team14.warzone.GameEngine.State;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -17,6 +7,11 @@ import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditorConquest;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This is Tournament class which extends Phase
@@ -258,7 +253,7 @@ public class Tournament extends Phase {
      * @param p_FileName
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         // TODO Auto-generated method stub
 
     }
@@ -337,14 +332,14 @@ public class Tournament extends Phase {
 
     }
 
-    /**
-     * @param p_FileName
-     */
-    @Override
-    public void loadGame(String p_FileName) {
-        // TODO Auto-generated method stub
-
-    }
+//    /**
+//     * @param p_FileName
+//     */
+//    @Override
+//    public void loadGame(String p_FileName) {
+//        // TODO Auto-generated method stub
+//
+//    }
 
     @Override
     public void issueCommands() {

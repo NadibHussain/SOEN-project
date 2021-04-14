@@ -95,7 +95,7 @@ public class GameOverPhase extends GamePlayPhase {
      * @param p_FileName
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
 
     }
 

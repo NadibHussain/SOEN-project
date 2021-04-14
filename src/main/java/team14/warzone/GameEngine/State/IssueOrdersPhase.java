@@ -230,7 +230,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
      * saves map
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         invalidCommandMessage();
     }
 
