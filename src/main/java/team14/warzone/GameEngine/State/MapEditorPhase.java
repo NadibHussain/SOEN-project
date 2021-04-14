@@ -5,7 +5,6 @@ import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.AdminCommands;
 import team14.warzone.GameEngine.GameEngine;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -175,14 +174,5 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public void saveGame(String p_FileName) {
         invalidCommandMessage();
-    }
-
-    /**
-     * Loadgame method which is valid in startup phase
-     * @param p_FileName filename
-     */
-    @Override
-    public void loadGame(String p_FileName) {
-        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
     }
 }

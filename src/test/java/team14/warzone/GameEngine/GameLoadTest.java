@@ -1,10 +1,13 @@
 package team14.warzone.GameEngine;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.AdapterMapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -18,7 +21,7 @@ public class GameLoadTest {
     /**
      * Map Editor Field
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * Console Field
      */
@@ -35,7 +38,7 @@ public class GameLoadTest {
      */
     @Before
     public void setup() {
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_Console = new Console();
         d_GE = new GameEngine(d_Console, d_MapEditor);
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");

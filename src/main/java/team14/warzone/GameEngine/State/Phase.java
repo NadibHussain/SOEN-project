@@ -200,12 +200,6 @@ public abstract class Phase implements Serializable {
     abstract public void saveGame(String p_FileName);
 
     /**
-     * used for loading a saved game
-     * @param p_FileName filename
-     */
-    public abstract void loadGame(String p_FileName);
-
-    /**
      * takes command in round robin manner in the play phase
      */
     abstract public void issueCommands(); // instant for map phase and round robin for play phase
