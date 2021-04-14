@@ -46,7 +46,7 @@ public class GameSaveLoad implements Serializable {
             System.out.println("Game Saved Successfully as" + " " + p_FileName);
             d_saved = true;
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Invalid");
             d_saved = false;
         }
         return d_saved;
@@ -68,7 +68,7 @@ public class GameSaveLoad implements Serializable {
         } catch (EOFException f) {
                 f.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("File does not exist");
             d_loaded = false;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -114,6 +114,14 @@ public class GameSaveLoad implements Serializable {
      */
     public GameEngine runLoadGame(String p_FileName) {
         loadGame(p_FileName);
+        return d_loadGameEngine;
+    }
+
+    /**
+     * Getter for the loaded game engine after loading a game
+     * @return loaded game engine
+     */
+    public GameEngine getD_loadGameEngine() {
         return d_loadGameEngine;
     }
 }

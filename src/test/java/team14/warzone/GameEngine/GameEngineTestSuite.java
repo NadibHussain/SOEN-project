@@ -13,7 +13,7 @@ import team14.warzone.GameEngine.State.PreMapLoadPhaseTest;
         AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class,
         DiplomacyTest.class,
         IssueOrdersPhaseTest.class, PreMapLoadPhaseTest.class, GameOverPhaseTest.class,
-        CardTest.class
+        CardTest.class, GameSaveTest.class, GameLoadTest.class
 })
 
 /**

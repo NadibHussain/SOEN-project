@@ -19,8 +19,8 @@ import java.util.List;
 public class Cheater implements Behavior {
     
     /** 
-     * @param p_GE
-     * @param p_Player
+     * @param p_GE GameEngine
+     * @param p_Player Player
      */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
