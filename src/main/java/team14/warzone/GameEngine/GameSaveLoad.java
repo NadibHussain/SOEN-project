@@ -66,12 +66,14 @@ public class GameSaveLoad implements Serializable {
             d_loadGameEngine = (GameEngine) d_ObjectIn.readObject();
             d_loaded = true;
         } catch (EOFException f) {
-                f.printStackTrace();
+//                f.printStackTrace();
+            System.out.println("Error: could not load game");
         } catch (IOException e) {
-            System.out.println("File does not exist");
+            System.out.println("Error: file does not exist");
             d_loaded = false;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error: could not load game");
         }
         return d_loaded;
     }
