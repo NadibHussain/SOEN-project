@@ -46,7 +46,7 @@ public class GameSaveLoad implements Serializable {
             System.out.println("Game Saved Successfully as" + " " + p_FileName);
             d_saved = true;
         } catch (IOException e) {
-            System.out.println("Invalid");
+            e.printStackTrace();
             d_saved = false;
         }
         return d_saved;

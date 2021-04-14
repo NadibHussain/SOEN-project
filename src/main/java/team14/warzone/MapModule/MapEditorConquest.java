@@ -1,9 +1,6 @@
 package team14.warzone.MapModule;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -12,7 +9,7 @@ import java.util.Stack;
  * This is the main class for Mapeditor functions
  */
 
-public class MapEditorConquest {
+public class MapEditorConquest implements Serializable {
 
     /**
      * loaded map object
