@@ -69,6 +69,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
      */
     @Override
     public void issueCommands() {
+        d_GameEngine.incrementD_CurrentNumberOfTurns();
         ArrayList<Player> l_PlayerList = d_GameEngine.getD_PlayerList();
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[l_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);

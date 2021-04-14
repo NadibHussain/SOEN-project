@@ -107,6 +107,10 @@ public class GameEngine implements Serializable {
     private GameSaveLoad d_GameSaveLoad;
 
     /**
+     * Tournament mode current number of turns
+     */
+    private int d_CurrentNumberOfTurns = 0;
+    /**
      * Constructor for Game Engine
      *
      * @param p_Console   console object
@@ -510,5 +514,13 @@ public class GameEngine implements Serializable {
 
     public ArrayList<AdminCommands> getD_AdminCommandsBuffer() {
         return d_AdminCommandsBuffer;
+    }
+
+    public void incrementD_CurrentNumberOfTurns(){
+        d_CurrentNumberOfTurns++;
+    }
+
+    public int getD_CurrentNumberOfTurns(){
+        return d_CurrentNumberOfTurns;
     }
 }

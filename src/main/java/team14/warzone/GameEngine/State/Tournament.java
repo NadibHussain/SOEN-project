@@ -126,13 +126,17 @@ public class Tournament extends Phase {
                 d_CurrentMap = d_Maps.get(l_MapIndex);
                 d_GameEngine.setD_LoadedMap(d_CurrentMap);
                 assignCountries();// assign countries to players for current map
-
-                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
-                    for (Player l_APlayer : d_Players) {
-                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
-                        l_APlayer.issueOrder();
-                    }
+                while (d_GameEngine.getD_CurrentNumberOfTurns() < d_NumOfTurns){
+                    System.out.println("inside loop" + d_GameEngine.getD_CurrentPhase());
+                    d_GameEngine.getD_CurrentPhase().run();
                 }
+//                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
+//                    for (Player l_APlayer : d_Players) {
+//                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
+//                        l_APlayer.issueOrder();
+//                    }
+//                }
+
                 
                 ArrayList<Integer> l_IndexListOfWinners = determineWinner();
                 String l_WinningValue = "";
@@ -317,6 +321,7 @@ public class Tournament extends Phase {
                 }
             }
             Console.displayMsg("Success: countries assigned");
+            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());//change to issueOrder phase
         } else {
             Console.displayMsg("Failed: 2-5 players required");
         }
