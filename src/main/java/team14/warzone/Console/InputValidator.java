@@ -86,7 +86,7 @@ public class InputValidator {
     public static ArrayList<String> VALID_MAP_TYPE = new ArrayList<>(
             Arrays.asList(
                     "domination",
-                    "conquest”"
+                    "conquest"
             )
     );
 
