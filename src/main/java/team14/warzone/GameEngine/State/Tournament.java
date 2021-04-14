@@ -123,6 +123,8 @@ public class Tournament extends Phase {
         for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
 
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                System.out.println("start+++++++++++++++++++++++++++++++++");
+                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
                 d_GameEngine.setD_GameOver(false);
                 d_GameEngine.resetPlayers();
                 d_CurrentMap = d_Maps.get(l_MapIndex);
@@ -316,9 +318,11 @@ public class Tournament extends Phase {
                 for (int l_PlayerIterator = 0; l_PlayerIterator < d_Players.size()
                         && l_CountryCounter < l_Countries.size(); l_PlayerIterator++) {
                     // add country to player's country-list
+                    System.out.println("before country set ###################");
                     d_Players.get(l_PlayerIterator).addCountryOwned(l_Countries.get(l_CountryCounter));
                     // set country's current owner to player
                     l_Countries.get(l_CountryCounter).setD_CurrentOwner(d_Players.get(l_PlayerIterator).getD_Name());
+                    System.out.println("after country set ###################");
                     l_CountryCounter++;
                 }
             }
