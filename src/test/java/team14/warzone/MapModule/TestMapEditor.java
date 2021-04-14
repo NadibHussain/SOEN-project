@@ -31,7 +31,7 @@ public class TestMapEditor {
     @BeforeClass
     public static void init() throws FileNotFoundException {
 
-        d_MapEditor = new MapEditorDomination();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_MapEditor.loadMapDomination("europass.map");
     }
 
