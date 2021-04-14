@@ -35,7 +35,7 @@ public class Benevolent implements Behavior {
         }
 
         // play cards if any
-        else if (!p_Player.getCardList().isEmpty()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
             Card l_Card = p_Player.getCardList().get(0);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
@@ -94,7 +94,7 @@ public class Benevolent implements Behavior {
     private Country findWeakestCountry(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
         Country l_WeakestCountry = null;
-        if(l_CountryList.size() != 0){
+        if (l_CountryList.size() != 0) {
             l_CountryList.sort(Comparator.comparing(Country::getD_NumberOfArmies));
             l_WeakestCountry = l_CountryList.get(0);
         }
@@ -228,7 +228,7 @@ public class Benevolent implements Behavior {
      * @return name of behavior
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "benevolent";
     }
 }
