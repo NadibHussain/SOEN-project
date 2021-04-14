@@ -20,7 +20,12 @@ public class GameOverPhase extends GamePlayPhase {
     public void run() {
         System.out.println("Game over!");
         System.out.println("Congratulations, winner: " + d_GameEngine.getD_CurrentPlayer().getD_Name());
-        System.exit(0);
+        if (d_GameEngine.isD_TournamentMode()){
+            d_GameEngine.setD_GameOver(true);
+//            d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
+        }
+        else
+            System.exit(0);
     }
 
 

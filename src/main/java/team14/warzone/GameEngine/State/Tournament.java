@@ -88,7 +88,6 @@ public class Tournament extends Phase {
      * @param p_Strategies
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
-        System.out.println("adding players");
         d_Players = new ArrayList<>();
         int l_Count = 1;
         for (String p_AStrategy : p_Strategies) {
@@ -100,7 +99,6 @@ public class Tournament extends Phase {
             } else
                 System.out.println(p_AStrategy + " is not valid or allowed to play tournament.");
         }
-        System.out.println(d_Players);
         d_GameEngine.setD_PlayerList(d_Players);
     }
 
@@ -120,27 +118,21 @@ public class Tournament extends Phase {
 
     @Override
     public void run() {
+        d_GameEngine.setD_TournamentMode(true);
         d_GameTable = new String[d_Maps.size()][d_NumOfGames];
         for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
 
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                d_GameEngine.setD_GameOver(false);
                 d_GameEngine.resetPlayers();
                 d_CurrentMap = d_Maps.get(l_MapIndex);
                 d_GameEngine.setD_LoadedMap(d_CurrentMap);
                 assignCountries();// assign countries to players for current map
-                while (d_GameEngine.getD_CurrentNumberOfTurns() < d_NumOfTurns) {
-                    System.out.println("inside loop" + d_GameEngine.getD_CurrentPhase());
+
+                while (d_GameEngine.getD_CurrentNumberOfTurns() < d_NumOfTurns && !d_GameEngine.isD_GameOver()) {
                     d_GameEngine.getD_CurrentPhase().run();
                 }
                 d_GameEngine.setD_CurrentNumberOfTurns(0);
-//                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
-//                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
-//                    for (Player l_APlayer : d_Players) {
-//                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
-//                        l_APlayer.issueOrder();
-//                    }
-//                }
-
 
                 ArrayList<Integer> l_IndexListOfWinners = determineWinner();
                 String l_WinningValue = "";
@@ -152,11 +144,13 @@ public class Tournament extends Phase {
                                 + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
                     System.out.println("The game is a draw between " + l_WinningValue);
+                    System.out.println("____________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = "Draw between " + l_WinningValue;
                 } else if (l_IndexListOfWinners.size() == 1) {
                     l_WinningValue = l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(0)).getD_Name() + " "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
                     System.out.println("The winner is " + l_WinningValue + " with owning countries " + d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
+                    System.out.println("____________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = l_WinningValue;
                 } else
                     System.out.println("The game does not have any winner");
@@ -314,7 +308,6 @@ public class Tournament extends Phase {
 
     @Override
     public void assignCountries() {
-        System.out.println("player :" + d_Players);
         // if number of players between 2 and 5, assign countries to players randomly
         if (d_Players.size() >= 2 && d_Players.size() <= 5) {
             int l_CountryCounter = 0;

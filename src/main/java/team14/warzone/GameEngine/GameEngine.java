@@ -112,7 +112,15 @@ public class GameEngine implements Serializable {
     /**
      * Tournament mode current number of turns
      */
-    private int d_CurrentNumberOfTurns = 0;
+    private int d_CurrentNumberOfTurns;
+    /**
+     * Check if game is over, used in tournament mode
+     */
+    private boolean d_GameOver;
+    /**
+     * Check if it is tournament mode
+     */
+    private boolean d_TournamentMode;
     /**
      * Check if tournament ended
      */
@@ -140,7 +148,10 @@ public class GameEngine implements Serializable {
         d_GameOverPhase = new GameOverPhase(this);
         d_TournamentModePhase = new Tournament(this);
         d_CurrentPlayer = new Player("temp", this);
+        d_CurrentNumberOfTurns = 0;
         d_TournamentEnded = false;
+        d_TournamentMode = false;
+        d_GameOver = false;
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
@@ -545,10 +556,26 @@ public class GameEngine implements Serializable {
     }
 
     public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
-        this.d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
+        d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
     }
 
     public void setD_TournamentEnded(boolean p_TournamentEnded) {
         d_TournamentEnded = p_TournamentEnded;
+    }
+
+    public boolean isD_TournamentMode() {
+        return d_TournamentMode;
+    }
+
+    public void setD_TournamentMode(boolean p_TournamentMode) {
+        d_TournamentMode = p_TournamentMode;
+    }
+
+    public boolean isD_GameOver() {
+        return d_GameOver;
+    }
+
+    public void setD_GameOver(boolean p_GameOver) {
+        d_GameOver = p_GameOver;
     }
 }
