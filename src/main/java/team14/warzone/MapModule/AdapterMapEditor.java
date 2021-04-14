@@ -6,7 +6,14 @@ import java.util.Scanner;
 
 public class AdapterMapEditor extends MapEditorDomination{
 
+    /**
+     * copy of conquest map editor conquest
+     */
     MapEditorConquest d_MapEditorConquest;
+    /**
+     * loaded map object
+     */
+    public Map d_LoadedMap;
 
     /**
      * Constructor which takes map editor conquest as local variable
@@ -50,12 +57,20 @@ public class AdapterMapEditor extends MapEditorDomination{
      * @param p_format the format can be (domination/conquest) in which the file will be saved
      */
     public void saveMap(String p_format,String p_filename){
-
-        if (p_format.equals("domination")){
-            saveMapDomination(p_filename);
+        Map l_LoadedMap;
+        if (d_MapEditorConquest.getD_LoadedMap()==null)
+        {
+            l_LoadedMap = d_LoadedMap;
         }
         else {
-            d_MapEditorConquest.saveMapConquest(p_filename);
+            l_LoadedMap = d_MapEditorConquest.d_LoadedMap;
+        }
+
+        if (p_format.equals("domination")){
+            saveMapDomination(p_filename ,l_LoadedMap);
+        }
+        else {
+            d_MapEditorConquest.saveMapConquest(p_filename,l_LoadedMap);
         }
     }
 
@@ -79,6 +94,21 @@ public class AdapterMapEditor extends MapEditorDomination{
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * Get a loaded map
+     *
+     * @return a loaded map file
+     */
+    @Override
+    public Map getD_LoadedMap() {
+        if (d_LoadedMap != null){
+            return d_LoadedMap;
+        }
+        else {
+            return d_MapEditorConquest.d_LoadedMap;
         }
     }
 }

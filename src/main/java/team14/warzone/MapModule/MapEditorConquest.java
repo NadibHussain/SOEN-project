@@ -37,7 +37,7 @@ public class MapEditorConquest {
         } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
-            saveMapConquest(p_FileName);
+            saveMapConquest(p_FileName,d_LoadedMap);
         }
     }
 
@@ -158,7 +158,8 @@ public class MapEditorConquest {
      *
      * @param p_FileName String filename
      */
-    public void saveMapConquest(String p_FileName) {
+    public void saveMapConquest(String p_FileName,Map p_LoadedMap) {
+        d_LoadedMap = p_LoadedMap;
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
         // writing all the continents
         l_Content.append("[Continents]\n");

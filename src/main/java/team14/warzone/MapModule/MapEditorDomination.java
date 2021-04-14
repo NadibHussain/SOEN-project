@@ -34,7 +34,7 @@ public class MapEditorDomination  implements Serializable{
         } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
-            saveMapDomination(p_FileName);
+            saveMapDomination(p_FileName,d_LoadedMap);
         }
     }
 
@@ -111,7 +111,11 @@ public class MapEditorDomination  implements Serializable{
                 break;
             } else {
                 String[] l_ContinentArray = l_Line.split(" ");
-                l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
+                String l_ContinentName = "";
+                for (int l_Counter=0;l_Counter<l_ContinentArray.length-1;l_Counter++){
+                    l_ContinentName+=l_ContinentArray[l_Counter];
+                }
+                l_Map.addContinent(l_ContinentName, Integer.parseInt(l_ContinentArray[l_ContinentArray.length-1]));
             }
         }
     }
@@ -152,8 +156,9 @@ public class MapEditorDomination  implements Serializable{
      *
      * @param p_FileName String filename
      */
-    public void saveMapDomination(String p_FileName) {
+    public void saveMapDomination(String p_FileName,Map p_LoadedMap) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
+        d_LoadedMap = p_LoadedMap;
         // writing all the continents
         l_Content.append("[continents]\n");
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
