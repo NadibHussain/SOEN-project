@@ -98,6 +98,10 @@ public class GameEngine implements Serializable {
      */
     private Phase d_GameOverPhase;
     /**
+     * Tournament mode phase
+     */
+    private Phase d_TournamentModePhase;
+    /**
      * Flag to check whether automated player passed their turn
      */
     private boolean d_PlayerPassed;
@@ -105,11 +109,23 @@ public class GameEngine implements Serializable {
      * GameSaveLoad object to access GameEngine
      */
     private GameSaveLoad d_GameSaveLoad;
-
     /**
      * Tournament mode current number of turns
      */
-    private int d_CurrentNumberOfTurns = 0;
+    private int d_CurrentNumberOfTurns;
+    /**
+     * Check if game is over, used in tournament mode
+     */
+    private boolean d_GameOver;
+    /**
+     * Check if it is tournament mode
+     */
+    private boolean d_TournamentMode;
+    /**
+     * Check if tournament ended
+     */
+    private boolean d_TournamentEnded;
+
     /**
      * Constructor for Game Engine
      *
@@ -130,7 +146,12 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_GameOverPhase = new GameOverPhase(this);
+        d_TournamentModePhase = new Tournament(this);
         d_CurrentPlayer = new Player("temp", this);
+        d_CurrentNumberOfTurns = 0;
+        d_TournamentEnded = false;
+        d_TournamentMode = false;
+        d_GameOver = false;
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
@@ -156,6 +177,7 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
         d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
         d_GameOverPhase = p_GameEngine.d_GameOverPhase;
+        d_TournamentModePhase = p_GameEngine.d_TournamentModePhase;
         d_CurrentPhase = p_GameEngine.d_CurrentPhase;
 
         d_LoadedMap = p_GameEngine.d_LoadedMap;
@@ -165,7 +187,7 @@ public class GameEngine implements Serializable {
      * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
-        while (true) {
+        while (!d_TournamentEnded) {
             d_CurrentPhase.run();
         }
     }
@@ -468,6 +490,15 @@ public class GameEngine implements Serializable {
     }
 
     /**
+     * getter
+     *
+     * @return d_TournamentModePhase
+     */
+    public Phase getD_TournamentModePhase() {
+        return d_TournamentModePhase;
+    }
+
+    /**
      * Getter for LogEntryBuffer
      *
      * @return the current log entry buffer for this engine
@@ -522,5 +553,29 @@ public class GameEngine implements Serializable {
 
     public int getD_CurrentNumberOfTurns(){
         return d_CurrentNumberOfTurns;
+    }
+
+    public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
+        d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
+    }
+
+    public void setD_TournamentEnded(boolean p_TournamentEnded) {
+        d_TournamentEnded = p_TournamentEnded;
+    }
+
+    public boolean isD_TournamentMode() {
+        return d_TournamentMode;
+    }
+
+    public void setD_TournamentMode(boolean p_TournamentMode) {
+        d_TournamentMode = p_TournamentMode;
+    }
+
+    public boolean isD_GameOver() {
+        return d_GameOver;
+    }
+
+    public void setD_GameOver(boolean p_GameOver) {
+        d_GameOver = p_GameOver;
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * This is Tournament class which extends Phase
- * 
+ *
  * @author tanzia-ahmed
  */
 public class Tournament extends Phase {
@@ -50,7 +50,7 @@ public class Tournament extends Phase {
 
     /**
      * Constructor
-     * 
+     *
      * @param p_GameEngine
      */
 
@@ -61,14 +61,14 @@ public class Tournament extends Phase {
 
     /**
      * adds to map list d_Maps
-     * 
+     *
      * @param p_MapList
      */
     public void tournamentAddMaps(List<String> p_MapList) {
         d_Maps = new ArrayList<>();
         for (String p_MapFileName : p_MapList) {
             try {
-                
+
                 d_MapEditor.loadMap(p_MapFileName);
                 if (d_MapEditor.validateMap(d_MapEditor.d_LoadedMap))
                     d_Maps.add(d_MapEditor.d_LoadedMap);
@@ -84,7 +84,7 @@ public class Tournament extends Phase {
 
     /**
      * adds to player list d_Players
-     * 
+     *
      * @param p_Strategies
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
@@ -118,51 +118,52 @@ public class Tournament extends Phase {
 
     @Override
     public void run() {
+        d_GameEngine.setD_TournamentMode(true);
         d_GameTable = new String[d_Maps.size()][d_NumOfGames];
         for (int l_MapIndex = 0; l_MapIndex < d_Maps.size(); l_MapIndex++) {
-            
+
             for (int l_GameCount = 0; l_GameCount < d_NumOfGames; l_GameCount++) {
+                d_GameEngine.setD_GameOver(false);
                 d_GameEngine.resetPlayers();
                 d_CurrentMap = d_Maps.get(l_MapIndex);
                 d_GameEngine.setD_LoadedMap(d_CurrentMap);
                 assignCountries();// assign countries to players for current map
-                while (d_GameEngine.getD_CurrentNumberOfTurns() < d_NumOfTurns){
-                    System.out.println("inside loop" + d_GameEngine.getD_CurrentPhase());
+
+                while (d_GameEngine.getD_CurrentNumberOfTurns() < d_NumOfTurns && !d_GameEngine.isD_GameOver()) {
                     d_GameEngine.getD_CurrentPhase().run();
                 }
-//                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
-//                    for (Player l_APlayer : d_Players) {
-//                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
-//                        l_APlayer.issueOrder();
-//                    }
-//                }
+                d_GameEngine.setD_CurrentNumberOfTurns(0);
 
-                
                 ArrayList<Integer> l_IndexListOfWinners = determineWinner();
                 String l_WinningValue = "";
                 if (l_IndexListOfWinners.size() > 1) {
                     System.out.println(l_IndexListOfWinners.get(0) + " " + l_IndexListOfWinners.get(1));
                     for (int i = 0; i < l_IndexListOfWinners.size(); i++) {
-                        l_WinningValue = l_WinningValue + " "+d_Players.get(l_IndexListOfWinners.get(i)).getD_Name()+" "
+                        l_WinningValue =
+                                l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(i)).getD_Name() + " "
                                 + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
                     System.out.println("The game is a draw between " + l_WinningValue);
+                    System.out.println("____________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = "Draw between " + l_WinningValue;
                 } else if (l_IndexListOfWinners.size() == 1) {
-                    l_WinningValue = l_WinningValue + " "+d_Players.get(l_IndexListOfWinners.get(0)).getD_Name()+" "
+                    l_WinningValue = l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(0)).getD_Name() + " "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
-                    System.out.println("The winner is " + l_WinningValue+" with owning countries " +d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
+                    System.out.println("The winner is " + l_WinningValue + " with owning countries " + d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
+                    System.out.println("____________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = l_WinningValue;
                 } else
                     System.out.println("The game does not have any winner");
             }
         }
+        // set tournament end flag
+        d_GameEngine.setD_TournamentEnded(true);
         //show in table
         String[] l_ColumnNames = new String[d_NumOfGames];
-        for(int l_IndexColumn = 0; l_IndexColumn<d_NumOfGames; l_IndexColumn++){
-            l_ColumnNames[l_IndexColumn] = "Game"+(l_IndexColumn+1);
+        for (int l_IndexColumn = 0; l_IndexColumn < d_NumOfGames; l_IndexColumn++) {
+            l_ColumnNames[l_IndexColumn] = "Game" + (l_IndexColumn + 1);
         }
-        JTable l_Table = new JTable(d_GameTable,l_ColumnNames);
+        JTable l_Table = new JTable(d_GameTable, l_ColumnNames);
 
         //Create and set up the window.
         JFrame l_Frame = new JFrame("Tournament");
@@ -174,6 +175,7 @@ public class Tournament extends Phase {
         l_Frame.pack();
         l_Frame.setVisible(true);
 
+        Console.displayMsg("Please enter \"exit\" to quit the game");
     }
 
     private ArrayList<Integer> determineWinner() {
@@ -184,7 +186,7 @@ public class Tournament extends Phase {
         int l_MaxVal = Collections.max(l_NumCountriesOwned);
         ArrayList<Integer> l_IndexListOfWinners = new ArrayList<>();
         for (int i = 0; i < l_NumCountriesOwned.size(); i++) {
-            if(l_NumCountriesOwned.get(i) == l_MaxVal){
+            if (l_NumCountriesOwned.get(i) == l_MaxVal) {
                 l_IndexListOfWinners.add(i);
             }
         }

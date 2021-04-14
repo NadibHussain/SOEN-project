@@ -567,7 +567,7 @@ public class InputValidator {
      */
     private static boolean validateTournament(String p_OptionName, List<String> p_Arguments) throws Exception {
         // Validate command for current tournament
-        gamePhaseCheck(Phase.TOURNAMENT);
+        gamePhaseCheck(Phase.MAPEDITOR);
 
         // Validate option name
         tournamentOptionNameCheck(p_OptionName);

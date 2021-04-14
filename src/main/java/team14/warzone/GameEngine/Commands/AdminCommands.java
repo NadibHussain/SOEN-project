@@ -153,6 +153,7 @@ public class AdminCommands implements ICommand, Serializable {
                 break;
 
             case "tournament":
+                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_TournamentModePhase());
                 if (l_OptionName.equals("-M") || l_OptionName.equals("-m"))
                     d_GameEngine.getD_CurrentPhase().tournamentAddMaps(l_CommandArgs);
                 else if (l_OptionName.equals("-P") || l_OptionName.equals("-p"))
