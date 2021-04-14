@@ -78,8 +78,9 @@ public class IssueOrdersPhase extends GamePlayPhase {
             int l_Counter = 0;
             while (l_Counter < l_PlayerList.size()) {
                 d_GameEngine.resetPlayerPassed();
+
                 // check if player has already passed or lost all his countries
-                if (!l_Flag.get(l_Counter) && l_PlayerList.get(l_Counter).getD_CountriesOwned().size() != 0) {
+                if (!l_Flag.get(l_Counter)) {
                     // print current player's name and ask for command
                     d_GameEngine.setD_CurrentPlayer(l_PlayerList.get(l_Counter));
                     Player l_CurrentPlayer = l_PlayerList.get(l_Counter);
@@ -103,6 +104,7 @@ public class IssueOrdersPhase extends GamePlayPhase {
                         if (l_CommandStrList.get(0).get(0).equals("pass")) {
                             // check if all armies are issued to be deployed, excluding cheater
                             if (l_CurrentPlayer.getD_ArmiesOrderedToBeDeployed() >= l_CurrentPlayer.getD_TotalNumberOfArmies()
+                                    || l_CurrentPlayer.getD_CountriesOwned().size() == 0
                                     || l_CurrentPlayer.getD_IssueOrderBehavior() instanceof Cheater) {
                                 // set flag to true
                                 l_Flag.set(l_Counter, Boolean.TRUE);

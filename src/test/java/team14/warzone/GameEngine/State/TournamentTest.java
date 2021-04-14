@@ -35,6 +35,7 @@ public class TournamentTest {
     @DisplayName("Testing Tournament")
     public void tournamentRun() {
         //tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
+        //tournament -M bigeurope.map -P aggressive random aggressive -G 2 -D 4
         List<String> l_MapList = new ArrayList<>();
         l_MapList.add("bigeurope.map");
         l_MapList.add("europass.map");
