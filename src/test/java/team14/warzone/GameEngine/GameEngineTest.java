@@ -3,7 +3,8 @@ package team14.warzone.GameEngine;
 import org.junit.Before;
 import org.junit.Test;
 import team14.warzone.Console.Console;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.AdapterMapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
 
 public class GameEngineTest {
     /**
@@ -13,7 +14,7 @@ public class GameEngineTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -25,7 +26,7 @@ public class GameEngineTest {
     @Before
     public void setup() {
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
     }
 

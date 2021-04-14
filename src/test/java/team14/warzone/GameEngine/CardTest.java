@@ -6,8 +6,9 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.Commands.Advance;
+import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +23,7 @@ public class CardTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -36,7 +37,7 @@ public class CardTest {
     public void setup() {
         // object instantiation
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
 
         // setting up the scenario

@@ -3,12 +3,12 @@ package team14.warzone.GameEngine.State;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
 
 import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Tournament extends Phase {
     /**
      * instance of Map Editor
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * tournament table
      */
@@ -56,7 +56,7 @@ public class Tournament extends Phase {
 
     public Tournament(GameEngine p_GameEngine) {
         super(p_GameEngine);
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
     }
 
     /**
@@ -67,17 +67,12 @@ public class Tournament extends Phase {
     public void tournamentAddMaps(List<String> p_MapList) {
         d_Maps = new ArrayList<>();
         for (String p_MapFileName : p_MapList) {
-            try {
-                
-                d_MapEditor.loadMap(p_MapFileName);
-                if (d_MapEditor.validateMap(d_MapEditor.d_LoadedMap))
-                    d_Maps.add(d_MapEditor.d_LoadedMap);
-                else
-                    System.out.println(p_MapFileName + " map is not valid.");
-            } catch (FileNotFoundException e) {
-                System.out.println(p_MapFileName + " file does not exist.");
-                e.printStackTrace();
-            }
+
+            d_MapEditor.loadMap(p_MapFileName);
+            if (d_MapEditor.validateMap(d_MapEditor.d_LoadedMap))
+                d_Maps.add(d_MapEditor.d_LoadedMap);
+            else
+                System.out.println(p_MapFileName + " map is not valid.");
 
         }
     }
@@ -258,7 +253,7 @@ public class Tournament extends Phase {
      * @param p_FileName
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         // TODO Auto-generated method stub
 
     }

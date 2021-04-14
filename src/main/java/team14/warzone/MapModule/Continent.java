@@ -90,10 +90,6 @@ public class Continent implements Serializable {
         this.d_ControlValue = p_ControlValue;
     }
 
-    
-    /** 
-     * @return ArrayList<Player>
-     */
     public ArrayList<Player> getD_CurrentOwners() {
         return d_CurrentOwners;
     }

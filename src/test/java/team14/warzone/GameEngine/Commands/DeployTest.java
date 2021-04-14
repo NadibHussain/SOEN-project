@@ -6,7 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.AdapterMapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
 
 /**
  * This class tests the deploy order
@@ -19,7 +20,7 @@ public class DeployTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -33,7 +34,7 @@ public class DeployTest {
     public void setup() {
         // object instantiation
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
 
         // setting up the scenario

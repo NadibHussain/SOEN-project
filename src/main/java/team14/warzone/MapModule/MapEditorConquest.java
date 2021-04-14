@@ -1,6 +1,9 @@
 package team14.warzone.MapModule;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
@@ -9,7 +12,7 @@ import java.util.Stack;
  * This is the main class for Mapeditor functions
  */
 
-public class MapEditor implements Serializable {
+public class MapEditorConquest {
 
     /**
      * loaded map object
@@ -19,22 +22,22 @@ public class MapEditor implements Serializable {
     /**
      * Mapeditor method
      */
-    public MapEditor() {
+    public MapEditorConquest() {
     }
 
     /**
      * This method loads an existing file. If file is not found, it creates a file
      * and map from scratch.
-     * 
+     *
      * @param p_FileName filename param
      */
-    public void editMap(String p_FileName) {
+    public void editMapConquest(String p_FileName) {
         try {
-            loadMap(p_FileName);
+            loadMapConquest(p_FileName);
         } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
-            saveMap(p_FileName);
+            saveMapConquest(p_FileName);
         }
     }
 
@@ -44,21 +47,31 @@ public class MapEditor implements Serializable {
      * @param p_FileName String filename
      * @throws FileNotFoundException throws exception when filename is invalid
      */
-    public void loadMap(String p_FileName) throws FileNotFoundException {
+    public void loadMapConquest(String p_FileName) throws FileNotFoundException {
         Map l_Map = new Map();
         File l_FileObject = new File(p_FileName);
         Scanner l_ReaderObject = new Scanner(l_FileObject);
         while (l_ReaderObject.hasNextLine()) {
             String l_Data = l_ReaderObject.nextLine();
             switch (l_Data) {
-                case "[countries]":
-                    handleCountries(l_ReaderObject, l_Map);
+                case "[Territories]":
+                    handleCountriesConquest(l_ReaderObject, l_Map);
                     break;
-                case "[continents]":
-                    handleContinents(l_ReaderObject,l_Map);
+                case "[Continents]":
+                    handleContinentsConquest(l_ReaderObject,l_Map);
                     break;
-                case "[borders]":
-                    handleNeighbour(l_ReaderObject,l_Map);
+            }
+
+        }
+
+        l_ReaderObject.close();
+
+        l_ReaderObject = new Scanner(l_FileObject);
+        while (l_ReaderObject.hasNextLine()) {
+            String l_Data = l_ReaderObject.nextLine();
+            switch (l_Data) {
+                case "[Territories]":
+                    handleNeighbourConquest(l_ReaderObject, l_Map);
                     break;
             }
 
@@ -73,8 +86,8 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleCountries(Scanner l_ReaderObject,Map l_Map){
-        while (true) {
+    private void handleCountriesConquest(Scanner l_ReaderObject,Map l_Map){
+        while (l_ReaderObject.hasNextLine()) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
                 continue;
@@ -83,15 +96,15 @@ public class MapEditor implements Serializable {
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_CountryArray = l_Line.split(" ");
+                String[] l_CountryArray = l_Line.split(",");
                 String l_ContinentName = "";
                 for (Continent l_Conrinent : l_ContinentList) {
-                    if (l_Conrinent.getD_ContinentIntID() == Integer.parseInt(l_CountryArray[2])) {
+                    if (l_Conrinent.getD_ContinentID().equals(l_CountryArray[3])) {
                         l_ContinentName = l_Conrinent.getD_ContinentID();
                         break;
                     }
                 }
-                l_Map.addCountry(l_CountryArray[1], l_ContinentName);
+                l_Map.addCountry(l_CountryArray[0], l_ContinentName);
             }
         }
     }
@@ -101,7 +114,7 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleContinents(Scanner l_ReaderObject,Map l_Map){
+    private void handleContinentsConquest(Scanner l_ReaderObject,Map l_Map){
         while (true) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
@@ -110,7 +123,7 @@ public class MapEditor implements Serializable {
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_ContinentArray = l_Line.split(" ");
+                String[] l_ContinentArray = l_Line.split("=");
                 l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
             }
         }
@@ -120,29 +133,22 @@ public class MapEditor implements Serializable {
      * @param  l_ReaderObject to read the text from the file
      * @param l_Map the map which needs to be edited
      */
-    private void handleNeighbour(Scanner l_ReaderObject,Map l_Map){
-        ArrayList<Country> l_Countires = l_Map.getD_Countries();
-        int l_Index = 0;
+    private void handleNeighbourConquest(Scanner l_ReaderObject,Map l_Map){
         while (l_ReaderObject.hasNextLine()) {
             String l_Line = l_ReaderObject.nextLine();
-            if (l_Line.charAt(0) == ';' && l_Line.length() > 0) {
+            if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
                 continue;
             }
+            ArrayList<Continent> l_ContinentList = l_Map.getD_Continents();
             if (l_Line.equals("")) {
                 break;
             } else {
-                String[] l_NeighbourArray = l_Line.split(" ");
-                ArrayList<Country> l_NeighbourIDArray = new ArrayList<Country>();
-                for (int l_NeighbourIndex = 1; l_NeighbourIndex < l_NeighbourArray.length; l_NeighbourIndex++) {
-                    for (int l_CountryIndex = 0; l_CountryIndex < l_Countires.size(); l_CountryIndex++) {
-                        if (l_Countires.get(l_CountryIndex).getD_CountryIntID() == Integer
-                                .parseInt(l_NeighbourArray[l_NeighbourIndex])) {
-                            l_NeighbourIDArray.add(l_Countires.get(l_CountryIndex));
-                        }
-                    }
+                String[] l_CountryArray = l_Line.split(",");
+                for (int x=4;x<l_CountryArray.length;x++)
+                {
+                    Country l_Neighbour = l_Map.findCountry(l_CountryArray[x]);
+                    l_Map.findCountry(l_CountryArray[0]).addNeighbour(l_Neighbour);
                 }
-                l_Countires.get(l_Index).setD_Neighbours(l_NeighbourIDArray);
-                l_Index++;
             }
         }
     }
@@ -152,35 +158,25 @@ public class MapEditor implements Serializable {
      *
      * @param p_FileName String filename
      */
-    public void saveMap(String p_FileName) {
+    public void saveMapConquest(String p_FileName) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
         // writing all the continents
-        l_Content.append("[continents]\n");
+        l_Content.append("[Continents]\n");
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-            l_Content.append(l_Continent.getD_ContinentID()).append(" ").append(l_Continent.getD_ControlValue()).append("\n");
+            l_Content.append(l_Continent.getD_ContinentID()).append("=").append(l_Continent.getD_ControlValue()).append("\n");
         }
 
         // writing all the countries
-        l_Content.append("\n[countries]\n");
+        l_Content.append("\n[Territories]\n");
         for (Country l_Country : d_LoadedMap.getD_Countries()) {
-            int l_ContinentIntId = -1;
-            for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
-                if (l_Continent.getD_ContinentID().equals(l_Country.getD_CountryContinentID())) {
-                    l_ContinentIntId = l_Continent.getD_ContinentIntID();
-                }
-            }
-            l_Content.append(l_Country.getD_CountryIntID()).append(" ").append(l_Country.getD_CountryID()).append(" ").append(l_ContinentIntId).append("\n");
-        }
+            l_Content.append(l_Country.getD_CountryID()).append(", , ,").append(l_Country.getD_CountryContinentID()).append(",");
 
-        // writing all the borders
-        l_Content.append("\n[borders]\n");
-        for (Country l_Country : d_LoadedMap.getD_Countries()) {
-            l_Content.append(l_Country.getD_CountryIntID()).append(" ");
-            for (Country l_Neighbour : l_Country.getD_Neighbours()) {
-                l_Content.append(l_Neighbour.getD_CountryIntID()).append(" ");
+            for (Country l_neighbour:l_Country.getD_Neighbours()){
+                l_Content.append(l_neighbour.getD_CountryID());
             }
             l_Content.append("\n");
         }
+
 
         try {
             FileWriter l_Writer = new FileWriter(p_FileName);
@@ -212,7 +208,7 @@ public class MapEditor implements Serializable {
 
         l_ConnectedGraph = dfs(l_Countries, "graph");
         // checking if map is connected
-        if (l_ConnectedGraph == true)
+        if (l_ConnectedGraph)
             System.out.println(l_ConnectedGraph+" The map is connected.");
 
         else {
@@ -274,7 +270,7 @@ public class MapEditor implements Serializable {
 
     /**
      * Depth-first-search (dfs)
-     * 
+     *
      * @param p_CountryList list of countries
      * @param p_typeOfGraph type of graph
      * @return true if dfs was successful
@@ -326,7 +322,7 @@ public class MapEditor implements Serializable {
 
     /**
      * counts how many nodes were visited
-     * 
+     *
      * @param l_Visited list of visited nodes
      * @return total nodes visited
      */
