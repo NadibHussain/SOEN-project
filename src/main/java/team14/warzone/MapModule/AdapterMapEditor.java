@@ -10,10 +10,7 @@ public class AdapterMapEditor extends MapEditorDomination{
      * copy of conquest map editor conquest
      */
     MapEditorConquest d_MapEditorConquest;
-    /**
-     * loaded map object
-     */
-    public Map d_LoadedMap;
+
 
     /**
      * Constructor which takes map editor conquest as local variable
@@ -111,4 +108,5 @@ public class AdapterMapEditor extends MapEditorDomination{
             return d_MapEditorConquest.d_LoadedMap;
         }
     }
+
 }

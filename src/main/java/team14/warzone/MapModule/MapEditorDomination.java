@@ -111,11 +111,18 @@ public class MapEditorDomination  implements Serializable{
                 break;
             } else {
                 String[] l_ContinentArray = l_Line.split(" ");
-                String l_ContinentName = "";
-                for (int l_Counter=0;l_Counter<l_ContinentArray.length-1;l_Counter++){
-                    l_ContinentName+=l_ContinentArray[l_Counter];
+                StringBuilder l_ContinentName = new StringBuilder();
+                int l_ContinentValue = 0;
+                for (int l_Counter=0;l_Counter<l_ContinentArray.length;l_Counter++){
+                    try{
+                        l_ContinentValue=Integer.parseInt(l_ContinentArray[l_Counter]);
+                        break;
+                    }
+                    catch (Exception e){
+                        l_ContinentName.append(l_ContinentArray[l_Counter]);
+                    }
                 }
-                l_Map.addContinent(l_ContinentName, Integer.parseInt(l_ContinentArray[l_ContinentArray.length-1]));
+                l_Map.addContinent(l_ContinentName.toString(), l_ContinentValue);
             }
         }
     }
