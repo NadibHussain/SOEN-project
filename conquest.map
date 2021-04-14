@@ -1,0 +1,149 @@
+[Map]
+author=_ MIKE CRUSH _
+image=_61_ CASTLE MOONBAT.bmp
+wrap=yes
+scroll=horizontal
+warn=yes
+
+[Continents]
+Tower Left Top=1
+Tower Left Middle=2
+Tower Left Bottom=1
+Tower Right Top=1
+Tower Right Middle=2
+Tower Right Bottom=1
+FLAG=1
+Castle TURRET Area=2
+Castle DOOR=1
+Castle Left Of Door=1
+Castle Right Of Door=1
+
+[Territories]
+Territory01,148,55,Tower Left Top,Territory02,Territory03
+Territory02,134,85,Tower Left Top,Territory01,Territory03,Territory04,Territory05
+Territory03,160,86,Tower Left Top,Territory01,Territory02,Territory05,Territory06
+Territory04,119,115,Tower Left Top,Territory02,Territory05,Territory07,Territory08,Territory53
+Territory05,146,114,Tower Left Top,Territory02,Territory04,Territory03,Territory06,Territory08,Territory09
+Territory06,174,114,Tower Left Top,Territory03,Territory05,Territory09,Territory10
+Territory07,102,146,Tower Left Top,Territory04,Territory08,Territory11,Territory12
+Territory08,131,144,Tower Left Top,Territory04,Territory07,Territory05,Territory09,Territory12,Territory13
+Territory09,159,145,Tower Left Top,Territory05,Territory08,Territory06,Territory10,Territory13,Territory14
+Territory10,189,146,Tower Left Top,Territory06,Territory09,Territory14,Territory15
+Territory11,86,174,Tower Left Top,Territory07,Territory12,Territory16
+Territory12,116,175,Tower Left Top,Territory07,Territory11,Territory08,Territory13,Territory16,Territory17
+Territory13,145,174,Tower Left Top,Territory08,Territory12,Territory09,Territory14,Territory17,Territory18
+Territory14,176,174,Tower Left Top,Territory09,Territory13,Territory10,Territory15,Territory18,Territory19
+Territory15,206,176,Tower Left Top,Territory10,Territory14,Territory19
+Territory16,89,215,Tower Left Middle,Territory11,Territory12,Territory17,Territory20
+Territory17,125,214,Tower Left Middle,Territory12,Territory13,Territory16,Territory18,Territory21
+Territory18,161,215,Tower Left Middle,Territory13,Territory17,Territory14,Territory19,Territory21
+Territory19,203,215,Tower Left Middle,Territory14,Territory18,Territory15,Territory22
+Territory20,85,242,Tower Left Middle,Territory16,Territory23
+Territory21,145,241,Tower Left Middle,Territory17,Territory18,Territory24
+Territory22,207,239,Tower Left Middle,Territory19,Territory25
+Territory23,84,270,Tower Left Middle,Territory20,Territory26
+Territory24,145,271,Tower Left Middle,Territory21,Territory27
+Territory25,211,269,Tower Left Middle,Territory22,Territory28,Territory108
+Territory26,85,306,Tower Left Middle,Territory23,Territory29,Territory75
+Territory27,146,308,Tower Left Middle,Territory24,Territory30,Territory31
+Territory28,212,309,Tower Left Middle,Territory25,Territory32,Territory109,Territory108
+Territory29,88,346,Tower Left Middle,Territory26,Territory30,Territory33,Territory34
+Territory30,127,347,Tower Left Middle,Territory27,Territory31,Territory29,Territory34,Territory35
+Territory31,166,348,Tower Left Middle,Territory27,Territory32,Territory30,Territory35,Territory36
+Territory32,207,347,Tower Left Middle,Territory28,Territory31,Territory36,Territory37,Territory117,Territory109
+Territory33,83,378,Tower Left Middle,Territory29,Territory34,Territory38
+Territory34,115,378,Tower Left Middle,Territory29,Territory33,Territory30,Territory35,Territory38,Territory39
+Territory35,148,379,Tower Left Middle,Territory30,Territory34,Territory31,Territory36,Territory39
+Territory36,179,379,Tower Left Middle,Territory35,Territory31,Territory32,Territory37,Territory39,Territory40
+Territory37,211,379,Tower Left Middle,Territory36,Territory32,Territory40,Territory117
+Territory38,94,414,Tower Left Bottom,Territory33,Territory34,Territory39,Territory41
+Territory39,148,414,Tower Left Bottom,Territory34,Territory35,Territory36,Territory38,Territory40,Territory41,Territory42
+Territory40,204,414,Tower Left Bottom,Territory36,Territory37,Territory39,Territory42,Territory121
+Territory41,112,446,Tower Left Bottom,Territory38,Territory39,Territory42,Territory43,Territory44,Territory89
+Territory42,186,446,Tower Left Bottom,Territory39,Territory40,Territory41,Territory44,Territory45,Territory122,Territory121
+Territory43,89,480,Tower Left Bottom,Territory41,Territory44,Territory46
+Territory44,143,479,Tower Left Bottom,Territory41,Territory43,Territory42,Territory45,Territory46,Territory47
+Territory45,202,479,Tower Left Bottom,Territory42,Territory44,Territory47,Territory122
+Territory46,106,516,Tower Left Bottom,Territory43,Territory44,Territory47
+Territory47,184,517,Tower Left Bottom,Territory44,Territory45,Territory46,Territory124
+Territory48,708,57,Tower Right Top,Territory49,Territory50
+Territory49,694,85,Tower Right Top,Territory48,Territory50,Territory51,Territory52
+Territory50,720,85,Tower Right Top,Territory48,Territory49,Territory52,Territory53
+Territory51,678,116,Tower Right Top,Territory49,Territory52,Territory54,Territory55
+Territory52,706,115,Tower Right Top,Territory49,Territory50,Territory53,Territory51,Territory55,Territory56
+Territory53,734,116,Tower Right Top,Territory50,Territory52,Territory56,Territory57,Territory04
+Territory54,661,145,Tower Right Top,Territory51,Territory55,Territory58,Territory59
+Territory55,690,145,Tower Right Top,Territory51,Territory52,Territory56,Territory54,Territory59,Territory60
+Territory56,721,146,Tower Right Top,Territory52,Territory53,Territory57,Territory55,Territory60,Territory61
+Territory57,750,145,Tower Right Top,Territory53,Territory56,Territory61,Territory62
+Territory58,647,176,Tower Right Top,Territory54,Territory59,Territory63
+Territory59,676,174,Tower Right Top,Territory54,Territory55,Territory60,Territory58,Territory63,Territory64
+Territory60,706,176,Tower Right Top,Territory55,Territory56,Territory61,Territory59,Territory64,Territory65
+Territory61,736,174,Tower Right Top,Territory56,Territory57,Territory62,Territory60,Territory65,Territory66
+Territory62,766,176,Tower Right Top,Territory57,Territory61,Territory66
+Territory63,649,216,Tower Right Middle,Territory58,Territory59,Territory64,Territory67
+Territory64,686,215,Tower Right Middle,Territory59,Territory60,Territory65,Territory63,Territory68
+Territory65,721,214,Tower Right Middle,Territory60,Territory61,Territory66,Territory64,Territory68
+Territory66,763,214,Tower Right Middle,Territory61,Territory62,Territory65,Territory69
+Territory67,643,242,Tower Right Middle,Territory63,Territory70
+Territory68,704,240,Tower Right Middle,Territory64,Territory65,Territory71
+Territory69,768,241,Tower Right Middle,Territory66,Territory72
+Territory70,643,271,Tower Right Middle,Territory67,Territory73,Territory106
+Territory71,706,272,Tower Right Middle,Territory68,Territory74
+Territory72,771,272,Tower Right Middle,Territory69,Territory75
+Territory73,644,306,Tower Right Middle,Territory70,Territory76,Territory113,Territory106
+Territory74,706,308,Tower Right Middle,Territory71,Territory78,Territory77
+Territory75,772,308,Tower Right Middle,Territory72,Territory79,Territory26
+Territory76,649,348,Tower Right Middle,Territory73,Territory77,Territory80,Territory81,Territory114,Territory113
+Territory77,688,347,Tower Right Middle,Territory74,Territory76,Territory78,Territory81,Territory82
+Territory78,724,346,Tower Right Middle,Territory74,Territory77,Territory79,Territory82,Territory83
+Territory79,766,348,Tower Right Middle,Territory75,Territory78,Territory83,Territory84
+Territory80,643,379,Tower Right Middle,Territory76,Territory81,Territory85,Territory114
+Territory81,675,380,Tower Right Middle,Territory76,Territory77,Territory82,Territory80,Territory85,Territory86
+Territory82,708,378,Tower Right Middle,Territory77,Territory78,Territory83,Territory81,Territory86
+Territory83,740,378,Tower Right Middle,Territory78,Territory79,Territory84,Territory82,Territory86,Territory87
+Territory84,772,381,Tower Right Middle,Territory79,Territory83,Territory87
+Territory85,654,413,Tower Right Bottom,Territory80,Territory81,Territory86,Territory88,Territory125
+Territory86,708,412,Tower Right Bottom,Territory81,Territory82,Territory83,Territory85,Territory87,Territory88,Territory89
+Territory87,763,414,Tower Right Bottom,Territory83,Territory84,Territory86,Territory89
+Territory88,669,446,Tower Right Bottom,Territory85,Territory86,Territory89,Territory90,Territory91,Territory127,Territory125
+Territory89,745,446,Tower Right Bottom,Territory86,Territory87,Territory88,Territory91,Territory92,Territory41
+Territory90,649,480,Tower Right Bottom,Territory88,Territory91,Territory93,Territory127
+Territory91,705,480,Tower Right Bottom,Territory88,Territory89,Territory92,Territory90,Territory93,Territory94
+Territory92,762,482,Tower Right Bottom,Territory89,Territory91,Territory94
+Territory93,667,519,Tower Right Bottom,Territory90,Territory91,Territory94,Territory128
+Territory94,746,517,Tower Right Bottom,Territory92,Territory91,Territory93
+Territory95,447,162,FLAG,Territory99,Territory96,Territory97,Territory98,Territory101,Territory100
+Territory96,459,147,FLAG,Territory95,Territory99,Territory97
+Territory97,483,165,FLAG,Territory95,Territory96,Territory98
+Territory98,459,178,FLAG,Territory95,Territory97,Territory101
+Territory99,427,142,FLAG,Territory95,Territory96,Territory100
+Territory100,421,165,FLAG,Territory95,Territory101,Territory99
+Territory101,431,181,FLAG,Territory95,Territory98,Territory100,Territory102
+Territory102,417,203,FLAG,Territory101,Territory103
+Territory103,417,234,FLAG,Territory102,Territory104
+Territory104,423,287,Castle TURRET Area,Territory103,Territory111
+Territory105,510,288,Castle TURRET Area,Territory112
+Territory106,602,289,Castle TURRET Area,Territory113,Territory73,Territory70
+Territory107,336,289,Castle TURRET Area,Territory110
+Territory108,249,289,Castle TURRET Area,Territory109,Territory28,Territory25
+Territory109,266,335,Castle TURRET Area,Territory110,Territory108,Territory117,Territory32,Territory28
+Territory110,340,335,Castle TURRET Area,Territory111,Territory107,Territory109,Territory117,Territory116
+Territory111,424,332,Castle TURRET Area,Territory104,Territory110,Territory112,Territory118,Territory119,Territory120
+Territory112,509,335,Castle TURRET Area,Territory111,Territory105,Territory113,Territory114,Territory115
+Territory113,589,334,Castle TURRET Area,Territory112,Territory106,Territory114,Territory76,Territory73
+Territory114,576,373,Castle TURRET Area,Territory113,Territory112,Territory115,Territory80,Territory76,Territory125
+Territory115,507,369,Castle TURRET Area,Territory112,Territory114,Territory125,Territory120
+Territory116,331,370,Castle TURRET Area,Territory117,Territory110,Territory121,Territory119
+Territory117,271,373,Castle TURRET Area,Territory109,Territory116,Territory110,Territory121,Territory37,Territory32
+Territory118,422,429,Castle DOOR,Territory111,Territory119,Territory120
+Territory119,383,450,Castle DOOR,Territory118,Territory124,Territory123,Territory121,Territory116,Territory111
+Territory120,461,450,Castle DOOR,Territory118,Territory128,Territory126,Territory125,Territory115,Territory111
+Territory121,292,418,Castle Left Of Door,Territory122,Territory123,Territory42,Territory40,Territory117,Territory116,Territory119
+Territory122,259,474,Castle Left Of Door,Territory124,Territory121,Territory45,Territory42
+Territory123,324,476,Castle Left Of Door,Territory121,Territory124,Territory119
+Territory124,290,518,Castle Left Of Door,Territory122,Territory123,Territory47,Territory119
+Territory125,555,417,Castle Right Of Door,Territory126,Territory127,Territory88,Territory85,Territory114,Territory120,Territory115
+Territory126,522,473,Castle Right Of Door,Territory128,Territory125,Territory120
+Territory127,594,474,Castle Right Of Door,Territory125,Territory128,Territory90,Territory88
+Territory128,559,520,Castle Right Of Door,Territory126,Territory127,Territory93,Territory120

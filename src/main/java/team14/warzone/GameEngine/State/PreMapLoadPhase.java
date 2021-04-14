@@ -92,7 +92,7 @@ public class PreMapLoadPhase extends MapEditorPhase {
      * @param p_FileName map file name
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         errorLoadMapFirst();
     }
 

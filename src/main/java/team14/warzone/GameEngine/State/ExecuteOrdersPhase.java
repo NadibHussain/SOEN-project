@@ -162,7 +162,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
      * @param p_FileName name of map file
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         invalidCommandMessage();
     }
 
