@@ -33,6 +33,10 @@ public class Card {
      */
     public String TYPES[] = {d_Bomb, d_Blockade, d_Airlift, d_Diplomacy};
 
+    /**
+     * Check if card is used in current turn
+     */
+    private boolean d_Used;
 
     /**
      * Getter method for Card type
@@ -81,5 +85,22 @@ public class Card {
      */
     public Card(String p_CardType) {
         this.d_CardType = p_CardType;
+        this.d_Used = false;
+    }
+
+    /**
+     * Check if card is used
+     * @return
+     */
+    public boolean isD_Used() {
+        return d_Used;
+    }
+
+    /**
+     * Change status of card used or unused
+     * @param p_Used
+     */
+    public void setD_Used(boolean p_Used) {
+        this.d_Used = p_Used;
     }
 }

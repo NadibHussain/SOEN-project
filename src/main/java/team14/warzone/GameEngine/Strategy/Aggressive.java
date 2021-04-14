@@ -63,6 +63,7 @@ public class Aggressive implements Behavior {
                 }
                 Bomb l_BombOrder = new Bomb(l_CountryToAttack.getD_CountryID(), p_GE);
                 p_Player.getD_OrderList().add(l_BombOrder);
+                p_Player.setCardUsed("bomb");
                 p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued bomb command");
                 p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
             }
@@ -106,6 +107,7 @@ public class Aggressive implements Behavior {
                                     Airlift l_AirliftOrder = new Airlift(l_SecondStrongestCountry.getD_CountryID(), l_StrongestCountry.getD_CountryID(),
                                             l_NumOfArmiesToMove, p_GE);
                                     p_Player.getD_OrderList().add(l_AirliftOrder);
+                                    p_Player.setCardUsed("airlift");
                                     p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued airlift command");
                                     p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
                                 } else {//no airlift card available, so we need to look for an adjacent country with the strongest country

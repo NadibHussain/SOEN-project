@@ -202,10 +202,17 @@ public class Player implements Serializable {
      */
     public boolean hasCard(String p_CardType) {
         for (Card l_Card : d_CardList) {
-            if (l_Card.getD_CardType().equals(p_CardType))
+            if (l_Card.getD_CardType().equals(p_CardType) && !l_Card.isD_Used())
                 return true;
         }
         return false;
+    }
+
+    public void setCardUsed(String p_CardType) {
+        for (Card l_Card : d_CardList) {
+            if (l_Card.getD_CardType().equals(p_CardType) && !l_Card.isD_Used())
+                l_Card.setD_Used(true);
+        }
     }
 
     /**
