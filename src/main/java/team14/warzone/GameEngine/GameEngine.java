@@ -109,11 +109,15 @@ public class GameEngine implements Serializable {
      * GameSaveLoad object to access GameEngine
      */
     private GameSaveLoad d_GameSaveLoad;
-
     /**
      * Tournament mode current number of turns
      */
     private int d_CurrentNumberOfTurns = 0;
+    /**
+     * Check if tournament ended
+     */
+    private boolean d_TournamentEnded;
+
     /**
      * Constructor for Game Engine
      *
@@ -136,6 +140,7 @@ public class GameEngine implements Serializable {
         d_GameOverPhase = new GameOverPhase(this);
         d_TournamentModePhase = new Tournament(this);
         d_CurrentPlayer = new Player("temp", this);
+        d_TournamentEnded = false;
 
         d_CurrentPhase = d_PreMapLoadPhase;
         d_LogEntryBuffer.attach(new LogerOberver());
@@ -171,7 +176,7 @@ public class GameEngine implements Serializable {
      * A method loops and continually invokes the run method in each phase
      */
     public void gameLoop() {
-        while (true) {
+        while (!d_TournamentEnded) {
             d_CurrentPhase.run();
         }
     }
@@ -541,5 +546,9 @@ public class GameEngine implements Serializable {
 
     public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
         this.d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
+    }
+
+    public void setD_TournamentEnded(boolean p_TournamentEnded) {
+        d_TournamentEnded = p_TournamentEnded;
     }
 }
