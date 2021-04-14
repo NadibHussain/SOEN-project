@@ -98,6 +98,10 @@ public class GameEngine implements Serializable {
      */
     private Phase d_GameOverPhase;
     /**
+     * Tournament mode phase
+     */
+    private Phase d_TournamentModePhase;
+    /**
      * Flag to check whether automated player passed their turn
      */
     private boolean d_PlayerPassed;
@@ -130,6 +134,7 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = new IssueOrdersPhase(this);
         d_ExecuteOrdersPhase = new ExecuteOrdersPhase(this);
         d_GameOverPhase = new GameOverPhase(this);
+        d_TournamentModePhase = new Tournament(this);
         d_CurrentPlayer = new Player("temp", this);
 
         d_CurrentPhase = d_PreMapLoadPhase;
@@ -156,6 +161,7 @@ public class GameEngine implements Serializable {
         d_IssueOrdersPhase = p_GameEngine.d_IssueOrdersPhase;
         d_ExecuteOrdersPhase = p_GameEngine.d_ExecuteOrdersPhase;
         d_GameOverPhase = p_GameEngine.d_GameOverPhase;
+        d_TournamentModePhase = p_GameEngine.d_TournamentModePhase;
         d_CurrentPhase = p_GameEngine.d_CurrentPhase;
 
         d_LoadedMap = p_GameEngine.d_LoadedMap;
@@ -465,6 +471,15 @@ public class GameEngine implements Serializable {
      */
     public Phase getD_GameOverPhase() {
         return d_GameOverPhase;
+    }
+
+    /**
+     * getter
+     *
+     * @return d_TournamentModePhase
+     */
+    public Phase getD_TournamentModePhase() {
+        return d_TournamentModePhase;
     }
 
     /**

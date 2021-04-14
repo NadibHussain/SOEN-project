@@ -88,6 +88,7 @@ public class Tournament extends Phase {
      * @param p_Strategies
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
+        System.out.println("adding players");
         d_Players = new ArrayList<>();
         int l_Count = 1;
         for (String p_AStrategy : p_Strategies) {
@@ -99,6 +100,7 @@ public class Tournament extends Phase {
             } else
                 System.out.println(p_AStrategy + " is not valid or allowed to play tournament.");
         }
+        System.out.println(d_Players);
         d_GameEngine.setD_PlayerList(d_Players);
     }
 
@@ -130,6 +132,7 @@ public class Tournament extends Phase {
                     System.out.println("inside loop" + d_GameEngine.getD_CurrentPhase());
                     d_GameEngine.getD_CurrentPhase().run();
                 }
+//                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
 //                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
 //                    for (Player l_APlayer : d_Players) {
 //                        d_GameEngine.setD_CurrentPlayer(l_APlayer);
@@ -306,6 +309,7 @@ public class Tournament extends Phase {
 
     @Override
     public void assignCountries() {
+        System.out.println("player :" + d_Players);
         // if number of players between 2 and 5, assign countries to players randomly
         if (d_Players.size() >= 2 && d_Players.size() <= 5) {
             int l_CountryCounter = 0;
