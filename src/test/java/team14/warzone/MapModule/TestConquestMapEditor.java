@@ -45,7 +45,7 @@ public class TestConquestMapEditor {
     @Test
     @DisplayName("Testing Save map")
     public void testSaveConquestMap() {
-        d_MapEditorConquest.saveMapConquest("saveConquest.map");
+        d_MapEditorConquest.saveMapConquest("saveConquest.map",d_MapEditorConquest.d_LoadedMap);
         Map l_Map = d_MapEditorConquest.getD_LoadedMap();
         assertEquals(11, l_Map.getD_Continents().size());
         assertEquals(128, l_Map.getD_Countries().size());
