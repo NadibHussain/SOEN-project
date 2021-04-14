@@ -35,7 +35,7 @@ public class Benevolent implements Behavior {
         }
 
         // play cards if any
-        else if (!p_Player.getCardList().isEmpty()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
             Card l_Card = p_Player.getCardList().get(0);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
@@ -94,7 +94,7 @@ public class Benevolent implements Behavior {
     private Country findWeakestCountry(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
         Country l_WeakestCountry = null;
-        if(l_CountryList.size() != 0){
+        if (l_CountryList.size() != 0) {
             l_CountryList.sort(Comparator.comparing(Country::getD_NumberOfArmies));
             l_WeakestCountry = l_CountryList.get(0);
         }
@@ -177,6 +177,7 @@ public class Benevolent implements Behavior {
 
         p_Player.getD_OrderList().add(l_Blockade);
         Console.displayMsg(p_Player.getD_Name() + " issued: blockade on " + l_DestinationCountry.getD_CountryID());
+        p_Player.setCardUsed("blockade");
         // write to log
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued blockade command on " + l_DestinationCountry.getD_CountryID());
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
@@ -195,6 +196,7 @@ public class Benevolent implements Behavior {
         p_Player.getD_OrderList().add(l_Airlift);
         Console.displayMsg(p_Player.getD_Name() + " issued: airlift from " + l_StrongestCountry.getD_CountryID() + " " +
                 "to " + l_WeakestCountry.getD_CountryID());
+        p_Player.setCardUsed("airlift");
         // write to log
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued airlift command from " + l_StrongestCountry.getD_CountryID() + " " +
                 "to " + l_WeakestCountry.getD_CountryID());
@@ -216,6 +218,7 @@ public class Benevolent implements Behavior {
 
         p_Player.getD_OrderList().add(l_Diplomacy);
         Console.displayMsg(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
+        p_Player.setCardUsed("diplomacy");
         // write to log
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
@@ -225,7 +228,7 @@ public class Benevolent implements Behavior {
      * @return name of behavior
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "benevolent";
     }
 }
