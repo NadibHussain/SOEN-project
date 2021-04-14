@@ -132,6 +132,7 @@ public class Tournament extends Phase {
                     System.out.println("inside loop" + d_GameEngine.getD_CurrentPhase());
                     d_GameEngine.getD_CurrentPhase().run();
                 }
+                d_GameEngine.setD_CurrentNumberOfTurns(0);
 //                d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_IssueOrdersPhase());
 //                for (int l_TurnCount = 0; l_TurnCount < d_NumOfTurns; l_TurnCount++) {
 //                    for (Player l_APlayer : d_Players) {
@@ -177,6 +178,7 @@ public class Tournament extends Phase {
         l_Frame.pack();
         l_Frame.setVisible(true);
 
+        Console.displayMsg("Please enter \"exit\" to quit the game");
     }
 
     private ArrayList<Integer> determineWinner() {

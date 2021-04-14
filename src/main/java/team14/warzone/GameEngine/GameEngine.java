@@ -538,4 +538,8 @@ public class GameEngine implements Serializable {
     public int getD_CurrentNumberOfTurns(){
         return d_CurrentNumberOfTurns;
     }
+
+    public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
+        this.d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
+    }
 }
