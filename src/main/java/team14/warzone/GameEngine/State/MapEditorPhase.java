@@ -46,14 +46,16 @@ public abstract class MapEditorPhase extends Phase {
         System.out.println("Enter command:");
         List<List<String>> l_CommandStrList = Console.readInput();
         // { { tournament -M ap1 map2 }, { tounraent -P }
-        if (l_CommandStrList.get(0).get(0).equals("tournament")) {
-            if (l_CommandStrList.size() == 4) {
-                createAdminCommand(l_CommandStrList);
+        if (!l_CommandStrList.isEmpty()) {
+            if (l_CommandStrList.get(0).get(0).equals("tournament")) {
+                if (l_CommandStrList.size() == 4) {
+                    createAdminCommand(l_CommandStrList);
+                } else {
+                    System.out.println("Invalid command");
+                }
             } else {
-                System.out.println("Invalid command");
+                createAdminCommand(l_CommandStrList);
             }
-        } else {
-            createAdminCommand(l_CommandStrList);
         }
     }
 
