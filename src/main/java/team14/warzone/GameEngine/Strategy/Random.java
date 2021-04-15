@@ -21,7 +21,7 @@ public class Random implements Behavior {
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         // check if already deployed all undeployed armies
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
-        if (l_ArmiesLeftToDeploy > 0) {
+        if (l_ArmiesLeftToDeploy > 0 && p_Player.getD_CountriesOwned().size() > 0) {
             // deploy to random country
             // select random country from countries owned list
             int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
@@ -41,7 +41,7 @@ public class Random implements Behavior {
         }
 
         // attack random neighbor or move (minimum one of each)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && p_Player.getD_TotalNumberOfArmies() > 0) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && p_Player.getD_CountriesOwned().size() > 0) {
             // randomly select either attack enemy or move army between owned country
             switch (Randomizer.generateRandomNumber(0, 2)) {
                 case 0:
@@ -136,7 +136,7 @@ public class Random implements Behavior {
                 }
             }
             //if all counties owned by player have zero armies
-            if(l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0)
+            if((l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0) || l_AttackFrom == null)
                 l_Flag = true;
         }
         // this is a mechanical keyboard

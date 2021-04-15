@@ -20,7 +20,7 @@ public class Benevolent implements Behavior {
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
 
         // deploy to weakest
-        if (l_ArmiesLeftToDeploy > 0) {
+        if (l_ArmiesLeftToDeploy > 0 && p_Player.getD_CountriesOwned().size() != 0) {
             // find weakest country
             Country l_Country = findWeakestCountry(p_Player);
             // instantiate deploy order
@@ -35,7 +35,7 @@ public class Benevolent implements Behavior {
         }
 
         // play cards if any
-        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used() && p_Player.getD_CountriesOwned().size() != 0) {
             Card l_Card = p_Player.getCardList().get(0);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
@@ -55,7 +55,7 @@ public class Benevolent implements Behavior {
         }
 
         // advance from strong to weak (self)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && p_Player.getD_CountriesOwned().size() != 0) {
             // find if any weak country has strong neighbor
             ArrayList<Country> l_WeakCountries = findWeakerCountriesWithStrongNeighbor(p_Player);
             if (l_WeakCountries.size() > 0) {
