@@ -530,6 +530,9 @@ public class GameEngine implements Serializable {
         d_PlayerPassed = p_PlayerPassed;
     }
 
+    /**
+     * resets Player Passed value
+     */
     public void resetPlayerPassed() {
         d_PlayerPassed = false;
     }
@@ -562,13 +565,16 @@ public class GameEngine implements Serializable {
         return d_AdminCommandsBuffer;
     }
 
+    /**
+     * increments Current Number of Turns
+     */
     public void incrementD_CurrentNumberOfTurns(){
         d_CurrentNumberOfTurns++;
     }
 
     
     /** 
-     * @return int
+     * @return int Current Number of Turns
      */
     public int getD_CurrentNumberOfTurns(){
         return d_CurrentNumberOfTurns;
@@ -592,7 +598,7 @@ public class GameEngine implements Serializable {
 
     
     /** 
-     * @return boolean
+     * @return boolean true for tournament mode
      */
     public boolean isD_TournamentMode() {
         return d_TournamentMode;
@@ -608,7 +614,7 @@ public class GameEngine implements Serializable {
 
     
     /** 
-     * @return boolean
+     * @return boolean true for game over
      */
     public boolean isD_GameOver() {
         return d_GameOver;
