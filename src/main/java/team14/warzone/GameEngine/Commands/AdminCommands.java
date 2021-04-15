@@ -212,10 +212,10 @@ public class AdminCommands implements ICommand, Serializable {
     }
 
     /**
-     * A method replace "-" with space in country and continent name
+     * A method replace "_" with space in country and continent name
      */
     public String reformatName(String p_Name){
-       return p_Name.replace('-', ' ');
+       return p_Name.replace('_', ' ');
     }
 
     /**
