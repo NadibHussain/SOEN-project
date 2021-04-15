@@ -2,7 +2,9 @@ package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
+import team14.warzone.GameEngine.Commands.Advance;
 import team14.warzone.GameEngine.Commands.Deploy;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
@@ -23,6 +25,14 @@ public class Random implements Behavior {
         int l_ExpectedNumberOfOrders = 3;
         // check if already deployed all undeployed armies
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
+        // check if already advance order issued
+        boolean l_AlreadyAdvanced = false;
+        for (Order l_Order : p_Player.getD_OrderList()) {
+            if (l_Order instanceof Advance) {
+                l_AlreadyAdvanced = true;
+                break;
+            }
+        }
         if (l_ArmiesLeftToDeploy > 0) {
             // deploy to random country
             // select random country from countries owned list
@@ -43,8 +53,8 @@ public class Random implements Behavior {
         }
 
         // play card if any
-        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
-            Card l_Card = p_Player.getCardList().get(0);
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(p_Player.getCardList().size() - 1).isD_Used()) {
+            Card l_Card = p_Player.getCardList().get(p_Player.getCardList().size() - 1);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
                     BehaviorUtilities.issueBlockade(p_GE, p_Player, l_Card);
@@ -55,6 +65,9 @@ public class Random implements Behavior {
                 case "diplomacy":
                     BehaviorUtilities.issueDiplomacy(p_GE, p_Player, l_Card);
                     break;
+                case "bomb":
+                    BehaviorUtilities.issueBomb(p_GE, p_Player, l_Card);
+                    break;
 
                 default:
                     p_Player.removeCard(l_Card);
@@ -63,7 +76,7 @@ public class Random implements Behavior {
         }
 
         // attack random neighbor or move (minimum one of each)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced) {
             // randomly select either attack enemy or move army between owned country
             switch (Randomizer.generateRandomNumber(0, 1)) {
                 case 0:

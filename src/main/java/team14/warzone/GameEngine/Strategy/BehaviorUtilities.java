@@ -2,13 +2,11 @@ package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
-import team14.warzone.GameEngine.Commands.Advance;
-import team14.warzone.GameEngine.Commands.Airlift;
-import team14.warzone.GameEngine.Commands.Blockade;
-import team14.warzone.GameEngine.Commands.Diplomacy;
+import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
+import team14.warzone.Utils.Randomizer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,8 +20,22 @@ public class BehaviorUtilities {
                 p_NumOfArmies, p_GE);
         // add order to order list
         p_Player.getD_OrderList().add(l_Advance);
-        Console.displayMsg(p_Player.getD_Name() + " issued: advance (relocate army) " + p_SourceCountry.getD_CountryID() +
+        Console.displayMsg(p_Player.getD_Name() + " issued: advance " + p_SourceCountry.getD_CountryID() +
                 " " + p_DestinationCountry.getD_CountryID() + " " + p_NumOfArmies);
+        // write to log
+        p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
+        p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+    }
+
+    public static void issueBomb(GameEngine p_GE, Player p_Player, Card p_Card) {
+        // find country to bomb
+        Country l_DestinationCountry = findRandomEnemyNeighborWithArmy(p_Player);
+
+        Bomb l_Advance = new Bomb("CountryName", p_GE);
+        // add order to order list
+        p_Player.getD_OrderList().add(l_Advance);
+        Console.displayMsg(p_Player.getD_Name() + " issued: bomb on " + l_DestinationCountry.getD_CountryID());
+        p_Player.setCardUsed("bomb");
         // write to log
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
@@ -81,6 +93,7 @@ public class BehaviorUtilities {
         p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued: diplomacy with player " + l_TargetPlayer.getD_Name());
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
+
 
     public static Country findCountryAtRisk(Player p_Player) {
         int l_Risk = 0;
@@ -162,5 +175,33 @@ public class BehaviorUtilities {
             l_WeakestCountry = l_CountryList.get(0);
         }
         return l_WeakestCountry;
+    }
+
+    public static Country findRandomEnemyNeighborWithArmy(Player p_Player) {
+        ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
+        ArrayList<Country> l_EnemyNeighborsWithArmies = new ArrayList<>();
+        ArrayList<Country> l_EnemyNeighbors = new ArrayList<>();
+        // find enemy neighbors with armies
+        for (Country l_Country : l_CountryList) {
+            ArrayList<Country> l_Neighbors = l_Country.getD_Neighbours();
+            for (Country l_Neighbor : l_Neighbors) {
+                if (!l_Neighbor.getD_CurrentOwner().equals(l_Country.getD_CurrentOwner()) && l_Neighbor.getD_NumberOfArmies() > 0) {
+                    l_EnemyNeighborsWithArmies.add(l_Neighbor);
+                    l_EnemyNeighbors.add(l_Neighbor);
+                } else if (!l_Neighbor.getD_CurrentOwner().equals(l_Country.getD_CurrentOwner())) {
+                    l_EnemyNeighbors.add(l_Neighbor);
+                }
+            }
+        }
+        // select one of the enemy neighbors randomly
+        if (!l_EnemyNeighborsWithArmies.isEmpty()) {
+            return l_EnemyNeighborsWithArmies.get(Randomizer.generateRandomNumber(0,
+                    l_EnemyNeighborsWithArmies.size() - 1));
+        } else if (!l_EnemyNeighbors.isEmpty()) {
+            return l_EnemyNeighbors.get(Randomizer.generateRandomNumber(0,
+                    l_EnemyNeighbors.size() - 1));
+        } else {
+            return null;
+        }
     }
 }

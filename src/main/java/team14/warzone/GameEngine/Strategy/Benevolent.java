@@ -4,6 +4,7 @@ import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.Commands.Advance;
 import team14.warzone.GameEngine.Commands.Deploy;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
@@ -18,6 +19,14 @@ public class Benevolent implements Behavior {
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         int l_ExpectedNumberOfOrders = 3;
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
+        // check if already advance order issued
+        boolean l_AlreadyAdvanced = false;
+        for (Order l_Order : p_Player.getD_OrderList()) {
+            if (l_Order instanceof Advance) {
+                l_AlreadyAdvanced = true;
+                break;
+            }
+        }
 
         // deploy to weakest
         if (l_ArmiesLeftToDeploy > 0) {
@@ -55,7 +64,7 @@ public class Benevolent implements Behavior {
         }
 
         // advance from strong to weak (self)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced) {
             // find if any weak country has strong neighbor
             ArrayList<Country> l_WeakCountries = BehaviorUtilities.findWeakerCountriesWithStrongNeighbor(p_Player);
             if (l_WeakCountries.size() > 0) {
