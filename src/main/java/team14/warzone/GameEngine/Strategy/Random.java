@@ -1,7 +1,7 @@
 package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
-import team14.warzone.GameEngine.Commands.Advance;
+import team14.warzone.GameEngine.Card;
 import team14.warzone.GameEngine.Commands.Deploy;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -9,16 +9,18 @@ import team14.warzone.MapModule.Country;
 import team14.warzone.Utils.Randomizer;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Random implements Behavior {
-    
-    /** 
-     * @param p_GE Game Engine
+
+    /**
+     * @param p_GE     Game Engine
      * @param p_Player Player
      */
-        int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
+//        int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 4);
+        int l_ExpectedNumberOfOrders = 3;
         // check if already deployed all undeployed armies
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
         if (l_ArmiesLeftToDeploy > 0) {
@@ -40,10 +42,30 @@ public class Random implements Behavior {
             p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
         }
 
+        // play card if any
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
+            Card l_Card = p_Player.getCardList().get(0);
+            switch (l_Card.getD_CardType()) {
+                case "blockade":
+                    BehaviorUtilities.issueBlockade(p_GE, p_Player, l_Card);
+                    break;
+                case "airlift":
+                    BehaviorUtilities.issueAirlift(p_GE, p_Player, l_Card);
+                    break;
+                case "diplomacy":
+                    BehaviorUtilities.issueDiplomacy(p_GE, p_Player, l_Card);
+                    break;
+
+                default:
+                    p_Player.removeCard(l_Card);
+                    break;
+            }
+        }
+
         // attack random neighbor or move (minimum one of each)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && p_Player.getD_TotalNumberOfArmies() > 0) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
             // randomly select either attack enemy or move army between owned country
-            switch (Randomizer.generateRandomNumber(0, 2)) {
+            switch (Randomizer.generateRandomNumber(0, 1)) {
                 case 0:
                     attackNeighbor(p_GE, p_Player);
                     break;
@@ -58,9 +80,9 @@ public class Random implements Behavior {
         }
     }
 
-    
-    /** 
-     * @param p_GE Game Engine
+
+    /**
+     * @param p_GE     Game Engine
      * @param p_Player Player
      */
     private void attackNeighbor(GameEngine p_GE, Player p_Player) {
@@ -69,48 +91,44 @@ public class Random implements Behavior {
         Country l_AttackFrom = null;
         Country l_NeighborToAttack = null;
         boolean l_Flag = false;
-        while (!l_Flag) {
+        int l_Counter = 0;
+        // check if any country has army
+        for (Country l_Country : l_CountriesOwned) {
+            if (l_Country.getD_NumberOfArmies() > 1) {
+                l_Flag = true;
+                break;
+            }
+        }
+        while (l_Flag && l_Counter < 300) {
             int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
             ArrayList<Country> l_NeighborList = new ArrayList<>();
-            if(l_CountriesOwned.size() != 0){
+            if (l_CountriesOwned.size() > 0) {
                 l_NeighborList = l_CountriesOwned.get(l_RandomCountryIndex).getD_Neighbours();
             }
             for (Country l_Country : l_NeighborList) {
-                if (!l_Country.getD_CurrentOwner().equals(p_Player.getD_Name())) {
+                if (!l_Country.getD_CurrentOwner().equals(p_Player.getD_Name()) && l_CountriesOwned.get(l_RandomCountryIndex).getD_NumberOfArmies() > 1) {
                     l_NeighborToAttack = l_Country;
                     l_AttackFrom = l_CountriesOwned.get(l_RandomCountryIndex);
-                    if(l_AttackFrom.getD_NumberOfArmies() != 0){
-                        l_Flag = true;
-                        break;
-                    }
+                    l_Flag = false;
+                    break;
                 }
             }
-            //if all counties owned by player have zero armies_at game first round
-            if(l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0){
-                // pass
-                Console.displayMsg(p_Player.getD_Name() + ": pass");
-                p_GE.setD_PlayerPassed(true);
-                l_Flag = true;
-            }
+            l_Counter++;
         }
 
         // issue advance order
-        if (l_AttackFrom != null && l_NeighborToAttack != null && l_AttackFrom.getD_NumberOfArmies() != 0) {
+        if (Objects.nonNull(l_AttackFrom) && Objects.nonNull(l_NeighborToAttack) && l_AttackFrom.getD_NumberOfArmies() > 1) {
             int l_NumOfArmiesToAttackWith = l_AttackFrom.getD_NumberOfArmies() - 1;
-            Advance l_Advance = new Advance(l_AttackFrom.getD_CountryID(), l_NeighborToAttack.getD_CountryID(),
-                    l_NumOfArmiesToAttackWith, p_GE);
-            // add order to order list
-            p_Player.getD_OrderList().add(l_Advance);
-            Console.displayMsg(p_Player.getD_Name() + " issued: advance (attack enemy) " + l_AttackFrom.getD_CountryID() + " " + l_NeighborToAttack.getD_CountryID() + " " + l_NumOfArmiesToAttackWith);
-            // write to log
-            p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
-            p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+            BehaviorUtilities.issueAdvance(p_GE, p_Player, l_AttackFrom, l_NeighborToAttack, l_NumOfArmiesToAttackWith);
+        } else {
+            Console.displayMsg(p_Player.getD_Name() + ": pass");
+            p_GE.setD_PlayerPassed(true);
         }
     }
 
-    
-    /** 
-     * @param p_GE Game Engine
+
+    /**
+     * @param p_GE     Game Engine
      * @param p_Player Player
      */
     private void moveArmy(GameEngine p_GE, Player p_Player) {
@@ -119,46 +137,46 @@ public class Random implements Behavior {
         Country l_AttackFrom = null;
         Country l_NeighborCountry = null;
         boolean l_Flag = false;
-        while (!l_Flag) {
+        int l_Counter = 0;
+        // check if any country has army
+        for (Country l_Country : l_CountriesOwned) {
+            if (l_Country.getD_NumberOfArmies() > 1) {
+                l_Flag = true;
+                break;
+            }
+        }
+        // keep looping until a source country with armies and friendly neighbor is found
+        while (l_Flag && l_Counter < 300) {
             int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
             ArrayList<Country> l_NeighborList = new ArrayList<>();
-            if(l_CountriesOwned.size() != 0){
+            if (l_CountriesOwned.size() != 0) {
                 l_NeighborList = l_CountriesOwned.get(l_RandomCountryIndex).getD_Neighbours();
             }
             for (Country l_Country : l_NeighborList) {
-                if (l_Country.getD_CurrentOwner().equals(p_Player.getD_Name())) {
+                if (l_Country.getD_CurrentOwner().equals(p_Player.getD_Name()) && l_CountriesOwned.get(l_RandomCountryIndex).getD_NumberOfArmies() > 1) {
                     l_NeighborCountry = l_Country;
                     l_AttackFrom = l_CountriesOwned.get(l_RandomCountryIndex);
-                    if(l_AttackFrom.getD_NumberOfArmies() != 0){
-                        l_Flag = true;
-                        break;
-                    }
+                    l_Flag = false;
+                    break;
                 }
             }
-            //if all counties owned by player have zero armies
-            if(l_AttackFrom != null && l_AttackFrom.getD_NumberOfArmies() == 0)
-                l_Flag = true;
+            l_Counter++;
         }
-        // this is a mechanical keyboard
         // issue advance order
-        if (l_AttackFrom != null && l_NeighborCountry != null && l_AttackFrom.getD_NumberOfArmies() != 0) {
-            int l_NumOfArmiesToAttackWith = Randomizer.generateRandomNumber(1, l_AttackFrom.getD_NumberOfArmies());
-            Advance l_Advance = new Advance(l_AttackFrom.getD_CountryID(), l_NeighborCountry.getD_CountryID(),
-                    l_NumOfArmiesToAttackWith, p_GE);
-            // add order to order list
-            p_Player.getD_OrderList().add(l_Advance);
-            Console.displayMsg(p_Player.getD_Name() + " issued: advance (relocate army) " + l_AttackFrom.getD_CountryID() +
-                    " " + l_NeighborCountry.getD_CountryID() + " " + l_NumOfArmiesToAttackWith);
-            // write to log
-            p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued advance command");
-            p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
+        if (Objects.nonNull(l_AttackFrom) && Objects.nonNull(l_NeighborCountry) && l_AttackFrom.getD_NumberOfArmies() > 1) {
+            int l_NumOfArmiesToAttackWith = Randomizer.generateRandomNumber(1, l_AttackFrom.getD_NumberOfArmies() - 1);
+            BehaviorUtilities.issueAdvance(p_GE, p_Player, l_AttackFrom, l_NeighborCountry, l_NumOfArmiesToAttackWith);
+        } else {
+            Console.displayMsg(p_Player.getD_Name() + ": pass");
+            p_GE.setD_PlayerPassed(true);
         }
     }
+
     /**
      * @return name of behavior
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "random";
     }
 }
