@@ -27,7 +27,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
     @Override
     public void run() {
         executeCommands();
-        promptEnterKey();
+//        promptEnterKey();
     }
 
     /**
