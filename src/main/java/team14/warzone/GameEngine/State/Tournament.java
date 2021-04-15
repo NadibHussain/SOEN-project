@@ -311,6 +311,9 @@ public class Tournament extends Phase {
 
     }
 
+    /**
+     * assign countries for tournament phase
+     */
     @Override
     public void assignCountries() {
         // if number of players between 2 and 5, assign countries to players randomly
@@ -334,6 +337,9 @@ public class Tournament extends Phase {
         }
     }
 
+    /**
+     * reinforce
+     */
     @Override
     public void reinforce() {
         // TODO Auto-generated method stub
@@ -358,54 +364,79 @@ public class Tournament extends Phase {
 //
 //    }
 
+    /**
+     * issue commands
+     */
     @Override
     public void issueCommands() {
         // TODO Auto-generated method stub
 
     }
-
+    /**
+     * shows cards
+     */
     @Override
     public void showCards() {
         // TODO Auto-generated method stub
 
     }
-
+    /**
+     * execute commands
+     */
     @Override
     public void executeCommands() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * deploy
+     */
     @Override
     public void deploy() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * advance
+     */
     @Override
     public void advance() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * bomb
+     */
     @Override
     public void bomb() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * blockade
+     */
     @Override
     public void blockade() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * airlift
+     */
     @Override
     public void airlift() {
         // TODO Auto-generated method stub
 
     }
 
+    /**
+     * diplomacy
+     */
     @Override
     public void diplomacy() {
         // TODO Auto-generated method stub
