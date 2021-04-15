@@ -2,13 +2,14 @@ package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
-import team14.warzone.GameEngine.Commands.*;
+import team14.warzone.GameEngine.Commands.Advance;
+import team14.warzone.GameEngine.Commands.Deploy;
+import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Objects;
 
 public class Benevolent implements Behavior {
@@ -28,7 +29,7 @@ public class Benevolent implements Behavior {
         }
 
         // deploy to weakest
-        if (l_ArmiesLeftToDeploy > 0) {
+        if (l_ArmiesLeftToDeploy > 0 && p_Player.getD_CountriesOwned().size() > 0) {
             // find weakest country
             Country l_Country = BehaviorUtilities.findWeakestCountry(p_Player);
             // instantiate deploy order
@@ -63,7 +64,7 @@ public class Benevolent implements Behavior {
         }
 
         // advance from strong to weak (self)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced && p_Player.getD_CountriesOwned().size() > 0) {
             // find if any weak country has strong neighbor
             ArrayList<Country> l_WeakCountries = BehaviorUtilities.findWeakerCountriesWithStrongNeighbor(p_Player);
             if (l_WeakCountries.size() > 0) {
