@@ -29,6 +29,7 @@ public class Console implements Serializable {
 
     /**
      * A method to read input from user console
+     *
      * @return returns commands list
      */
     public static List<List<String>> readInput() {

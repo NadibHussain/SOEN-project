@@ -13,6 +13,7 @@ import java.util.List;
 public abstract class MapEditorPhase extends Phase {
     /**
      * MapEditorPhase
+     *
      * @param p_GameEngine GE
      */
     public MapEditorPhase(GameEngine p_GameEngine) {
@@ -44,7 +45,16 @@ public abstract class MapEditorPhase extends Phase {
         // use console to prompt user to enter command
         System.out.println("Enter command:");
         List<List<String>> l_CommandStrList = Console.readInput();
-        createAdminCommand(l_CommandStrList);
+        // { { tournament -M ap1 map2 }, { tounraent -P }
+        if (l_CommandStrList.get(0).get(0).equals("tournament")) {
+            if (l_CommandStrList.size() == 4) {
+                createAdminCommand(l_CommandStrList);
+            } else {
+                System.out.println("Invalid command");
+            }
+        } else {
+            createAdminCommand(l_CommandStrList);
+        }
     }
 
     /**
@@ -68,15 +78,13 @@ public abstract class MapEditorPhase extends Phase {
         d_GameEngine.getD_MapEditor().loadMap(p_FileName);
         d_GameEngine.setD_LoadedMap(d_GameEngine.getD_MapEditor().getD_LoadedMap());
         // validate map right after loading
-        if (!d_GameEngine.getD_MapEditor().validateMap(d_GameEngine.getD_LoadedMap()))
-        {
+        if (!d_GameEngine.getD_MapEditor().validateMap(d_GameEngine.getD_LoadedMap())) {
             System.out.println("Error: map validation failed, not loaded");
             d_GameEngine.getD_LogEntryBuffer().setD_log("Error: map validation failed, not loaded");
             d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-        }
-        else {
+        } else {
             System.out.println("Success: map loaded and validated");
-            d_GameEngine.getD_LogEntryBuffer().setD_log("Success: map loaded and validated map:"+p_FileName);
+            d_GameEngine.getD_LogEntryBuffer().setD_log("Success: map loaded and validated map:" + p_FileName);
             d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
             // move to the startup phase
             d_GameEngine.setD_CurrentPhase(d_GameEngine.getD_StartupPhase());
@@ -167,8 +175,10 @@ public abstract class MapEditorPhase extends Phase {
     public void diplomacy() {
         invalidCommandMessage();
     }
+
     /**
      * Savegame method which is valid in gameplay phase
+     *
      * @param p_FileName filename with which the game has to be saved
      */
     @Override

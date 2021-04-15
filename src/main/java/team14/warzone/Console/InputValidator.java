@@ -585,7 +585,7 @@ public class InputValidator {
         tournamentOptionNameCheck(p_OptionName);
 
         // Validate tournament arguments
-        //tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
+        // tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
         if (p_OptionName.equals("-M") || p_OptionName.equals("-m")) {
             if (p_Arguments.size() < 1)
                 throw new Exception("Invalid arguments");
@@ -678,7 +678,7 @@ public class InputValidator {
      * @return true if the string contains only alphanumeric characters; else retur false
      */
     private static boolean isAlphaNumeric(String p_Str) {
-        return p_Str != null && p_Str.matches("^[a-zA-Z0-9.]*$");
+        return p_Str != null && p_Str.matches("^[a-zA-Z0-9-.]*$");
     }
 
     /**
