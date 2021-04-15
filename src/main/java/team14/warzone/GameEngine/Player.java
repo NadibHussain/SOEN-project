@@ -420,7 +420,7 @@ public class Player implements Serializable {
      * Reset all game progress for player
      */
     public void resetPlayer() {
-        d_TotalNumberOfArmies = 0;
+        d_TotalNumberOfArmies = 20;
         d_ArmiesOrderedToBeDeployed = 0;
         d_CountriesOwned.clear();
         d_OrderList.clear();
