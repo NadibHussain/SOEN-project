@@ -5,8 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.Country;
-import team14.warzone.MapModule.MapEditor;
+import team14.warzone.MapModule.MapEditorConquest;
 
 /**
  * This class tests the aggressive player strategy
@@ -19,7 +20,7 @@ public class AggressiveTest {
     /**
      * map editor field
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
     /**
      * game engine field
      */
@@ -31,7 +32,7 @@ public class AggressiveTest {
     @Before
     public void init() {
         d_Console = new Console();
-        d_MapEditor = new MapEditor();
+        d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
         // map editor phase
         d_GE.getD_CurrentPhase().loadMap("bigeurope.map");

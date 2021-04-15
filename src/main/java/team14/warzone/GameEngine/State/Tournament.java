@@ -1,15 +1,5 @@
 package team14.warzone.GameEngine.State;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
@@ -19,12 +9,6 @@ import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditorConquest;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.*;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -90,7 +74,7 @@ public class Tournament extends Phase {
                     d_Maps.add(d_MapEditor.d_LoadedMap);
                 else
                     System.out.println(p_MapFileName + " map is not valid.");
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 System.out.println(p_MapFileName + " file does not exist.");
                 e.printStackTrace();
             }
