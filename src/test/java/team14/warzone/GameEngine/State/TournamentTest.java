@@ -1,6 +1,8 @@
 package team14.warzone.GameEngine.State;
 
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
@@ -15,15 +17,15 @@ public class TournamentTest {
      /**
      * console field
      */
-    private Console d_Console;
+    private static Console d_Console;
     /**
      * map editor field
      */
-    private AdapterMapEditor d_MapEditor;
+    private static AdapterMapEditor d_MapEditor;
     /**
      * game engine field
      */
-    private GameEngine d_GE;
+    private static GameEngine d_GE;
 
     @Before
     public void setup() {
@@ -32,6 +34,7 @@ public class TournamentTest {
         d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
     }
+    
     @Test
     @DisplayName("Testing Tournament")
     public void tournamentRun() {
@@ -55,6 +58,15 @@ public class TournamentTest {
 
         t.run();
 
+    }
+     /**
+     * tear down after all test run
+     */
+    @AfterClass
+    public static void tearDown() {
+        d_Console = null;
+        d_MapEditor = null;
+        d_GE = null;
     }
     
 }
