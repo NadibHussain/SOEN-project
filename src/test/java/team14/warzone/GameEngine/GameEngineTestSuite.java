@@ -6,6 +6,9 @@ import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.State.GameOverPhaseTest;
 import team14.warzone.GameEngine.State.IssueOrdersPhaseTest;
 import team14.warzone.GameEngine.State.PreMapLoadPhaseTest;
+import team14.warzone.GameEngine.Strategy.AggressiveTest;
+import team14.warzone.GameEngine.Strategy.BenevolentTest;
+import team14.warzone.GameEngine.Strategy.CheaterTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -13,7 +16,7 @@ import team14.warzone.GameEngine.State.PreMapLoadPhaseTest;
         AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class,
         DiplomacyTest.class,
         IssueOrdersPhaseTest.class, PreMapLoadPhaseTest.class, GameOverPhaseTest.class,
-        CardTest.class
+        CardTest.class, AggressiveTest.class, BenevolentTest.class, CheaterTest.class
 })
 
 /**

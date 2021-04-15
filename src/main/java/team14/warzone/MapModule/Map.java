@@ -261,7 +261,8 @@ public class Map implements Serializable {
      * @return String country name
      */
     public Country findCountry(String p_CountryName){
-
+        //replace "-" with space in country name
+        p_CountryName = p_CountryName.replace('-', ' ');
         for (Country l_CountryIndex: d_Countries) {
             if(l_CountryIndex.getD_CountryID().equals(p_CountryName))
             {

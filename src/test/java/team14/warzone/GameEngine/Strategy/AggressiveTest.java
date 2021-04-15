@@ -44,6 +44,7 @@ public class AggressiveTest {
     /**
      * Choose a country owned by p1, add armies to it then check if the aggressive player will deploy to this country,
      * since it will be the strongest country he owns
+     * then check if number of armies in a country with enemy neighbours is doubled after cheater issue order is executed
      */
     @Test
     public void aggressiveTest() {
