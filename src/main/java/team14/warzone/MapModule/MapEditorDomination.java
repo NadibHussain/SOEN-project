@@ -9,7 +9,7 @@ import java.util.Stack;
  * This is the main class for Mapeditor functions
  */
 
-public class MapEditor implements Serializable {
+public class MapEditorDomination implements Serializable {
 
     /**
      * loaded map object
@@ -19,22 +19,22 @@ public class MapEditor implements Serializable {
     /**
      * Mapeditor method
      */
-    public MapEditor() {
+    public MapEditorDomination() {
     }
 
     /**
      * This method loads an existing file. If file is not found, it creates a file
      * and map from scratch.
-     * 
+     *
      * @param p_FileName filename param
      */
-    public void editMap(String p_FileName) {
+    public void editMapDomination(String p_FileName) {
         try {
-            loadMap(p_FileName);
+            loadMapDomination(p_FileName);
         } catch (FileNotFoundException l_FileException) {
             System.out.println("Unable to find map file.Creating a new map file.");
             d_LoadedMap = new Map();
-            saveMap(p_FileName);
+            saveMapDomination(p_FileName, d_LoadedMap);
         }
     }
 
@@ -44,7 +44,7 @@ public class MapEditor implements Serializable {
      * @param p_FileName String filename
      * @throws FileNotFoundException throws exception when filename is invalid
      */
-    public void loadMap(String p_FileName) throws FileNotFoundException {
+    public void loadMapDomination(String p_FileName) throws FileNotFoundException {
         Map l_Map = new Map();
         File l_FileObject = new File(p_FileName);
         Scanner l_ReaderObject = new Scanner(l_FileObject);
@@ -52,13 +52,13 @@ public class MapEditor implements Serializable {
             String l_Data = l_ReaderObject.nextLine();
             switch (l_Data) {
                 case "[countries]":
-                    handleCountries(l_ReaderObject, l_Map);
+                    handleCountriesDomination(l_ReaderObject, l_Map);
                     break;
                 case "[continents]":
-                    handleContinents(l_ReaderObject,l_Map);
+                    handleContinentsDomination(l_ReaderObject, l_Map);
                     break;
                 case "[borders]":
-                    handleNeighbour(l_ReaderObject,l_Map);
+                    handleNeighbourDomination(l_ReaderObject, l_Map);
                     break;
             }
 
@@ -68,12 +68,14 @@ public class MapEditor implements Serializable {
         this.d_LoadedMap = l_Map;
 
     }
+
     /**
      * sub section of load map to hanlde countries
-     * @param  l_ReaderObject to read the text from the file
-     * @param l_Map the map which needs to be edited
+     *
+     * @param l_ReaderObject to read the text from the file
+     * @param l_Map          the map which needs to be edited
      */
-    private void handleCountries(Scanner l_ReaderObject,Map l_Map){
+    private void handleCountriesDomination(Scanner l_ReaderObject, Map l_Map) {
         while (true) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
@@ -98,10 +100,11 @@ public class MapEditor implements Serializable {
 
     /**
      * sub section of load map to hanlde Continents
-     * @param  l_ReaderObject to read the text from the file
-     * @param l_Map the map which needs to be edited
+     *
+     * @param l_ReaderObject to read the text from the file
+     * @param l_Map          the map which needs to be edited
      */
-    private void handleContinents(Scanner l_ReaderObject,Map l_Map){
+    private void handleContinentsDomination(Scanner l_ReaderObject, Map l_Map) {
         while (true) {
             String l_Line = l_ReaderObject.nextLine();
             if (l_Line.length() > 0 && l_Line.charAt(0) == ';') {
@@ -111,16 +114,28 @@ public class MapEditor implements Serializable {
                 break;
             } else {
                 String[] l_ContinentArray = l_Line.split(" ");
-                l_Map.addContinent(l_ContinentArray[0], Integer.parseInt(l_ContinentArray[1]));
+                StringBuilder l_ContinentName = new StringBuilder();
+                int l_ContinentValue = 0;
+                for (int l_Counter = 0; l_Counter < l_ContinentArray.length; l_Counter++) {
+                    try {
+                        l_ContinentValue = Integer.parseInt(l_ContinentArray[l_Counter]);
+                        break;
+                    } catch (Exception e) {
+                        l_ContinentName.append(l_ContinentArray[l_Counter]);
+                    }
+                }
+                l_Map.addContinent(l_ContinentName.toString(), l_ContinentValue);
             }
         }
     }
+
     /**
      * sub section of load map to hanlde Neighbour
-     * @param  l_ReaderObject to read the text from the file
-     * @param l_Map the map which needs to be edited
+     *
+     * @param l_ReaderObject to read the text from the file
+     * @param l_Map          the map which needs to be edited
      */
-    private void handleNeighbour(Scanner l_ReaderObject,Map l_Map){
+    private void handleNeighbourDomination(Scanner l_ReaderObject, Map l_Map) {
         ArrayList<Country> l_Countires = l_Map.getD_Countries();
         int l_Index = 0;
         while (l_ReaderObject.hasNextLine()) {
@@ -152,8 +167,9 @@ public class MapEditor implements Serializable {
      *
      * @param p_FileName String filename
      */
-    public void saveMap(String p_FileName) {
+    public void saveMapDomination(String p_FileName, Map p_LoadedMap) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");
+        d_LoadedMap = p_LoadedMap;
         // writing all the continents
         l_Content.append("[continents]\n");
         for (Continent l_Continent : d_LoadedMap.getD_Continents()) {
@@ -213,8 +229,8 @@ public class MapEditor implements Serializable {
         l_ConnectedGraph = dfs(l_Countries, "graph");
         // checking if map is connected
         if (l_ConnectedGraph == true)
-            System.out.println(l_ConnectedGraph+" The map is connected.");
-
+//            System.out.println(l_ConnectedGraph+" The map is connected.");
+            ;
         else {
             System.out.println("The map is not connected.");
         }
@@ -246,7 +262,7 @@ public class MapEditor implements Serializable {
             ArrayList<Country> l_Countries2 = p_Map
                     .getCountryListOfContinent(l_Continents.get(l_ContIndex).getD_ContinentID());
             l_ConnectedSubGraph = dfs(l_Countries2, "sub-graph");
-            if (l_ConnectedSubGraph == false){
+            if (l_ConnectedSubGraph == false) {
                 System.out.println("Sub-graph is not connected");
                 break;
             }
@@ -254,7 +270,6 @@ public class MapEditor implements Serializable {
         }
 
         if (l_ConnectedGraph && l_HasContinent && l_ConnectedSubGraph) {
-            System.out.println("The map is valid.");
             return true;
         } else {
             System.out.println("The map is not valid.");
@@ -274,7 +289,7 @@ public class MapEditor implements Serializable {
 
     /**
      * Depth-first-search (dfs)
-     * 
+     *
      * @param p_CountryList list of countries
      * @param p_typeOfGraph type of graph
      * @return true if dfs was successful
@@ -326,7 +341,7 @@ public class MapEditor implements Serializable {
 
     /**
      * counts how many nodes were visited
-     * 
+     *
      * @param l_Visited list of visited nodes
      * @return total nodes visited
      */

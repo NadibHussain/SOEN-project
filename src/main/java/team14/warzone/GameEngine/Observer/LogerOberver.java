@@ -7,7 +7,6 @@ import team14.warzone.GameEngine.State.Phase;
 import team14.warzone.MapModule.Continent;
 import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditor;
 
 import java.io.File;
 import java.io.FileInputStream;

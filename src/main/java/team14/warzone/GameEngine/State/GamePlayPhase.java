@@ -31,13 +31,4 @@ public abstract class GamePlayPhase extends Phase {
     public void saveGame(String p_FileName) {
         d_GameEngine.getD_GameSaveLoad().runSaveGame(p_FileName);
     }
-
-    /**
-     * Loadgame method which is invalid in gameplay phase
-     * @param p_FileName filename
-     */
-//    @Override
-//    public void loadGame(String p_FileName) {
-//        invalidCommandMessage();
-//    }
 }

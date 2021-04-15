@@ -30,8 +30,8 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_CountryId
-     * @param p_ContinentId
+     * @param p_CountryId Country ID to add
+     * @param p_ContinentId Continent ID to add
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -40,7 +40,7 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_CountryId
+     * @param p_CountryId Country ID to remove
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -49,8 +49,8 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * @param p_ContinentId Continent ID to add
+     * @param p_ControlValue Continents control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -59,7 +59,7 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_ContinentId
+     * @param p_ContinentId Continent ID to remove
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -68,8 +68,8 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId Country ID
+     * @param p_NeighborId Neighbour ID to add
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -78,8 +78,8 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId Country ID
+     * @param p_NeighborId Neighbour ID to remove
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -88,7 +88,7 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_FileName
+     * @param p_FileName File Name to load map from
      */
     @Override
     public void loadMap(String p_FileName) {
@@ -97,16 +97,16 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_FileName
+     * @param p_FileName save map with filename
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
 
     }
 
 
     /**
-     * @param p_FileName
+     * @param p_FileName file name of map to edit
      */
     @Override
     public void editMap(String p_FileName) {
@@ -115,7 +115,7 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_Map
+     * @param p_Map Map to be validated
      */
     @Override
     public void validateMap(Map p_Map) {
@@ -124,8 +124,8 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_Name
-     * @param p_PlayerType
+     * @param p_Name Name of player
+     * @param p_PlayerType type of player
      */
     @Override
     public void addPlayer(String p_Name, String p_PlayerType) {
@@ -134,7 +134,7 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_Name
+     * @param p_Name name of player
      */
     @Override
     public void removePlayer(String p_Name) {
@@ -153,17 +153,12 @@ public class GameOverPhase extends GamePlayPhase {
 
 
     /**
-     * @param p_FileName
+     * @param p_FileName File name for game to be saved as
      */
     @Override
     public void saveGame(String p_FileName) {
         invalidCommandMessage();
     }
-
-//    @Override
-//    public void loadGame(String p_FileName) {
-//        invalidCommandMessage();
-//    }
 
     @Override
     public void issueCommands() {

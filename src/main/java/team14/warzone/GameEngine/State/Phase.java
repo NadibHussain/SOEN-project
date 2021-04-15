@@ -147,7 +147,7 @@ public abstract class Phase implements Serializable {
      *
      * @param p_FileName Path of the .map file
      */
-    abstract public void saveMap(String p_FileName);
+    abstract public void saveMap(String p_FileName, String p_MapType);
 
     /**
      * Needed command before editing the Map object
@@ -198,15 +198,6 @@ public abstract class Phase implements Serializable {
      * @param p_FileName filename
      */
     abstract public void saveGame(String p_FileName);
-
-    /**
-     * used for loading a saved game
-     * @param p_FileName filename
-     */
-//    abstract public void loadGame(String p_FileName);
-
-    // issue order phase
-
 
     /**
      * takes command in round robin manner in the play phase
@@ -261,28 +252,28 @@ public abstract class Phase implements Serializable {
 
 
     /**
-     * @param p_Maps
+     * @param p_Maps maps for tournament
      */
     public void tournamentAddMaps(List<String> p_Maps) {
     }
 
 
     /**
-     * @param p_Strategies
+     * @param p_Strategies player strategies for tournament
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
     }
 
 
     /**
-     * @param p_NumOfTurns
+     * @param p_NumOfTurns number of turns to be given
      */
     public void tournamentMaxNumOfTurns(String p_NumOfTurns) {
     }
 
 
     /**
-     * @param p_NumOfGames
+     * @param p_NumOfGames number of games to be played
      */
     public void tournamentNumOfGames(String p_NumOfGames) {
     }

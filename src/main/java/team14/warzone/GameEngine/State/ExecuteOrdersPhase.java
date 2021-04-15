@@ -60,8 +60,8 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /**
      * checks if game is over; if player conquers all countries
-     * @param p_Players
-     * @return
+     * @param p_Players Players
+     * @return true if game over
      */
     private boolean gameOverCheck(ArrayList<Player> p_Players) {
         for (Player l_Player : p_Players) {
@@ -162,7 +162,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
      * @param p_FileName name of map file
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         invalidCommandMessage();
     }
 

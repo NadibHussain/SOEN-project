@@ -16,7 +16,8 @@ import team14.warzone.GameEngine.Strategy.CheaterTest;
         AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class,
         DiplomacyTest.class,
         IssueOrdersPhaseTest.class, PreMapLoadPhaseTest.class, GameOverPhaseTest.class,
-        CardTest.class, AggressiveTest.class, BenevolentTest.class, CheaterTest.class
+        CardTest.class, AggressiveTest.class, BenevolentTest.class, CheaterTest.class,
+        CardTest.class, GameSaveTest.class, GameLoadTest.class
 })
 
 /**

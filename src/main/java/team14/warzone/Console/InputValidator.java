@@ -81,6 +81,16 @@ public class InputValidator {
     );
 
     /**
+     * static variable VALID_MAP_TYPE of type String
+     */
+    public static ArrayList<String> VALID_MAP_TYPE = new ArrayList<>(
+            Arrays.asList(
+                    "domination",
+                    "conquest"
+            )
+    );
+
+    /**
      * Validates whether the user input is valid.
      * If the command is not valid it will print a error message to console.
      *
@@ -327,12 +337,14 @@ public class InputValidator {
         gamePhaseCheck(Phase.MAPEDITOR);
 
         // Validate -add arguments and -remove arguments
-        if (p_Arguments.size() != 1)
+        if (p_Arguments.size() != 2)
             throw new Exception("Invalid arguments");
 
         // Validate if filename is alphanumeric
         if (!isAlphaNumeric(p_Arguments.get(0)))
             throw new Exception("Invalid filename: should be alphanumberic");
+        else if (!isValidMapType(p_Arguments.get(1)))
+            throw new Exception("Invalid map type");
 
         return true;
     }
@@ -667,6 +679,18 @@ public class InputValidator {
      */
     private static boolean isAlphaNumeric(String p_Str) {
         return p_Str != null && p_Str.matches("^[a-zA-Z0-9.]*$");
+    }
+
+    /**
+     * This methods checks that the map type is valid. using the list of valid types
+     *
+     * @param p_MapType type to be checked
+     * @return true if type is valid; else return false
+     */
+    private static boolean isValidMapType(String p_MapType) throws Exception {
+        if(!VALID_MAP_TYPE.contains(p_MapType.toLowerCase()))
+            return false;
+        return true;
     }
 
     /**

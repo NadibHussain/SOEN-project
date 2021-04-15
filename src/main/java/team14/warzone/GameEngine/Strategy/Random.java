@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Random implements Behavior {
     
     /** 
-     * @param p_GE
-     * @param p_Player
+     * @param p_GE Game Engine
+     * @param p_Player Player
      */
         int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
     @Override
@@ -60,8 +60,8 @@ public class Random implements Behavior {
 
     
     /** 
-     * @param p_GE
-     * @param p_Player
+     * @param p_GE Game Engine
+     * @param p_Player Player
      */
     private void attackNeighbor(GameEngine p_GE, Player p_Player) {
         // randomly keep selecting country until enemy neighbor found
@@ -110,8 +110,8 @@ public class Random implements Behavior {
 
     
     /** 
-     * @param p_GE
-     * @param p_Player
+     * @param p_GE Game Engine
+     * @param p_Player Player
      */
     private void moveArmy(GameEngine p_GE, Player p_Player) {
         // randomly select country and neighbor owned by self

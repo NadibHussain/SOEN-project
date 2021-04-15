@@ -137,15 +137,6 @@ public class StartupPhase extends GamePlayPhase {
     }
 
     /**
-     * Loadgame method which is valid in startup phase
-     * @param p_FileName filename
-     */
-//    @Override
-//    public void loadGame(String p_FileName) {
-//        d_GameEngine = d_GameEngine.getD_GameSaveLoad().runLoadGame(p_FileName);
-//    }
-
-    /**
      * Reinforcement beginning of game play
      */
     @Override
@@ -156,8 +147,8 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Add to country list
      *
-     * @param p_CountryId
-     * @param p_ContinentId
+     * @param p_CountryId Country ID to add
+     * @param p_ContinentId Continent ID
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -168,7 +159,7 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Remove from country list
      *
-     * @param p_CountryId
+     * @param p_CountryId Country ID to remove
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -179,8 +170,8 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Add to continent list
      *
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * @param p_ContinentId Continent ID to add
+     * @param p_ControlValue Control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -191,7 +182,7 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * REmove from Continent list
      *
-     * @param p_ContinentId
+     * @param p_ContinentId Continent ID to remove
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -202,8 +193,8 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Add neighbor
      *
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId Country ID
+     * @param p_NeighborId Neighbour ID to add
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -214,8 +205,8 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Remove neighbor
      *
-     * @param p_CountryId
-     * @param p_NeighborId
+     * @param p_CountryId Country ID
+     * @param p_NeighborId Neighbour ID to remove
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -226,7 +217,7 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Loads map
      *
-     * @param p_FileName
+     * @param p_FileName File name to load map from
      */
     @Override
     public void loadMap(String p_FileName) {
@@ -237,10 +228,10 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Saves map
      *
-     * @param p_FileName
+     * @param p_FileName file name to save map
      */
     @Override
-    public void saveMap(String p_FileName) {
+    public void saveMap(String p_FileName, String p_MapType) {
         invalidCommandMessage();
     }
 
@@ -248,7 +239,7 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Edit map
      *
-     * @param p_FileName
+     * @param p_FileName file name to edit a map
      */
     @Override
     public void editMap(String p_FileName) {
@@ -259,7 +250,7 @@ public class StartupPhase extends GamePlayPhase {
     /**
      * Validates a map
      *
-     * @param p_Map
+     * @param p_Map map to be validated
      */
     @Override
     public void validateMap(Map p_Map) {

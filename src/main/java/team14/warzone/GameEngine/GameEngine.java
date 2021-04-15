@@ -6,12 +6,13 @@ import team14.warzone.GameEngine.Commands.Order;
 import team14.warzone.GameEngine.Observer.LogEntryBuffer;
 import team14.warzone.GameEngine.Observer.LogerOberver;
 import team14.warzone.GameEngine.State.*;
+import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.Map;
-import team14.warzone.MapModule.MapEditor;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -46,7 +47,7 @@ public class GameEngine implements Serializable {
     /**
      * instance of map editor
      */
-    private MapEditor d_MapEditor;
+    private AdapterMapEditor d_MapEditor;
 
     /**
      * Stores admin commands that are yet to be executed
@@ -132,7 +133,7 @@ public class GameEngine implements Serializable {
      * @param p_Console   console object
      * @param p_MapEditor map editor object
      */
-    public GameEngine(Console p_Console, MapEditor p_MapEditor) {
+    public GameEngine(Console p_Console, AdapterMapEditor p_MapEditor) {
         d_Console = p_Console;
         d_MapEditor = p_MapEditor;
         d_PlayerList = new ArrayList<Player>();
@@ -203,23 +204,25 @@ public class GameEngine implements Serializable {
 
     public void loadGame(String p_FileName) {
         GameEngine l_GE = d_GameSaveLoad.runLoadGame(p_FileName);
-        this.d_LoadedMap = l_GE.getD_LoadedMap();
-        this.d_CurrentPlayer = l_GE.getD_CurrentPlayer();
-        this.d_PlayerList = l_GE.getD_PlayerList();
-        this.d_Console = l_GE.getD_Console();
-        this.d_MapEditor = l_GE.getD_MapEditor();
-        this.d_AdminCommandsBuffer = l_GE.getD_AdminCommandsBuffer();
-        this.d_OrderBuffer = l_GE.getD_OrderBuffer();
-        this.d_OrderStrBuffer = l_GE.getD_OrderStrBuffer();
-        this.d_LogEntryBuffer = l_GE.getD_LogEntryBuffer();
-        this.d_CurrentPhase = l_GE.getD_CurrentPhase();
-        this.d_PreMapLoadPhase = l_GE.getD_PreMapLoadPhase();
-        this.d_PostMapEditLoadPhase = l_GE.getD_PostMapEditLoadPhase();
-        this.d_StartupPhase = l_GE.getD_StartupPhase();
-        this.d_IssueOrdersPhase = l_GE.getD_IssueOrdersPhase();
-        this.d_ExecuteOrdersPhase = l_GE.getD_ExecuteOrdersPhase();
-        this.d_GameOverPhase = l_GE.getD_GameOverPhase();
-        this.d_GameSaveLoad = l_GE.getD_GameSaveLoad();
+        if (Objects.nonNull(l_GE)) {
+            this.d_LoadedMap = l_GE.getD_LoadedMap();
+            this.d_CurrentPlayer = l_GE.getD_CurrentPlayer();
+            this.d_PlayerList = l_GE.getD_PlayerList();
+            this.d_Console = l_GE.getD_Console();
+            this.d_MapEditor = l_GE.getD_MapEditor();
+            this.d_AdminCommandsBuffer = l_GE.getD_AdminCommandsBuffer();
+            this.d_OrderBuffer = l_GE.getD_OrderBuffer();
+            this.d_OrderStrBuffer = l_GE.getD_OrderStrBuffer();
+            this.d_LogEntryBuffer = l_GE.getD_LogEntryBuffer();
+            this.d_CurrentPhase = l_GE.getD_CurrentPhase();
+            this.d_PreMapLoadPhase = l_GE.getD_PreMapLoadPhase();
+            this.d_PostMapEditLoadPhase = l_GE.getD_PostMapEditLoadPhase();
+            this.d_StartupPhase = l_GE.getD_StartupPhase();
+            this.d_IssueOrdersPhase = l_GE.getD_IssueOrdersPhase();
+            this.d_ExecuteOrdersPhase = l_GE.getD_ExecuteOrdersPhase();
+            this.d_GameOverPhase = l_GE.getD_GameOverPhase();
+            this.d_GameSaveLoad = l_GE.getD_GameSaveLoad();
+        }
     }
 
     /**
@@ -261,7 +264,7 @@ public class GameEngine implements Serializable {
      *
      * @return Object of type Map Editor
      */
-    public MapEditor getD_MapEditor() {
+    public AdapterMapEditor getD_MapEditor() {
         return d_MapEditor;
     }
 
@@ -517,7 +520,7 @@ public class GameEngine implements Serializable {
 
 
     /**
-     * @param p_PlayerPassed
+     * @param p_PlayerPassed player passed true or false
      */
     public void setD_PlayerPassed(boolean p_PlayerPassed) {
         d_PlayerPassed = p_PlayerPassed;

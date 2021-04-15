@@ -11,8 +11,8 @@ import java.util.List;
 public class Human implements Behavior, Serializable {
     
     /** 
-     * @param p_GE
-     * @param p_Player
+     * @param p_GE Game Engine
+     * @param p_Player Player
      */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
