@@ -2,14 +2,13 @@ package team14.warzone.GameEngine.Strategy;
 
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.Card;
-import team14.warzone.GameEngine.Commands.Advance;
-import team14.warzone.GameEngine.Commands.Deploy;
-import team14.warzone.GameEngine.Commands.Order;
+import team14.warzone.GameEngine.Commands.*;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Benevolent implements Behavior {
@@ -44,7 +43,7 @@ public class Benevolent implements Behavior {
         }
 
         // play cards if any
-        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used() && p_Player.getD_CountriesOwned().size() != 0) {
             Card l_Card = p_Player.getCardList().get(0);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
