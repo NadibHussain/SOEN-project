@@ -202,6 +202,10 @@ public class GameEngine implements Serializable {
         }
     }
 
+    
+    /** 
+     * @param p_FileName
+     */
     public void loadGame(String p_FileName) {
         GameEngine l_GE = d_GameSaveLoad.runLoadGame(p_FileName);
         if (Objects.nonNull(l_GE)) {
@@ -542,10 +546,18 @@ public class GameEngine implements Serializable {
         return d_GameSaveLoad;
     }
 
+    
+    /** 
+     * @return Console
+     */
     public Console getD_Console() {
         return d_Console;
     }
 
+    
+    /** 
+     * @return ArrayList<AdminCommands>
+     */
     public ArrayList<AdminCommands> getD_AdminCommandsBuffer() {
         return d_AdminCommandsBuffer;
     }
@@ -554,30 +566,58 @@ public class GameEngine implements Serializable {
         d_CurrentNumberOfTurns++;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getD_CurrentNumberOfTurns(){
         return d_CurrentNumberOfTurns;
     }
 
+    
+    /** 
+     * @param p_CurrentNumberOfTurns
+     */
     public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
         d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
     }
 
+    
+    /** 
+     * @param p_TournamentEnded
+     */
     public void setD_TournamentEnded(boolean p_TournamentEnded) {
         d_TournamentEnded = p_TournamentEnded;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean isD_TournamentMode() {
         return d_TournamentMode;
     }
 
+    
+    /** 
+     * @param p_TournamentMode
+     */
     public void setD_TournamentMode(boolean p_TournamentMode) {
         d_TournamentMode = p_TournamentMode;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean isD_GameOver() {
         return d_GameOver;
     }
 
+    
+    /** 
+     * @param p_GameOver
+     */
     public void setD_GameOver(boolean p_GameOver) {
         d_GameOver = p_GameOver;
     }

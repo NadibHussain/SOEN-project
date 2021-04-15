@@ -179,6 +179,10 @@ public class Tournament extends Phase {
         Console.displayMsg("Please enter \"exit\" to quit the game");
     }
 
+    
+    /** 
+     * @return ArrayList<Integer>
+     */
     private ArrayList<Integer> determineWinner() {
         ArrayList<Integer> l_NumCountriesOwned = new ArrayList<>();//num of countries for each player
         for (int l_PCount = 0; l_PCount < d_Players.size(); l_PCount++) {

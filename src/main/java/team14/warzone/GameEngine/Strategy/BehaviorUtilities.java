@@ -14,6 +14,14 @@ import java.util.Objects;
 
 public class BehaviorUtilities {
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     * @param p_SourceCountry
+     * @param p_DestinationCountry
+     * @param p_NumOfArmies
+     */
     public static void issueAdvance(GameEngine p_GE, Player p_Player, Country p_SourceCountry,
                                     Country p_DestinationCountry, int p_NumOfArmies) {
         Advance l_Advance = new Advance(p_SourceCountry.getD_CountryID(), p_DestinationCountry.getD_CountryID(),
@@ -27,6 +35,12 @@ public class BehaviorUtilities {
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     * @param p_Card
+     */
     public static void issueBomb(GameEngine p_GE, Player p_Player, Card p_Card) {
         // find country to bomb
         Country l_DestinationCountry = findRandomEnemyNeighborWithArmy(p_Player);
@@ -41,6 +55,12 @@ public class BehaviorUtilities {
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     * @param p_Card
+     */
     public static void issueBlockade(GameEngine p_GE, Player p_Player, Card p_Card) {
         Country l_DestinationCountry = findCountryAtRisk(p_Player);
         Blockade l_Blockade = new Blockade(l_DestinationCountry.getD_CountryID(), p_GE);
@@ -53,6 +73,12 @@ public class BehaviorUtilities {
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     * @param p_Card
+     */
     public static void issueAirlift(GameEngine p_GE, Player p_Player, Card p_Card) {
         // find strongest country and weakest country
         Country l_StrongestCountry = findStrongestCountry(p_Player);
@@ -73,6 +99,12 @@ public class BehaviorUtilities {
         p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
     }
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     * @param p_Card
+     */
     public static void issueDiplomacy(GameEngine p_GE, Player p_Player, Card p_Card) {
         // find target player
         Player l_TargetPlayer = null;
@@ -95,6 +127,11 @@ public class BehaviorUtilities {
     }
 
 
+    
+    /** 
+     * @param p_Player
+     * @return Country
+     */
     public static Country findCountryAtRisk(Player p_Player) {
         int l_Risk = 0;
         Country l_CountryAtRisk = null;
@@ -127,6 +164,11 @@ public class BehaviorUtilities {
         return l_CountryAtRisk;
     }
 
+    
+    /** 
+     * @param p_Country
+     * @return Country
+     */
     // find strong neighbor of weak country
     public static Country findStrongNeighbor(Country p_Country) {
         for (Country l_Neighbor : p_Country.getD_Neighbours()) {
@@ -140,6 +182,11 @@ public class BehaviorUtilities {
         return null;
     }
 
+    
+    /** 
+     * @param p_Player
+     * @return Country
+     */
     public static Country findStrongestCountry(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
         Country l_StrongestCountry = null;
@@ -148,6 +195,11 @@ public class BehaviorUtilities {
         return l_StrongestCountry;
     }
 
+    
+    /** 
+     * @param p_Player
+     * @return ArrayList<Country>
+     */
     // reinforce weaker country - find weaker countries
     public static ArrayList<Country> findWeakerCountriesWithStrongNeighbor(Player p_Player) {
         findWeakestCountry(p_Player);
@@ -166,6 +218,11 @@ public class BehaviorUtilities {
         return l_WeakCountryList;
     }
 
+    
+    /** 
+     * @param p_Player
+     * @return Country
+     */
     // find weakest country
     public static Country findWeakestCountry(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
@@ -177,6 +234,11 @@ public class BehaviorUtilities {
         return l_WeakestCountry;
     }
 
+    
+    /** 
+     * @param p_Player
+     * @return Country
+     */
     public static Country findRandomEnemyNeighborWithArmy(Player p_Player) {
         ArrayList<Country> l_CountryList = p_Player.getD_CountriesOwned();
         ArrayList<Country> l_EnemyNeighborsWithArmies = new ArrayList<>();

@@ -15,6 +15,11 @@ import java.util.Objects;
 public class Benevolent implements Behavior {
     private ArrayList<Country> d_WeakCountryList = new ArrayList<>();
 
+    
+    /** 
+     * @param p_GE
+     * @param p_Player
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         int l_ExpectedNumberOfOrders = 3;
