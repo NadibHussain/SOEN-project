@@ -72,6 +72,7 @@ public class Player implements Serializable {
      * Constructor that takes all attributes as params
      *
      * @param d_Name                name of the player
+     * @param p_PlayerType          player behavior type
      * @param d_TotalNumberOfArmies total number of armies
      * @param d_CountriesOwned      list of countries (Country objects) owned by the player
      * @param d_OrderList           list of orders the player has issued but has not executed yet
@@ -126,8 +127,9 @@ public class Player implements Serializable {
     /**
      * Constructor that accepts playername, playertype and sets the other attributes with default values
      *
-     * @param p_Name name of the player
-     * @param p_GE   gameengine
+     * @param p_Name       name of the player
+     * @param p_PlayerType player behavior type
+     * @param p_GE         gameengine
      */
     public Player(String p_Name, String p_PlayerType, GameEngine p_GE) {
         this(p_Name, p_PlayerType, 20, new ArrayList<Country>(Collections.emptyList()),
