@@ -183,8 +183,9 @@ public class Tournament extends Phase {
         //Display the window.
         l_Frame.pack();
         l_Frame.setVisible(true);
+        l_Frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         
-        Console.displayMsg("This Tournament has ended. Type Ctrl+c+y to exit.");
+        Console.displayMsg("This Tournament has ended. Close frame to exit game.");
     }
 
     /**
