@@ -36,3 +36,5 @@ target/
 
 # Log files
 logs.txt
+
+javadoc/
