@@ -165,7 +165,8 @@ public class MapEditorDomination implements Serializable {
     /**
      * This method is used to save a map in a text format
      *
-     * @param p_FileName String filename
+     * @param p_FileName  String filename
+     * @param p_LoadedMap Map object
      */
     public void saveMapDomination(String p_FileName, Map p_LoadedMap) {
         StringBuilder l_Content = new StringBuilder("This map was created from a SOEN-6441 Project \n \n");

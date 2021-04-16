@@ -12,13 +12,20 @@ import team14.warzone.MapModule.Country;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Class implements behavior for benevolent player
+ */
 public class Benevolent implements Behavior {
+    /**
+     * Holds a list of weak countries for current player
+     */
     private ArrayList<Country> d_WeakCountryList = new ArrayList<>();
 
-    
-    /** 
-     * @param p_GE
-     * @param p_Player
+    /**
+     * Order issuing strategy for benevolent player
+     *
+     * @param p_GE     Game Engine object
+     * @param p_Player Player object
      */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
@@ -34,7 +41,7 @@ public class Benevolent implements Behavior {
         }
 
         // deploy to weakest
-        if (l_ArmiesLeftToDeploy > 0) {
+        if (l_ArmiesLeftToDeploy > 0 && p_Player.getD_CountriesOwned().size() > 0) {
             // find weakest country
             Country l_Country = BehaviorUtilities.findWeakestCountry(p_Player);
             // instantiate deploy order
@@ -49,7 +56,7 @@ public class Benevolent implements Behavior {
         }
 
         // play cards if any
-        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(0).isD_Used() && p_Player.getD_CountriesOwned().size() != 0) {
             Card l_Card = p_Player.getCardList().get(0);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
@@ -69,7 +76,7 @@ public class Benevolent implements Behavior {
         }
 
         // advance from strong to weak (self)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced && p_Player.getD_CountriesOwned().size() > 0) {
             // find if any weak country has strong neighbor
             ArrayList<Country> l_WeakCountries = BehaviorUtilities.findWeakerCountriesWithStrongNeighbor(p_Player);
             if (l_WeakCountries.size() > 0) {

@@ -2,6 +2,7 @@ package team14.warzone.GameEngine.State;
 
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class ExecuteOrdersPhase extends GamePlayPhase {
     /**
      * ExecuteOrdersPhase
+     *
      * @param p_GameEngine GE
      */
     public ExecuteOrdersPhase(GameEngine p_GameEngine) {
@@ -27,7 +29,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
     @Override
     public void run() {
         executeCommands();
-        promptEnterKey();
+//        promptEnterKey();
     }
 
     /**
@@ -38,6 +40,11 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         ArrayList<Player> l_PlayerList = d_GameEngine.getD_PlayerList();
         ArrayList<Boolean> l_Flag = new ArrayList<Boolean>(Arrays.asList(new Boolean[l_PlayerList.size()]));
         Collections.fill(l_Flag, Boolean.FALSE);
+
+        // reset received reinforcement flags
+        for (Player l_Player : l_PlayerList) {
+            l_Player.resetReceivedReinforcement();
+        }
 
         while (l_Flag.contains(Boolean.FALSE)) {
             for (int i = 0; i < l_PlayerList.size(); i++) {
@@ -52,7 +59,11 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         // reset players card received flags
         for (Player l_Player : l_PlayerList) {
             l_Player.resetCardReceivedFlag();
+            for (Country l_Country: l_Player.getD_CountriesOwned()){
+                l_Country.setD_UsedCountry(false);
+            }
         }
+
         // check if all countries owned by 1 player
         if (!gameOverCheck(l_PlayerList))
             next();
@@ -60,6 +71,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
 
     /**
      * checks if game is over; if player conquers all countries
+     *
      * @param p_Players Players
      * @return true if game over
      */
@@ -76,7 +88,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         return false;
     }
 
-    public void promptEnterKey(){
+    public void promptEnterKey() {
         System.out.println("\nPress \"ENTER\" to continue...");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
@@ -90,9 +102,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Add to country list
-     * @param p_CountryId name of country
+     *
+     * @param p_CountryId   name of country
      * @param p_ContinentId name of continent
      */
     @Override
@@ -100,8 +113,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Remove from country list
+     *
      * @param p_CountryId name of country
      */
     @Override
@@ -109,9 +123,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Add to continent list
-     * @param p_ContinentId name of continent
+     *
+     * @param p_ContinentId  name of continent
      * @param p_ControlValue control value
      */
     @Override
@@ -119,8 +134,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * REmove from Continent list
+     *
      * @param p_ContinentId name of continent
      */
     @Override
@@ -128,9 +144,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-     /** 
+    /**
      * Add neighbor
-     * @param p_CountryId name of country
+     *
+     * @param p_CountryId  name of country
      * @param p_NeighborId name of neighbor country
      */
     @Override
@@ -138,9 +155,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Remove neighbor
-     * @param p_CountryId name of country
+     *
+     * @param p_CountryId  name of country
      * @param p_NeighborId name of neighbor
      */
     @Override
@@ -148,8 +166,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Loads map
+     *
      * @param p_FileName name of map file
      */
     @Override
@@ -157,8 +176,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Saves map
+     *
      * @param p_FileName name of map file
      */
     @Override
@@ -166,8 +186,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Edit map
+     *
      * @param p_FileName name of map file
      */
     @Override
@@ -175,8 +196,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-    /** 
+    /**
      * Validates a map
+     *
      * @param p_Map map object
      */
     @Override
@@ -204,7 +226,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-     /**
+    /**
      * Method assigns all countries randomly between the players
      */
     @Override
@@ -228,7 +250,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-     /**
+    /**
      * Advance order
      */
     @Override
@@ -236,7 +258,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         invalidCommandMessage();
     }
 
-     /**
+    /**
      * Bomb order
      */
     @Override

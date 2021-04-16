@@ -13,6 +13,9 @@ import team14.warzone.Utils.Randomizer;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Class implements behavior for random players
+ */
 public class Random implements Behavior {
 
     /**
@@ -33,7 +36,7 @@ public class Random implements Behavior {
                 break;
             }
         }
-        if (l_ArmiesLeftToDeploy > 0) {
+        if (l_ArmiesLeftToDeploy > 0 && p_Player.getD_CountriesOwned().size() > 0) {
             // deploy to random country
             // select random country from countries owned list
             int l_RandomCountryIndex = Randomizer.generateRandomNumber(0, p_Player.getD_CountriesOwned().size() - 1);
@@ -53,7 +56,7 @@ public class Random implements Behavior {
         }
 
         // play card if any
-        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(p_Player.getCardList().size() - 1).isD_Used()) {
+        else if (!p_Player.getCardList().isEmpty() && !p_Player.getCardList().get(p_Player.getCardList().size() - 1).isD_Used() && p_Player.getD_CountriesOwned().size() > 0) {
             Card l_Card = p_Player.getCardList().get(p_Player.getCardList().size() - 1);
             switch (l_Card.getD_CardType()) {
                 case "blockade":
@@ -76,7 +79,7 @@ public class Random implements Behavior {
         }
 
         // attack random neighbor or move (minimum one of each)
-        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced) {
+        else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && !l_AlreadyAdvanced && p_Player.getD_CountriesOwned().size() > 0) {
             // randomly select either attack enemy or move army between owned country
             switch (Randomizer.generateRandomNumber(0, 1)) {
                 case 0:
@@ -95,6 +98,8 @@ public class Random implements Behavior {
 
 
     /**
+     * Issue advance order on enemy neighbor
+     *
      * @param p_GE     Game Engine
      * @param p_Player Player
      */
@@ -141,6 +146,8 @@ public class Random implements Behavior {
 
 
     /**
+     * Move army between countries owned by self
+     *
      * @param p_GE     Game Engine
      * @param p_Player Player
      */
@@ -186,6 +193,8 @@ public class Random implements Behavior {
     }
 
     /**
+     * Convert to string
+     *
      * @return name of behavior
      */
     @Override

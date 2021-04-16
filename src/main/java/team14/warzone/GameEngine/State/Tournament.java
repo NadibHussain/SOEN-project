@@ -151,7 +151,7 @@ public class Tournament extends Phase {
                     l_WinningValue = l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(0)).getD_Name() + " "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
                     System.out.println("The winner is " + l_WinningValue + " with owning countries " + d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
-                    System.out.println("____________________________________________________________");
+                    System.out.println("_____________________________________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = l_WinningValue;
                 } else
                     System.out.println("The game does not have any winner");

@@ -8,7 +8,6 @@ import team14.warzone.GameEngine.Commands.Deploy;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
-import team14.warzone.Utils.Randomizer;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
  * @version 1.0
  */
 public class Aggressive implements Behavior {
-    int l_ExpectedNumberOfOrders = Randomizer.generateRandomNumber(1, 5);
+    int l_ExpectedNumberOfOrders = 3;
 
     
     /** 
@@ -33,7 +32,12 @@ public class Aggressive implements Behavior {
         // check if already deployed all un-deployed armies
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
         Country l_StrongestCountry = findStrongestCountry(p_Player.getD_CountriesOwned(), p_Player);
-            //deploy on its strongest country
+        //if the strongest country was used in previous turn then choose the second strongest country
+        if (l_StrongestCountry.isD_UsedCountry()){
+            int l_NewStrongestCountry = findSecondStrongestCountry(p_Player.getD_CountriesOwned(), l_StrongestCountry, false);
+            l_StrongestCountry = p_Player.getD_CountriesOwned().get(l_NewStrongestCountry);
+        }
+        //deploy on its strongest country
         if (l_ArmiesLeftToDeploy > 0 && l_StrongestCountry != null) {
                 String l_StrongestCountryName = l_StrongestCountry.getD_CountryID();
 
@@ -69,10 +73,10 @@ public class Aggressive implements Behavior {
                 Bomb l_BombOrder = new Bomb(l_CountryToAttack.getD_CountryID(), p_GE);
                 p_Player.getD_OrderList().add(l_BombOrder);
                 p_Player.setCardUsed("bomb");
+                Console.displayMsg(p_Player.getD_Name() + " issued: bomb on " + l_CountryToAttack.getD_CountryID());
                 p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued bomb command");
                 p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
             }
-            //Diplomacy with one of his enemies
             else {//attack with its strongest country
                 if (l_StrongestCountry != null && l_StrongestCountry.getD_NumberOfArmies() != 0){
                     //select one of neighbor enemies countries as a destination to attack, enemy should not be a diplomatic player
@@ -92,6 +96,8 @@ public class Aggressive implements Behavior {
                         int l_NumOfArmiesToAttackWith = l_CountryAttackFrom.getD_NumberOfArmies() - 1;
                         advanceArmies(p_Player, l_CountryAttackFrom.getD_CountryID(), l_CountryToAttack.getD_CountryID(),
                                 l_NumOfArmiesToAttackWith, p_GE, "(attack enemy) ");
+                        //mark countries as used
+                        l_CountryAttackFrom.setD_UsedCountry(true);
                     }
                     //if the aggressive player doesn't find a weaker country to attack then he need to moves its armies
                     //in order to maximize aggregation of forces in one country
@@ -113,6 +119,8 @@ public class Aggressive implements Behavior {
                                             l_NumOfArmiesToMove, p_GE);
                                     p_Player.getD_OrderList().add(l_AirliftOrder);
                                     p_Player.setCardUsed("airlift");
+                                    Console.displayMsg(p_Player.getD_Name() + " issued: airlift from " + l_SecondStrongestCountry.getD_CountryID() + " " +
+                                            "to " + l_StrongestCountry.getD_CountryID());
                                     p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued airlift command");
                                     p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
                                 } else {//no airlift card available, so we need to look for an adjacent country with the strongest country

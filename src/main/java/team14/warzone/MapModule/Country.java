@@ -30,8 +30,10 @@ public class Country implements Serializable {
      * Number of armies on the country
      */
     private int d_NumberOfArmies;
-
-
+    /**
+     * A flag to tell if country was already been chosen in previous commands
+     */
+    private boolean d_UsedCountry;
 
     /**
      * list of the country object of neighbours
@@ -52,6 +54,7 @@ public class Country implements Serializable {
         this.d_CountryContinentID = p_CountryContinentID;
         this.d_CurrentOwner = p_CurrentOwner;
         this.d_NumberOfArmies = p_NumberOfArmies;
+        this.d_UsedCountry = false;
     }
 
     /**
@@ -199,6 +202,21 @@ public class Country implements Serializable {
         return false;
     }
 
+    /**
+     * A method to get usedCountry flag
+     * @return true if country is used, false otherwise
+     */
+    public boolean isD_UsedCountry() {
+        return d_UsedCountry;
+    }
+
+    /**
+     * A method to set usedCountry flag
+     * @param p_UsedCountry
+     */
+    public void setD_UsedCountry(boolean p_UsedCountry) {
+        this.d_UsedCountry = p_UsedCountry;
+    }
     
     /** 
      * @return String

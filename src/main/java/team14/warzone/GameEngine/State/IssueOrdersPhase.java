@@ -43,24 +43,28 @@ public class IssueOrdersPhase extends GamePlayPhase {
     @Override
     public void reinforce() {
         for (Player l_Player : d_GameEngine.getD_PlayerList()) {
-            //1. # of territories owned divided by 3
-            int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
-            //2. if the player owns all the territories of an entire continent the player is given
-            // a control bonus value
-            int l_ControlValueEnforcement = 0;
-            for (Continent l_Continent : d_GameEngine.getD_LoadedMap().getD_Continents()) {
-                //check if all countries belong to the l_Continent are owned by l_Player
-                if (l_Player.getD_CountriesOwned().containsAll(d_GameEngine.getD_LoadedMap().getCountryListOfContinent(l_Continent.getD_ContinentID())))
-                    l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+            if (!l_Player.getD_ReceivedReinforcement()) {
+                //1. # of territories owned divided by 3
+                int l_PlayerEnforcement = l_Player.getD_CountriesOwned().size() / 3;
+                //2. if the player owns all the territories of an entire continent the player is given
+                // a control bonus value
+                int l_ControlValueEnforcement = 0;
+                for (Continent l_Continent : d_GameEngine.getD_LoadedMap().getD_Continents()) {
+                    //check if all countries belong to the l_Continent are owned by l_Player
+                    if (l_Player.getD_CountriesOwned().containsAll(d_GameEngine.getD_LoadedMap().getCountryListOfContinent(l_Continent.getD_ContinentID())))
+                        l_ControlValueEnforcement += l_Continent.getD_ControlValue();
+                }
+                //3.the minimal number of reinforcement armies for any player is 3 + control values
+                // of continents he owns
+                l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
+                //give reinforcement to the player
+                d_GameEngine.getD_LogEntryBuffer().setD_log(l_Player.getD_Name() + " gets " + l_PlayerEnforcement +
+                        " armies as reinforcement");
+                d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
+                l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
+                // set received reinforcements flag
+                l_Player.hasReceivedReinforcement();
             }
-            //3.the minimal number of reinforcement armies for any player is 3 + control values
-            // of continents he owns
-            l_PlayerEnforcement = Math.max(l_PlayerEnforcement, 3) + l_ControlValueEnforcement;
-            //give reinforcement to the player
-            d_GameEngine.getD_LogEntryBuffer().setD_log(l_Player.getD_Name() + " gets " + l_PlayerEnforcement +
-                    " armies as reinforcement");
-            d_GameEngine.getD_LogEntryBuffer().notifyObservers(d_GameEngine.getD_LogEntryBuffer());
-            l_Player.setD_TotalNumberOfArmies(l_Player.getD_TotalNumberOfArmies() + l_PlayerEnforcement);
         }
     }
 
@@ -135,23 +139,6 @@ public class IssueOrdersPhase extends GamePlayPhase {
             }
         }
         next();
-    }
-
-    /**
-     * Show list of cards currently in possion of player
-     */
-    @Override
-    public void showCards() {
-        List<Card> l_Cards = d_GameEngine.getD_CurrentPlayer().getCardList();
-        if (l_Cards.isEmpty()) {
-            System.out.println(d_GameEngine.getD_CurrentPlayer().getD_Name() + " has no cards");
-        } else {
-            System.out.print(d_GameEngine.getD_CurrentPlayer().getD_Name() + " cards: [ ");
-            for (Card l_Card : l_Cards) {
-                System.out.print(l_Card.getD_CardType() + " ");
-            }
-            System.out.println("]");
-        }
     }
 
     /**

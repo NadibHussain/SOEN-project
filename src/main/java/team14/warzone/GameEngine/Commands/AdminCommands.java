@@ -86,27 +86,27 @@ public class AdminCommands implements ICommand, Serializable {
         switch (this.getD_Keyword()) {
             case "editcontinent":
                 if (l_OptionName.equals("-add"))
-                    d_GameEngine.getD_CurrentPhase().addContinent(l_CommandArgs.get(0),
+                    d_GameEngine.getD_CurrentPhase().addContinent(reformatName(l_CommandArgs.get(0)),
                             Integer.parseInt(l_CommandArgs.get(1)));
                 else //-remove option
-                    d_GameEngine.getD_CurrentPhase().removeContinent(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().removeContinent(reformatName(l_CommandArgs.get(0)));
                 break;
 
             case "editcountry":
                 if (l_OptionName.equals("-add"))
-                    d_GameEngine.getD_CurrentPhase().addCountry(l_CommandArgs.get(0),
-                            l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().addCountry(reformatName(l_CommandArgs.get(0)),
+                            reformatName(l_CommandArgs.get(1)));
                 else //-remove option
-                    d_GameEngine.getD_CurrentPhase().removeCountry(l_CommandArgs.get(0));
+                    d_GameEngine.getD_CurrentPhase().removeCountry(reformatName(l_CommandArgs.get(0)));
                 break;
 
             case "editneighbor":
                 if (l_OptionName.equals("-add"))
-                    d_GameEngine.getD_CurrentPhase().addNeighbor(l_CommandArgs.get(0),
-                            l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().addNeighbor(reformatName(l_CommandArgs.get(0)),
+                            reformatName(l_CommandArgs.get(1)));
                 else //-remove option
-                    d_GameEngine.getD_CurrentPhase().removeNeighbor(l_CommandArgs.get(0),
-                            l_CommandArgs.get(1));
+                    d_GameEngine.getD_CurrentPhase().removeNeighbor(reformatName(l_CommandArgs.get(0)),
+                            reformatName(l_CommandArgs.get(1)));
                 break;
 
             case "savemap":
@@ -211,6 +211,12 @@ public class AdminCommands implements ICommand, Serializable {
         this.d_Option = p_Option;
     }
 
+    /**
+     * A method replace "_" with space in country and continent name
+     */
+    public String reformatName(String p_Name){
+       return p_Name.replace('_', ' ');
+    }
 
     /**
      * @return String
