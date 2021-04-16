@@ -220,7 +220,7 @@ public class MapEditorDomination implements Serializable {
      * @return checking validity
      * @author tanzia
      */
-    public boolean validateMap(Map p_Map) {
+    public boolean validateMapDomination(Map p_Map) {
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         ArrayList<Continent> l_Continents = p_Map.getD_Continents();
 
