@@ -7,8 +7,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Randomizer {
 
-    
-    /** 
+
+    /**
+     * Generates a random number between given range
+     *
      * @param p_LowerLimit upper limit of number
      * @param p_UpperLimit lower limit of number
      * @return int
