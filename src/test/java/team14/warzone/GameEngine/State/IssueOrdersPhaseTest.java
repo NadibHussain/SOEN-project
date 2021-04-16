@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.Console.InputValidator;
 import team14.warzone.GameEngine.GameEngine;
+import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.AdapterMapEditor;
 import team14.warzone.MapModule.MapEditorConquest;
 
@@ -70,8 +71,12 @@ public class IssueOrdersPhaseTest {
         d_GE.getD_PlayerList().get(1).removeCountryOwned(d_GE.getD_LoadedMap().findCountry("por4"));
         d_GE.getD_PlayerList().get(0).addCountryOwned(d_GE.getD_LoadedMap().findCountry("por2"));
         d_GE.getD_PlayerList().get(0).addCountryOwned(d_GE.getD_LoadedMap().findCountry("por4"));
+        for (Player l_Player : d_GE.getD_PlayerList()) {
+            l_Player.resetReceivedReinforcement();
+        }
         d_IssueOrderPh.reinforce();
-        //check if the reinforcement of the player should equal (50_previously owned + 30_reinforcement + 5_Control value of Portugal)
+        //check if the reinforcement of the player should equal (50_previously owned + 30_reinforcement + 5_Control
+        // value of Portugal)
         assertEquals(85, d_GE.getD_PlayerList().get(0).getD_TotalNumberOfArmies());
     }
 

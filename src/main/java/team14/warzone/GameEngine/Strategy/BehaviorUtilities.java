@@ -31,7 +31,7 @@ public class BehaviorUtilities {
         // find country to bomb
         Country l_DestinationCountry = findRandomEnemyNeighborWithArmy(p_Player);
 
-        Bomb l_Advance = new Bomb("CountryName", p_GE);
+        Bomb l_Advance = new Bomb(l_DestinationCountry.getD_CountryID(), p_GE);
         // add order to order list
         p_Player.getD_OrderList().add(l_Advance);
         Console.displayMsg(p_Player.getD_Name() + " issued: bomb on " + l_DestinationCountry.getD_CountryID());
@@ -43,6 +43,10 @@ public class BehaviorUtilities {
 
     public static void issueBlockade(GameEngine p_GE, Player p_Player, Card p_Card) {
         Country l_DestinationCountry = findCountryAtRisk(p_Player);
+        if (Objects.isNull(l_DestinationCountry)) {
+            l_DestinationCountry = p_Player.getD_CountriesOwned().get(Randomizer.generateRandomNumber(0,
+                    p_Player.getD_CountriesOwned().size() - 1));
+        }
         Blockade l_Blockade = new Blockade(l_DestinationCountry.getD_CountryID(), p_GE);
 
         p_Player.getD_OrderList().add(l_Blockade);
