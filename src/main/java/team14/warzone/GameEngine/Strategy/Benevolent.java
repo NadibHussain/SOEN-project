@@ -9,13 +9,14 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * Class implements behavior for benevolent player
  */
-public class Benevolent implements Behavior {
+public class Benevolent implements Behavior, Serializable {
     /**
      * Holds a list of weak countries for current player
      */

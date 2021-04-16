@@ -9,6 +9,7 @@ import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @author Zeina
  * @version 1.0
  */
-public class Aggressive implements Behavior {
+public class Aggressive implements Behavior, Serializable {
     /**
      * Number of orders expected to be issued
      */
@@ -38,7 +39,8 @@ public class Aggressive implements Behavior {
         Country l_StrongestCountry = findStrongestCountry(p_Player.getD_CountriesOwned(), p_Player);
         //if the strongest country was used in previous turn then choose the second strongest country
         if (l_StrongestCountry != null && l_StrongestCountry.isD_UsedCountry() && p_Player.getD_CountriesOwned().size() > 1) {
-            int l_NewStrongestCountryIndex = findSecondStrongestCountry(p_Player.getD_CountriesOwned(), l_StrongestCountry, false);
+            int l_NewStrongestCountryIndex = findSecondStrongestCountry(p_Player.getD_CountriesOwned(),
+                    l_StrongestCountry, false);
             l_StrongestCountry = p_Player.getD_CountriesOwned().get(l_NewStrongestCountryIndex);
         }
         //deploy on its strongest country
@@ -109,9 +111,10 @@ public class Aggressive implements Behavior {
                     //in order to maximize aggregation of forces in one country
                     //looking for a country that has the biggest number of armies after the strongest country
                     else {
-                        int l_SecondStrongestCountryIndex = findSecondStrongestCountry(l_CountriesOwnedByPlayer, l_StrongestCountry, false);
+                        int l_SecondStrongestCountryIndex = findSecondStrongestCountry(l_CountriesOwnedByPlayer,
+                                l_StrongestCountry, false);
                         Country l_SecondStrongestCountry = null;
-                        if(l_SecondStrongestCountryIndex != -1)
+                        if (l_SecondStrongestCountryIndex != -1)
                             l_SecondStrongestCountry = l_CountriesOwnedByPlayer.get(l_SecondStrongestCountryIndex);
                         if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_SecondStrongestCountry == null
                                 || l_StrongestCountry.getD_NumberOfArmies() == 0 || l_SecondStrongestCountry.getD_NumberOfArmies() == 0) {
@@ -134,17 +137,21 @@ public class Aggressive implements Behavior {
                                     p_GE.getD_LogEntryBuffer().setD_log(p_Player.getD_Name() + " issued airlift " +
                                             "command");
                                     p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
-                                } else {//no airlift card available, so we need to look for an adjacent country with the strongest country
-                                    l_SecondStrongestCountryIndex = findSecondStrongestCountry(l_CountriesOwnedByPlayer, l_StrongestCountry, true);
+                                } else {//no airlift card available, so we need to look for an adjacent country with
+                                    // the strongest country
+                                    l_SecondStrongestCountryIndex =
+                                            findSecondStrongestCountry(l_CountriesOwnedByPlayer, l_StrongestCountry,
+                                                    true);
                                     if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_StrongestCountry.getD_NumberOfArmies() == 0 || l_SecondStrongestCountry.getD_NumberOfArmies() == 0) {
                                         // pass
                                         Console.displayMsg(p_Player.getD_Name() + ": pass");
                                         p_GE.setD_PlayerPassed(true);
-                                    }
-                                    else{
-                                        l_SecondStrongestCountry = l_CountriesOwnedByPlayer.get(l_SecondStrongestCountryIndex);
+                                    } else {
+                                        l_SecondStrongestCountry =
+                                                l_CountriesOwnedByPlayer.get(l_SecondStrongestCountryIndex);
                                         l_NumOfArmiesToMove = l_SecondStrongestCountry.getD_NumberOfArmies() - 1;
-                                        advanceArmies(p_Player, l_SecondStrongestCountry.getD_CountryID(), l_StrongestCountry.getD_CountryID(),
+                                        advanceArmies(p_Player, l_SecondStrongestCountry.getD_CountryID(),
+                                                l_StrongestCountry.getD_CountryID(),
                                                 l_NumOfArmiesToMove, p_GE, "(aggregate armies) ");
                                     }
                                 }
@@ -176,7 +183,8 @@ public class Aggressive implements Behavior {
      * @return index of country with the biggest number of armies
      */
     public Country findStrongestCountry(List<Country> p_CountriesList, Player p_Player) {
-        Collections.sort(p_CountriesList, (Country p_C1, Country p_C2) -> p_C1.getD_NumberOfArmies() - p_C2.getD_NumberOfArmies());
+        Collections.sort(p_CountriesList,
+                (Country p_C1, Country p_C2) -> p_C1.getD_NumberOfArmies() - p_C2.getD_NumberOfArmies());
         Collections.sort(p_CountriesList,
                 (Country p_C1, Country p_C2) -> p_C1.getD_NumberOfArmies() - p_C2.getD_NumberOfArmies());
         Country l_StrongestCountry = null;

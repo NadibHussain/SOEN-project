@@ -10,13 +10,14 @@ import team14.warzone.GameEngine.Player;
 import team14.warzone.MapModule.Country;
 import team14.warzone.Utils.Randomizer;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * Class implements behavior for random players
  */
-public class Random implements Behavior {
+public class Random implements Behavior, Serializable {
 
     /**
      * @param p_GE     Game Engine
