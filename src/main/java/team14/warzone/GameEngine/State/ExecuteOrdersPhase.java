@@ -94,7 +94,10 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
     public void promptEnterKey() {
         System.out.println("\nPress \"ENTER\" to continue...");
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+        String l_TempChar = scanner.nextLine();
+        if (l_TempChar.equals("s")) {
+            showMap();
+        }
     }
 
     /**

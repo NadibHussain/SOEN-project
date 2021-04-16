@@ -131,7 +131,7 @@ public class Country implements Serializable {
      * @return A string with name of player
      */
     public String getD_CurrentOwner() {
-        if(d_CurrentOwner == ""){
+        if (d_CurrentOwner == "") {
             d_CurrentOwner = "Neutral";
         }
         return d_CurrentOwner;
@@ -261,5 +261,14 @@ public class Country implements Serializable {
                 ", d_CurrentOwner='" + d_CurrentOwner + '\'' +
                 ", d_neighbours=" + l_NeighbourList +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object p_Country) {
+        Country l_Country = (Country) p_Country;
+        if (d_CountryID.equals(l_Country.getD_CountryID())) {
+            return true;
+        }
+        return false;
     }
 }
