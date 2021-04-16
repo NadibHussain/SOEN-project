@@ -142,23 +142,6 @@ public class IssueOrdersPhase extends GamePlayPhase {
     }
 
     /**
-     * Show list of cards currently in possion of player
-     */
-    @Override
-    public void showCards() {
-        List<Card> l_Cards = d_GameEngine.getD_CurrentPlayer().getCardList();
-        if (l_Cards.isEmpty()) {
-            System.out.println(d_GameEngine.getD_CurrentPlayer().getD_Name() + " has no cards");
-        } else {
-            System.out.print(d_GameEngine.getD_CurrentPlayer().getD_Name() + " cards: [ ");
-            for (Card l_Card : l_Cards) {
-                System.out.print(l_Card.getD_CardType() + " ");
-            }
-            System.out.println("]");
-        }
-    }
-
-    /**
      * execute commands
      */
     @Override
