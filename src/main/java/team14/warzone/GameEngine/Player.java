@@ -215,6 +215,11 @@ public class Player implements Serializable {
         return false;
     }
 
+    /**
+     * Setter for list of used cards
+     *
+     * @param p_CardType type of card
+     */
     public void setCardUsed(String p_CardType) {
         for (Card l_Card : d_CardList) {
             if (l_Card.getD_CardType().equals(p_CardType) && !l_Card.isD_Used())

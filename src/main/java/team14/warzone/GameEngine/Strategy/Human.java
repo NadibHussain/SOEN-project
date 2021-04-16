@@ -8,10 +8,15 @@ import team14.warzone.GameEngine.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Class implements behavior for human players
+ */
 public class Human implements Behavior, Serializable {
-    
-    /** 
-     * @param p_GE Game Engine
+
+    /**
+     * Issue order overriden
+     *
+     * @param p_GE     Game Engine
      * @param p_Player Player
      */
     @Override
