@@ -37,9 +37,9 @@ public class Aggressive implements Behavior {
         int l_ArmiesLeftToDeploy = p_Player.getD_TotalNumberOfArmies() - p_Player.getD_ArmiesOrderedToBeDeployed();
         Country l_StrongestCountry = findStrongestCountry(p_Player.getD_CountriesOwned(), p_Player);
         //if the strongest country was used in previous turn then choose the second strongest country
-        if (l_StrongestCountry != null && l_StrongestCountry.isD_UsedCountry()) {
-            int l_NewStrongestCountry = findSecondStrongestCountry(p_Player.getD_CountriesOwned(), l_StrongestCountry, false);
-            l_StrongestCountry = p_Player.getD_CountriesOwned().get(l_NewStrongestCountry);
+        if (l_StrongestCountry != null && l_StrongestCountry.isD_UsedCountry() && p_Player.getD_CountriesOwned().size() > 1) {
+            int l_NewStrongestCountryIndex = findSecondStrongestCountry(p_Player.getD_CountriesOwned(), l_StrongestCountry, false);
+            l_StrongestCountry = p_Player.getD_CountriesOwned().get(l_NewStrongestCountryIndex);
         }
         //deploy on its strongest country
         if (l_ArmiesLeftToDeploy > 0 && l_StrongestCountry != null) {
@@ -57,7 +57,7 @@ public class Aggressive implements Behavior {
             p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
 
             // check if player can issue more orders in current round
-        } else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders) {
+        } else if (p_Player.getD_OrderList().size() < l_ExpectedNumberOfOrders && p_Player.getD_CountriesOwned().size() > 0) {
             //first use bomb card if available
             List<Country> l_CountriesOwnedByPlayer = p_Player.getD_CountriesOwned();
             //bomb an enemy country
