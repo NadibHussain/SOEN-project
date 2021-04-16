@@ -40,6 +40,7 @@ public class Card {
 
     /**
      * Getter method for Card type
+     *
      * @return card type
      */
     public String getD_CardType() {
@@ -48,6 +49,7 @@ public class Card {
 
     /**
      * Getter method for all types
+     *
      * @return array of types
      */
     public String[] getTYPES() {
@@ -56,6 +58,7 @@ public class Card {
 
     /**
      * Setter method for types
+     *
      * @param TYPES array of types
      */
     public void setTYPES(String[] TYPES) {
@@ -64,12 +67,12 @@ public class Card {
 
     /**
      * Setter method for allotting a card type
+     *
      * @param d_CardType type of the card
      */
     public void setD_CardType(String d_CardType) {
         this.d_CardType = d_CardType;
     }
-
 
 
     /**
@@ -81,6 +84,7 @@ public class Card {
 
     /**
      * Card constructor
+     *
      * @param p_CardType type of card
      */
     public Card(String p_CardType) {
@@ -90,7 +94,8 @@ public class Card {
 
     /**
      * Check if card is used
-     * @return
+     *
+     * @return card
      */
     public boolean isD_Used() {
         return d_Used;
@@ -98,7 +103,8 @@ public class Card {
 
     /**
      * Change status of card used or unused
-     * @param p_Used
+     *
+     * @param p_Used used or not
      */
     public void setD_Used(boolean p_Used) {
         this.d_Used = p_Used;

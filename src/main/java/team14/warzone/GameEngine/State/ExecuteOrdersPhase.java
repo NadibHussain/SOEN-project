@@ -59,7 +59,7 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         // reset players card received flags
         for (Player l_Player : l_PlayerList) {
             l_Player.resetCardReceivedFlag();
-            for (Country l_Country: l_Player.getD_CountriesOwned()){
+            for (Country l_Country : l_Player.getD_CountriesOwned()) {
                 l_Country.setD_UsedCountry(false);
             }
         }
@@ -88,6 +88,9 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         return false;
     }
 
+    /**
+     * Wait until enter key is pressed
+     */
     public void promptEnterKey() {
         System.out.println("\nPress \"ENTER\" to continue...");
         Scanner scanner = new Scanner(System.in);

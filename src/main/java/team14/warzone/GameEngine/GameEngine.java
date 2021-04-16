@@ -202,6 +202,11 @@ public class GameEngine implements Serializable {
         }
     }
 
+    /**
+     * Load game. Replaces current game engine with game engine loaded from file
+     *
+     * @param p_FileName Name of file to load
+     */
     public void loadGame(String p_FileName) {
         GameEngine l_GE = d_GameSaveLoad.runLoadGame(p_FileName);
         if (Objects.nonNull(l_GE)) {
@@ -526,58 +531,106 @@ public class GameEngine implements Serializable {
         d_PlayerPassed = p_PlayerPassed;
     }
 
+    /**
+     * Reset if player has passed flag
+     */
     public void resetPlayerPassed() {
         d_PlayerPassed = false;
     }
 
     /**
-     * @return GameSaveLoad
-     */
-    /**
      * Getter for GameSaveLoad function
      *
-     * @return d_GameSaveLoad
+     * @return d_GameSaveLoad object
      */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
     }
 
+    /**
+     * Getter for console
+     *
+     * @return Console object
+     */
     public Console getD_Console() {
         return d_Console;
     }
 
+    /**
+     * Getter for admin commands buffer
+     *
+     * @return Array list of commands
+     */
     public ArrayList<AdminCommands> getD_AdminCommandsBuffer() {
         return d_AdminCommandsBuffer;
     }
 
-    public void incrementD_CurrentNumberOfTurns(){
+    /**
+     * Increase number of turns
+     */
+    public void incrementD_CurrentNumberOfTurns() {
         d_CurrentNumberOfTurns++;
     }
 
-    public int getD_CurrentNumberOfTurns(){
+    /**
+     * Getter for current number of turns
+     *
+     * @return Number of turns
+     */
+    public int getD_CurrentNumberOfTurns() {
         return d_CurrentNumberOfTurns;
     }
 
-    public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns){
+    /**
+     * Setter method
+     *
+     * @param p_CurrentNumberOfTurns Number of turns
+     */
+    public void setD_CurrentNumberOfTurns(int p_CurrentNumberOfTurns) {
         d_CurrentNumberOfTurns = p_CurrentNumberOfTurns;
     }
 
+    /**
+     * Setter method
+     *
+     * @param p_TournamentEnded true if tournament has ended
+     */
     public void setD_TournamentEnded(boolean p_TournamentEnded) {
         d_TournamentEnded = p_TournamentEnded;
     }
 
+    /**
+     * Getter
+     *
+     * @return If tournament mode is true
+     */
     public boolean isD_TournamentMode() {
         return d_TournamentMode;
     }
 
+    /**
+     * Setter
+     *
+     * @param p_TournamentMode Whether tournament mode is active
+     */
     public void setD_TournamentMode(boolean p_TournamentMode) {
         d_TournamentMode = p_TournamentMode;
     }
 
+    /**
+     * Getter
+     *
+     * @return if game is over or not
+     */
     public boolean isD_GameOver() {
         return d_GameOver;
     }
 
+    /**
+     * Setter
+     *
+     * @param p_GameOver whether game over or not
+     */
     public void setD_GameOver(boolean p_GameOver) {
         d_GameOver = p_GameOver;
     }

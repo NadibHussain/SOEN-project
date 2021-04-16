@@ -146,6 +146,7 @@ public abstract class Phase implements Serializable {
      * save Map object as .map file
      *
      * @param p_FileName Path of the .map file
+     * @param p_MapType  Type of map
      */
     abstract public void saveMap(String p_FileName, String p_MapType);
 
@@ -169,7 +170,7 @@ public abstract class Phase implements Serializable {
     /**
      * Adding players in the game
      *
-     * @param p_Name Name of the player
+     * @param p_Name       Name of the player
      * @param p_PlayerType Behavior type of player
      */
     abstract public void addPlayer(String p_Name, String p_PlayerType);
@@ -195,6 +196,7 @@ public abstract class Phase implements Serializable {
 
     /**
      * Used for saving a game
+     *
      * @param p_FileName filename
      */
     abstract public void saveGame(String p_FileName);
@@ -208,7 +210,6 @@ public abstract class Phase implements Serializable {
      * display the list of cards in current players possession
      */
     abstract public void showCards(); // instant for map phase and round robin for play phase
-
 
 
     // execute order phase
