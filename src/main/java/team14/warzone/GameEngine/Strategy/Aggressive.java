@@ -113,7 +113,8 @@ public class Aggressive implements Behavior {
                         Country l_SecondStrongestCountry = null;
                         if(l_SecondStrongestCountryIndex != -1)
                             l_SecondStrongestCountry = l_CountriesOwnedByPlayer.get(l_SecondStrongestCountryIndex);
-                        if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_SecondStrongestCountry == null || l_StrongestCountry.getD_NumberOfArmies() == 0) {
+                        if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_SecondStrongestCountry == null
+                                || l_StrongestCountry.getD_NumberOfArmies() == 0 || l_SecondStrongestCountry.getD_NumberOfArmies() == 0) {
                             // pass
                             Console.displayMsg(p_Player.getD_Name() + ": pass");
                             p_GE.setD_PlayerPassed(true);
@@ -135,7 +136,7 @@ public class Aggressive implements Behavior {
                                     p_GE.getD_LogEntryBuffer().notifyObservers(p_GE.getD_LogEntryBuffer());
                                 } else {//no airlift card available, so we need to look for an adjacent country with the strongest country
                                     l_SecondStrongestCountryIndex = findSecondStrongestCountry(l_CountriesOwnedByPlayer, l_StrongestCountry, true);
-                                    if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_StrongestCountry.getD_NumberOfArmies() == 0) {
+                                    if (l_StrongestCountry == null || l_SecondStrongestCountryIndex == -1 || l_StrongestCountry.getD_NumberOfArmies() == 0 || l_SecondStrongestCountry.getD_NumberOfArmies() == 0) {
                                         // pass
                                         Console.displayMsg(p_Player.getD_Name() + ": pass");
                                         p_GE.setD_PlayerPassed(true);
