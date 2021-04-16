@@ -57,6 +57,10 @@ public class Player implements Serializable {
      * Depending on the player strategy holds the suitable implementation of issue order
      */
     public Behavior d_IssueOrderBehavior;
+    /**
+     * Keeps track of whether player has already received reinforcement
+     */
+    private boolean d_ReceivedReinforcement;
 
     /**
      * Default constructor that takes no params
@@ -83,6 +87,7 @@ public class Player implements Serializable {
         d_ArmiesOrderedToBeDeployed = 0;
         d_CardList = new ArrayList<>();
         d_CardReceived = false;
+        d_ReceivedReinforcement = false;
 
         switch (p_PlayerType) {
             case "human":
@@ -426,5 +431,17 @@ public class Player implements Serializable {
         d_OrderList.clear();
         d_CardList.clear();
         d_DiplomaticPlayers.clear();
+    }
+
+    public boolean getD_ReceivedReinforcement() {
+        return d_ReceivedReinforcement;
+    }
+
+    public void resetReceivedReinforcement() {
+        d_ReceivedReinforcement = false;
+    }
+
+    public void hasReceivedReinforcement() {
+        d_ReceivedReinforcement = true;
     }
 }
