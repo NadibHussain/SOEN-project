@@ -2,7 +2,6 @@ package team14.warzone.GameEngine.State;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.DisplayName;
 import team14.warzone.Console.Console;
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.MapModule.AdapterMapEditor;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TournamentTest {
-     /**
+    /**
      * console field
      */
     private Console d_Console;
@@ -32,8 +31,8 @@ public class TournamentTest {
         d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
         d_GE = new GameEngine(d_Console, d_MapEditor);
     }
+
     @Test
-    @DisplayName("Testing Tournament")
     public void tournamentRun() {
         //tournament -M listofmapfiles -P listofplayerstrategies -G numberofgames -D maxnumberofturns
         //tournament -M bigeurope.map -P aggressive random aggressive -G 2 -D 4
@@ -56,5 +55,5 @@ public class TournamentTest {
         t.run();
 
     }
-    
+
 }
