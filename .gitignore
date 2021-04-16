@@ -41,3 +41,5 @@ logs.txt
 javadoc/
 *.html
 *.zip
+SaveTest
+TestLoad

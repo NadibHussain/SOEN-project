@@ -1,0 +1,144 @@
+This map was created from a SOEN-6441 Project 
+ 
+[Continents]
+Tower Left Top=1
+Tower Left Middle=2
+Tower Left Bottom=1
+Tower Right Top=1
+Tower Right Middle=2
+Tower Right Bottom=1
+FLAG=1
+Castle TURRET Area=2
+Castle DOOR=1
+Castle Left Of Door=1
+Castle Right Of Door=1
+
+[Territories]
+Territory01, , ,Tower Left Top,Territory02Territory03
+Territory02, , ,Tower Left Top,Territory01Territory03Territory04Territory05
+Territory03, , ,Tower Left Top,Territory01Territory02Territory05Territory06
+Territory04, , ,Tower Left Top,Territory02Territory05Territory07Territory08Territory53
+Territory05, , ,Tower Left Top,Territory02Territory04Territory03Territory06Territory08Territory09
+Territory06, , ,Tower Left Top,Territory03Territory05Territory09Territory10
+Territory07, , ,Tower Left Top,Territory04Territory08Territory11Territory12
+Territory08, , ,Tower Left Top,Territory04Territory07Territory05Territory09Territory12Territory13
+Territory09, , ,Tower Left Top,Territory05Territory08Territory06Territory10Territory13Territory14
+Territory10, , ,Tower Left Top,Territory06Territory09Territory14Territory15
+Territory11, , ,Tower Left Top,Territory07Territory12Territory16
+Territory12, , ,Tower Left Top,Territory07Territory11Territory08Territory13Territory16Territory17
+Territory13, , ,Tower Left Top,Territory08Territory12Territory09Territory14Territory17Territory18
+Territory14, , ,Tower Left Top,Territory09Territory13Territory10Territory15Territory18Territory19
+Territory15, , ,Tower Left Top,Territory10Territory14Territory19
+Territory16, , ,Tower Left Middle,Territory11Territory12Territory17Territory20
+Territory17, , ,Tower Left Middle,Territory12Territory13Territory16Territory18Territory21
+Territory18, , ,Tower Left Middle,Territory13Territory17Territory14Territory19Territory21
+Territory19, , ,Tower Left Middle,Territory14Territory18Territory15Territory22
+Territory20, , ,Tower Left Middle,Territory16Territory23
+Territory21, , ,Tower Left Middle,Territory17Territory18Territory24
+Territory22, , ,Tower Left Middle,Territory19Territory25
+Territory23, , ,Tower Left Middle,Territory20Territory26
+Territory24, , ,Tower Left Middle,Territory21Territory27
+Territory25, , ,Tower Left Middle,Territory22Territory28Territory108
+Territory26, , ,Tower Left Middle,Territory23Territory29Territory75
+Territory27, , ,Tower Left Middle,Territory24Territory30Territory31
+Territory28, , ,Tower Left Middle,Territory25Territory32Territory109Territory108
+Territory29, , ,Tower Left Middle,Territory26Territory30Territory33Territory34
+Territory30, , ,Tower Left Middle,Territory27Territory31Territory29Territory34Territory35
+Territory31, , ,Tower Left Middle,Territory27Territory32Territory30Territory35Territory36
+Territory32, , ,Tower Left Middle,Territory28Territory31Territory36Territory37Territory117Territory109
+Territory33, , ,Tower Left Middle,Territory29Territory34Territory38
+Territory34, , ,Tower Left Middle,Territory29Territory33Territory30Territory35Territory38Territory39
+Territory35, , ,Tower Left Middle,Territory30Territory34Territory31Territory36Territory39
+Territory36, , ,Tower Left Middle,Territory35Territory31Territory32Territory37Territory39Territory40
+Territory37, , ,Tower Left Middle,Territory36Territory32Territory40Territory117
+Territory38, , ,Tower Left Bottom,Territory33Territory34Territory39Territory41
+Territory39, , ,Tower Left Bottom,Territory34Territory35Territory36Territory38Territory40Territory41Territory42
+Territory40, , ,Tower Left Bottom,Territory36Territory37Territory39Territory42Territory121
+Territory41, , ,Tower Left Bottom,Territory38Territory39Territory42Territory43Territory44Territory89
+Territory42, , ,Tower Left Bottom,Territory39Territory40Territory41Territory44Territory45Territory122Territory121
+Territory43, , ,Tower Left Bottom,Territory41Territory44Territory46
+Territory44, , ,Tower Left Bottom,Territory41Territory43Territory42Territory45Territory46Territory47
+Territory45, , ,Tower Left Bottom,Territory42Territory44Territory47Territory122
+Territory46, , ,Tower Left Bottom,Territory43Territory44Territory47
+Territory47, , ,Tower Left Bottom,Territory44Territory45Territory46Territory124
+Territory48, , ,Tower Right Top,Territory49Territory50
+Territory49, , ,Tower Right Top,Territory48Territory50Territory51Territory52
+Territory50, , ,Tower Right Top,Territory48Territory49Territory52Territory53
+Territory51, , ,Tower Right Top,Territory49Territory52Territory54Territory55
+Territory52, , ,Tower Right Top,Territory49Territory50Territory53Territory51Territory55Territory56
+Territory53, , ,Tower Right Top,Territory50Territory52Territory56Territory57Territory04
+Territory54, , ,Tower Right Top,Territory51Territory55Territory58Territory59
+Territory55, , ,Tower Right Top,Territory51Territory52Territory56Territory54Territory59Territory60
+Territory56, , ,Tower Right Top,Territory52Territory53Territory57Territory55Territory60Territory61
+Territory57, , ,Tower Right Top,Territory53Territory56Territory61Territory62
+Territory58, , ,Tower Right Top,Territory54Territory59Territory63
+Territory59, , ,Tower Right Top,Territory54Territory55Territory60Territory58Territory63Territory64
+Territory60, , ,Tower Right Top,Territory55Territory56Territory61Territory59Territory64Territory65
+Territory61, , ,Tower Right Top,Territory56Territory57Territory62Territory60Territory65Territory66
+Territory62, , ,Tower Right Top,Territory57Territory61Territory66
+Territory63, , ,Tower Right Middle,Territory58Territory59Territory64Territory67
+Territory64, , ,Tower Right Middle,Territory59Territory60Territory65Territory63Territory68
+Territory65, , ,Tower Right Middle,Territory60Territory61Territory66Territory64Territory68
+Territory66, , ,Tower Right Middle,Territory61Territory62Territory65Territory69
+Territory67, , ,Tower Right Middle,Territory63Territory70
+Territory68, , ,Tower Right Middle,Territory64Territory65Territory71
+Territory69, , ,Tower Right Middle,Territory66Territory72
+Territory70, , ,Tower Right Middle,Territory67Territory73Territory106
+Territory71, , ,Tower Right Middle,Territory68Territory74
+Territory72, , ,Tower Right Middle,Territory69Territory75
+Territory73, , ,Tower Right Middle,Territory70Territory76Territory113Territory106
+Territory74, , ,Tower Right Middle,Territory71Territory78Territory77
+Territory75, , ,Tower Right Middle,Territory72Territory79Territory26
+Territory76, , ,Tower Right Middle,Territory73Territory77Territory80Territory81Territory114Territory113
+Territory77, , ,Tower Right Middle,Territory74Territory76Territory78Territory81Territory82
+Territory78, , ,Tower Right Middle,Territory74Territory77Territory79Territory82Territory83
+Territory79, , ,Tower Right Middle,Territory75Territory78Territory83Territory84
+Territory80, , ,Tower Right Middle,Territory76Territory81Territory85Territory114
+Territory81, , ,Tower Right Middle,Territory76Territory77Territory82Territory80Territory85Territory86
+Territory82, , ,Tower Right Middle,Territory77Territory78Territory83Territory81Territory86
+Territory83, , ,Tower Right Middle,Territory78Territory79Territory84Territory82Territory86Territory87
+Territory84, , ,Tower Right Middle,Territory79Territory83Territory87
+Territory85, , ,Tower Right Bottom,Territory80Territory81Territory86Territory88Territory125
+Territory86, , ,Tower Right Bottom,Territory81Territory82Territory83Territory85Territory87Territory88Territory89
+Territory87, , ,Tower Right Bottom,Territory83Territory84Territory86Territory89
+Territory88, , ,Tower Right Bottom,Territory85Territory86Territory89Territory90Territory91Territory127Territory125
+Territory89, , ,Tower Right Bottom,Territory86Territory87Territory88Territory91Territory92Territory41
+Territory90, , ,Tower Right Bottom,Territory88Territory91Territory93Territory127
+Territory91, , ,Tower Right Bottom,Territory88Territory89Territory92Territory90Territory93Territory94
+Territory92, , ,Tower Right Bottom,Territory89Territory91Territory94
+Territory93, , ,Tower Right Bottom,Territory90Territory91Territory94Territory128
+Territory94, , ,Tower Right Bottom,Territory92Territory91Territory93
+Territory95, , ,FLAG,Territory99Territory96Territory97Territory98Territory101Territory100
+Territory96, , ,FLAG,Territory95Territory99Territory97
+Territory97, , ,FLAG,Territory95Territory96Territory98
+Territory98, , ,FLAG,Territory95Territory97Territory101
+Territory99, , ,FLAG,Territory95Territory96Territory100
+Territory100, , ,FLAG,Territory95Territory101Territory99
+Territory101, , ,FLAG,Territory95Territory98Territory100Territory102
+Territory102, , ,FLAG,Territory101Territory103
+Territory103, , ,FLAG,Territory102Territory104
+Territory104, , ,Castle TURRET Area,Territory103Territory111
+Territory105, , ,Castle TURRET Area,Territory112
+Territory106, , ,Castle TURRET Area,Territory113Territory73Territory70
+Territory107, , ,Castle TURRET Area,Territory110
+Territory108, , ,Castle TURRET Area,Territory109Territory28Territory25
+Territory109, , ,Castle TURRET Area,Territory110Territory108Territory117Territory32Territory28
+Territory110, , ,Castle TURRET Area,Territory111Territory107Territory109Territory117Territory116
+Territory111, , ,Castle TURRET Area,Territory104Territory110Territory112Territory118Territory119Territory120
+Territory112, , ,Castle TURRET Area,Territory111Territory105Territory113Territory114Territory115
+Territory113, , ,Castle TURRET Area,Territory112Territory106Territory114Territory76Territory73
+Territory114, , ,Castle TURRET Area,Territory113Territory112Territory115Territory80Territory76Territory125
+Territory115, , ,Castle TURRET Area,Territory112Territory114Territory125Territory120
+Territory116, , ,Castle TURRET Area,Territory117Territory110Territory121Territory119
+Territory117, , ,Castle TURRET Area,Territory109Territory116Territory110Territory121Territory37Territory32
+Territory118, , ,Castle DOOR,Territory111Territory119Territory120
+Territory119, , ,Castle DOOR,Territory118Territory124Territory123Territory121Territory116Territory111
+Territory120, , ,Castle DOOR,Territory118Territory128Territory126Territory125Territory115Territory111
+Territory121, , ,Castle Left Of Door,Territory122Territory123Territory42Territory40Territory117Territory116Territory119
+Territory122, , ,Castle Left Of Door,Territory124Territory121Territory45Territory42
+Territory123, , ,Castle Left Of Door,Territory121Territory124Territory119
+Territory124, , ,Castle Left Of Door,Territory122Territory123Territory47Territory119
+Territory125, , ,Castle Right Of Door,Territory126Territory127Territory88Territory85Territory114Territory120Territory115
+Territory126, , ,Castle Right Of Door,Territory128Territory125Territory120
+Territory127, , ,Castle Right Of Door,Territory125Territory128Territory90Territory88
+Territory128, , ,Castle Right Of Door,Territory126Territory127Territory93Territory120
