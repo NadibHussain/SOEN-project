@@ -46,7 +46,8 @@ public class AdapterMapEditor extends MapEditorDomination {
                 d_MapEditorConquest.loadMapConquest(p_filename);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to find map file.Creating a new map ");
+            d_LoadedMap = new Map();
         }
 
     }
@@ -92,7 +93,6 @@ public class AdapterMapEditor extends MapEditorDomination {
             l_ReaderObject.close();
             return false;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return false;
         }
     }
