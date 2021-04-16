@@ -9,6 +9,7 @@ import team14.warzone.MapModule.Map;
 import team14.warzone.MapModule.MapEditorConquest;
 
 import javax.swing.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -182,8 +183,8 @@ public class Tournament extends Phase {
         //Display the window.
         l_Frame.pack();
         l_Frame.setVisible(true);
-
-        Console.displayMsg("Please enter \"exit\" to quit the game");
+        
+        Console.displayMsg("This Tournament has ended. Type Ctrl+c+y to exit.");
     }
 
     /**
