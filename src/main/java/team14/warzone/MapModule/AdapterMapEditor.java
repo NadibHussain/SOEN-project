@@ -111,4 +111,23 @@ public class AdapterMapEditor extends MapEditorDomination {
         }
     }
 
+    /**
+     * checking if the map is connected, all countries belong to at least one
+     * continent, all continents have at least one country, sub-graphs are connected
+     * which means the countries inside a continent are connected.
+     *
+     * @param p_Map Map object
+     * @return checking validity
+     */
+    public boolean validateMap(Map p_Map) {
+        if (d_MapEditorConquest.d_LoadedMap == null) {
+            return validateMapDomination(p_Map);
+        } else {
+            return d_MapEditorConquest.validateMapConquest(p_Map);
+        }
+
+    }
+
+
+
 }

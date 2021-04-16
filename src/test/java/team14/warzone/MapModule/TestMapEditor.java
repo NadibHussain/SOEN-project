@@ -54,7 +54,7 @@ public class TestMapEditor {
     @DisplayName("Testing map validator")
     public void testValidateMap() {
         Map l_Map = d_MapEditor.getD_LoadedMap();
-        boolean l_Test = d_MapEditor.validateMap(l_Map);
+        boolean l_Test = d_MapEditor.validateMapDomination(l_Map);
         assertEquals(true, l_Test);
     }
 
@@ -151,7 +151,7 @@ public class TestMapEditor {
             e.printStackTrace();
         }
         Map l_Map = d_MapEditor.getD_LoadedMap();
-        boolean l_Test = d_MapEditor.validateMap(l_Map);
+        boolean l_Test = d_MapEditor.validateMapDomination(l_Map);
         assertEquals(false, l_Test);
     }
 
