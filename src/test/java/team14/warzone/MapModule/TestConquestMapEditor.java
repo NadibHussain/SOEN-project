@@ -59,7 +59,7 @@ public class TestConquestMapEditor {
     @Test
     @DisplayName("Testing Validate a map")
     public void testValidateConquestMap() {
-        d_MapEditorConquest.validateMap(d_MapEditorConquest.getD_LoadedMap());
+        d_MapEditorConquest.validateMapConquest(d_MapEditorConquest.getD_LoadedMap());
     }
 
 

@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TestMap.class,
-        TestMapEditor.class
+        TestMapEditor.class,
+        TestConquestMapEditor.class
 })
 
 public class MapModuleTestSuite {
