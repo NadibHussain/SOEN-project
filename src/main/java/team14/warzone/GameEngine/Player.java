@@ -215,9 +215,10 @@ public class Player implements Serializable {
         return false;
     }
 
-    
-    /** 
-     * @param p_CardType
+    /**
+     * Setter for list of used cards
+     *
+     * @param p_CardType type of card
      */
     public void setCardUsed(String p_CardType) {
         for (Card l_Card : d_CardList) {

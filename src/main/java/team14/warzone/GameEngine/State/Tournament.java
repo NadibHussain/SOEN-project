@@ -51,9 +51,8 @@ public class Tournament extends Phase {
     /**
      * Constructor
      *
-     * @param p_GameEngine
+     * @param p_GameEngine Game Engine object
      */
-
     public Tournament(GameEngine p_GameEngine) {
         super(p_GameEngine);
         d_MapEditor = new AdapterMapEditor(new MapEditorConquest());
@@ -62,7 +61,7 @@ public class Tournament extends Phase {
     /**
      * adds to map list d_Maps
      *
-     * @param p_MapList
+     * @param p_MapList List of maps
      */
     public void tournamentAddMaps(List<String> p_MapList) {
         d_Maps = new ArrayList<>();
@@ -85,7 +84,7 @@ public class Tournament extends Phase {
     /**
      * adds to player list d_Players
      *
-     * @param p_Strategies
+     * @param p_Strategies List of strategies
      */
     public void tournamentAddPlayersStrategies(List<String> p_Strategies) {
         d_Players = new ArrayList<>();
@@ -103,19 +102,26 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_NumOfGames
+     * Number of games
+     *
+     * @param p_NumOfGames integer value for num of games
      */
     public void tournamentNumOfGames(String p_NumOfGames) {
         this.d_NumOfGames = Integer.parseInt(p_NumOfGames);
     }
 
     /**
-     * @param p_NumOfTurns
+     * Max turns
+     *
+     * @param p_NumOfTurns number of turns
      */
     public void tournamentMaxNumOfTurns(String p_NumOfTurns) {
         this.d_NumOfTurns = Integer.parseInt(p_NumOfTurns);
     }
 
+    /**
+     * Run method
+     */
     @Override
     public void run() {
         d_GameEngine.setD_TournamentMode(true);
@@ -142,7 +148,7 @@ public class Tournament extends Phase {
                     for (int i = 0; i < l_IndexListOfWinners.size(); i++) {
                         l_WinningValue =
                                 l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(i)).getD_Name() + " "
-                                + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
+                                        + d_Players.get(l_IndexListOfWinners.get(i)).getD_IssueOrderBehavior().toString();
                     }
                     System.out.println("The game is a draw between " + l_WinningValue);
                     System.out.println("____________________________________________________________");
@@ -151,7 +157,8 @@ public class Tournament extends Phase {
                     l_WinningValue = l_WinningValue + " " + d_Players.get(l_IndexListOfWinners.get(0)).getD_Name() + " "
                             + d_Players.get(l_IndexListOfWinners.get(0)).getD_IssueOrderBehavior().toString();
                     System.out.println("The winner is " + l_WinningValue + " with owning countries " + d_Players.get(l_IndexListOfWinners.get(0)).getD_CountriesOwned().size());
-                    System.out.println("_____________________________________________________________________________________");
+                    System.out.println(
+                            "_____________________________________________________________________________________");
                     d_GameTable[l_MapIndex][l_GameCount] = l_WinningValue;
                 } else
                     System.out.println("The game does not have any winner");
@@ -179,9 +186,10 @@ public class Tournament extends Phase {
         Console.displayMsg("Please enter \"exit\" to quit the game");
     }
 
-    
-    /** 
-     * @return ArrayList<Integer>
+    /**
+     * Determine winner of tounrament
+     *
+     * @return Winning player index
      */
     private ArrayList<Integer> determineWinner() {
         ArrayList<Integer> l_NumCountriesOwned = new ArrayList<>();//num of countries for each player
@@ -199,8 +207,10 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_CountryId
-     * @param p_ContinentId
+     * Add country
+     *
+     * @param p_CountryId   Country id
+     * @param p_ContinentId Continent
      */
     @Override
     public void addCountry(String p_CountryId, String p_ContinentId) {
@@ -209,7 +219,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_CountryId
+     * Remove country
+     *
+     * @param p_CountryId Country name
      */
     @Override
     public void removeCountry(String p_CountryId) {
@@ -218,8 +230,10 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_ContinentId
-     * @param p_ControlValue
+     * Add continent
+     *
+     * @param p_ContinentId  Continent name
+     * @param p_ControlValue Control value
      */
     @Override
     public void addContinent(String p_ContinentId, int p_ControlValue) {
@@ -228,7 +242,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_ContinentId
+     * Remove continent
+     *
+     * @param p_ContinentId Continent name
      */
     @Override
     public void removeContinent(String p_ContinentId) {
@@ -237,8 +253,10 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_CountryId
-     * @param p_NeighborId
+     * Add neighbor
+     *
+     * @param p_CountryId  country
+     * @param p_NeighborId neighbor
      */
     @Override
     public void addNeighbor(String p_CountryId, String p_NeighborId) {
@@ -247,8 +265,10 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_CountryId
-     * @param p_NeighborId
+     * Remove neighbor
+     *
+     * @param p_CountryId  country
+     * @param p_NeighborId neighbor
      */
     @Override
     public void removeNeighbor(String p_CountryId, String p_NeighborId) {
@@ -257,7 +277,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_FileName
+     * Load map from file
+     *
+     * @param p_FileName file name
      */
     @Override
     public void loadMap(String p_FileName) {
@@ -266,7 +288,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_FileName
+     * Save map to file
+     *
+     * @param p_FileName file name
      */
     @Override
     public void saveMap(String p_FileName, String p_MapType) {
@@ -275,7 +299,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_FileName
+     * Edit map file
+     *
+     * @param p_FileName file name
      */
     @Override
     public void editMap(String p_FileName) {
@@ -284,7 +310,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_Map
+     * Validate loaded map
+     *
+     * @param p_Map map object
      */
     @Override
     public void validateMap(Map p_Map) {
@@ -293,8 +321,10 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_Name
-     * @param p_PlayerType
+     * Add player to list
+     *
+     * @param p_Name       Name of player
+     * @param p_PlayerType Type of player
      */
     @Override
     public void addPlayer(String p_Name, String p_PlayerType) {
@@ -303,7 +333,9 @@ public class Tournament extends Phase {
     }
 
     /**
-     * @param p_Name
+     * Remove player from list
+     *
+     * @param p_Name name of player
      */
     @Override
     public void removePlayer(String p_Name) {
@@ -312,7 +344,7 @@ public class Tournament extends Phase {
     }
 
     /**
-     * assign countries for tournament phase
+     * Assign countries to players
      */
     @Override
     public void assignCountries() {
@@ -338,108 +370,93 @@ public class Tournament extends Phase {
     }
 
     /**
-     * reinforce
+     * Reinforcement
      */
     @Override
     public void reinforce() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * @param p_FileName
+     * Save game to file
+     *
+     * @param p_FileName name of file
      */
     @Override
     public void saveGame(String p_FileName) {
-        // TODO Auto-generated method stub
 
     }
 
-//    /**
-//     * @param p_FileName
-//     */
-//    @Override
-//    public void loadGame(String p_FileName) {
-//
-//
-//    }
-
     /**
-     * issue commands
+     * Issue commands
      */
     @Override
     public void issueCommands() {
         // TODO Auto-generated method stub
 
     }
+
     /**
-     * shows cards
+     * Show cards for player
      */
     @Override
     public void showCards() {
-        // TODO Auto-generated method stub
 
     }
+
     /**
-     * execute commands
+     * Execute commands
      */
     @Override
     public void executeCommands() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * deploy
+     * Deploy
      */
     @Override
     public void deploy() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * advance
+     * Advance
      */
     @Override
     public void advance() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * bomb
+     * Bomb
      */
     @Override
     public void bomb() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * blockade
+     * Blockade
      */
     @Override
     public void blockade() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * airlift
+     * Airflift
      */
     @Override
     public void airlift() {
-        // TODO Auto-generated method stub
 
     }
 
     /**
-     * diplomacy
+     * Diplomacy
      */
     @Override
     public void diplomacy() {
-        // TODO Auto-generated method stub
 
     }
 

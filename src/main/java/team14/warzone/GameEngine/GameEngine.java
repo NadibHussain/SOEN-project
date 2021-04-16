@@ -531,17 +531,17 @@ public class GameEngine implements Serializable {
         d_PlayerPassed = p_PlayerPassed;
     }
 
+    /**
+     * Reset if player has passed flag
+     */
     public void resetPlayerPassed() {
         d_PlayerPassed = false;
     }
 
     /**
-     * @return GameSaveLoad
-     */
-    /**
      * Getter for GameSaveLoad function
      *
-     * @return d_GameSaveLoad
+     * @return d_GameSaveLoad object
      */
     public GameSaveLoad getD_GameSaveLoad() {
         return d_GameSaveLoad;
