@@ -11,11 +11,10 @@ import team14.warzone.GameEngine.Strategy.*;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         GameEngineTest.class,
-        AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class,
-        DiplomacyTest.class,
+        AdvanceTest.class, AirliftTest.class, BlockadeTest.class, BombTest.class, DeployTest.class, DiplomacyTest.class,
         IssueOrdersPhaseTest.class, PreMapLoadPhaseTest.class, GameOverPhaseTest.class,
         CardTest.class, AggressiveTest.class, BenevolentTest.class, CheaterTest.class,
-        CardTest.class, GameSaveTest.class, GameLoadTest.class,
+        GameSaveTest.class, GameLoadTest.class,
         BehaviorUtilitiesTest.class
 })
 
