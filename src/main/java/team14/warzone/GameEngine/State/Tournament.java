@@ -71,7 +71,7 @@ public class Tournament extends Phase {
                 d_MapEditor.loadMap(p_MapFileName);
                 if (d_MapEditor.validateMap(d_MapEditor.getD_LoadedMap()))
                 {
-                    d_Maps.add(d_MapEditor.d_LoadedMap);
+                    d_Maps.add(d_MapEditor.getD_LoadedMap());
                     d_MapEditor.removeMap();
 
                 }
