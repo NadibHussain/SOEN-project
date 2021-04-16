@@ -2,6 +2,7 @@ package team14.warzone.GameEngine.State;
 
 import team14.warzone.GameEngine.GameEngine;
 import team14.warzone.GameEngine.Player;
+import team14.warzone.MapModule.Country;
 import team14.warzone.MapModule.Map;
 
 import java.util.ArrayList;
@@ -58,7 +59,11 @@ public class ExecuteOrdersPhase extends GamePlayPhase {
         // reset players card received flags
         for (Player l_Player : l_PlayerList) {
             l_Player.resetCardReceivedFlag();
+            for (Country l_Country: l_Player.getD_CountriesOwned()){
+                l_Country.setD_UsedCountry(false);
+            }
         }
+
         // check if all countries owned by 1 player
         if (!gameOverCheck(l_PlayerList))
             next();
