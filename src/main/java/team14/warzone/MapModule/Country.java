@@ -131,6 +131,9 @@ public class Country implements Serializable {
      * @return A string with name of player
      */
     public String getD_CurrentOwner() {
+        if(d_CurrentOwner == ""){
+            d_CurrentOwner = "Neutral";
+        }
         return d_CurrentOwner;
     }
 

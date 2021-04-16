@@ -175,7 +175,7 @@ public class MapEditorConquest implements Serializable {
             l_Content.append(l_Country.getD_CountryID()).append(", , ,").append(l_Country.getD_CountryContinentID()).append(",");
 
             for (Country l_neighbour : l_Country.getD_Neighbours()) {
-                l_Content.append(l_neighbour.getD_CountryID());
+                l_Content.append(l_neighbour.getD_CountryID()).append(",");
             }
             l_Content.append("\n");
         }
@@ -202,7 +202,7 @@ public class MapEditorConquest implements Serializable {
      * @return checking validity
      * @author tanzia
      */
-    public boolean validateMap(Map p_Map) {
+    public boolean validateMapConquest(Map p_Map) {
         ArrayList<Country> l_Countries = p_Map.getD_Countries();
         ArrayList<Continent> l_Continents = p_Map.getD_Continents();
 

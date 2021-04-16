@@ -15,6 +15,10 @@ public class BenevolentTest {
     private Console d_Console;
     private AdapterMapEditor d_MapEditor;
 
+    
+    /** 
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         // object instantiation

@@ -46,7 +46,8 @@ public class AdapterMapEditor extends MapEditorDomination {
                 d_MapEditorConquest.loadMapConquest(p_filename);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to find map file.Creating a new map ");
+            d_LoadedMap = new Map();
         }
 
     }
@@ -92,7 +93,6 @@ public class AdapterMapEditor extends MapEditorDomination {
             l_ReaderObject.close();
             return false;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -110,5 +110,33 @@ public class AdapterMapEditor extends MapEditorDomination {
             return d_MapEditorConquest.d_LoadedMap;
         }
     }
+
+    /**
+     * checking if the map is connected, all countries belong to at least one
+     * continent, all continents have at least one country, sub-graphs are connected
+     * which means the countries inside a continent are connected.
+     *
+     * @param p_Map Map object
+     * @return checking validity
+     */
+    public boolean validateMap(Map p_Map) {
+        if (d_MapEditorConquest.d_LoadedMap == null) {
+            return validateMapDomination(p_Map);
+        } else {
+            return d_MapEditorConquest.validateMapConquest(p_Map);
+        }
+
+    }
+
+    /**
+     *removing all loadedmaps.
+     *
+     */
+    public void removeMap() {
+        d_LoadedMap=null;
+        d_MapEditorConquest.d_LoadedMap=null;
+    }
+
+
 
 }

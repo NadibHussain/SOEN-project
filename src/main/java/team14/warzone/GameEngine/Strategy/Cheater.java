@@ -33,7 +33,10 @@ public class Cheater implements Behavior {
                 if (l_NeighborCountry.getD_CurrentOwner() != p_Player.getD_Name()){
                     //change the owner of the neighbor country, add it to current player countries list
                     // and remove it from the old owner list
-                    p_GE.findPlayer(l_NeighborCountry.getD_CurrentOwner()).removeCountryOwned(l_NeighborCountry);
+                    Player l_NeighborPlayer = p_GE.findPlayer(l_NeighborCountry.getD_CurrentOwner());
+                    if(l_NeighborPlayer.getD_Name() != "Neutral"){
+                    l_NeighborPlayer.removeCountryOwned(l_NeighborCountry);
+                    }
                     l_NeighborCountry.setD_CurrentOwner(p_Player.getD_Name());
                     l_ConqueredCountries.add(l_NeighborCountry);
                 }
