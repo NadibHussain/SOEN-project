@@ -12,9 +12,21 @@ import team14.warzone.MapModule.Country;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Class implements behavior for benevolent player
+ */
 public class Benevolent implements Behavior {
+    /**
+     * Holds a list of weak countries for current player
+     */
     private ArrayList<Country> d_WeakCountryList = new ArrayList<>();
 
+    /**
+     * Order issuing strategy for benevolent player
+     *
+     * @param p_GE     Game Engine object
+     * @param p_Player Player object
+     */
     @Override
     public void issueOrder(GameEngine p_GE, Player p_Player) {
         int l_ExpectedNumberOfOrders = 3;

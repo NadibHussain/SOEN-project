@@ -13,6 +13,9 @@ import team14.warzone.Utils.Randomizer;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Class implements behavior for random players
+ */
 public class Random implements Behavior {
 
     /**
@@ -95,6 +98,8 @@ public class Random implements Behavior {
 
 
     /**
+     * Issue advance order on enemy neighbor
+     *
      * @param p_GE     Game Engine
      * @param p_Player Player
      */
@@ -141,6 +146,8 @@ public class Random implements Behavior {
 
 
     /**
+     * Move army between countries owned by self
+     *
      * @param p_GE     Game Engine
      * @param p_Player Player
      */
@@ -186,6 +193,8 @@ public class Random implements Behavior {
     }
 
     /**
+     * Convert to string
+     *
      * @return name of behavior
      */
     @Override

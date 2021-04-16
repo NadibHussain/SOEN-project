@@ -433,14 +433,25 @@ public class Player implements Serializable {
         d_DiplomaticPlayers.clear();
     }
 
+    /**
+     * Getter
+     *
+     * @return whether reinforcement received this turn
+     */
     public boolean getD_ReceivedReinforcement() {
         return d_ReceivedReinforcement;
     }
 
+    /**
+     * Reset reinforcement flag (set to false)
+     */
     public void resetReceivedReinforcement() {
         d_ReceivedReinforcement = false;
     }
 
+    /**
+     * Set reinforcement flag to true
+     */
     public void hasReceivedReinforcement() {
         d_ReceivedReinforcement = true;
     }
