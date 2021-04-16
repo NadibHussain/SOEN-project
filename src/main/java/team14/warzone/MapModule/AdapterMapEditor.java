@@ -128,6 +128,15 @@ public class AdapterMapEditor extends MapEditorDomination {
 
     }
 
+    /**
+     *removing all loadedmaps.
+     *
+     */
+    public void removeMap() {
+        d_LoadedMap=null;
+        d_MapEditorConquest.d_LoadedMap=null;
+    }
+
 
 
 }
